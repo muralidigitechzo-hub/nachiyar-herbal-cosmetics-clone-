@@ -158,6 +158,11 @@ async function initStorefrontApp() {
         el.textContent = settings.brandName;
       });
     }
+
+    // Sync with Reusable CRM Theme & Dynamic Branding Engine
+    if (window.ThemeEngine && typeof window.ThemeEngine.applyDirect === 'function') {
+      window.ThemeEngine.applyDirect(settings, true);
+    }
   }
 
   // Internal helper to reliably map live backend products into storefront PRODUCTS dictionary

@@ -3530,12 +3530,69 @@ document.addEventListener('DOMContentLoaded', () => {
         const bannerPane = document.getElementById('settingsSubpaneBanner');
         const bizPane = document.getElementById('settingsSubpaneBusiness');
         const payPane = document.getElementById('settingsSubpanePayments');
+        const brandPane = document.getElementById('settingsSubpaneBranding');
+        const modPane = document.getElementById('settingsSubpaneModules');
         if (bannerPane) bannerPane.style.display = target === 'banner' ? 'block' : 'none';
         if (bizPane) bizPane.style.display = target === 'business' ? 'block' : 'none';
         if (payPane) payPane.style.display = target === 'payments' ? 'block' : 'none';
+        if (brandPane) brandPane.style.display = target === 'branding' ? 'block' : 'none';
+        if (modPane) modPane.style.display = target === 'modules' ? 'block' : 'none';
       };
     });
   }
+
+  // 8.1.b. Color Inputs & Preset Handlers
+  function syncColorPair(pickerId, hexId) {
+    const picker = document.getElementById(pickerId);
+    const hex = document.getElementById(hexId);
+    if (picker && hex) {
+      picker.addEventListener('input', () => { hex.value = picker.value.toUpperCase(); });
+      hex.addEventListener('input', () => {
+        if (/^#[0-9A-F]{6}$/i.test(hex.value.trim())) {
+          picker.value = hex.value.trim();
+        }
+      });
+    }
+  }
+  syncColorPair('setThemeColorPrimary', 'setThemeColorPrimaryHex');
+  syncColorPair('setThemeColorSecondary', 'setThemeColorSecondaryHex');
+  syncColorPair('setThemeColorAccent', 'setThemeColorAccentHex');
+  syncColorPair('setThemeColorBg', 'setThemeColorBgHex');
+
+  // Preset Buttons
+  document.querySelectorAll('.btn-preset-theme').forEach(btn => {
+    btn.onclick = () => {
+      const p = btn.dataset.primary;
+      const s = btn.dataset.secondary;
+      const a = btn.dataset.accent;
+      const bg = btn.dataset.bg;
+      if (p) {
+        const elP = document.getElementById('setThemeColorPrimary');
+        const elPH = document.getElementById('setThemeColorPrimaryHex');
+        if (elP) elP.value = p;
+        if (elPH) elPH.value = p.toUpperCase();
+      }
+      if (s) {
+        const elS = document.getElementById('setThemeColorSecondary');
+        const elSH = document.getElementById('setThemeColorSecondaryHex');
+        if (elS) elS.value = s;
+        if (elSH) elSH.value = s.toUpperCase();
+      }
+      if (a) {
+        const elA = document.getElementById('setThemeColorAccent');
+        const elAH = document.getElementById('setThemeColorAccentHex');
+        if (elA) elA.value = a;
+        if (elAH) elAH.value = a.toUpperCase();
+      }
+      if (bg) {
+        const elBg = document.getElementById('setThemeColorBg');
+        const elBgH = document.getElementById('setThemeColorBgHex');
+        if (elBg) elBg.value = bg;
+        if (elBgH) elBgH.value = bg.toUpperCase();
+      }
+      showToast('Theme preset applied! Click "Save Branding & Live Theme" to publish.');
+    };
+  });
 
   // 8.2. Coupon Auto-Generator
   const btnGenRandomCoupon = document.getElementById('btnGenRandomCoupon');
@@ -3654,6 +3711,52 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('setStoreAddress').value = storeSettings.storeAddress || 'Temple Ring Road, Madurai, Tamil Nadu - 625001';
     }
 
+    // Branding & Theme Fields
+    const branding = storeSettings.branding || {};
+    const colors = branding.themeColors || storeSettings.themeColors || {};
+    const modules = storeSettings.modules || {};
+    const seo = storeSettings.seo || {};
+
+    if (document.getElementById('setBrandName')) {
+      document.getElementById('setBrandName').value = branding.brandName || storeSettings.brandName || 'Nachiyar Herbals & Cosmetics';
+    }
+    if (document.getElementById('setBrandTagline')) {
+      document.getElementById('setBrandTagline').value = branding.tagline || storeSettings.tagline || 'Pure Botanical Elegance & Ayurvedic Care';
+    }
+    if (document.getElementById('setBrandLogoUrl')) {
+      document.getElementById('setBrandLogoUrl').value = branding.logoUrl || storeSettings.logoUrl || 'assets/nachiyar-logo.png';
+    }
+    if (document.getElementById('setBrandFaviconUrl')) {
+      document.getElementById('setBrandFaviconUrl').value = branding.faviconUrl || storeSettings.faviconUrl || 'favicon.png';
+    }
+
+    // Theme Colors
+    const pColor = colors.primary || '#7C5AAB';
+    const sColor = colors.secondary || '#D4AF37';
+    const aColor = colors.accent || '#583B82';
+    const bgColor = colors.bg || '#F9F8F5';
+
+    if (document.getElementById('setThemeColorPrimary')) document.getElementById('setThemeColorPrimary').value = pColor;
+    if (document.getElementById('setThemeColorPrimaryHex')) document.getElementById('setThemeColorPrimaryHex').value = pColor.toUpperCase();
+    if (document.getElementById('setThemeColorSecondary')) document.getElementById('setThemeColorSecondary').value = sColor;
+    if (document.getElementById('setThemeColorSecondaryHex')) document.getElementById('setThemeColorSecondaryHex').value = sColor.toUpperCase();
+    if (document.getElementById('setThemeColorAccent')) document.getElementById('setThemeColorAccent').value = aColor;
+    if (document.getElementById('setThemeColorAccentHex')) document.getElementById('setThemeColorAccentHex').value = aColor.toUpperCase();
+    if (document.getElementById('setThemeColorBg')) document.getElementById('setThemeColorBg').value = bgColor;
+    if (document.getElementById('setThemeColorBgHex')) document.getElementById('setThemeColorBgHex').value = bgColor.toUpperCase();
+
+    // SEO
+    if (document.getElementById('setSeoTitle')) document.getElementById('setSeoTitle').value = seo.metaTitle || '';
+    if (document.getElementById('setSeoDescription')) document.getElementById('setSeoDescription').value = seo.metaDescription || '';
+
+    // Modules
+    if (document.getElementById('setModReviews')) document.getElementById('setModReviews').checked = modules.reviews !== false;
+    if (document.getElementById('setModMarketplaces')) document.getElementById('setModMarketplaces').checked = modules.marketplaces !== false;
+    if (document.getElementById('setModBilling')) document.getElementById('setModBilling').checked = modules.billing !== false;
+    if (document.getElementById('setModWhatsApp')) document.getElementById('setModWhatsApp').checked = modules.whatsapp_chat !== false;
+    if (document.getElementById('setModCoupons')) document.getElementById('setModCoupons').checked = modules.coupons !== false;
+    if (document.getElementById('setModAnnouncements')) document.getElementById('setModAnnouncements').checked = modules.announcements !== false;
+
     // Payment Methods
     const pm = storeSettings.paymentMethods || {};
     if (document.getElementById('setPmCod')) {
@@ -3696,7 +3799,48 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    const bName = document.getElementById('setBrandName')?.value || 'Nachiyar Herbals & Cosmetics';
+    const bTagline = document.getElementById('setBrandTagline')?.value || '';
+    const bLogo = document.getElementById('setBrandLogoUrl')?.value || 'assets/nachiyar-logo.png';
+    const bFavicon = document.getElementById('setBrandFaviconUrl')?.value || 'favicon.png';
+    const primaryC = document.getElementById('setThemeColorPrimary')?.value || '#7C5AAB';
+    const secondaryC = document.getElementById('setThemeColorSecondary')?.value || '#D4AF37';
+    const accentC = document.getElementById('setThemeColorAccent')?.value || '#583B82';
+    const bgC = document.getElementById('setThemeColorBg')?.value || '#F9F8F5';
+
     const payload = {
+      branding: {
+        brandName: bName,
+        tagline: bTagline,
+        logoUrl: bLogo,
+        faviconUrl: bFavicon,
+        themeColors: {
+          primary: primaryC,
+          secondary: secondaryC,
+          accent: accentC,
+          bg: bgC,
+          text: '#191319'
+        }
+      },
+      themeColors: {
+        primary: primaryC,
+        secondary: secondaryC,
+        accent: accentC,
+        bg: bgC,
+        text: '#191319'
+      },
+      modules: {
+        reviews: document.getElementById('setModReviews') ? document.getElementById('setModReviews').checked : true,
+        marketplaces: document.getElementById('setModMarketplaces') ? document.getElementById('setModMarketplaces').checked : true,
+        billing: document.getElementById('setModBilling') ? document.getElementById('setModBilling').checked : true,
+        whatsapp_chat: document.getElementById('setModWhatsApp') ? document.getElementById('setModWhatsApp').checked : true,
+        coupons: document.getElementById('setModCoupons') ? document.getElementById('setModCoupons').checked : true,
+        announcements: document.getElementById('setModAnnouncements') ? document.getElementById('setModAnnouncements').checked : true
+      },
+      seo: {
+        metaTitle: document.getElementById('setSeoTitle')?.value || '',
+        metaDescription: document.getElementById('setSeoDescription')?.value || ''
+      },
       announcementText: document.getElementById('setAnnouncementText')?.value || '',
       freeShippingThreshold: Number(document.getElementById('setFreeShipping')?.value) || 599,
       couponCode: (document.getElementById('setCouponCode')?.value || 'ROYAL15').trim().toUpperCase(),
@@ -3755,6 +3899,9 @@ document.addEventListener('DOMContentLoaded', () => {
             couponActive: payload.couponActive
           }));
           localStorage.setItem('nachiyar_store_settings', JSON.stringify(payload));
+          localStorage.setItem('crm_active_theme', JSON.stringify(res.data));
+          const ch = new BroadcastChannel('nachiyar_store_channel');
+          ch.postMessage({ type: 'THEME_UPDATED', settings: res.data, timestamp: Date.now() });
         } catch (err) {}
         updateBannerLivePreview();
       } else {
@@ -3781,6 +3928,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSavePaymentSettings = document.getElementById('btnSavePaymentSettings');
   if (btnSavePaymentSettings) {
     btnSavePaymentSettings.onclick = () => saveStoreSettingsData('Payment Gateway Settings Saved!');
+  }
+  const btnSaveBrandingSettings = document.getElementById('btnSaveBrandingSettings');
+  if (btnSaveBrandingSettings) {
+    btnSaveBrandingSettings.onclick = () => saveStoreSettingsData('Branding & Live Theme Published!');
+  }
+  const btnSaveModuleSettings = document.getElementById('btnSaveModuleSettings');
+  if (btnSaveModuleSettings) {
+    btnSaveModuleSettings.onclick = () => saveStoreSettingsData('Active Modules Configuration Saved!');
   }
 
   // ==========================================

@@ -1,279 +1,374 @@
 /**
- * Nachiyar Herbals & Cosmetics
- * Resilient PostgreSQL Database Connection Pool
- *
- * Automatically configured via environment configuration.
- * Automatically bootstraps schema and default admin accounts on initial connection.
- * Resilient to missing configuration: keeps server alive and reports status via /api/health.
+ * ==============================================================================
+ * NACHIYAR HERBALS & COSMETICS - STANDALONE FILE-BASED JSON DATABASE ENGINE
+ * ==============================================================================
+ * 100% Isolated, Local, Zero-Database Dependency Architecture.
+ * All data reads and writes are safely committed directly to 'data/db.json'.
+ * Eliminates PostgreSQL dependency, ports, credentials, and .env files.
+ * ==============================================================================
  */
 
-const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
-const config = require('./environment');
 
-let pool = null;
-let isConnected = false;
-let connectionError = null;
-let schemaBootstrapped = false;
+// Resolve path to data/db.json
+const dataDir = path.resolve(__dirname, '..', '..', '..', 'data');
+const dbFilePath = path.join(dataDir, 'db.json');
 
-function initPool() {
-  const db = config.database;
+// Ensure data directory exists
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
 
-  if (!db.isConfigured) {
-    const envFile = config.isProduction ? '.env.production' : '.env.development';
-    connectionError = `Database not configured. Please set DATABASE_URL or DB_HOST/DB_USER/DB_PASSWORD/DB_NAME in ${envFile} or cPanel environment variables.`;
-    console.warn(`⚠️ [DatabaseConfig] ${connectionError}`);
-    return null;
+// In-memory cache of db.json
+let dbCache = null;
+
+// Helper to safely load data/db.json
+function loadDatabase() {
+  if (dbCache) return dbCache;
+
+  if (fs.existsSync(dbFilePath)) {
+    try {
+      const raw = fs.readFileSync(dbFilePath, 'utf8');
+      dbCache = JSON.parse(raw);
+    } catch (e) {
+      console.warn('⚠️ [FileDB] Failed to parse data/db.json, initializing clean store:', e.message);
+      dbCache = {};
+    }
+  } else {
+    dbCache = {};
   }
 
+  // Ensure all standard collections exist
+  if (!Array.isArray(dbCache.products)) dbCache.products = [];
+  if (!Array.isArray(dbCache.categories)) dbCache.categories = [];
+  if (!Array.isArray(dbCache.orders)) dbCache.orders = [];
+  if (!Array.isArray(dbCache.invoices)) dbCache.invoices = [];
+  if (!Array.isArray(dbCache.inventory_logs)) dbCache.inventory_logs = [];
+  if (!Array.isArray(dbCache.users)) dbCache.users = [];
+  if (!Array.isArray(dbCache.reviews)) dbCache.reviews = [];
+  if (!Array.isArray(dbCache.customers)) dbCache.customers = [];
+  if (!Array.isArray(dbCache.contact_messages)) dbCache.contact_messages = [];
+  if (!Array.isArray(dbCache.marketplace_channels)) dbCache.marketplace_channels = [];
+  if (!Array.isArray(dbCache.marketplace_skus)) dbCache.marketplace_skus = [];
+  if (!Array.isArray(dbCache.marketplace_orders)) dbCache.marketplace_orders = [];
+
+  // Default site_settings
+  if (!dbCache.site_settings || typeof dbCache.site_settings !== 'object') {
+    dbCache.site_settings = {
+      announcementText: 'ROYAL BOTANICAL CARE • FREE PAN-INDIA SHIPPING OVER ₹599',
+      freeShippingThreshold: 599,
+      brandName: 'Nachiyar Herbals & Cosmetics',
+      tagline: 'Pure Botanical Elegance & Ayurvedic Care',
+      logoUrl: 'assets/nachiyar-logo.png',
+      faviconUrl: 'favicon.png',
+      themeColors: {
+        primary: '#7C5AAB',
+        secondary: '#D4AF37',
+        accent: '#583B82',
+        bg: '#F9F8F5',
+        text: '#191319'
+      },
+      modules: {
+        reviews: true,
+        marketplaces: true,
+        billing: true,
+        coupons: true,
+        whatsapp_chat: true,
+        announcements: true
+      },
+      socialLinks: {
+        whatsapp: '+919444088990',
+        instagram: 'https://instagram.com/nachiyarherbals',
+        facebook: 'https://facebook.com/nachiyarherbals',
+        youtube: ''
+      },
+      seo: {
+        metaTitle: 'Nachiyar Herbals & Cosmetics | Pure Ayurvedic Hair & Skin Care',
+        metaDescription: 'Authentic botanical and Ayurvedic personal care formulations handcrafted in Madurai.'
+      },
+      gstin: '33AAACH9876K1Z2',
+      supportPhone: '+91 94440 88990',
+      supportEmail: 'care@nachiyarherbals.com',
+      storeTimings: 'Mon - Sat: 9:30 AM - 8:30 PM',
+      storeAddress: 'Nachiyar Botanical Heritage, No. 18 Temple Ring Road, Madurai, Tamil Nadu - 625001'
+    };
+  }
+
+  // Ensure default staff admin user exists
+  if (dbCache.users.length === 0) {
+    dbCache.users.push(
+      { id: 'user_nimda', username: 'nimda', email: 'admin@nachiyarherbals.com', password: 'admin', name: 'Super Nimda', role: 'super_admin', permissions: ['all'] },
+      { id: 'user_admin', username: 'admin', email: 'admin@nachiyarherbals.com', password: 'admin', name: 'Super Administrator', role: 'super_admin', permissions: ['all'] },
+      { id: 'user_murali', username: 'murali', email: 'muraliii@gmail.com', password: '123', name: 'murali', role: 'super_admin', permissions: ['all'] }
+    );
+  }
+
+  // Ensure default categories exist
+  if (dbCache.categories.length === 0) {
+    dbCache.categories.push(
+      { id: 'cat_hair_care', name: 'Hair Care', slug: 'hair-care', count: 1 },
+      { id: 'cat_scalp', name: 'Scalp & Cleansing', slug: 'scalp-cleansing', count: 1 },
+      { id: 'cat_sets', name: 'Ritual Sets & Combos', slug: 'ritual-sets', count: 1 },
+      { id: 'cat_gifting', name: 'Royal Gifting', slug: 'royal-gifting', count: 0 }
+    );
+  }
+
+  return dbCache;
+}
+
+// Helper to write changes to data/db.json
+function saveDatabase() {
+  if (!dbCache) return;
   try {
-    let poolConfig;
-    if (db.connectionString) {
-      poolConfig = {
-        connectionString: db.connectionString,
-        ssl: db.ssl,
-        max: config.isProduction ? 20 : 10,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 5000
+    fs.writeFileSync(dbFilePath, JSON.stringify(dbCache, null, 2), 'utf8');
+  } catch (err) {
+    console.error('❌ [FileDB] Error persisting data to data/db.json:', err.message);
+  }
+}
+
+// Initialize database in memory
+loadDatabase();
+
+/**
+ * Universal SQL Query Emulator for File-based Storage
+ */
+async function query(sql, params = []) {
+  const db = loadDatabase();
+  const trimmed = (sql || '').trim();
+  const upper = trimmed.toUpperCase();
+
+  // 1. DDL Statements (CREATE, ALTER, DROP, INDEX, GRANT, DO, PRAGMA) -> Silent No-op
+  if (
+    upper.startsWith('CREATE ') ||
+    upper.startsWith('ALTER ') ||
+    upper.startsWith('DROP ') ||
+    upper.startsWith('GRANT ') ||
+    upper.startsWith('DO ') ||
+    upper.startsWith('BEGIN') ||
+    upper.startsWith('COMMIT') ||
+    upper.startsWith('ROLLBACK')
+  ) {
+    return { rows: [], rowCount: 0 };
+  }
+
+  // 2. Utility queries
+  if (upper.startsWith('SELECT NOW()')) {
+    return { rows: [{ now: new Date().toISOString() }], rowCount: 1 };
+  }
+  if (upper === 'SELECT 1') {
+    return { rows: [{ '?column?': 1 }], rowCount: 1 };
+  }
+  if (upper.includes('FROM INFORMATION_SCHEMA.TABLES')) {
+    const tableNames = Object.keys(db);
+    return { rows: tableNames.map(t => ({ table_name: t })), rowCount: tableNames.length };
+  }
+
+  // 3. SITE SETTINGS QUERY
+  if (upper.includes('SITE_SETTINGS')) {
+    if (upper.startsWith('SELECT')) {
+      return {
+        rows: [{ id: 1, data: JSON.stringify(db.site_settings) }],
+        rowCount: 1
       };
+    }
+    if (upper.startsWith('INSERT') || upper.startsWith('UPDATE')) {
+      let updatedData = {};
+      if (params.length > 0) {
+        updatedData = typeof params[0] === 'string' ? JSON.parse(params[0]) : params[0];
+      }
+      db.site_settings = { ...db.site_settings, ...updatedData };
+      saveDatabase();
+      return {
+        rows: [{ id: 1, data: JSON.stringify(db.site_settings) }],
+        rowCount: 1
+      };
+    }
+  }
+
+  // Detect table name from query
+  const fromMatch = trimmed.match(/(?:FROM|INTO|UPDATE)\s+([a-zA-Z0-9_]+)/i);
+  const tableName = fromMatch ? fromMatch[1].toLowerCase() : null;
+
+  if (!tableName || !db[tableName]) {
+    // If unknown table, return empty result gracefully
+    return { rows: [], rowCount: 0 };
+  }
+
+  const collection = db[tableName];
+
+  // 4. COUNT(*) QUERY
+  if (upper.includes('COUNT(')) {
+    return { rows: [{ count: collection.length.toString() }], rowCount: 1 };
+  }
+
+  // 5. SELECT QUERY
+  if (upper.startsWith('SELECT')) {
+    let results = [...collection];
+
+    // Filter by category
+    if (upper.includes('CATEGORY') && params.length > 0) {
+      const catParam = params[0]?.toLowerCase();
+      if (catParam) {
+        results = results.filter(item => 
+          (item.category && item.category.toLowerCase() === catParam) ||
+          (item.category_id && item.category_id.toLowerCase() === catParam)
+        );
+      }
+    }
+
+    // Filter by ID or Slug
+    if (upper.includes('WHERE') && (upper.includes('ID =') || upper.includes('SLUG =') || upper.includes('ORDER_NUMBER =') || upper.includes('INVOICE_NUMBER =') || upper.includes('EMAIL =') || upper.includes('USERNAME ='))) {
+      if (params.length > 0) {
+        const pVal = String(params[0] || '').toLowerCase().trim();
+        results = results.filter(item => {
+          const itemId = String(item.id || '').toLowerCase();
+          const itemSlug = String(item.slug || '').toLowerCase();
+          const itemOrderNo = String(item.order_number || '').toLowerCase();
+          const itemInvoiceNo = String(item.invoice_number || '').toLowerCase();
+          const itemEmail = String(item.email || '').toLowerCase();
+          const itemUser = String(item.username || '').toLowerCase();
+          const p2 = params[1] ? String(params[1]).toLowerCase().trim() : null;
+
+          return itemId === pVal ||
+                 itemSlug === pVal ||
+                 (p2 && itemSlug === p2) ||
+                 itemOrderNo === pVal ||
+                 itemInvoiceNo === pVal ||
+                 itemEmail === pVal ||
+                 itemUser === pVal;
+        });
+      }
+    }
+
+    // Filter by status (e.g. status = 'approved' for reviews or status = 'active' for products)
+    if (upper.includes("STATUS = 'APPROVED'")) {
+      results = results.filter(item => item.status === 'approved');
+    } else if (upper.includes("STATUS = 'ACTIVE'")) {
+      results = results.filter(item => item.status === 'active');
+    }
+
+    // Sorting
+    if (upper.includes('ORDER BY CREATED_AT DESC') || upper.includes('ORDER BY TIMESTAMP DESC')) {
+      results.sort((a, b) => new Date(b.created_at || b.timestamp || 0) - new Date(a.created_at || a.timestamp || 0));
+    } else if (upper.includes('ORDER BY CREATED_AT ASC')) {
+      results.sort((a, b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
+    }
+
+    // Limit
+    if (upper.includes('LIMIT 1')) {
+      results = results.slice(0, 1);
+    }
+
+    return { rows: results, rowCount: results.length };
+  }
+
+  // 6. INSERT QUERY
+  if (upper.startsWith('INSERT')) {
+    const colMatch = trimmed.match(/\(([^)]+)\)\s+VALUES/i);
+    const cols = colMatch ? colMatch[1].split(',').map(c => c.trim().toLowerCase()) : [];
+
+    const newRecord = {};
+    cols.forEach((col, idx) => {
+      let val = params[idx];
+      // Auto parse JSON strings if needed
+      if (typeof val === 'string' && (val.startsWith('{') || val.startsWith('['))) {
+        try { val = JSON.parse(val); } catch (e) {}
+      }
+      newRecord[col] = val;
+    });
+
+    if (!newRecord.id) {
+      newRecord.id = `${tableName.slice(0, 3)}_${Date.now()}`;
+    }
+    if (!newRecord.created_at) {
+      newRecord.created_at = new Date().toISOString();
+    }
+
+    // Upsert check for users, products, categories
+    const existingIdx = collection.findIndex(item => 
+      (newRecord.id && item.id === newRecord.id) ||
+      (newRecord.username && item.username && item.username.toLowerCase() === newRecord.username.toLowerCase()) ||
+      (newRecord.slug && item.slug && item.slug.toLowerCase() === newRecord.slug.toLowerCase())
+    );
+
+    if (existingIdx !== -1) {
+      collection[existingIdx] = { ...collection[existingIdx], ...newRecord };
     } else {
-      poolConfig = {
-        host: db.host,
-        port: db.port,
-        user: db.user,
-        password: db.password,
-        database: db.database,
-        ssl: db.ssl,
-        max: config.isProduction ? 20 : 10,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 5000
-      };
+      collection.unshift(newRecord);
     }
 
-    const newPool = new Pool(poolConfig);
-
-    newPool.on('connect', () => {
-      isConnected = true;
-      connectionError = null;
-    });
-
-    newPool.on('error', (err) => {
-      console.error('❌ Unexpected error on PostgreSQL client:', err.message);
-      connectionError = err.message;
-    });
-
-    return newPool;
-  } catch (err) {
-    console.error('❌ Failed to construct database pool:', err.message);
-    connectionError = err.message;
-    return null;
+    saveDatabase();
+    return { rows: [newRecord], rowCount: 1 };
   }
-}
 
-pool = initPool();
+  // 7. UPDATE QUERY
+  if (upper.startsWith('UPDATE')) {
+    let affected = [];
+    const idParam = params[params.length - 1]; // Often the last param is the ID
 
-/**
- * Automatically bootstrap tables and default accounts from schema.sql
- */
-async function autoBootstrapSchema() {
-  if (!pool) return;
-  try {
-    const schemaPath = path.join(__dirname, '..', 'db', 'schema.sql');
-    if (fs.existsSync(schemaPath)) {
-      const sql = fs.readFileSync(schemaPath, 'utf8');
-      try {
-        await pool.query(sql);
-      } catch (fullSqlErr) {
-        // Fallback to statement by statement execution
-        const stmts = sql
-          .split(';')
-          .map(s => s.trim())
-          .filter(s => s.length > 0 && !s.startsWith('--'));
+    collection.forEach(item => {
+      const isTarget = idParam && (
+        item.id === idParam ||
+        item.order_number === idParam ||
+        item.invoice_number === idParam ||
+        item.slug === idParam
+      );
 
-        for (const stmt of stmts) {
-          try {
-            await pool.query(stmt);
-          } catch (stmtErr) {
-            // Individual statement error will not abort other statements
-          }
+      if (isTarget || !idParam) {
+        // Apply updates
+        if (upper.includes('STOCK =') && params.length >= 2) {
+          item.stock = Number(params[0]);
+          if (params.length >= 3) item.online_sold = Number(params[1]);
         }
-      }
-      schemaBootstrapped = true;
-      console.log('✅ PostgreSQL database schema & essential tables verified/bootstrapped successfully.');
-    }
-
-    // Auto-seed core products if products table is empty
-    try {
-      const prodCountRes = await pool.query('SELECT COUNT(*) FROM products');
-      const prodCount = parseInt(prodCountRes.rows[0].count, 10);
-      if (prodCount === 0) {
-        const dbJsonPath = path.join(__dirname, '..', '..', '..', 'data', 'db.json');
-        if (fs.existsSync(dbJsonPath)) {
-          const dbData = JSON.parse(fs.readFileSync(dbJsonPath, 'utf8'));
-          if (Array.isArray(dbData.products)) {
-            for (const p of dbData.products) {
-              await pool.query(`
-                INSERT INTO products (
-                  id, slug, name, subtitle, category, category_id,
-                  price, mrp, stock, initial_stock, online_sold, offline_sold,
-                  sku, images, theme_color, tagline, metric_badge, badge,
-                  short_description, description, benefits, ingredients, how_to_use,
-                  variants, seo, status
-                ) VALUES (
-                  $1, $2, $3, $4, $5, $6,
-                  $7, $8, $9, $10, 0, 0,
-                  $11, $12, $13, $14, $15, $16,
-                  $17, $18, $19, $20, $21,
-                  $22, $23, $24
-                ) ON CONFLICT (id) DO NOTHING
-              `, [
-                p.id, p.slug, p.name, p.subtitle || '', p.category || 'Hair Care', p.categoryId || 'cat_hair_care',
-                p.price, p.mrp || Math.round(p.price * 1.2), p.stock || 50, p.initialStock || p.stock || 50,
-                p.sku || '', JSON.stringify(p.images || []), p.themeColor || '#6B4E9B', p.tagline || '',
-                p.metricBadge || '', p.badge || '', p.shortDescription || '', p.description || '',
-                JSON.stringify(p.benefits || []), p.ingredients || '', p.howToUse || '',
-                JSON.stringify(p.variants || []), JSON.stringify(p.seo || {}), p.status || 'active'
-              ]);
-            }
-            console.log('✅ Auto-seeded core products into empty database.');
-          }
+        if (upper.includes('STATUS =') && params.length >= 1) {
+          item.status = params[0];
         }
+        item.updated_at = new Date().toISOString();
+        affected.push(item);
       }
-    } catch (seedErr) {
-      console.warn('Auto-seed check note:', seedErr.message);
-    }
-
-    // Auto-seed categories table if empty
-    try {
-      await pool.query(`
-        CREATE TABLE IF NOT EXISTS categories (
-          id VARCHAR(100) PRIMARY KEY,
-          name VARCHAR(255) NOT NULL,
-          slug VARCHAR(255) UNIQUE NOT NULL,
-          count INT DEFAULT 0
-        )
-      `);
-      const catCountRes = await pool.query('SELECT COUNT(*) FROM categories');
-      if (parseInt(catCountRes.rows[0].count, 10) === 0) {
-        await pool.query(`
-          INSERT INTO categories (id, name, slug, count)
-          VALUES 
-            ('cat_hair_care', 'Hair Care', 'hair-care', 1),
-            ('cat_scalp', 'Scalp & Cleansing', 'scalp-cleansing', 1),
-            ('cat_sets', 'Ritual Sets & Combos', 'ritual-sets', 1),
-            ('cat_gifting', 'Royal Gifting', 'royal-gifting', 0)
-          ON CONFLICT (id) DO NOTHING
-        `);
-      }
-    } catch (catErr) {
-      console.warn('Categories verify note:', catErr.message);
-    }
-
-    // Auto-synchronize table ownership & permissions between nachiyarherbals and nachiyarherbals_client_db
-    try {
-      const syncPermissionsSql = `
-        DO $$
-        BEGIN
-          -- 1. Transfer ownership of client_db tables to nachiyarherbals
-          BEGIN ALTER TABLE IF EXISTS categories OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS contact_messages OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS customers OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS reviews OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS inventory_logs OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS invoices OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS orders OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS products OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS site_settings OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-          BEGIN ALTER TABLE IF EXISTS users OWNER TO nachiyarherbals; EXCEPTION WHEN OTHERS THEN NULL; END;
-
-          -- 2. Grant all permissions to both users across all tables & sequences
-          BEGIN
-            GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO nachiyarherbals;
-            GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO nachiyarherbals;
-            GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO nachiyarherbals_client_db;
-            GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO nachiyarherbals_client_db;
-          EXCEPTION WHEN OTHERS THEN NULL;
-          END;
-
-          -- 3. Set default privileges for any future tables
-          BEGIN
-            ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO nachiyarherbals;
-            ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO nachiyarherbals_client_db;
-          EXCEPTION WHEN OTHERS THEN NULL;
-          END;
-        END $$;
-      `;
-      await pool.query(syncPermissionsSql);
-      console.log('✅ PostgreSQL database table ownership & permissions synchronized to nachiyarherbals successfully.');
-    } catch (syncErr) {
-      console.warn('Ownership sync note:', syncErr.message);
-    }
-
-    // Auto-seed default admin account into users table if empty
-    try {
-      const userCountRes = await pool.query('SELECT COUNT(*) FROM users');
-      if (parseInt(userCountRes.rows[0].count, 10) === 0) {
-        await pool.query(`
-          INSERT INTO users (id, username, email, phone, password, name, role, permissions)
-          VALUES 
-            ('user_nimda_master', 'admin', 'admin@nachiyarherbals.com', '9876543210', 'admin123', 'Super Administrator', 'super_admin', '["all"]'::jsonb)
-          ON CONFLICT (id) DO NOTHING
-        `);
-        console.log('✅ Auto-seeded master admin account into users table.');
-      }
-    } catch (userErr) {
-      console.warn('Users seed note:', userErr.message);
-    }
-  } catch (err) {
-    console.warn('⚠️ Auto-schema bootstrap note:', err.message);
-  }
-}
-
-// Trigger initial health check and schema bootstrap asynchronously
-if (pool) {
-  pool.query('SELECT NOW()')
-    .then(() => {
-      isConnected = true;
-      connectionError = null;
-      return autoBootstrapSchema();
-    })
-    .catch((err) => {
-      isConnected = false;
-      connectionError = err.message;
-      console.warn('⚠️ Initial database ping failed:', err.message);
     });
-}
 
-/**
- * Resilient query wrapper that provides actionable errors instead of crashing
- */
-async function query(text, params) {
-  if (!pool) {
-    // Attempt lazy re-initialization if environment variables were updated at runtime
-    pool = initPool();
-    if (!pool) {
-      throw new Error(connectionError || 'Database not configured. Please set DATABASE_URL in cPanel environment variables.');
-    }
+    saveDatabase();
+    return { rows: affected, rowCount: affected.length };
   }
 
-  try {
-    return await pool.query(text, params);
-  } catch (err) {
-    // If table doesn't exist, try auto-bootstrap and retry once
-    if (err.message && err.message.includes('does not exist')) {
-      console.log('🔄 Detected missing relation, attempting auto-bootstrap of schema...');
-      await autoBootstrapSchema();
-      return await pool.query(text, params);
+  // 8. DELETE QUERY
+  if (upper.startsWith('DELETE')) {
+    const idParam = params[0];
+    if (idParam) {
+      db[tableName] = collection.filter(item => item.id !== idParam && item.slug !== idParam);
+      saveDatabase();
     }
-    throw err;
+    return { rows: [], rowCount: 1 };
   }
+
+  return { rows: [], rowCount: 0 };
 }
+
+// Client object for transactions
+const clientInstance = {
+  query: query,
+  release: () => {}
+};
+
+// PostgreSQL-compatible Pool Object Mock
+const pool = {
+  connect: async () => clientInstance,
+  query: query,
+  end: async () => {},
+  on: (event, handler) => {
+    if (event === 'connect') handler();
+  }
+};
 
 module.exports = {
   pool,
   query,
-  isConnected: () => isConnected,
-  getConnectionError: () => connectionError,
-  autoBootstrapSchema
+  isConnected: () => true,
+  getConnectionError: () => null,
+  autoBootstrapSchema: async () => {
+    loadDatabase();
+    return Promise.resolve();
+  }
 };

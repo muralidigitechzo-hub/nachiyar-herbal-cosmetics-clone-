@@ -94,46 +94,18 @@ const isTest = currentEnv === 'test';
 // Port configuration (supports numeric port or Passenger UNIX domain socket path)
 const port = process.env.PORT || 5000;
 
-// Database configuration
+// Database configuration (Standalone File-Based Mode)
 function getDatabaseConfig() {
-  let connectionString = process.env.DATABASE_URL || '';
-  const host = process.env.DB_HOST || '127.0.0.1';
-  const dbPort = parseInt(process.env.DB_PORT, 10) || 5432;
-  const user = process.env.DB_USER || (isProduction ? 'nachiyarherbals_client_db' : '');
-  const password = process.env.DB_PASSWORD || (isProduction ? 'nachiyarherbals_db' : '');
-  const database = process.env.DB_NAME || (isProduction ? 'nachiyarherbals_db' : '');
-
-  // Auto-compose connection string if individual credentials are provided
-  if (!connectionString && user && password && database) {
-    const encUser = encodeURIComponent(user);
-    const encPass = encodeURIComponent(password);
-    connectionString = `postgresql://${encUser}:${encPass}@${host}:${dbPort}/${database}`;
-  }
-
-  // On cPanel or local servers, if database host is localhost / 127.0.0.1, default SSL to false
-  const isLocalHost = (connectionString && (connectionString.includes('localhost') || connectionString.includes('127.0.0.1'))) ||
-                      host === 'localhost' || host === '127.0.0.1';
-
-  let ssl = false;
-  if (process.env.DB_SSL === 'true') {
-    ssl = { rejectUnauthorized: false };
-  } else if (process.env.DB_SSL === 'false') {
-    ssl = false;
-  } else if (isProduction && !isLocalHost) {
-    ssl = { rejectUnauthorized: false };
-  } else {
-    ssl = false;
-  }
-
   return {
-    connectionString,
-    host,
-    port: dbPort,
-    user,
-    password,
-    database,
-    ssl,
-    isConfigured: Boolean(connectionString || (host && database && user))
+    connectionString: '',
+    host: 'Standalone Local File',
+    port: 0,
+    user: '',
+    password: '',
+    database: 'data/db.json',
+    ssl: false,
+    isConfigured: true,
+    isStandaloneFileDB: true
   };
 }
 

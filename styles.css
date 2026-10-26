@@ -5,8 +5,15 @@
 
 /* --- 1. DESIGN TOKENS & CSS VARIABLES --- */
 :root {
+  /* Configurable Brand Theme Variables (From Admin Settings) */
+  --brand-primary: #7C5AAB;
+  --brand-secondary: #D4AF37;
+  --brand-accent: #583B82;
+  --brand-bg: #F9F8F5;
+  --brand-text: #191319;
+
   /* Canvas & Foundations */
-  --color-canvas: #F9F8F5;
+  --color-canvas: var(--brand-bg, #F9F8F5);
   --color-canvas-alt: #F2EFE9;
   --color-surface: #FFFFFF;
   --color-text-main: #191319;
@@ -16,15 +23,15 @@
   --color-border-subtle: rgba(25, 19, 25, 0.04);
 
   /* Royal Brand Accents */
-  --color-gold: #D4AF37;
+  --color-gold: var(--brand-secondary, #D4AF37);
   --color-gold-light: #F4E8C1;
   --color-gold-dark: #A37F14;
   --gold-gradient: linear-gradient(135deg, #F3E6C4 0%, #D4AF37 50%, #B88E1C 100%);
   --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.25);
 
   /* Product Signature Colorways */
-  --color-lavender-primary: #7C5AAB;
-  --color-lavender-dark: #583B82;
+  --color-lavender-primary: var(--brand-primary, #7C5AAB);
+  --color-lavender-dark: var(--brand-accent, #583B82);
   --color-lavender-light: #ECE5F8;
   
   --color-hibiscus-primary: #872134;
@@ -2659,17 +2666,18 @@ button {
   overflow: hidden;
   user-select: none;
   pointer-events: none;
-  padding-block: 20px;
+  padding-block: 10px;
 }
 
 .footer-watermark-text {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 14vw, 11rem);
+  font-size: clamp(2rem, 7vw, 5.5rem);
   font-weight: 900;
   letter-spacing: 0.08em;
   color: rgba(212, 175, 55, 0.06);
-  line-height: 0.8;
+  line-height: 0.9;
   display: block;
+  white-space: nowrap;
 }
 
 .footer-legal-bar {

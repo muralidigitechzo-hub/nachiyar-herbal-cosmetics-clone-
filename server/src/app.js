@@ -562,43 +562,8 @@ app.get(['/api/fix-database', '/api/admin/fix-permissions'], async (req, res) =>
   }
 });
 
-// Public storefront settings (announcements & enabled checkout payment methods)
-const { query: dbQuery } = require('./config/db');
-app.get('/api/settings/public', async (req, res) => {
-  try {
-    const result = await dbQuery('SELECT data FROM site_settings WHERE id = 1');
-    const settings = result.rows.length > 0 ? (typeof result.rows[0].data === 'string' ? JSON.parse(result.rows[0].data) : result.rows[0].data) : {};
-    res.json({
-      success: true,
-      data: {
-        announcementText: settings.announcementText || 'ROYAL BOTANICAL CARE • FREE PAN-INDIA SHIPPING OVER ₹599',
-        freeShippingThreshold: settings.freeShippingThreshold || 599,
-        paymentMethods: settings.paymentMethods || {},
-        couponCode: settings.couponCode || 'FESTIVE15',
-        discountPercent: settings.discountPercent || 15,
-        couponExpiryDate: settings.couponExpiryDate || '',
-        couponActive: settings.couponActive !== false && settings.couponActive !== 'false',
-        couponTagline: settings.couponTagline || 'Special Festival Discount',
-        firebaseConfig: (process.env.FIREBASE_API_KEY && !process.env.FIREBASE_API_KEY.includes('YOUR_FIREBASE_API_KEY')) ? {
-          apiKey: process.env.FIREBASE_API_KEY,
-          authDomain: process.env.FIREBASE_AUTH_DOMAIN || '',
-          projectId: process.env.FIREBASE_PROJECT_ID || '',
-          storageBucket: process.env.FIREBASE_STORAGE_BUCKET || '',
-          messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || '',
-          appId: process.env.FIREBASE_APP_ID || '',
-          measurementId: process.env.FIREBASE_MEASUREMENT_ID || ''
-        } : null,
-        homeShowcase: settings.homeShowcase || {
-          slot1: { productId: 'prod_oil_01', title: 'Herbal Hair Oil', price: 299, mrp: 599, customImage: 'assets/new-oil-bottle-card.jpg' },
-          slot2: { productId: 'prod_shampoo_02', title: 'Hibiscus Flower Shampoo', price: 249, mrp: 549, customImage: 'assets/new-shampoo-bottle-card.jpg' },
-          combo: { productId: 'prod_duo_03', selectedProductIds: ['prod_oil_01', 'prod_shampoo_02'], title: 'The Royal Hair Ritual (Duo Set)', price: 499, mrp: 1148, customImage: 'assets/duo-ritual-new.jpg', tag: 'BEST VALUE: SAVE ₹149' }
-        }
-      }
-    });
-  } catch (err) {
-    res.json({ success: true, data: { couponCode: 'FESTIVE15', discountPercent: 15, couponActive: false } });
-  }
-});
+// Settings API Routes (Public & Admin)
+app.use('/api/settings', settingsRouter);
 
 // Dedicated active coupon endpoint for instant storefront & checkout privilege resolution
 app.get('/api/coupon/active', async (req, res) => {
@@ -630,7 +595,7 @@ app.post('/api/webhooks/marketplace', (req, res, next) => {
 app.use('/api/invoices', requireAdminAuth, invoicesRouter);
 app.use('/api/inventory', requireAdminAuth, inventoryRouter);
 app.use('/api/analytics', requireAdminAuth, analyticsRouter);
-app.use('/api/settings', requireAdminAuth, settingsRouter);
+// settingsRouter mounted above
 
 // Image Upload Endpoint (Environment-aware: Local storage in dev, cPanel storage in prod)
 app.post('/api/upload', requireAdminAuth, async (req, res) => {
