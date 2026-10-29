@@ -41,8 +41,8 @@ function syncAll(rootDir) {
   const brandName = brand.name || 'Store';
   const shortName = brand.shortName || brandName.split(' ')[0].toUpperCase();
   const tagline = brand.tagline || 'Excellence & Precision';
-  const logo = brand.logo || 'assets/logo.png';
-  const favicon = brand.favicon || logo;
+  const logo = (brand.logo && !brand.logo.includes('unsplash.com')) ? brand.logo : 'assets/logo.png';
+  const favicon = (brand.favicon && !brand.favicon.includes('unsplash.com')) ? brand.favicon : 'assets/logo.png';
   const phone = business.phone || '+91 98765 43210';
   const email = business.email || 'support@store.com';
   const address = business.address || 'Heritage Atelier, MG Road, Bengaluru, Karnataka - 560001';

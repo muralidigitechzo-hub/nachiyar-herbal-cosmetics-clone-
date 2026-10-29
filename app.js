@@ -147,12 +147,19 @@ async function initStorefrontApp() {
       img.src = activeLogo;
     });
 
-    // Dynamic Browser Tab Favicon
+    // Dynamic Browser Tab Favicon (re-attach to force instant browser cache refresh)
     const rawFavicon = settings.brand?.favicon || settings.faviconUrl || '';
     const isExternalFavicon = rawFavicon.includes('unsplash.com') || rawFavicon.includes('nachiyar-logo') || rawFavicon.includes('technova-logo');
-    const faviconHref = (rawFavicon && !isExternalFavicon) ? rawFavicon : '/favicon.png';
-    document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => {
-      el.href = faviconHref;
+    const cleanFavicon = (rawFavicon && !isExternalFavicon) ? rawFavicon : '/favicon.png';
+    const cacheBustedFavicon = cleanFavicon + (cleanFavicon.includes('?') ? '&' : '?') + 'v=2';
+    
+    document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => el.remove());
+    ['icon', 'shortcut icon', 'apple-touch-icon'].forEach(rel => {
+      const link = document.createElement('link');
+      link.rel = rel;
+      link.type = 'image/png';
+      link.href = cacheBustedFavicon;
+      document.head.appendChild(link);
     });
 
     // 4. Contact Details
@@ -1814,43 +1821,43 @@ async function initStorefrontApp() {
 
   const DEFAULT_REVIEWS = [
   {
-    "name": "Meera Subramanian",
-    "product_name": "The Noor Discovery Duo (Set of 2)",
+    "name": "Aditya Kapoor",
+    "product_name": "The Aurelia Collector's Duo (Set of 2)",
     "rating": 5,
-    "title": "The Perfect Pair",
-    "comment": "Oud for evenings and the attar for daytime. The gift casket alone is worth it, and the 15% saving made the decision easy.",
-    "location": "Coimbatore, India"
+    "title": "Two Watches, One Perfect Set",
+    "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
+    "location": "Delhi, India"
   },
   {
     "name": "Rohan Mehta",
-    "product_name": "Noor Royal Oud Extrait 50ml",
+    "product_name": "Aurelia Sovereign Emerald 41",
     "rating": 5,
-    "title": "Compliments All Day",
-    "comment": "Projects beautifully and lasts through a full workday into the night. Easily my best fragrance purchase this year.",
+    "title": "The Emerald Dial Is Stunning",
+    "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
     "location": "Mumbai, India"
   },
   {
-    "name": "Fathima Rahman",
-    "product_name": "Noor Rose Taif Pure Attar 12ml",
+    "name": "Vikram Nair",
+    "product_name": "Aurelia DeepOcean Ceramic Diver",
     "rating": 5,
-    "title": "Pure and Intimate",
-    "comment": "Authentic rose with a creamy sandalwood trail. The dropper makes it easy to control and a little goes a long way.",
-    "location": "Chennai, India"
+    "title": "Built Like A Tank",
+    "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
+    "location": "Kochi, India"
   },
   {
     "name": "Ananya Krishnan",
-    "product_name": "Noor Midnight Jasmine Body Mist 100ml",
+    "product_name": "Aurelia Heritage Moonphase",
     "rating": 5,
-    "title": "Daily Favourite",
-    "comment": "Light, airy and unmistakably jasmine. I reapply it throughout the day and always get asked what it is.",
-    "location": "Madurai, India"
+    "title": "Perfect Gift",
+    "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
+    "location": "Chennai, India"
   },
   {
     "name": "Siddharth Rao",
-    "product_name": "Noor Travel Atomizer Kit (3 x 10ml)",
+    "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
     "rating": 4,
-    "title": "Great Travel Companion",
-    "comment": "Leak-proof and easy to refill. Wish there were a couple more colour options.",
+    "title": "Great Value Straps",
+    "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
     "location": "Bengaluru, India"
   }
 ];

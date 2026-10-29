@@ -52,20 +52,29 @@ app.get(['/favicon.ico', '/favicon.png'], (req, res) => {
     const cfgPath = path.resolve(__dirname, '../../data/site-config.json');
     if (fs.existsSync(cfgPath)) {
       const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
-      const favRel = cfg.brand?.favicon || cfg.brand?.logo;
-      if (favRel) {
-        const fullFavPath = path.resolve(__dirname, '../../', favRel);
-        if (fs.existsSync(fullFavPath)) {
+      let favRel = cfg.brand?.favicon || cfg.brand?.logo;
+      if (favRel && typeof favRel === 'string') {
+        const cleanRel = favRel.replace(/^[/\\]+/, '');
+        const fullFavPath = path.resolve(__dirname, '../../', cleanRel);
+        if (fs.existsSync(fullFavPath) && !cleanRel.includes('unsplash.com')) {
+          res.setHeader('Content-Type', 'image/png');
           res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
           return res.sendFile(fullFavPath);
         }
       }
     }
   } catch (e) {}
-  const defaultLogo = path.resolve(__dirname, '../../assets/technova-logo.png');
-  if (fs.existsSync(defaultLogo)) {
+  const digiLogo = path.resolve(__dirname, '../../assets/logo.png');
+  if (fs.existsSync(digiLogo)) {
+    res.setHeader('Content-Type', 'image/png');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    return res.sendFile(defaultLogo);
+    return res.sendFile(digiLogo);
+  }
+  const rootFavicon = path.resolve(__dirname, '../../favicon.png');
+  if (fs.existsSync(rootFavicon)) {
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    return res.sendFile(rootFavicon);
   }
   res.status(204).end();
 });
