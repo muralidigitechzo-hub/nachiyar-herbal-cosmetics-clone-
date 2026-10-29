@@ -1,12 +1,17 @@
-import { useEffect } from 'react';
+import Head from 'next/head';
 
 export default function Home() {
-  useEffect(() => {
-    // Fallback client-side redirect if not served directly via rewrite
-    if (typeof window !== 'undefined' && window.location.pathname === '/') {
-      window.location.replace('/index.html');
-    }
-  }, []);
-
-  return null;
+  return (
+    <>
+      <Head>
+        <title>Nachiyar Herbals & Cosmetics</title>
+        <meta httpEquiv="refresh" content="0;url=/index.html" />
+      </Head>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.location.replace('/index.html');`
+        }}
+      />
+    </>
+  );
 }
