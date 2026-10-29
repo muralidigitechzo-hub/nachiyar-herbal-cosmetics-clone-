@@ -1805,7 +1805,7 @@ async function initStorefrontApp() {
         ${r.title ? `<h4 class="review-card-title">${escapeHtml(r.title)}</h4>` : ''}
         <p class="review-card-body">"${escapeHtml(r.comment)}"</p>
         <div class="review-card-footer">
-          <span>${brandName} Owner Experience</span>
+          <span>${escapeHtml((typeof window !== 'undefined' && (window.__SITE_SETTINGS__?.brand?.name || window.__SITE_SETTINGS__?.brandName)) || document.querySelector('.brand-name')?.textContent?.trim() || 'Aurelia')} Owner Experience</span>
           <span style="font-weight:700; color:var(--color-gold);">⭐ ${Number(r.rating || 5)}.0 / 5.0</span>
         </div>
       </div>
@@ -1924,7 +1924,11 @@ async function initStorefrontApp() {
       }
 
       // Render ONLY original, unique approved reviews — ZERO duplicate cards!
-      reviewsScrollerTrack.innerHTML = reviews.map(r => renderReviewCard(r)).join('');
+      try {
+        reviewsScrollerTrack.innerHTML = reviews.map(r => renderReviewCard(r)).join('');
+      } catch (renderErr) {
+        console.error('Error rendering review cards:', renderErr);
+      }
 
       // Measure and initialize carousel engine after DOM layout
       requestAnimationFrame(() => {
