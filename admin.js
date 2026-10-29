@@ -225,8 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const bName = storeSettings.brandName || storeSettings.branding?.brandName || 'NACHIYAR HERBALS';
         const isH = bName.toLowerCase().includes('nachiyar') || bName.toLowerCase().includes('herbal');
         const bInitials = (bName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'NH';
-        let bLogo = storeSettings.logoUrl || storeSettings.branding?.logoUrl || '';
-        if (!isH && (bLogo.includes('nachiyar-logo') || !bLogo)) bLogo = '';
+        let bLogo = storeSettings.logoUrl || storeSettings.branding?.logoUrl || '/assets/logo.png';
+        if (bLogo.includes('unsplash.com') || bLogo.includes('nachiyar-logo') || bLogo.includes('technova-logo') || !bLogo) bLogo = '/assets/logo.png';
 
         document.querySelectorAll('.admin-title').forEach(el => el.textContent = bName.toUpperCase());
         const wSub = document.querySelector('.welcome-sub');
@@ -3818,7 +3818,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('setBrandTagline').value = branding.tagline || storeSettings.tagline || 'Pure Botanical Elegance & Ayurvedic Care';
     }
     if (document.getElementById('setBrandLogoUrl')) {
-      document.getElementById('setBrandLogoUrl').value = branding.logoUrl || storeSettings.logoUrl || 'assets/nachiyar-logo.png';
+      document.getElementById('setBrandLogoUrl').value = (branding.logoUrl || storeSettings.logoUrl || 'assets/logo.png').replace(/.*unsplash\.com.*/, 'assets/logo.png');
     }
     if (document.getElementById('setBrandFaviconUrl')) {
       document.getElementById('setBrandFaviconUrl').value = branding.faviconUrl || storeSettings.faviconUrl || 'favicon.png';
@@ -3895,7 +3895,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bName = document.getElementById('setBrandName')?.value || 'Nachiyar Herbals & Cosmetics';
     const bTagline = document.getElementById('setBrandTagline')?.value || '';
-    const bLogo = document.getElementById('setBrandLogoUrl')?.value || 'assets/nachiyar-logo.png';
+    const bLogo = document.getElementById('setBrandLogoUrl')?.value || 'assets/logo.png';
     const bFavicon = document.getElementById('setBrandFaviconUrl')?.value || 'favicon.png';
     const primaryC = document.getElementById('setThemeColorPrimary')?.value || '#7C5AAB';
     const secondaryC = document.getElementById('setThemeColorSecondary')?.value || '#D4AF37';

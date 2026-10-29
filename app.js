@@ -133,27 +133,24 @@ async function initStorefrontApp() {
       document.querySelectorAll('.brand-sub').forEach(el => el.textContent = tagline.toUpperCase());
     }
 
-    // 3. Dynamic Logo & Favicon from JSON
-    const logoUrl = settings.brand?.logo || settings.logoUrl || settings.branding?.logoUrl || '';
-    const activeLogo = logoUrl;
-    const primaryCol = settings.brand?.colors?.primary || settings.themeColors?.primary || '#1E1B24';
-    const secCol = settings.brand?.colors?.secondary || settings.themeColors?.secondary || '#D4AF37';
-    const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="${encodeURIComponent(primaryCol)}" stroke="${encodeURIComponent(secCol)}" stroke-width="2.5"/><text x="50%" y="54%" font-family="sans-serif" font-size="20" font-weight="700" fill="${encodeURIComponent(secCol)}" dominant-baseline="middle" text-anchor="middle">${initials}</text></svg>`;
+    // 3. Fixed Brand Logo & Favicon across the clone
+    const rawLogo = settings.brand?.logo || settings.logoUrl || settings.branding?.logoUrl || '';
+    const isExternalProductPic = rawLogo.includes('unsplash.com') || rawLogo.includes('nachiyar-logo') || rawLogo.includes('technova-logo') || rawLogo.includes('fashion-logo');
+    const activeLogo = (rawLogo && !isExternalProductPic) ? rawLogo : '/assets/logo.png';
+    const fallbackLogo = '/assets/logo.png';
 
     document.querySelectorAll('.brand-logo-img, .footer-crest-img, .admin-logo').forEach(img => {
-      if (activeLogo) {
-        img.onerror = function() {
-          this.onerror = null;
-          this.src = fallbackSvg;
-        };
-        img.src = activeLogo;
-      } else {
-        img.src = fallbackSvg;
-      }
+      img.onerror = function() {
+        this.onerror = null;
+        this.src = fallbackLogo;
+      };
+      img.src = activeLogo;
     });
 
-    // Dynamic Browser Tab Favicon from JSON
-    const faviconHref = settings.brand?.favicon || settings.faviconUrl || activeLogo || fallbackSvg;
+    // Dynamic Browser Tab Favicon
+    const rawFavicon = settings.brand?.favicon || settings.faviconUrl || '';
+    const isExternalFavicon = rawFavicon.includes('unsplash.com') || rawFavicon.includes('nachiyar-logo') || rawFavicon.includes('technova-logo');
+    const faviconHref = (rawFavicon && !isExternalFavicon) ? rawFavicon : '/favicon.png';
     document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => {
       el.href = faviconHref;
     });
@@ -1817,43 +1814,43 @@ async function initStorefrontApp() {
 
   const DEFAULT_REVIEWS = [
   {
-    "name": "Aditya Kapoor",
-    "product_name": "The Aurelia Collector's Duo (Set of 2)",
+    "name": "Meera Subramanian",
+    "product_name": "The Noor Discovery Duo (Set of 2)",
     "rating": 5,
-    "title": "Two Watches, One Perfect Set",
-    "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
-    "location": "Delhi, India"
+    "title": "The Perfect Pair",
+    "comment": "Oud for evenings and the attar for daytime. The gift casket alone is worth it, and the 15% saving made the decision easy.",
+    "location": "Coimbatore, India"
   },
   {
     "name": "Rohan Mehta",
-    "product_name": "Aurelia Sovereign Emerald 41",
+    "product_name": "Noor Royal Oud Extrait 50ml",
     "rating": 5,
-    "title": "The Emerald Dial Is Stunning",
-    "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
+    "title": "Compliments All Day",
+    "comment": "Projects beautifully and lasts through a full workday into the night. Easily my best fragrance purchase this year.",
     "location": "Mumbai, India"
   },
   {
-    "name": "Vikram Nair",
-    "product_name": "Aurelia DeepOcean Ceramic Diver",
+    "name": "Fathima Rahman",
+    "product_name": "Noor Rose Taif Pure Attar 12ml",
     "rating": 5,
-    "title": "Built Like A Tank",
-    "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
-    "location": "Kochi, India"
-  },
-  {
-    "name": "Ananya Krishnan",
-    "product_name": "Aurelia Heritage Moonphase",
-    "rating": 5,
-    "title": "Perfect Gift",
-    "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
+    "title": "Pure and Intimate",
+    "comment": "Authentic rose with a creamy sandalwood trail. The dropper makes it easy to control and a little goes a long way.",
     "location": "Chennai, India"
   },
   {
+    "name": "Ananya Krishnan",
+    "product_name": "Noor Midnight Jasmine Body Mist 100ml",
+    "rating": 5,
+    "title": "Daily Favourite",
+    "comment": "Light, airy and unmistakably jasmine. I reapply it throughout the day and always get asked what it is.",
+    "location": "Madurai, India"
+  },
+  {
     "name": "Siddharth Rao",
-    "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
+    "product_name": "Noor Travel Atomizer Kit (3 x 10ml)",
     "rating": 4,
-    "title": "Great Value Straps",
-    "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
+    "title": "Great Travel Companion",
+    "comment": "Leak-proof and easy to refill. Wish there were a couple more colour options.",
     "location": "Bengaluru, India"
   }
 ];

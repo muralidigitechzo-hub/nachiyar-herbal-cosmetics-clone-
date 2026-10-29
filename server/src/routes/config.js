@@ -69,8 +69,8 @@ router.put('/', (req, res) => {
           db.site_settings = {
             brandName: newConfig.brand?.name || db.site_settings?.brandName,
             tagline: newConfig.brand?.tagline || db.site_settings?.tagline,
-            logoUrl: newConfig.brand?.logo || db.site_settings?.logoUrl,
-            faviconUrl: newConfig.brand?.favicon || db.site_settings?.faviconUrl,
+            logoUrl: (newConfig.brand?.logo && !newConfig.brand.logo.includes('unsplash.com')) ? newConfig.brand.logo : (db.site_settings?.logoUrl || '/assets/logo.png'),
+            faviconUrl: (newConfig.brand?.favicon && !newConfig.brand.favicon.includes('unsplash.com')) ? newConfig.brand.favicon : (db.site_settings?.faviconUrl || '/favicon.png'),
             supportPhone: newConfig.business?.phone || db.site_settings?.supportPhone,
             supportEmail: newConfig.business?.email || db.site_settings?.supportEmail,
             storeAddress: newConfig.business?.address || db.site_settings?.storeAddress,

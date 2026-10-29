@@ -3,8 +3,8 @@
     "name": "Aurelia Chronometry",
     "shortName": "AURELIA",
     "tagline": "Mastering Time with Precision & Elegance",
-    "logo": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80",
-    "favicon": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80",
+    "logo": "/assets/logo.png",
+    "favicon": "/favicon.png",
     "colors": {
       "primary": "#064E3B",
       "secondary": "#E2B755",
