@@ -253,7 +253,7 @@
       "title": "Two Watches, One Perfect Set",
       "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
       "status": "approved",
-      "created_at": "2026-10-29T13:25:30.437Z"
+      "created_at": "2026-10-29T13:32:25.102Z"
     },
     {
       "id": "rev_2",
@@ -263,7 +263,7 @@
       "title": "The Emerald Dial Is Stunning",
       "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
       "status": "approved",
-      "created_at": "2026-10-29T13:25:30.445Z"
+      "created_at": "2026-10-29T13:32:25.106Z"
     },
     {
       "id": "rev_3",
@@ -273,7 +273,7 @@
       "title": "Built Like A Tank",
       "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
       "status": "approved",
-      "created_at": "2026-10-29T13:25:30.445Z"
+      "created_at": "2026-10-29T13:32:25.106Z"
     },
     {
       "id": "rev_4",
@@ -283,7 +283,7 @@
       "title": "Perfect Gift",
       "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
       "status": "approved",
-      "created_at": "2026-10-29T13:25:30.445Z"
+      "created_at": "2026-10-29T13:32:25.106Z"
     },
     {
       "id": "rev_5",
@@ -293,7 +293,7 @@
       "title": "Great Value Straps",
       "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
       "status": "approved",
-      "created_at": "2026-10-29T13:25:30.445Z"
+      "created_at": "2026-10-29T13:32:25.106Z"
     }
   ],
   "customers": [],
@@ -607,10 +607,10 @@
         "ctaText": "Add The Collection to Bag"
       },
       "reviewsSection": {
-        "eyebrow": "VERIFIED COLLECTORS",
-        "title": "Loved by Discerning Collectors",
-        "ratingScore": "4.9 / 5.0",
-        "ratingText": "Based on Verified Collector Reviews",
+        "eyebrow": "VERIFIED CUSTOMER EXPERIENCES",
+        "title": "Loved by Aurelia Chronometry Customers",
+        "ratingScore": "4.8 / 5.0",
+        "ratingText": "Based on 5 Verified Patron Reviews",
         "ctaText": "✍️ Comment Your Review"
       },
       "story": {
@@ -855,7 +855,35 @@
           }
         ],
         "signInText": "Sign In",
-        "bagText": "Bag"
+        "bagText": "Bag",
+        "bottomNav": {
+          "enabled": true,
+          "theme": {
+            "bubbleGradient": "linear-gradient(135deg, #064E3B 0%, #047857 50%, #064E3B 100%)",
+            "bubbleBorder": "rgba(226, 183, 85, 0.6)",
+            "activeTextColor": "#064E3B",
+            "inactiveTextColor": "#52796F",
+            "waveStroke": "rgba(6, 78, 59, 0.22)"
+          },
+          "items": [
+            {
+              "name": "Home",
+              "url": "/"
+            },
+            {
+              "name": "Shop",
+              "url": "/shop/"
+            },
+            {
+              "name": "About Us",
+              "url": "/about/"
+            },
+            {
+              "name": "Contact",
+              "url": "/contact/"
+            }
+          ]
+        }
       },
       "cart": {
         "title": "Your Atelier Bag",

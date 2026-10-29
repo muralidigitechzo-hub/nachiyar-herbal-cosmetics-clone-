@@ -291,10 +291,10 @@
       "ctaText": "Add The Collection to Bag"
     },
     "reviewsSection": {
-      "eyebrow": "VERIFIED COLLECTORS",
-      "title": "Loved by Discerning Collectors",
-      "ratingScore": "4.9 / 5.0",
-      "ratingText": "Based on Verified Collector Reviews",
+      "eyebrow": "VERIFIED CUSTOMER EXPERIENCES",
+      "title": "Loved by Aurelia Chronometry Customers",
+      "ratingScore": "4.8 / 5.0",
+      "ratingText": "Based on 5 Verified Patron Reviews",
       "ctaText": "✍️ Comment Your Review"
     },
     "story": {
@@ -539,7 +539,35 @@
         }
       ],
       "signInText": "Sign In",
-      "bagText": "Bag"
+      "bagText": "Bag",
+      "bottomNav": {
+        "enabled": true,
+        "theme": {
+          "bubbleGradient": "linear-gradient(135deg, #064E3B 0%, #047857 50%, #064E3B 100%)",
+          "bubbleBorder": "rgba(226, 183, 85, 0.6)",
+          "activeTextColor": "#064E3B",
+          "inactiveTextColor": "#52796F",
+          "waveStroke": "rgba(6, 78, 59, 0.22)"
+        },
+        "items": [
+          {
+            "name": "Home",
+            "url": "/"
+          },
+          {
+            "name": "Shop",
+            "url": "/shop/"
+          },
+          {
+            "name": "About Us",
+            "url": "/about/"
+          },
+          {
+            "name": "Contact",
+            "url": "/contact/"
+          }
+        ]
+      }
     },
     "cart": {
       "title": "Your Atelier Bag",
