@@ -958,8 +958,8 @@ img, svg, video {
   }
 }
 
-/* 14. Footer & Mobile Bottom Navigation Bar */
-@media (max-width: 768px) {
+/* 14. Footer & Mobile Bottom Navigation Bar (Brand Themed) */
+@media (max-width: 991px) {
   .site-footer {
     padding-block: 40px 80px !important;
     padding-inline: 16px !important;
@@ -975,16 +975,57 @@ img, svg, video {
   }
 
   .mobile-curved-bottom-nav {
-    display: flex !important;
+    display: block !important;
     position: fixed !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    width: 100% !important;
-    z-index: 999 !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(12px) !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+    height: 70px !important;
+    background: #FFFFFF !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-top: 1px solid rgba(6, 78, 59, 0.12) !important;
+    box-shadow: 0 -8px 24px rgba(6, 78, 59, 0.08) !important;
+    z-index: 9999 !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 6px) !important;
+  }
+
+  /* Active elevated circular bubble with Aurelia emerald & gold theme */
+  .nav-bubble-circle,
+  #navBubbleCircle {
+    background: linear-gradient(135deg, #064E3B 0%, #047857 50%, #064E3B 100%) !important;
+    box-shadow: 0 6px 18px rgba(6, 78, 59, 0.42) !important;
+    border: 1.5px solid rgba(226, 183, 85, 0.6) !important;
+  }
+
+  .bubble-icon-slot svg {
+    stroke: #FFFFFF !important;
+    stroke-width: 2.2 !important;
+  }
+
+  /* Wave arch border stroke */
+  .nav-wave-shape svg path:last-child {
+    stroke: rgba(6, 78, 59, 0.22) !important;
+  }
+
+  /* Active tab text in Emerald brand color */
+  .mobile-nav-tab.is-active .tab-label {
+    color: #064E3B !important;
+    font-weight: 800 !important;
+  }
+
+  /* Inactive tab icons and labels */
+  .mobile-nav-tab .tab-icon-wrap {
+    color: #52796F !important;
+  }
+
+  .mobile-nav-tab .tab-icon-wrap svg {
+    stroke: #52796F !important;
+  }
+
+  .mobile-nav-tab .tab-label {
+    color: #52796F !important;
   }
 }
 
