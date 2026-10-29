@@ -1800,7 +1800,7 @@ async function initStorefrontApp() {
         ${r.title ? `<h4 class="review-card-title">${escapeHtml(r.title)}</h4>` : ''}
         <p class="review-card-body">"${escapeHtml(r.comment)}"</p>
         <div class="review-card-footer">
-          <span>Nachiyar Ritual Experience</span>
+          <span>${brandName} Owner Experience</span>
           <span style="font-weight:700; color:var(--color-gold);">⭐ ${Number(r.rating || 5)}.0 / 5.0</span>
         </div>
       </div>
@@ -1869,20 +1869,45 @@ async function initStorefrontApp() {
     let stats = { average: '5.0', total: 0 };
 
     try {
-      const res = await fetch('/api/reviews');
-      const data = await res.json();
+      let data = null;
+      try {
+        const res = await fetch('/api/reviews');
+        if (res.ok) {
+          data = await res.json();
+        }
+      } catch (fetchErr) {
+        console.warn('Backend reviews API fetch error:', fetchErr);
+      }
 
-      if (data && data.success && data.data && data.data.reviews && data.data.reviews.length > 0) {
-        reviews = data.data.reviews;
-        stats = data.data.stats || { average: '5.0', total: reviews.length };
-      } else {
-        reviews = [];
-        stats = { average: '5.0', total: 0 };
+      let rawReviews = [];
+      if (data && data.success && data.data) {
+        if (Array.isArray(data.data.reviews) && data.data.reviews.length > 0) {
+          rawReviews = data.data.reviews;
+          stats = data.data.stats || {
+            average: (rawReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / rawReviews.length).toFixed(1),
+            total: rawReviews.length
+          };
+        } else if (Array.isArray(data.data) && data.data.length > 0) {
+          rawReviews = data.data;
+          stats = {
+            average: (rawReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / rawReviews.length).toFixed(1),
+            total: rawReviews.length
+          };
+        }
+      }
+
+      if (rawReviews.length > 0) {
+        reviews = rawReviews;
+      } else if (typeof DEFAULT_REVIEWS !== 'undefined' && Array.isArray(DEFAULT_REVIEWS) && DEFAULT_REVIEWS.length > 0) {
+        reviews = DEFAULT_REVIEWS;
+        stats = { average: '4.9', total: DEFAULT_REVIEWS.length };
       }
     } catch (e) {
-      console.warn('Backend reviews API offline:', e);
-      reviews = [];
-      stats = { average: '5.0', total: 0 };
+      console.warn('Reviews processing exception, falling back to defaults:', e);
+      if (typeof DEFAULT_REVIEWS !== 'undefined' && Array.isArray(DEFAULT_REVIEWS) && DEFAULT_REVIEWS.length > 0) {
+        reviews = DEFAULT_REVIEWS;
+        stats = { average: '4.9', total: DEFAULT_REVIEWS.length };
+      }
     }
 
     if (reviews && reviews.length > 0) {
