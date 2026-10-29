@@ -39,6 +39,7 @@ export default function handler(req, res) {
         bg: colors.background || '#F9F8F5',
         text: colors.text || '#0F172A'
       },
+      customCSS: config.customCSS || "",
       content: config.content || {
         orbitCenterImage: 'assets/aurelia-emerald-watch.png',
         orbitBadge: 'Swiss Caliber 2824 • Certified Chronometer',

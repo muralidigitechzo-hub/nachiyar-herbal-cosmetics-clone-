@@ -144,6 +144,638 @@
       --font-heading: 'Cinzel', serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
+    /* ==========================================================================
+   AURELIA CHRONOMETRY — COMPREHENSIVE MOBILE RESPONSIVE ENGINE
+   Configured in & driven from site-config.json
+   ========================================================================== */
+
+/* 1. Global Viewport & Container Containment */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  -webkit-text-size-adjust: 100% !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box !important;
+}
+
+img, svg, video {
+  max-width: 100% !important;
+  height: auto;
+}
+
+/* 2. Announcement Bar & Ticker */
+.announcement-bar {
+  max-width: 100vw !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  padding: 8px 12px !important;
+  font-size: 0.72rem !important;
+}
+
+.announcement-ticker {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* 3. Site Header & Brand Lockup on Mobile */
+@media (max-width: 768px) {
+  .site-header {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding-inline: 0 !important;
+  }
+  
+  .header-container {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 10px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    gap: 8px !important;
+  }
+
+  .mobile-nav-toggle {
+    display: flex !important;
+    flex-shrink: 0 !important;
+    z-index: 10 !important;
+  }
+
+  .brand-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    justify-content: flex-start !important;
+  }
+
+  .brand-crest {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .brand-logo-img {
+    max-width: 32px !important;
+    max-height: 32px !important;
+  }
+
+  .brand-text-lockup {
+    min-width: 0 !important;
+  }
+
+  .brand-name {
+    font-size: 1.05rem !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .brand-sub {
+    display: none !important; /* Hide long subtitle on mobile to eliminate header overflow */
+  }
+
+  .header-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .btn-header-auth {
+    padding: 6px 10px !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+  }
+
+  .btn-cart-trigger {
+    padding: 6px 10px !important;
+  }
+}
+
+/* 4. Mystery Discount / Coupon Modal & Promo Banner */
+.coupon-modal-card,
+.promo-banner,
+.mystery-discount-banner,
+.floating-coupon-card {
+  max-width: calc(100vw - 24px) !important;
+  box-sizing: border-box !important;
+  margin-inline: auto !important;
+  overflow: hidden !important;
+  word-break: break-word !important;
+}
+
+@media (max-width: 768px) {
+  .promo-banner {
+    padding: 20px 16px !important;
+    margin: 16px 12px !important;
+    border-radius: 16px !important;
+  }
+  .promo-banner h2, .promo-banner h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+  }
+  .promo-banner-code-box {
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .promo-banner-code-box .btn {
+    width: 100% !important;
+  }
+}
+
+/* 5. Hero Section & Flanking Cards */
+@media (max-width: 992px) {
+  .hero-flanking-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding-inline: 14px !important;
+    box-sizing: border-box !important;
+    gap: 20px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-center-content {
+    order: -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px 0 !important;
+  }
+
+  .hero-title {
+    font-size: clamp(1.65rem, 6vw, 2.3rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .hero-description {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    padding-inline: 4px !important;
+  }
+
+  .hero-cta-group {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .hero-cta-group .btn {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 14px 20px !important;
+  }
+
+  .hero-product-flank {
+    width: 100% !important;
+    max-width: 380px !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-flank-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-pillars {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+}
+
+/* 6. Marquee Ticker */
+.marquee-section {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.marquee-track {
+  width: max-content !important;
+}
+
+/* 7. 18-Module Circular Orbit Section (Perfect Mobile Sizing) */
+@media (max-width: 768px) {
+  .herbal-ingredients-section {
+    padding-block: 40px 30px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  .ingredients-section-header {
+    padding-inline: 16px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .ingredients-section-header .section-heading {
+    font-size: clamp(1.35rem, 5vw, 1.85rem) !important;
+  }
+
+  .ingredients-section-header .section-subtext {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .orbit-stage-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 15px 8px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .orbit-stage {
+    --orbit-radius: 125px !important;
+    width: 320px !important;
+    height: 320px !important;
+    max-width: 95vw !important;
+    margin: 0 auto !important;
+    position: relative !important;
+  }
+
+  .orbit-ring--outer {
+    width: 250px !important;
+    height: 250px !important;
+  }
+
+  .orbit-ring--middle {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  .orbit-ring--inner {
+    width: 160px !important;
+    height: 160px !important;
+  }
+
+  .orbit-center-bottle-wrap {
+    width: 125px !important;
+    height: 125px !important;
+  }
+
+  .orbit-center-bottle {
+    max-width: 110px !important;
+    max-height: 110px !important;
+    object-fit: contain !important;
+  }
+
+  .bottle-caption-badge {
+    font-size: 0.65rem !important;
+    padding: 3px 8px !important;
+    white-space: nowrap !important;
+    max-width: 92vw !important;
+    bottom: -22px !important;
+  }
+
+  .orbit-node {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .orbit-node .node-avatar-wrap {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .orbit-node .node-avatar-icon {
+    font-size: 0.92rem !important;
+  }
+
+  .orbit-node .node-label {
+    display: none !important;
+  }
+
+  .orbit-idle-card,
+  .spotlight-card {
+    width: calc(100vw - 32px) !important;
+    max-width: 360px !important;
+    margin: 16px auto !important;
+    padding: 12px 14px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .orbit-stage {
+    --orbit-radius: 108px !important;
+    width: 280px !important;
+    height: 280px !important;
+  }
+
+  .orbit-center-bottle {
+    max-width: 90px !important;
+    max-height: 90px !important;
+  }
+
+  .bottle-caption-badge {
+    font-size: 0.58rem !important;
+    padding: 2px 6px !important;
+  }
+}
+
+/* 8. Products & Collection Grid on Mobile */
+@media (max-width: 768px) {
+  .collection-grid,
+  .products-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding-inline: 12px !important;
+    gap: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-card {
+    width: 100% !important;
+    max-width: 380px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  .product-card-pricing {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .product-card-pricing .price-group {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+  }
+
+  .btn-add-to-bag,
+  .btn-card-add {
+    white-space: nowrap !important;
+    padding: 10px 16px !important;
+    min-width: 110px !important;
+    font-size: 0.88rem !important;
+    flex-shrink: 0 !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* 9. Bundle Banner (Collector's Duo) */
+@media (max-width: 768px) {
+  .bundle-banner {
+    padding: 20px 14px !important;
+    margin: 20px 10px !important;
+    width: auto !important;
+    max-width: calc(100vw - 20px) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+  }
+
+  .bundle-banner-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  .bundle-banner-title {
+    font-size: 1.35rem !important;
+    word-break: break-word !important;
+    line-height: 1.25 !important;
+  }
+
+  .bundle-banner-desc {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .bundle-pricing {
+    display: flex !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .bundle-banner-cta .btn {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* 10. Reviews Section & Carousel on Mobile */
+@media (max-width: 768px) {
+  .reviews-section {
+    padding-block: 40px 30px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  .reviews-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 14px !important;
+    padding-inline: 14px !important;
+    width: 100% !important;
+  }
+
+  .reviews-header-info {
+    width: 100% !important;
+  }
+
+  .reviews-header-action {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .btn-comment-review {
+    width: 100% !important;
+    max-width: 280px !important;
+    justify-content: center !important;
+    padding: 12px 20px !important;
+  }
+
+  .reviews-scroller-viewport {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 10px 12px 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .reviews-scroller-track {
+    display: flex !important;
+    gap: 14px !important;
+    width: max-content !important;
+  }
+
+  .review-card {
+    width: 290px !important;
+    min-width: 290px !important;
+    max-width: 85vw !important;
+    box-sizing: border-box !important;
+    padding: 20px 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .reviews-edge-nav {
+    display: none !important;
+  }
+}
+
+/* 11. Science / Triad Grid */
+@media (max-width: 768px) {
+  .science-section {
+    padding-block: 40px 30px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  .triad-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+    padding-inline: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .triad-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 24px 18px !important;
+  }
+}
+
+/* 12. Quote Section */
+@media (max-width: 768px) {
+  .quote-section {
+    padding-block: 40px 30px !important;
+    padding-inline: 16px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  .quote-container,
+  .quote-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .quote-image-wrap {
+    width: 170px !important;
+    height: 170px !important;
+    margin: 0 auto 16px !important;
+  }
+
+  .quote-text {
+    font-size: 1.1rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
+/* 13. Newsletter Form */
+@media (max-width: 768px) {
+  .newsletter-section {
+    padding-block: 40px 30px !important;
+    padding-inline: 14px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  .newsletter-form,
+  .form-input-group {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 10px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .newsletter-form input[type="email"] {
+    width: 100% !important;
+    border-radius: 999px !important;
+    padding: 14px 20px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-sizing: border-box !important;
+    color: #FFFFFF !important;
+  }
+
+  .newsletter-form button[type="submit"] {
+    width: 100% !important;
+    border-radius: 999px !important;
+    padding: 14px !important;
+    margin: 0 !important;
+    justify-content: center !important;
+  }
+}
+
+/* 14. Footer & Mobile Bottom Navigation Bar */
+@media (max-width: 768px) {
+  .site-footer {
+    padding-block: 40px 80px !important; /* Leave space for curved bottom nav */
+    padding-inline: 16px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  .footer-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+  }
+
+  .mobile-curved-bottom-nav {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 999 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
   </style>
 </head>
 <body class="page-body">

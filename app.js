@@ -514,6 +514,11 @@ async function initStorefrontApp() {
       let badgeNum = '100%';
       let badgeUnit = 'PURE';
       let badgeTitle = '100% Pure Active Plant Infusion';
+      if (prodObj.badge && typeof prodObj.badge === 'object') {
+        badgeNum = prodObj.badge.number || 'COSC';
+        badgeUnit = prodObj.badge.unit || 'SWISS';
+        badgeTitle = prodObj.badge.title || 'Certified Chronometer';
+      }
 
       if (themeBg.toLowerCase() === '#822234' || isShampoo) {
         cardTextColor = '#FCF4F6';

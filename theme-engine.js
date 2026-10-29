@@ -87,6 +87,16 @@
     const isBadFav = rawFav.includes('unsplash.com') || rawFav.includes('technova-logo') || rawFav.includes('nachiyar-logo');
     const fav = (rawFav && !isBadFav) ? rawFav : '/favicon.png';
     document.querySelectorAll('link[rel*="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => el.href = fav);
+    if (settings.customCSS) {
+      let customStyleEl = document.getElementById('dynamicCustomCSS');
+      if (!customStyleEl) {
+        customStyleEl = document.createElement('style');
+        customStyleEl.id = 'dynamicCustomCSS';
+        document.head.appendChild(customStyleEl);
+      }
+      customStyleEl.textContent = settings.customCSS;
+    }
+
     const bName = settings.brandName || settings.brand?.name;
     const tag = settings.tagline || settings.brand?.tagline || 'Official Store';
     if (bName && !document.title.includes('Admin') && !document.title.includes('Nimda')) {

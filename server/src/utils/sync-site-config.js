@@ -211,6 +211,7 @@ function syncAll(rootDir) {
       ${fonts.heading ? `--font-heading: '${fonts.heading}', serif;` : ''}
       ${fonts.body ? `--font-body: '${fonts.body}', sans-serif;` : ''}
     }
+    ${config.customCSS || ''}
   </style>`;
   }
 
@@ -1564,6 +1565,31 @@ ${orbitNodesHtml}
     } catch (err) {
       console.error('[Sync] Error updating app.js:', err.message);
     }
+  }
+
+  
+  // Copy synced files to client/public
+  const clientPublicDir = path.join(rootDir, 'client', 'public');
+  if (fs.existsSync(clientPublicDir)) {
+    const filesToSync = [
+      ['data/site-config.json', 'data/site-config.json'],
+      ['data/db.json', 'data/db.json'],
+      ['index.html', 'index.html'],
+      ['shop.html', 'shop.html'],
+      ['product.html', 'product.html'],
+      ['app.js', 'app.js'],
+      ['styles.css', 'styles.css'],
+      ['theme-engine.js', 'theme-engine.js']
+    ];
+    filesToSync.forEach(([src, dest]) => {
+      const srcPath = path.join(rootDir, src);
+      const destPath = path.join(clientPublicDir, dest);
+      if (fs.existsSync(srcPath)) {
+        fs.mkdirSync(path.dirname(destPath), { recursive: true });
+        fs.copyFileSync(srcPath, destPath);
+      }
+    });
+    console.log('[Sync] client/public synchronized with root files.');
   }
 
   return true;
