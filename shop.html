@@ -389,23 +389,50 @@
       async function loadShopProducts() {
         try {
           const [pRes, sRes] = await Promise.all([
-            fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => ({ success: false })),
-            fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => ({ success: false }))
+            fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null),
+            fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null)
           ]);
 
           if (sRes && sRes.success && sRes.data) {
             updateShopPageBranding(sRes.data);
           }
 
-          if (pRes && pRes.success && Array.isArray(pRes.data)) {
+          if (pRes && pRes.success && Array.isArray(pRes.data) && pRes.data.length > 0) {
             allProducts = pRes.data;
-            updateCategoryFilters(allProducts, sRes?.data?.categories);
           } else {
-            allProducts = [];
+            // Direct fallback to static /data/db.json
+            const dbFallback = await fetch('/data/db.json?_t=' + Date.now()).then(r => r.json()).catch(() => null);
+            if (dbFallback && Array.isArray(dbFallback.products)) {
+              allProducts = dbFallback.products.map(p => ({
+                ...p,
+                price: Number(p.price || 0),
+                mrp: Number(p.mrp || p.compareAtPrice || p.price || 0),
+                category: p.category || 'General',
+                themeColor: p.themeColor || p.theme_color || '#064E3B',
+                images: Array.isArray(p.images) ? p.images : (p.images ? [p.images] : []),
+                metricBadge: p.metricBadge || (typeof p.badge === 'string' ? p.badge : (p.badge?.number ? (p.badge.number + ' ' + (p.badge.unit || '')).trim() : 'PREMIUM'))
+              }));
+            } else {
+              allProducts = [];
+            }
           }
+          updateCategoryFilters(allProducts, sRes?.data?.categories);
         } catch (e) {
-          console.warn('API unavailable, rendering empty catalog:', e);
-          allProducts = [];
+          console.warn('API unavailable, attempting db.json fallback:', e);
+          try {
+            const dbFallback = await fetch('/data/db.json?_t=' + Date.now()).then(r => r.json()).catch(() => null);
+            if (dbFallback && Array.isArray(dbFallback.products)) {
+              allProducts = dbFallback.products.map(p => ({
+                ...p,
+                price: Number(p.price || 0),
+                mrp: Number(p.mrp || p.compareAtPrice || p.price || 0),
+                category: p.category || 'General',
+                themeColor: p.themeColor || p.theme_color || '#064E3B',
+                images: Array.isArray(p.images) ? p.images : (p.images ? [p.images] : []),
+                metricBadge: p.metricBadge || (typeof p.badge === 'string' ? p.badge : (p.badge?.number ? (p.badge.number + ' ' + (p.badge.unit || '')).trim() : 'PREMIUM'))
+              }));
+            }
+          } catch(err) {}
         }
         renderCatalog(document.querySelector('.filter-btn.active')?.dataset.cat || 'all');
       }
