@@ -5,24 +5,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Nimda & POS Console | Nachiyar Herbals & Cosmetics</title>
-  <!-- Nachiyar Royal Brand Favicon -->
-  <link rel="icon" type="image/png" href="assets/nachiyar-logo.png">
-  <link rel="shortcut icon" type="image/png" href="assets/nachiyar-logo.png">
-  <link rel="apple-touch-icon" href="assets/nachiyar-logo.png">
+  <title>Aurelia Chronometry | Management Console</title>
+  <!-- Dynamic Brand Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="admin.css?v=5.7">
   <script>
     // Immediate client-side security auth gate
     (function() {
-      const token = localStorage.getItem('nachiyar_admin_token');
+      const token = localStorage.getItem('store_admin_token') || localStorage.getItem('nachiyar_admin_token') || localStorage.getItem('admin_token') || (document.cookie.match(/(?:store_admin_token|nachiyar_admin_token|admin_token)=([^;]+)/) || [])[1];
       if (!token) {
         window.location.replace('/nimda-login/');
       }
     })();
   </script>
+  <script src="/theme-engine.js"></script>
+  <style id="dynamicBrandTheme">
+    :root {
+      --color-canvas: #FDFBF7;
+      --color-canvas-alt: #F1EEE6;
+      --color-surface: #FFFFFF;
+      --color-text-main: #0F291E;
+      --color-text-muted: #52796F;
+      --color-lavender-primary: #064E3B;
+      --color-lavender-dark: #047857;
+      --color-lavender-light: rgba(6, 78, 59, 0.12);
+      --color-gold: #E2B755;
+      --color-gold-light: rgba(226, 183, 85, 0.18);
+      --color-gold-dark: #047857;
+      --gold-gradient: linear-gradient(135deg, #E2B755 0%, #047857 100%);
+      --gold-glow: 0 4px 20px rgba(226, 183, 85, 0.35);
+      --color-hibiscus-primary: #1E293B;
+      --color-hibiscus-dark: #1E293B;
+      --color-bundle-dark: #14532D;
+      --color-bundle-accent: #E2B755;
+      --card-bg-1: #064E3B;
+      --card-bg-2: #1E293B;
+      --card-bg-bundle: #14532D;
+      --promo-banner-bg: linear-gradient(135deg, #064E3B 0%, #14532D 100%);
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
 </head>
 <body class="admin-body">
 
@@ -35,9 +63,9 @@
         <span class="admin-hamburger-line"></span>
       </button>
       <div class="admin-brand">
-        <img src="assets/nachiyar-logo.png" alt="Nachiyar Logo" class="admin-logo">
+        <img src="/favicon.png" alt="TechNova Electronics Logo" class="admin-logo">
         <div class="brand-info">
-          <span class="admin-title">NACHIYAR HERBALS</span>
+          <span class="admin-title">TechNova Electronics</span>
           <span class="admin-subtitle">NIMDA OPERATIONS & POS CONSOLE</span>
         </div>
       </div>
@@ -127,6 +155,7 @@
           <span class="nav-text">Nimda Accounts</span>
           <span class="badge-count" style="display:none;" id="badgeStaffCount"></span>
         </button>
+                
         <button class="nav-tab" data-tab="settings" id="tabNavSettings">
           <span class="nav-icon">⚙️</span>
           <span class="nav-text">Store Settings & SEO</span>
@@ -154,7 +183,7 @@
         <div class="pane-header">
           <div>
             <h1 class="pane-title">Hello, <span id="headingAdminName">Admin</span>! 👋</h1>
-            <p class="pane-desc">Welcome to your Nachiyar Herbals Command Center. Live synchronization across online website orders and retail counter sales.</p>
+            <p class="pane-desc">Welcome to your TechNova Electronics Command Center. Live synchronization across online website orders and retail counter sales.</p>
           </div>
           <button class="btn-primary" id="btnQuickSaleHeader">+ New POS Counter Sale</button>
         </div>
@@ -308,7 +337,7 @@
           <div class="card-panel">
             <div class="panel-header">
               <div>
-                <h3>🏆 Top Selling Herbal Formulations</h3>
+                <h3>🏆 Top Selling Products</h3>
                 <p class="panel-subtitle">Ranked by actual cumulative sales across online & POS</p>
               </div>
               <button class="btn-link" onclick="openAnalyticsModal('top_selling')">Full List →</button>
@@ -390,11 +419,11 @@
           <div class="sync-demo-right">
             <div class="sync-stat-box">
               <span class="stat-number" id="syncOilStock">--</span>
-              <span class="stat-name">Lavender Hair Oil Stock</span>
+              <span class="stat-name">Nova X5 Smartphone Stock</span>
             </div>
             <div class="sync-stat-box">
               <span class="stat-number" id="syncShampooStock">--</span>
-              <span class="stat-name">Hibiscus Shampoo Stock</span>
+              <span class="stat-name">SonicBeat Headphones Stock</span>
             </div>
           </div>
         </div>
@@ -473,10 +502,11 @@
           <div class="panel-filter-row">
             <input type="text" class="input-search" id="productSearchInput" placeholder="Search by name, SKU, or category...">
             <select class="select-filter" id="productCategoryFilter">
-              <option value="">All Categories</option>
+<option value="">All Categories</option>
               <option value="Hair Care">Hair Care</option>
               <option value="Scalp & Cleansing">Scalp & Cleansing</option>
-              <option value="Ritual Sets">Ritual Sets</option>
+              <option value="Ritual Sets & Combos">Ritual Sets & Combos</option>
+              <option value="Royal Gifting">Royal Gifting</option>
             </select>
           </div>
 
@@ -672,11 +702,11 @@
             <div id="posUpiBox" class="pos-payment-subbox" style="margin-top: 12px; padding: 14px; background: #F8FAFC; border: 1px solid var(--admin-border); border-radius: 10px;">
               <div style="display: flex; gap: 14px; align-items: center;">
                 <div style="width: 90px; height: 90px; background: #FFF; border: 1px solid var(--admin-border); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 4px;">
-                  <img id="posUpiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3Dnachiyarherbals18%40okaxis%26pn%3DNachiyar%2520Herbals%26cu%3DINR" alt="Store UPI QR" style="width: 100%; height: 100%; object-fit: contain;">
+                  <img id="posUpiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3DTechNova Electronicsherbals18%40okaxis%26pn%3DTechNova Electronics%2520Herbals%26cu%3DINR" alt="Store UPI QR" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
                 <div style="flex: 1; min-width: 0;">
                   <div style="font-weight: 700; font-size: 0.8125rem; color: var(--admin-text-main);">Scan UPI QR Code to Pay</div>
-                  <div style="font-size: 0.75rem; color: var(--admin-primary); font-family: monospace; font-weight: 700; margin-top: 2px;" id="posUpiIdDisplay">nachiyarherbals18@okaxis</div>
+                  <div style="font-size: 0.75rem; color: var(--admin-primary); font-family: monospace; font-weight: 700; margin-top: 2px;" id="posUpiIdDisplay">TechNova Electronicsherbals18@okaxis</div>
                   <small style="display: block; font-size: 0.6875rem; color: var(--admin-text-muted); margin-top: 4px;">GPay, PhonePe, Paytm, BHIM</small>
                 </div>
               </div>
@@ -836,6 +866,11 @@
       </section>
 
       <!-- ==================== TAB 7: SETTINGS & SEO ==================== -->
+            <!-- ==========================================
+           TAB: 1-CLICK MASTER BRAND JSON CONFIGURATOR
+           ========================================== -->
+      
+
       <section class="tab-pane" id="pane-settings">
         <div class="pane-header">
           <div>
@@ -854,9 +889,15 @@
             <button type="button" class="review-filter-btn" data-subtab="business" id="btnSubtabBusiness">
               🏢 Business & Invoicing Information
             </button>
-            <button type="button" class="review-filter-btn" data-subtab="payments" id="btnSubtabPayments">
+            <button type="button" class="review-filter-btn" data-subtab="payments" id="btnSubtabPayments"
+            >
               💳 Payment Methods & Gateway Settings
             </button>
+            <button type="button" class="review-filter-btn" data-subtab="branding" id="btnSubtabBranding">
+              🎨 Branding & Live Theme>
+              💳 Payment Methods & Gateway Settings
+            </button>
+            
           </div>
         </div>
 
@@ -970,7 +1011,7 @@
 
             <div class="form-group">
               <label>Official Business / Brand Name *</label>
-              <input type="text" id="setBrandName" class="form-input" value="Nachiyar Herbals & Cosmetics">
+              <input type="text" id="setBrandName" class="form-input" value="TechNova Electronics">
             </div>
 
             <div class="form-row">
@@ -980,14 +1021,14 @@
               </div>
               <div class="form-group">
                 <label>Customer Support Helpline / Phone *</label>
-                <input type="tel" id="setSupportPhone" class="form-input" placeholder="+91 94440 88990">
+                <input type="tel" id="setSupportPhone" class="form-input" placeholder="+91 98765 43210">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label>Official Support Email Address</label>
-                <input type="email" id="setSupportEmail" class="form-input" placeholder="care@nachiyarherbals.com">
+                <input type="email" id="setSupportEmail" class="form-input" placeholder="support@technova.com">
               </div>
               <div class="form-group">
                 <label>Store Boutique Operating Hours</label>
@@ -1050,11 +1091,11 @@
                 <div class="form-row" style="margin-top: 6px;">
                   <div class="form-group" style="margin-bottom: 0;">
                     <label style="font-size: 0.75rem;">Store UPI ID / VPA *</label>
-                    <input type="text" id="setPmUpiId" class="form-input form-input-sm" value="nachiyarherbals18@okaxis" placeholder="brand@okaxis">
+                    <input type="text" id="setPmUpiId" class="form-input form-input-sm" value="TechNova Electronicsherbals18@okaxis" placeholder="brand@okaxis">
                   </div>
                   <div class="form-group" style="margin-bottom: 0;">
                     <label style="font-size: 0.75rem;">UPI Merchant Display Name *</label>
-                    <input type="text" id="setPmUpiName" class="form-input form-input-sm" value="Nachiyar Herbals & Cosmetics" placeholder="Merchant Name">
+                    <input type="text" id="setPmUpiName" class="form-input form-input-sm" value="TechNova Electronics" placeholder="Merchant Name">
                   </div>
                 </div>
               </div>
@@ -1097,6 +1138,76 @@
             </div>
           </div>
         </div>
+      
+        <!-- ==================== SUBPANE 4: BRANDING & LIVE THEME ==================== -->
+        <div class="settings-subpane" id="settingsSubpaneBranding" style="display: none;">
+          <div class="card-panel" style="margin-bottom: 20px;">
+            <div class="panel-header" style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--admin-text-main);">🎨 Brand Identity & Live Theme Control</h3>
+                <p class="panel-subtitle">Customize brand name, tagline, logo, and active storefront theme colors.</p>
+              </div>
+              <button type="button" class="btn-primary" id="btnSaveBrandingSettings">Save Branding & Live Theme</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
+              <div class="form-group">
+                <label for="setBrandName" style="font-size: 0.78rem; font-weight: 700; color: #475569; text-transform: uppercase;">Brand Name</label>
+                <input type="text" id="setBrandName" class="form-input" placeholder="e.g. TechNova Electronics">
+              </div>
+              <div class="form-group">
+                <label for="setBrandTagline" style="font-size: 0.78rem; font-weight: 700; color: #475569; text-transform: uppercase;">Brand Tagline</label>
+                <input type="text" id="setBrandTagline" class="form-input" placeholder="e.g. Technology That Moves You Forward">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+              <div class="form-group">
+                <label for="setBrandLogoUrl" style="font-size: 0.78rem; font-weight: 700; color: #475569; text-transform: uppercase;">Logo Path</label>
+                <input type="text" id="setBrandLogoUrl" class="form-input" placeholder="assets/technova-logo.png">
+              </div>
+              <div class="form-group">
+                <label for="setBrandFaviconUrl" style="font-size: 0.78rem; font-weight: 700; color: #475569; text-transform: uppercase;">Favicon Path</label>
+                <input type="text" id="setBrandFaviconUrl" class="form-input" placeholder="assets/technova-logo.png">
+              </div>
+            </div>
+
+            <h4 style="font-size: 0.95rem; font-weight: 800; margin: 20px 0 12px; color: var(--admin-text-main);">Storefront Dynamic Theme Palette</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px;">
+              <div class="form-group">
+                <label for="setThemeColorPrimary" style="font-size: 0.78rem; font-weight: 700; color: #475569;">Primary Brand Color</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <input type="color" id="setThemeColorPrimary" class="form-input-color" value="#7C5AAB" style="width: 44px; height: 38px; padding: 2px; border-radius: 8px;">
+                  <input type="text" id="setThemeColorPrimaryHex" class="form-input" value="#7C5AAB" style="flex: 1; font-family: monospace;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="setThemeColorSecondary" style="font-size: 0.78rem; font-weight: 700; color: #475569;">Secondary / Accent Gold</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <input type="color" id="setThemeColorSecondary" class="form-input-color" value="#D4AF37" style="width: 44px; height: 38px; padding: 2px; border-radius: 8px;">
+                  <input type="text" id="setThemeColorSecondaryHex" class="form-input" value="#D4AF37" style="flex: 1; font-family: monospace;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="setThemeColorAccent" style="font-size: 0.78rem; font-weight: 700; color: #475569;">Dark Accent Color</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <input type="color" id="setThemeColorAccent" class="form-input-color" value="#583B82" style="width: 44px; height: 38px; padding: 2px; border-radius: 8px;">
+                  <input type="text" id="setThemeColorAccentHex" class="form-input" value="#583B82" style="flex: 1; font-family: monospace;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="setThemeColorBg" style="font-size: 0.78rem; font-weight: 700; color: #475569;">Page Background Canvas</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <input type="color" id="setThemeColorBg" class="form-input-color" value="#F9F8F5" style="width: 44px; height: 38px; padding: 2px; border-radius: 8px;">
+                  <input type="text" id="setThemeColorBgHex" class="form-input" value="#F9F8F5" style="flex: 1; font-family: monospace;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== SUBPANE 6: 1-CLICK MASTER BRAND JSON CONFIG ==================== -->
+        
       </section>
 
       <!-- ==================== TAB 7: CUSTOMER REVIEWS MODERATION ==================== -->
@@ -1189,7 +1300,7 @@
                 <span class="mkt-logo-circle fk-bg">F</span>
                 <div>
                   <strong>Flipkart Marketplace</strong>
-                  <small>Seller Hub API: FK_NACHIYAR_77</small>
+                  <small>Seller Hub API: FK_TechNova Electronics_77</small>
                 </div>
               </div>
               <span class="badge-tag paid" style="font-size: 0.6875rem; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px;">🟢 Live Sync</span>
@@ -1217,7 +1328,7 @@
                 <span class="mkt-logo-circle az-bg">a</span>
                 <div>
                   <strong>Amazon Seller Central</strong>
-                  <small>SP-API: NACHIYAR_IN</small>
+                  <small>SP-API: TechNova Electronics_IN</small>
                 </div>
               </div>
               <span class="badge-tag paid" style="font-size: 0.6875rem; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px;">🟢 Live Sync</span>
@@ -1333,7 +1444,7 @@
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
             <div>
               <h3 style="margin: 0; font-size: 1.1rem; font-weight: 800;" id="channelProductsTitle">Flipkart Product Sales &amp; Listing Breakdown</h3>
-              <p style="font-size: 0.8125rem; color: var(--admin-text-muted); margin-top: 2px;">Units sold, revenue, and active listing status for Nachiyar botanical formulations on this channel.</p>
+              <p style="font-size: 0.8125rem; color: var(--admin-text-muted); margin-top: 2px;">Units sold, revenue, and active listing status for TechNova Electronics botanical formulations on this channel.</p>
             </div>
             <button type="button" class="btn-secondary btn-sm" id="btnSyncAllChannelCatalog">
               <span>🔄 Sync Master Stock with Channel</span>
@@ -1346,7 +1457,7 @@
                 <tr>
                   <th>Product Formulation</th>
                   <th>Channel SKU</th>
-                  <th>Nachiyar Price</th>
+                  <th>TechNova Electronics Price</th>
                   <th>Channel Listing Price</th>
                   <th>Channel Units Sold</th>
                   <th>Channel Revenue</th>
@@ -1462,11 +1573,12 @@
           <div style="display: flex; gap: 12px; align-items: center; flex: 1; justify-content: flex-end; flex-wrap: wrap;">
             <select id="selectMessageSubjectFilter" class="select-filter" style="min-width: 190px;">
               <option value="all">All Inquiry Types</option>
-              <option value="Hair Care Consultation">Hair Care Consultation</option>
+              <option value="Technical Support">Technical &amp; Product Support</option>
               <option value="Order Tracking & Shipping">Order Tracking &amp; Shipping</option>
-              <option value="Wholesale & Clinic Inquiry">Wholesale &amp; Salon Supply</option>
-              <option value="Ingredients & Formulation">Botanical Formulation</option>
-              <option value="Press & Partnership">Press &amp; Partnership</option>
+              <option value="Warranty & Service">Warranty &amp; Service</option>
+              <option value="Corporate & B2B">Corporate &amp; B2B</option>
+              <option value="Press & Partnerships">Press &amp; Partnerships</option>
+              <option value="Other / General">Other / General</option>
             </select>
             <div class="reviews-search-box" style="flex: 1; max-width: 320px;">
               <input type="text" id="inputSearchMessages" class="input-search" placeholder="Search patron, email, phone, keyword..." style="width: 100%;">
@@ -1773,7 +1885,7 @@
 
           <div class="form-group" style="margin-bottom: 14px;">
             <label style="font-size: 0.8125rem; font-weight: 700; color: #334155; display: block; margin-bottom: 6px;">Subtitle / Size info</label>
-            <input type="text" id="flagshipFormSubtitle" class="form-input" placeholder="e.g. Lavender Glass Bottle with Precision Dropper • 200ml" style="width: 100%; box-sizing: border-box;">
+            <input type="text" id="flagshipFormSubtitle" class="form-input" placeholder="e.g. 5G Ultra • 120Hz AMOLED" style="width: 100%; box-sizing: border-box;">
           </div>
 
           <div class="form-row" style="display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;">
@@ -1815,7 +1927,7 @@
   <div class="modal-overlay" id="productModalOverlay">
     <div class="modal-box modal-box--large">
       <div class="modal-header">
-        <h2 id="modalProductTitle">Add New Formulation</h2>
+        <h2 id="modalProductTitle">Add New Product</h2>
         <button class="modal-close-btn" id="modalProductClose">✕</button>
       </div>
       <form id="productForm" class="modal-form">
@@ -1834,7 +1946,7 @@
               <select id="formProdCategory" class="form-input" required>
                 <option value="Hair Care">Hair Care</option>
                 <option value="Scalp & Cleansing">Scalp & Cleansing</option>
-                <option value="Ritual Sets">Ritual Sets</option>
+                <option value="Ritual Sets & Combos">Ritual Sets & Combos</option>
                 <option value="Royal Gifting">Royal Gifting</option>
               </select>
             </div>
@@ -1918,7 +2030,7 @@
           </div>
           <div class="form-group">
             <label>Target Keywords (comma-separated)</label>
-            <input type="text" id="formProdKeywords" class="form-input" placeholder="hair oil, ayurveda, nachiyar">
+            <input type="text" id="formProdKeywords" class="form-input" placeholder="hair oil, ayurveda, TechNova Electronics">
           </div>
 
           <h4 class="form-section-title">5. Storefront Home Page Showcase Placement</h4>
@@ -2199,7 +2311,7 @@
             <div class="form-row">
               <div class="form-group flex-2">
                 <label>Flipkart Seller ID / Username</label>
-                <input type="text" id="apiFkSellerId" class="form-input" value="FK_NACHIYAR_77">
+                <input type="text" id="apiFkSellerId" class="form-input" value="FK_TechNova Electronics_77">
               </div>
               <div class="form-group flex-2">
                 <label>Application ID / App Secret</label>
@@ -2217,7 +2329,7 @@
             <div class="form-row">
               <div class="form-group flex-2">
                 <label>Merchant / Seller ID</label>
-                <input type="text" id="apiAzMerchantId" class="form-input" value="NACHIYAR_IN">
+                <input type="text" id="apiAzMerchantId" class="form-input" value="TechNova Electronics_IN">
               </div>
               <div class="form-group flex-2">
                 <label>LWA Refresh Token</label>
@@ -2248,7 +2360,7 @@
           <div style="background: #F1F5F9; border-radius: 8px; padding: 12px 14px;">
             <label style="font-size: 0.75rem; font-weight: 700; color: var(--admin-text-muted); display: block; margin-bottom: 4px;">UNIFIED INVENTORY DEDUCTION WEBHOOK URL</label>
             <div style="display: flex; gap: 8px; align-items: center;">
-              <input type="text" id="mktWebhookUrlInput" class="form-input" value="https://nachiyarherbals.com/api/webhooks/marketplace" readonly style="font-family: monospace; font-size: 0.8125rem; background: #fff;">
+              <input type="text" id="mktWebhookUrlInput" class="form-input" value="https://TechNova Electronicsherbals.com/api/webhooks/marketplace" readonly style="font-family: monospace; font-size: 0.8125rem; background: #fff;">
               <button type="button" class="btn-secondary btn-sm" id="btnCopyWebhookUrl" style="white-space: nowrap;">📋 Copy</button>
             </div>
             <small style="color: var(--admin-text-muted); font-size: 0.7rem; display: block; margin-top: 4px;">Paste this URL in Flipkart, Amazon &amp; Meesho developer portal to automatically deduct live stock when sales occur.</small>
@@ -2296,7 +2408,7 @@
               <h2 id="deepDiveChannelTitle" style="margin: 0; font-size: 1.25rem;">Flipkart Marketplace Seller Intelligence</h2>
               <span class="badge-tag paid" id="deepDiveStatusTag" style="font-size: 0.7rem;">🟢 Live Sync</span>
             </div>
-            <p id="deepDiveSubtitle" style="font-size: 0.8125rem; color: var(--admin-text-muted); margin-top: 2px;">Seller ID: FK_NACHIYAR_77 • Automated Catalog &amp; Multi-Channel Inventory Management</p>
+            <p id="deepDiveSubtitle" style="font-size: 0.8125rem; color: var(--admin-text-muted); margin-top: 2px;">Seller ID: FK_TechNova Electronics_77 • Automated Catalog &amp; Multi-Channel Inventory Management</p>
           </div>
         </div>
         <button class="modal-close-btn" id="modalDeepDiveClose">✕</button>
@@ -2309,7 +2421,7 @@
           <div>
             <strong style="color: #0369A1; font-size: 0.875rem; display: block; margin-bottom: 2px;">Channel Integration Purpose:</strong>
             <p style="font-size: 0.8125rem; color: #0C4A6E; margin: 0; line-height: 1.45;">
-              Intha channel moolama namma Nachiyar products direct-ah antha marketplace-la sell aagi, stock auto-deduct aagum. Neenga inga irunthey sales performance, commission deductions, bank settlement amounts, matrum individual dispatch orders-ah track &amp; manage pannalam.
+              Intha channel moolama namma TechNova Electronics products direct-ah antha marketplace-la sell aagi, stock auto-deduct aagum. Neenga inga irunthey sales performance, commission deductions, bank settlement amounts, matrum individual dispatch orders-ah track &amp; manage pannalam.
             </p>
           </div>
         </div>
@@ -2494,7 +2606,7 @@
             </div>
             <div class="form-group">
               <label style="display: block; font-size: 0.72rem; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 4px;">Email Address</label>
-              <input type="email" id="inputModalAdminEmail" class="form-input" placeholder="e.g. murali@nachiyar.com" style="width: 100%;">
+              <input type="email" id="inputModalAdminEmail" class="form-input" placeholder="e.g. murali@TechNova Electronics.com" style="width: 100%;">
             </div>
           </div>
 

@@ -1,0 +1,327 @@
+{
+  "brand": {
+    "name": "Aari Silk Couture",
+    "shortName": "AARI SILK",
+    "tagline": "Handcrafted Heritage & Royal Bridal Weaves",
+    "logo": "assets/fashion-logo.svg",
+    "favicon": "assets/fashion-logo.svg",
+    "colors": {
+      "primary": "#831843",
+      "secondary": "#D4AF37",
+      "accent": "#BE185D",
+      "background": "#FFFDFB",
+      "surface": "#FFFFFF",
+      "text": "#1E1318",
+      "muted": "#78716C"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Plus Jakarta Sans"
+    }
+  },
+  "business": {
+    "phone": "+91 94440 77112",
+    "email": "concierge@aarisilk.com",
+    "address": "Aari Silk Heritage Bhavan, No. 24 Silk Handloom Weavers Colony, Kanchipuram, Tamil Nadu - 631501",
+    "gstin": "33AABCA8899K1Z4",
+    "timings": "Mon - Sat: 10:00 AM - 8:30 PM"
+  },
+  "content": {
+    "announcement": "👑 ROYAL BRIDAL FESTIVAL • COMPLIMENTARY INSURED PAN-INDIA DELIVERY OVER ₹1999 👑",
+    "freeShippingThreshold": 1999,
+    "coupon": {
+      "code": "BRIDAL20",
+      "discountPercent": 20,
+      "active": true,
+      "tagline": "20% Royal Festive Courtesy On All Handloom Silks"
+    },
+    "hero": {
+      "eyebrow": "AUTHENTIC SOUTH INDIAN HANDLOOMS",
+      "title": "Woven in Royalty. Draped in Grace.",
+      "subtitle": "Each garment is masterfully crafted using pure Mulberry silk and certified 24-karat tested zari, preserving centuries of South Indian temple weaving traditions."
+    },
+    "collection": {
+      "eyebrow": "THE BRIDAL MASTERPIECES",
+      "title": "Two Royal Silks. Zero Compromise.",
+      "subtitle": "Designed to drape gracefully as a timeless heritage statement for auspicious celebrations."
+    },
+    "orbitCenterImage": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80",
+    "orbitBadge": "Pure Handloom • Silk Mark Certified",
+    "orbitEyebrow": "SACRED WEAVING HERITAGE",
+    "orbitHeading": "18 Master Craftsmanship Traditions",
+    "orbitSubtext": "Handwoven over 30 days by master weavers across Kanchipuram and Banaras. Hover over any craft element to explore.",
+    "orbitIdleIcon": "👑",
+    "orbitIdleText": "Hover over any heritage weaving node to explore its sacred royal craftsmanship",
+    "orbit": [
+      {
+        "name": "Pure Mulberry Silk",
+        "icon": "🧵",
+        "tag": "Pure Silk",
+        "desc": "100% certified pure Mulberry silk spun from double-ply threads for unmatched lustrous drape."
+      },
+      {
+        "name": "24K Tested Zari",
+        "icon": "✨",
+        "tag": "Pure Gold",
+        "desc": "Electroplated pure silver and 24-karat gold warp wires woven into intricate heritage borders."
+      },
+      {
+        "name": "Korvai Weaving",
+        "icon": "🎨",
+        "tag": "Ancient Technique",
+        "desc": "Complex dual-shuttle technique joining heavy border and contrasting body without seams."
+      },
+      {
+        "name": "Mayilkan Motif",
+        "icon": "🦚",
+        "tag": "Peacock Eye",
+        "desc": "Sacred peacock eye motifs handwoven into the pallu symbolizing royalty and prosperity."
+      },
+      {
+        "name": "Natural Flora Dye",
+        "icon": "🌿",
+        "tag": "Eco Color",
+        "desc": "Eco-friendly vegetable and floral organic extracts preserving rich, non-fading colors."
+      },
+      {
+        "name": "Aari Needlework",
+        "icon": "🪡",
+        "tag": "Hand Needle",
+        "desc": "Exquisite hand-crochet tambour needlework detailing neckline and sleeves."
+      },
+      {
+        "name": "Zardozi Metallic",
+        "icon": "⚜️",
+        "tag": "Royal Court",
+        "desc": "Three-dimensional metallic thread embroidery patronized by ancient South Indian dynasties."
+      },
+      {
+        "name": "Hand Jacquard Loom",
+        "icon": "🏛️",
+        "tag": "Master Loom",
+        "desc": "Traditional pit-loom hand operation operated by fourth-generation artisan weavers."
+      },
+      {
+        "name": "Feather Georgette",
+        "icon": "🪶",
+        "tag": "Graceful Drape",
+        "desc": "Breathable airy georgette weave providing fluid, effortless movement throughout celebrations."
+      },
+      {
+        "name": "Velvet Rich Trim",
+        "icon": "💎",
+        "tag": "Regal Finish",
+        "desc": "Plush micro-velvet facing on hemline and cuffs adding structural poise."
+      },
+      {
+        "name": "Mirror Foil Accents",
+        "icon": "🪞",
+        "tag": "Festive Shimmer",
+        "desc": "Reflective hand-applied lightcatchers shimmering gently under evening banquet lights."
+      },
+      {
+        "name": "Kodi Visiri Border",
+        "icon": "🍃",
+        "tag": "Temple Floral",
+        "desc": "Intricate floral creeper motifs inspired by ancient Dravidian temple carvings."
+      },
+      {
+        "name": "Heavy 980g Fall",
+        "icon": "⚖️",
+        "tag": "Royal Weight",
+        "desc": "Substantial handloom weight ensuring crisp pleating that stays in place all day."
+      },
+      {
+        "name": "Silk Mark Tagged",
+        "icon": "🏷️",
+        "tag": "Govt Certified",
+        "desc": "Officially certified by the Silk Mark Organisation of India verifying 100% natural silk."
+      },
+      {
+        "name": "Custom Stitched Fit",
+        "icon": "✂️",
+        "tag": "Bespoke",
+        "desc": "Complimentary tailored unstitched blouse piece included with golden lining."
+      },
+      {
+        "name": "Anti-Crease Weave",
+        "icon": "🛡️",
+        "tag": "Resilient",
+        "desc": "High-twist spun yarn maintaining wrinkle-free elegance across multi-hour ceremonies."
+      },
+      {
+        "name": "Scented Muslin Wrap",
+        "icon": "🌸",
+        "tag": "Heritage Pack",
+        "desc": "Shipped in aromatic cedar-wood and handloom muslin cloth preserving silk fibers."
+      },
+      {
+        "name": "Heirloom Legacy",
+        "icon": "👑",
+        "tag": "Generational",
+        "desc": "Crafted to be treasured, worn, and handed down across mother-to-daughter generations."
+      }
+    ],
+    "features": [
+      {
+        "title": "100% Silk Mark Certified",
+        "subtitle": "Official purity guarantee from Silk Mark India"
+      },
+      {
+        "title": "Insured Pan-India Express",
+        "subtitle": "Tamper-proof insured luxury delivery"
+      },
+      {
+        "title": "Bespoke Tailoring Support",
+        "subtitle": "Expert blouse stitching concierge available"
+      }
+    ],
+    "story": {
+      "title": "The Legacy of Aari Silk",
+      "description": "Founded in the sacred loom lanes of Kanchipuram, Aari Silk Couture honors centuries of South Indian bridal heritage through pure handloom weaving and authentic zari craft."
+    },
+    "footer": {
+      "bio": "Aari Silk Couture is an authentic bridal handloom couture house celebrating South Indian silk traditions, pure zari weaves, and heirloom bridal ensembles."
+    }
+  },
+  "products": [
+    {
+      "id": "AR-DRS-001",
+      "name": "Kanchipuram Pure Silk Bridal Saree",
+      "slug": "kanchipuram-pure-silk-bridal-saree",
+      "category": "Bridal Sarees",
+      "brand": "Aari Silk",
+      "price": 18999,
+      "compareAtPrice": 24999,
+      "stock": 20,
+      "sku": "AR-DRS-001",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#831843",
+      "tagline": "Pure Mulberry Silk • 24K Tested Zari",
+      "badge": {
+        "number": "100%",
+        "unit": "SILK",
+        "title": "Silk Mark Certified Pure Handloom"
+      },
+      "description": "Authentic Kanchipuram pure silk saree with heavy Korvai contrast border, rich Mayilkan peacock pallu, and certified 24-karat tested zari weave.",
+      "shortDescription": "Regal bridal silk saree in deep crimson and gold.",
+      "images": [
+        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "specifications": {
+        "fabric": "100% Pure Mulberry Silk",
+        "zari": "Tested 24K Gold & Silver Zari",
+        "length": "6.3 Meters with Blouse",
+        "weight": "950 Grams",
+        "certification": "Silk Mark Certified"
+      },
+      "rating": 4.9,
+      "reviewCount": 88
+    },
+    {
+      "id": "AR-DRS-002",
+      "name": "Banarasi Georgette Handloom Anarkali",
+      "slug": "banarasi-georgette-handloom-anarkali",
+      "category": "Anarkalis",
+      "brand": "Aari Silk",
+      "price": 9499,
+      "compareAtPrice": 12999,
+      "stock": 18,
+      "sku": "AR-DRS-002",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#9D174D",
+      "tagline": "Hand-Cut Floral Motifs • Feather Drape",
+      "badge": {
+        "number": "PURE",
+        "unit": "ZARI",
+        "title": "Handloom Banarasi Weave"
+      },
+      "description": "Fluid pure georgette Anarkali gown enriched with intricate Banarasi gold floral bootis, handcrafted neckline, and matching handloom dupatta.",
+      "shortDescription": "Featherlight royal Anarkali with Banarasi zari.",
+      "images": [
+        "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "specifications": {
+        "fabric": "Pure Handloom Georgette",
+        "embroidery": "Banarasi Gold Zari Booti",
+        "flair": "4.5 Meters Gher",
+        "dupatta": "Handwoven Banarasi Silk Dupatta",
+        "lining": "Pure Butter Crepe"
+      },
+      "rating": 4.8,
+      "reviewCount": 62
+    },
+    {
+      "id": "AR-DRS-003",
+      "name": "Chanderi Embroidered Velvet Kurti Set",
+      "slug": "chanderi-embroidered-velvet-kurti-set",
+      "category": "Festive Wear",
+      "brand": "Aari Silk",
+      "price": 4999,
+      "compareAtPrice": 6499,
+      "stock": 25,
+      "sku": "AR-DRS-003",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#831843",
+      "tagline": "Aari Needlework • Silk Blend Kurti",
+      "badge": {
+        "number": "AARI",
+        "unit": "CRAFT",
+        "title": "Handcrafted Needle Embroidery"
+      },
+      "description": "Elegant Chanderi silk kurti paired with tailored straight pants and sheer organza dupatta, embellished with delicate Aari needle embroidery.",
+      "shortDescription": "Contemporary festive kurti set with delicate Aari work.",
+      "images": [
+        "https://images.unsplash.com/photo-1596783074418-975a52840be8?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "specifications": {
+        "fabric": "Chanderi Silk & Micro Velvet",
+        "work": "Aari & Zardozi Needle Work",
+        "setIncludes": "Kurti, Pants & Dupatta",
+        "care": "Dry Clean Only",
+        "warranty": "Authentic Handcraft"
+      },
+      "rating": 4.7,
+      "reviewCount": 45
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_saree",
+      "name": "Bridal Sarees",
+      "slug": "bridal-sarees",
+      "count": 1
+    },
+    {
+      "id": "cat_anarkali",
+      "name": "Anarkalis",
+      "slug": "anarkalis",
+      "count": 1
+    },
+    {
+      "id": "cat_festive",
+      "name": "Festive Wear",
+      "slug": "festive-wear",
+      "count": 1
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_f01",
+      "name": "Ananya Sundaram",
+      "rating": 5,
+      "title": "Heirloom Bridal Saree",
+      "comment": "The Kanchipuram saree was the crown of my wedding reception. The gold zari has breathtaking sheen and authenticity."
+    },
+    {
+      "id": "rev_f02",
+      "name": "Meera Krishnan",
+      "rating": 5,
+      "title": "Pure Silk Perfection",
+      "comment": "The Anarkali drape is feather-light and the Banarasi work looks royal. Absolutely worth every rupee."
+    }
+  ]
+}

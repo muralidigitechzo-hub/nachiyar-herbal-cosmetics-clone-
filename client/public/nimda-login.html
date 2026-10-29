@@ -4,14 +4,14 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nimda Staff Login | Nachiyar Herbals</title>
-  <!-- Nachiyar Royal Brand Favicon -->
-  <link rel="icon" type="image/png" href="assets/nachiyar-logo.png">
-  <link rel="shortcut icon" type="image/png" href="assets/nachiyar-logo.png">
-  <link rel="apple-touch-icon" href="assets/nachiyar-logo.png">
+  <title>Aurelia Chronometry | Admin Authentication</title>
+  <!-- TechNova Electronics Royal Brand Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -306,6 +306,34 @@
       }
     }
   </style>
+  <style id="dynamicBrandTheme">
+    :root {
+      --color-canvas: #FDFBF7;
+      --color-canvas-alt: #F1EEE6;
+      --color-surface: #FFFFFF;
+      --color-text-main: #0F291E;
+      --color-text-muted: #52796F;
+      --color-lavender-primary: #064E3B;
+      --color-lavender-dark: #047857;
+      --color-lavender-light: rgba(6, 78, 59, 0.12);
+      --color-gold: #E2B755;
+      --color-gold-light: rgba(226, 183, 85, 0.18);
+      --color-gold-dark: #047857;
+      --gold-gradient: linear-gradient(135deg, #E2B755 0%, #047857 100%);
+      --gold-glow: 0 4px 20px rgba(226, 183, 85, 0.35);
+      --color-hibiscus-primary: #1E293B;
+      --color-hibiscus-dark: #1E293B;
+      --color-bundle-dark: #14532D;
+      --color-bundle-accent: #E2B755;
+      --card-bg-1: #064E3B;
+      --card-bg-2: #1E293B;
+      --card-bg-bundle: #14532D;
+      --promo-banner-bg: linear-gradient(135deg, #064E3B 0%, #14532D 100%);
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+  <script src="/theme-engine.js"></script>
 </head>
 <body>
 
@@ -313,7 +341,7 @@
     <div class="login-card">
       <div class="brand-header">
         <div class="brand-crest">
-          <img src="assets/nachiyar-logo.png" alt="Nachiyar Crest Logo">
+          <img src="assets/TechNova Electronics-logo.png" alt="TechNova Electronics Crest Logo">
         </div>
 
         <!-- Reference Model: Pill badge with shield icon -->
@@ -354,7 +382,7 @@
               type="text" 
               id="loginIdentifier" 
               class="form-input" 
-              placeholder="nimda@nachiyarherbals.com or nimda" 
+              placeholder="nimda@TechNova Electronicsherbals.com or nimda" 
               required 
               autocomplete="username"
               autofocus
@@ -404,7 +432,7 @@
     </div>
 
     <div class="login-footer">
-      <p>© 2026 NACHIYAR HERBALS & COSMETICS</p>
+      <p>© 2026 TechNova Electronics</p>
       <p style="margin-top: 6px;"><a href="/">← Return to Storefront</a></p>
     </div>
   </div>
@@ -461,7 +489,7 @@
       const idLower = identifier.toLowerCase().trim();
 
       // Check if this ID was deleted by administrator
-      const deletedAdmins = JSON.parse(localStorage.getItem('nachiyar_deleted_admins') || '[]');
+      const deletedAdmins = JSON.parse(localStorage.getItem('TechNova Electronics_deleted_admins') || '[]');
       if (deletedAdmins.includes(idLower)) {
         showAlert('This nimda account has been deactivated or deleted.');
         return;
@@ -484,11 +512,14 @@
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.token) {
+            localStorage.setItem('store_admin_token', data.token);
             localStorage.setItem('nachiyar_admin_token', data.token);
+            localStorage.setItem('store_admin_user', JSON.stringify(data.user));
             localStorage.setItem('nachiyar_admin_user', JSON.stringify(data.user));
-            localStorage.removeItem('nachiyar_admin_active_tab');
-            localStorage.setItem('nachiyar_admin_active_tab', 'dashboard');
-            document.cookie = `nachiyar_admin_token=${data.token}; path=/; max-age=86400; SameSite=Lax`;
+            localStorage.removeItem('admin_active_tab');
+            localStorage.setItem('admin_active_tab', 'dashboard');
+            document.cookie = 'store_admin_token=' + data.token + '; path=/; max-age=86400; SameSite=Lax';
+            document.cookie = 'nachiyar_admin_token=' + data.token + '; path=/; max-age=86400; SameSite=Lax';
             showAlert('Access Granted! Launching Nimda OS...', true);
             setTimeout(() => {
               window.location.replace('/nimda/dashboard/');
@@ -528,14 +559,14 @@
       const idLower = identifier.toLowerCase().trim();
 
       // Check if this ID was deleted by administrator
-      const deletedAdmins = JSON.parse(localStorage.getItem('nachiyar_deleted_admins') || '[]');
+      const deletedAdmins = JSON.parse(localStorage.getItem('TechNova Electronics_deleted_admins') || '[]');
       if (deletedAdmins.includes(idLower)) {
         showAlert('This nimda account has been deactivated or deleted.');
         return true;
       }
 
       // Check dynamic admin accounts created inside Admin Console
-      const customAccounts = JSON.parse(localStorage.getItem('nachiyar_admin_accounts') || '[]');
+      const customAccounts = JSON.parse(localStorage.getItem('TechNova Electronics_admin_accounts') || '[]');
       const matched = customAccounts.find(acc => 
         (acc.username && acc.username.toLowerCase() === idLower) || 
         (acc.email && acc.email.toLowerCase() === idLower)
@@ -557,11 +588,14 @@
         }).catch(() => {});
 
         const fallbackToken = 'staff_token_' + Date.now();
+        localStorage.setItem('store_admin_token', fallbackToken);
         localStorage.setItem('nachiyar_admin_token', fallbackToken);
-        localStorage.setItem('nachiyar_admin_user', JSON.stringify(matched));
-        localStorage.removeItem('nachiyar_admin_active_tab');
-        localStorage.setItem('nachiyar_admin_active_tab', 'dashboard');
-        document.cookie = `nachiyar_admin_token=${fallbackToken}; path=/; max-age=86400; SameSite=Lax`;
+        localStorage.setItem('store_admin_user', JSON.stringify(matched || fallbackUser));
+        localStorage.setItem('nachiyar_admin_user', JSON.stringify(matched || fallbackUser));
+        localStorage.removeItem('admin_active_tab');
+        localStorage.setItem('admin_active_tab', 'dashboard');
+        document.cookie = 'store_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
+        document.cookie = 'nachiyar_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
         showAlert(`Access Granted as ${matched.name || matched.username}! Launching Nimda OS...`, true);
         setTimeout(() => {
           window.location.replace('/nimda/dashboard/');
@@ -573,7 +607,7 @@
       let role = null;
       let name = null;
 
-      if (!deletedAdmins.includes('admin') && (idLower === 'nimda' || idLower === 'nimda@nachiyar.com' || idLower === 'nimda@nachiyarherbals.com' || idLower === 'admin') && (password === 'admin123' || password === 'nimda123')) {
+      if (!deletedAdmins.includes('admin') && (idLower === 'nimda' || idLower === 'nimda@TechNova Electronics.com' || idLower === 'nimda@TechNova Electronicsherbals.com' || idLower === 'admin') && (password === 'admin123' || password === 'nimda123')) {
         role = 'super_admin';
         name = 'Super Nimda';
       }
@@ -581,11 +615,14 @@
       if (role) {
         const fallbackToken = 'staff_token_' + Date.now();
         const fallbackUser = { id: 'admin_master', name: name, username: identifier, role: role };
+        localStorage.setItem('store_admin_token', fallbackToken);
         localStorage.setItem('nachiyar_admin_token', fallbackToken);
-        localStorage.setItem('nachiyar_admin_user', JSON.stringify(fallbackUser));
-        localStorage.removeItem('nachiyar_admin_active_tab');
-        localStorage.setItem('nachiyar_admin_active_tab', 'dashboard');
-        document.cookie = `nachiyar_admin_token=${fallbackToken}; path=/; max-age=86400; SameSite=Lax`;
+        localStorage.setItem('store_admin_user', JSON.stringify(matched || fallbackUser));
+        localStorage.setItem('nachiyar_admin_user', JSON.stringify(matched || fallbackUser));
+        localStorage.removeItem('admin_active_tab');
+        localStorage.setItem('admin_active_tab', 'dashboard');
+        document.cookie = 'store_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
+        document.cookie = 'nachiyar_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
         showAlert('Staff Access Verified! Launching Nimda OS...', true);
         setTimeout(() => {
           window.location.replace('/nimda/dashboard/');

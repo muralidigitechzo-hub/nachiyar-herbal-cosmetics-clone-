@@ -83,10 +83,10 @@
       }
     }
 
-    if (settings.faviconUrl || settings.brand?.favicon) {
-      const fav = settings.faviconUrl || settings.brand?.favicon;
-      document.querySelectorAll('link[rel*="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => el.href = fav);
-    }
+    const rawFav = settings.faviconUrl || settings.brand?.favicon || '';
+    const isBadFav = rawFav.includes('unsplash.com') || rawFav.includes('technova-logo') || rawFav.includes('nachiyar-logo');
+    const fav = (rawFav && !isBadFav) ? rawFav : '/favicon.png';
+    document.querySelectorAll('link[rel*="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => el.href = fav);
     const bName = settings.brandName || settings.brand?.name;
     const tag = settings.tagline || settings.brand?.tagline || 'Official Store';
     if (bName && !document.title.includes('Admin') && !document.title.includes('Nimda')) {
@@ -97,7 +97,20 @@
   // Hydrate immediately from cache
   try {
     const cachedSettings = JSON.parse(localStorage.getItem('nachiyar_store_settings') || localStorage.getItem('crm_active_theme') || 'null');
-    if (cachedSettings) applyTheme(cachedSettings);
+    if (cachedSettings) {
+      if (cachedSettings.brand) {
+        if (cachedSettings.brand.logo && (cachedSettings.brand.logo.includes('unsplash.com') || cachedSettings.brand.logo.includes('technova-logo') || cachedSettings.brand.logo.includes('nachiyar-logo'))) {
+          cachedSettings.brand.logo = '/assets/logo.png';
+        }
+        if (cachedSettings.brand.favicon && (cachedSettings.brand.favicon.includes('unsplash.com') || cachedSettings.brand.favicon.includes('technova-logo') || cachedSettings.brand.favicon.includes('nachiyar-logo'))) {
+          cachedSettings.brand.favicon = '/favicon.png';
+        }
+      }
+      if (cachedSettings.faviconUrl && (cachedSettings.faviconUrl.includes('unsplash.com') || cachedSettings.faviconUrl.includes('technova-logo') || cachedSettings.faviconUrl.includes('nachiyar-logo'))) {
+        cachedSettings.faviconUrl = '/favicon.png';
+      }
+      applyTheme(cachedSettings);
+    }
   } catch (e) {}
 
   // Async fetch fresh settings from API to guarantee latest live theme

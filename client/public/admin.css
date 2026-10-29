@@ -165,6 +165,9 @@ body.admin-body {
   height: 42px;
   border-radius: 50%;
   border: 1px solid var(--admin-gold);
+  object-fit: contain;
+  background: #ffffff;
+  padding: 2px;
 }
 
 .brand-info {
