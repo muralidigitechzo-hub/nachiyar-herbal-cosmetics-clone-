@@ -39,6 +39,16 @@ export default function handler(req, res) {
         bg: colors.background || '#F9F8F5',
         text: colors.text || '#0F172A'
       },
+      content: config.content || {
+        orbitCenterImage: 'assets/aurelia-emerald-watch.png',
+        orbitBadge: 'Swiss Caliber 2824 • Certified Chronometer',
+        orbitEyebrow: 'HOROLOGICAL ARCHITECTURE',
+        orbitHeading: '18 Precision Mechanical Engineering Modules',
+        orbitSubtext: 'Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.',
+        orbitIdleIcon: '⏱️',
+        orbitIdleText: 'Hover over any chronometer component to inspect its horological specifications'
+      },
+      orbit: config.orbit || config.content?.orbit || [],
       categories: config.categories || [
         { id: 'cat_chrono', name: 'Automatic Chronometers' },
         { id: 'cat_diver', name: 'Ceramic Divers' },

@@ -275,18 +275,18 @@ async function initStorefrontApp() {
       const idleText = orbitSection.querySelector('.spotlight-idle-text');
 
       const orbitData = settings.content?.orbit || settings.orbit;
-      const centerImg = settings.content?.orbitCenterImage || (settings.products && settings.products[0]?.images?.[0]) || (isHerbal ? 'assets/hero-bottle-oil-transparent.png' : 'assets/technova-phone-transparent.png');
+      const centerImg = settings.content?.orbitCenterImage || (settings.products && settings.products[0]?.images?.[0]) || 'assets/aurelia-emerald-watch.png';
 
-      if (orbitEyebrow) orbitEyebrow.textContent = settings.content?.orbitEyebrow || (isHerbal ? 'SACRED BOTANICAL CRAFTSMANSHIP' : 'ENGINEERED ARCHITECTURE');
-      if (orbitHeading) orbitHeading.textContent = settings.content?.orbitHeading || (isHerbal ? '18 Sacred Earth-Born Botanicals' : '18 Precision Smart Architecture Modules');
-      if (orbitSubtext) orbitSubtext.textContent = settings.content?.orbitSubtext || (isHerbal ? 'Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.' : 'Engineered with 18 high-precision hardware modules, sensors, and intelligent algorithms. Hover over any node to explore.');
+      if (orbitEyebrow) orbitEyebrow.textContent = settings.content?.orbitEyebrow || (isHerbal ? 'SACRED BOTANICAL CRAFTSMANSHIP' : 'HOROLOGICAL ARCHITECTURE');
+      if (orbitHeading) orbitHeading.textContent = settings.content?.orbitHeading || (isHerbal ? '18 Sacred Earth-Born Botanicals' : '18 Precision Mechanical Engineering Modules');
+      if (orbitSubtext) orbitSubtext.textContent = settings.content?.orbitSubtext || (isHerbal ? 'Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.' : 'Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.');
       if (orbitImg) {
         orbitImg.src = centerImg;
         orbitImg.alt = `${brandName} Flagship Architecture`;
       }
-      if (orbitBadge) orbitBadge.textContent = settings.content?.orbitBadge || (isHerbal ? '18 Rare Herbs • Cold-Pressed' : 'Flagship Architecture • Precision Built');
-      if (idleIcon) idleIcon.textContent = settings.content?.orbitIdleIcon || (isHerbal ? '🌿' : '⚡');
-      if (idleText) idleText.textContent = settings.content?.orbitIdleText || (isHerbal ? 'Hover over any botanical herb to discover its sacred hair-care benefits' : 'Hover over any precision architecture module to explore its specifications');
+      if (orbitBadge) orbitBadge.textContent = settings.content?.orbitBadge || (isHerbal ? '18 Rare Herbs • Cold-Pressed' : 'Swiss Caliber 2824 • Certified Chronometer');
+      if (idleIcon) idleIcon.textContent = settings.content?.orbitIdleIcon || (isHerbal ? '🌿' : '⏱️');
+      if (idleText) idleText.textContent = settings.content?.orbitIdleText || (isHerbal ? 'Hover over any botanical herb to discover its sacred hair-care benefits' : 'Hover over any chronometer component to inspect its horological specifications');
 
       // Populate orbit nodes directly from JSON data
       if (Array.isArray(orbitData) && orbitData.length > 0) {
