@@ -117,6 +117,7 @@
       }
     }
   </style>
+  <script src="theme-engine.js"></script>
 </head>
 <body class="page-body">
 
@@ -127,8 +128,8 @@
           <img src="assets/nachiyar-logo.png" alt="Nachiyar Logo" class="brand-logo-img">
         </div>
         <div class="brand-text-lockup">
-          <span class="brand-name">NACHIYAR</span>
-          <span class="brand-sub">HERBALS & COSMETICS</span>
+          <span class="brand-name">STORE</span>
+          <span class="brand-sub">OFFICIAL STORE</span>
         </div>
       </a>
       <div style="display: flex; align-items: center; gap: 14px;">
@@ -155,7 +156,7 @@
             Verifying Order Information...
           </h2>
           <p style="color: var(--color-text-muted); font-size: 0.9rem;">
-            Connecting to Nachiyar central apothecary repository.
+            Connecting to live order tracking network.
           </p>
         </div>
 
@@ -164,7 +165,7 @@
           <div class="status-state-icon status-state-icon--success">✓</div>
           <span class="section-eyebrow" style="color: #059669; font-weight: 800; letter-spacing: 0.08em;">ORDER CONFIRMED</span>
           <h1 class="section-heading" style="font-size: 2.1rem; margin-top: 6px; margin-bottom: 12px;">
-            Thank You For Choosing Royal Botanical Care
+            Thank You For Your Order
           </h1>
           <p class="section-subtext" style="margin-inline: auto; font-size: 0.95rem; color: var(--color-text-muted); max-width: 540px;">
             Your order has been verified and registered with our central inventory. Our master herbalists are preparing your fresh cold-pressed formulation.
@@ -174,7 +175,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
               <div>
                 <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Order Reference</span>
-                <p style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-display); margin: 0; color: #2E1065;" id="dispOrderNumber">NH-ON-...</p>
+                <p style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-display); margin: 0; color: #2E1065;" id="dispOrderNumber">ORD-...</p>
               </div>
               <div id="dispPaymentBadge">
                 <span style="background: #EBF8F2; color: #0D7A46; font-size: 0.75rem; font-weight: 700; padding: 6px 14px; border-radius: 20px; border: 1px solid #B8EAD1;">
@@ -224,14 +225,14 @@
           <div class="status-state-icon status-state-icon--lookup">📦</div>
           <span class="section-eyebrow" style="color: var(--color-gold-dark); font-weight: 800; letter-spacing: 0.08em;">COURIER DISPATCH TRACKING</span>
           <h1 class="section-heading" style="font-size: 2.1rem; margin-top: 6px; margin-bottom: 12px;">
-            Track Your Botanical Order
+            Track Your Order Status
           </h1>
           <p class="section-subtext" style="margin-inline: auto; font-size: 0.95rem; color: var(--color-text-muted); max-width: 520px;">
-            Enter your Order Number (e.g., <strong>NH-ON-1001</strong>) or your 10-digit registered mobile number below to view live courier transit status, dispatch timeline, and invoices.
+            Enter your Order Number (e.g., <strong>ORD-1001</strong>) or your 10-digit registered mobile number below to view live courier transit status, dispatch timeline, and invoices.
           </p>
 
           <form id="orderLookupForm" class="tracking-lookup-form" onsubmit="handleLookupSubmit(event)">
-            <input type="text" id="lookupInput" class="tracking-input" placeholder="e.g. NH-ON-1001 or 9876543210" required autofocus>
+            <input type="text" id="lookupInput" class="tracking-input" placeholder="e.g. ORD-1001 or 9876543210" required autofocus>
             <button type="submit" class="btn-track-submit">
               <span>🔍 Track Status →</span>
             </button>

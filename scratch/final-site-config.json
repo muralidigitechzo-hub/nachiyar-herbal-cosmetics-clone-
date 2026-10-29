@@ -1,0 +1,799 @@
+{
+  "brand": {
+    "name": "Aurelia Chronometry",
+    "shortName": "AURELIA",
+    "tagline": "Mastering Time with Precision & Elegance",
+    "logo": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80",
+    "favicon": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=100&q=80",
+    "colors": {
+      "primary": "#064E3B",
+      "secondary": "#E2B755",
+      "accent": "#047857",
+      "background": "#FDFBF7",
+      "backgroundAlt": "#F1EEE6",
+      "surface": "#FFFFFF",
+      "text": "#0F291E",
+      "muted": "#52796F",
+      "cardBg1": "#064E3B",
+      "cardBg2": "#1E293B",
+      "bundleBg": "#14532D"
+    },
+    "fonts": {
+      "heading": "Cinzel",
+      "body": "Plus Jakarta Sans"
+    }
+  },
+  "business": {
+    "phone": "+91 94455 66778",
+    "email": "concierge@aureliatime.com",
+    "address": "Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001",
+    "gstin": "29AAACA1234E1Z8",
+    "timings": "Mon - Sat: 10:00 AM - 7:30 PM",
+    "socialLinks": {
+      "whatsapp": "+91 94455 66778",
+      "instagram": "https://instagram.com/aureliatime",
+      "youtube": "https://youtube.com/@aureliatime"
+    }
+  },
+  "content": {
+    "announcement": "✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨",
+    "freeShippingThreshold": 999,
+    "coupon": {
+      "code": "AURELIA15",
+      "discountPercent": 15,
+      "active": true,
+      "tagline": "15% Welcome Privilege On First Timepiece Acquisition"
+    },
+    "hero": {
+      "eyebrow": "HAUTE HORLOGERIE • SWISS HERITAGE",
+      "title": "Mastering The Art Of Timeless Precision.",
+      "subtitle": "Hand-assembled automatic chronometers engineered with sapphire crystal, 72-hour power reserve, and surgical-grade 316L stainless steel.",
+      "ctaPrimaryText": "Explore Timepieces",
+      "ctaPrimaryLink": "/shop/",
+      "ctaSecondaryText": "Shop The Collector's Duo (Save 15%)",
+      "ctaSecondaryLink": "/product/?slug=aurelia-collectors-duo"
+    },
+    "features": [
+      {
+        "icon": "🏅",
+        "title": "Swiss Certified Chronometer",
+        "subtitle": "Tested across 5 positions & 3 temperatures"
+      },
+      {
+        "icon": "🛡️",
+        "title": "5-Year Atelier Warranty",
+        "subtitle": "Complimentary global service coverage"
+      },
+      {
+        "icon": "📦",
+        "title": "Insured Air Courier",
+        "subtitle": "Doorstep white-glove security delivery"
+      }
+    ],
+    "marquee": [
+      "AURELIA CHRONOMETRY",
+      "SWISS CALIBER 2824",
+      "316L SURGICAL STEEL",
+      "DOUBLE-DOMED SAPPHIRE",
+      "COSC CERTIFIED",
+      "HAND-FINISHED MOVEMENTS",
+      "5-YEAR GLOBAL WARRANTY",
+      "GENEVA & BENGALURU ATELIER"
+    ],
+    "showcase": {
+      "eyebrow": "THE LIVING HOROLOGICAL RITUAL",
+      "title": "Real Wrists. Authentic Craftsmanship.",
+      "subtitle": "A mechanical watch is not an accessory, it is a daily ritual of winding, wearing and appreciating a living machine.",
+      "cards": [
+        {
+          "badge": "THE WINDING RITUAL",
+          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&crop=focalpoint&fp-x=.3&fp-y=.6&fp-z=1.6&w=800&q=80",
+          "title": "Crown By Crown Morning Awakening",
+          "desc": "A few gentle turns of the screw-down crown wake the Swiss caliber from its rest. The rotor tops up the mainspring with every movement of your wrist, so the watch is ready before your coffee is.",
+          "quote": "The soft tick of the rotor is the first sound of my morning."
+        },
+        {
+          "badge": "THE INSPECTION RITUAL",
+          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.4&fp-z=1.2",
+          "title": "Sapphire-Clear Dial Appreciation",
+          "desc": "Under a double-domed anti-reflective crystal, the hand-lacquered sunburst dial shifts from deep emerald to gold as the light moves. Applied indices and blued hands reward every second glance.",
+          "quote": "Every time I check the time, I notice something new on the dial."
+        },
+        {
+          "badge": "THE HERITAGE RESULT",
+          "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+          "title": "Worn Today, Inherited Tomorrow",
+          "desc": "Marine-grade steel, synthetic ruby bearings and a five-year atelier guarantee mean your Aurelia is built to keep perfect time for decades, and to be passed down with its story intact.",
+          "quote": "My father wore a mechanical watch. Now I understand why."
+        }
+      ],
+      "spotlight": {
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1000&q=80&crop=focalpoint&fp-x=0.6&fp-y=0.5&fp-z=1.0",
+        "imageEyebrow": "THE TIMEKEEPING",
+        "imageTitle": "Calibrated Sunburst Emerald Dial",
+        "imageCaption": "Regulated in five positions and three temperatures before it ever leaves the atelier.",
+        "eyebrow": "CHRONOMETER TEST OBSERVATION",
+        "heading": "Certified Precision In 15 Days",
+        "stats": [
+          {
+            "value": "-4/+6s",
+            "label": "Daily deviation, COSC certified"
+          },
+          {
+            "value": "72h",
+            "label": "Power reserve off the wrist"
+          },
+          {
+            "value": "9 Mohs",
+            "label": "Sapphire crystal scratch hardness"
+          }
+        ]
+      }
+    },
+    "orbitStage": {
+      "eyebrow": "HOROLOGICAL ARCHITECTURE",
+      "heading": "18 Precision Mechanical Engineering Modules",
+      "subtext": "Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.",
+      "centerImage": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+      "centerBadge": "Swiss Caliber 2824 • Certified Chronometer",
+      "idleIcon": "⌚",
+      "idleText": "Hover over any chronometer component to inspect its horological specifications"
+    },
+    "orbitCenterImage": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+    "orbitBadge": "Swiss Caliber 2824 • Certified Chronometer",
+    "orbitEyebrow": "HOROLOGICAL ARCHITECTURE",
+    "orbitHeading": "18 Precision Mechanical Engineering Modules",
+    "orbitSubtext": "Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.",
+    "orbitIdleIcon": "⌚",
+    "orbitIdleText": "Hover over any chronometer component to inspect its horological specifications",
+    "orbit": [
+      {
+        "name": "Sapphire Crystal",
+        "icon": "💎",
+        "tag": "Scratch Armor",
+        "desc": "Double-domed anti-reflective synthetic sapphire crystal with 9 Mohs hardness rating.",
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.45&fp-z=2"
+      },
+      {
+        "name": "Automatic Caliber",
+        "icon": "⚙️",
+        "tag": "Swiss Movement",
+        "desc": "Self-winding mechanical heart beating at 28,800 vibrations per hour for seamless sweep.",
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+      },
+      {
+        "name": "72h Power Reserve",
+        "icon": "⏳",
+        "tag": "Twin Barrels",
+        "desc": "Twin-barrel spring mechanism maintaining uninterrupted precision for 3 full days off the wrist.",
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+      },
+      {
+        "name": "316L Stainless Steel",
+        "icon": "🛡️",
+        "tag": "Marine Grade",
+        "desc": "Corrosion-resistant surgical alloy hand-polished with alternating brushed satin bevels.",
+        "image": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.5&fp-z=2"
+      },
+      {
+        "name": "Ceramic Bezel",
+        "icon": "🔘",
+        "tag": "Unidirectional",
+        "desc": "120-click laser-engraved scratch-proof ceramic diving bezel with platinum numerals.",
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.15&fp-z=2"
+      },
+      {
+        "name": "Super-LumiNova",
+        "icon": "✨",
+        "tag": "Swiss Lume",
+        "desc": "Grade A Swiss photoluminescent pigment ensuring vivid low-light dial legibility.",
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.5&fp-z=2.5"
+      },
+      {
+        "name": "200M Water Proof",
+        "icon": "🌊",
+        "tag": "Screw-Down Crown",
+        "desc": "Triple-sealed gasket assembly pressure-tested to withstand deep oceanic expeditions.",
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80"
+      },
+      {
+        "name": "Exhibition Caseback",
+        "icon": "🔍",
+        "tag": "Côtes de Genève",
+        "desc": "Transparent sapphire rear display showcasing gold rotor and Geneva stripes decoration.",
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+      },
+      {
+        "name": "Incabloc Shock",
+        "icon": "⚡",
+        "tag": "Impact Shield",
+        "desc": "Spring-loaded jewel bearing absorbing severe sudden mechanical shocks and drops.",
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+      },
+      {
+        "name": "Glucydur Balance",
+        "icon": "⚖️",
+        "tag": "Thermal Stable",
+        "desc": "Beryllium-bronze alloy balance wheel resisting extreme temperature fluctuations.",
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+      },
+      {
+        "name": "Nivaflex Mainspring",
+        "icon": "🌀",
+        "tag": "Anti-Magnetic",
+        "desc": "Space-age alloy providing consistent kinetic energy torque with zero magnetic distortion.",
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+      },
+      {
+        "name": "Sunburst Dial",
+        "icon": "☀️",
+        "tag": "Guilloché",
+        "desc": "Hand-lacquered emerald dial with radial sunburst brushing and applied gold hour indices.",
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80"
+      },
+      {
+        "name": "25 Jeweled Bearings",
+        "icon": "💍",
+        "tag": "Synthetic Rubies",
+        "desc": "High-purity ruby bearings virtually eliminating mechanical friction on internal pivot points.",
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+      },
+      {
+        "name": "Italian Calfskin",
+        "icon": "🧵",
+        "tag": "Handcrafted Strap",
+        "desc": "Full-grain Tuscan leather strap with artisanal tone-on-tone edge stitching.",
+        "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&h=420&q=80"
+      },
+      {
+        "name": "Butterfly Clasp",
+        "icon": "🔒",
+        "tag": "Dual Deployment",
+        "desc": "Spring-actuated double folding security buckle with laser-etched brand insignia.",
+        "image": "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.8&fp-y=0.8&fp-z=2"
+      },
+      {
+        "name": "COSC Certified",
+        "icon": "📜",
+        "tag": "Official Chronometer",
+        "desc": "Independently certified by the Official Swiss Chronometer Testing Institute within -4/+6s.",
+        "image": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&h=420&q=80"
+      },
+      {
+        "name": "Helium Escape Valve",
+        "icon": "💨",
+        "tag": "Deep Saturation",
+        "desc": "Automatic pressure release valve preventing crystal dislodgement during decompression.",
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.9&fp-y=0.5&fp-z=2.5"
+      },
+      {
+        "name": "5-Year Guarantee",
+        "icon": "🏅",
+        "tag": "Global Atelier Service",
+        "desc": "Comprehensive worldwide manufacturer warranty with complimentary 3rd-year maintenance.",
+        "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&crop=focalpoint&fp-x=.7&fp-y=.3&fp-z=1.5&w=700&h=420&q=80"
+      }
+    ],
+    "collection": {
+      "eyebrow": "THE FLAGSHIP DUO",
+      "title": "Signature Masterpieces. Pure Distinction.",
+      "subtitle": "Individually calibrated mechanical timepieces designed for connoisseurs of timeless horological craft."
+    },
+    "bundle": {
+      "productId": "AUR-DUO-003",
+      "eyebrow": "THE SIGNATURE 2-WATCH COLLECTION",
+      "badge": "★ BEST VALUE: SAVE ₹15,375",
+      "features": [
+        "✔ 1x Sovereign Emerald 41 (Steel Bracelet)",
+        "✔ 1x DeepOcean Ceramic Diver",
+        "✔ Free Insured Express Delivery & Collector's Box"
+      ],
+      "ctaText": "Add The Collection to Bag"
+    },
+    "reviewsSection": {
+      "eyebrow": "VERIFIED COLLECTORS",
+      "title": "Loved by Discerning Collectors",
+      "ratingScore": "4.9 / 5.0",
+      "ratingText": "Based on Verified Collector Reviews",
+      "ctaText": "✍️ Comment Your Review"
+    },
+    "story": {
+      "title": "The Aurelia Atelier Heritage",
+      "subtitle": "Where Swiss Precision Meets Indian Craftsmanship",
+      "badge": "SWISS CALIBER ARCHITECTURE",
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=1000",
+      "quote": "In an era of fleeting digital seconds, Aurelia celebrates the timeless poetry of mechanical movements calibrated by master horologists.",
+      "author": "Henri V. Aurelia",
+      "authorTitle": "Master Horologist, Founder & Atelier Director",
+      "description": "Every Aurelia timepiece begins as a symphony of raw marine-grade steel, synthetic ruby jewels, and hand-beveled balance springs. We bridge centuries of Swiss watchmaking heritage with contemporary industrial ergonomics."
+    },
+    "aboutPage": {
+      "heroEyebrow": "OUR ATELIER PHILOSOPHY",
+      "heroTitle": "True Luxury Ticks With Silent Perfection",
+      "heroDesc": "True luxury does not shout; it ticks with resolute, silent perfection upon your wrist."
+    },
+    "contactPage": {
+      "eyebrow": "ATELIER VISITS & CONCIERGE",
+      "title": "Connect With Our Horologists",
+      "subtitle": "Questions about movements, sizing, servicing or private appointments? Our concierge team is ready to assist.",
+      "boutiqueTitle": "Aurelia Atelier & Boutique",
+      "phoneTitle": "Concierge Hotline & WhatsApp",
+      "emailTitle": "Direct Correspondence",
+      "hoursTitle": "Boutique Hours",
+      "registrationLabel": "OFFICIAL REGISTRATION",
+      "form": {
+        "title": "Send a Direct Message",
+        "subtitle": "Every message is answered individually within 4 business hours.",
+        "nameLabel": "Your Full Name",
+        "namePlaceholder": "e.g. Rohan Mehta",
+        "emailLabel": "Email Address",
+        "emailPlaceholder": "name@domain.com",
+        "phoneLabel": "Phone / WhatsApp",
+        "phonePlaceholder": "+91 98765 43210",
+        "subjectLabel": "Subject of Inquiry",
+        "subjects": [
+          "Product Specifications & Inquiries",
+          "Order & Shipping Support",
+          "Warranty & Servicing",
+          "Private Atelier Appointment",
+          "Corporate & Bulk Gifting"
+        ],
+        "messageLabel": "Your Message",
+        "messagePlaceholder": "Please describe your inquiry with Aurelia Chronometry...",
+        "submitText": "Transmit Message →",
+        "successMessage": "Thank you. Our concierge will reply within 4 business hours."
+      }
+    },
+    "policies": {
+      "privacySummary": "Your personal and payment details are never shared with any third party.",
+      "shippingSummary": "Every timepiece ships fully insured via express air courier. Complimentary on orders above ₹999.",
+      "returnsSummary": "7-day inspection period. Unworn timepieces with original packaging may be returned.",
+      "warrantySummary": "5-year global atelier warranty with complimentary 3rd-year maintenance service."
+    },
+    "footer": {
+      "newsletterEyebrow": "THE AURELIA CIRCLE",
+      "newsletterTitle": "RECEIVE 15% OFF YOUR FIRST TIMEPIECE",
+      "newsletterSub": "Subscribe for private previews, limited editions and horological insights.",
+      "bio": "Aurelia Chronometry crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide.",
+      "copyright": "© 2026 AURELIA CHRONOMETRY. ALL RIGHTS RESERVED.",
+      "developerCredit": "Powered by Aurelia Atelier Platform",
+      "columns": [
+        {
+          "title": "SHOP TIMEPIECES",
+          "links": [
+            {
+              "label": "Sovereign Emerald 41",
+              "href": "/product/?slug=aurelia-sovereign-emerald-41"
+            },
+            {
+              "label": "DeepOcean Ceramic Diver",
+              "href": "/product/?slug=aurelia-deepocean-ceramic-diver"
+            },
+            {
+              "label": "The Collector's Duo",
+              "href": "/product/?slug=aurelia-collectors-duo"
+            },
+            {
+              "label": "Browse All Timepieces",
+              "href": "/shop/"
+            }
+          ]
+        },
+        {
+          "title": "COMPANY & CRAFT",
+          "links": [
+            {
+              "label": "About Aurelia",
+              "href": "/about/"
+            },
+            {
+              "label": "72-Hour Calibration",
+              "href": "/about/#heritage"
+            },
+            {
+              "label": "Swiss Movement Sourcing",
+              "href": "/about/#sourcing"
+            },
+            {
+              "label": "Boutique & Atelier Visits",
+              "href": "/contact/"
+            }
+          ]
+        },
+        {
+          "title": "CUSTOMER CARE",
+          "links": [
+            {
+              "label": "Track Your Order",
+              "href": "/order-status/"
+            },
+            {
+              "label": "Contact Customer Care",
+              "href": "/contact/"
+            },
+            {
+              "label": "Secure Web Checkout",
+              "href": "/checkout/"
+            },
+            {
+              "label": "Complete Catalog",
+              "href": "/shop/"
+            }
+          ]
+        }
+      ],
+      "legalLinks": [
+        {
+          "label": "Privacy Policy",
+          "href": "/privacy/"
+        },
+        {
+          "label": "Terms of Service",
+          "href": "/terms/"
+        },
+        {
+          "label": "Shipping & Returns",
+          "href": "/shipping-policy/"
+        },
+        {
+          "label": "Sitemap",
+          "href": "/sitemap/"
+        }
+      ]
+    },
+    "reviewForm": {
+      "eyebrow": "COMMUNITY COLLECTOR REVIEWS",
+      "title": "Share Your Experience",
+      "subtitle": "Your feedback is reviewed by our atelier team and published to the live community ticker.",
+      "submitText": "Submit Review for Verification ✦"
+    },
+    "craftsmanship": {
+      "eyebrow": "OUR HOROLOGICAL CRAFTSMANSHIP",
+      "title": "Assembled with Reverence",
+      "subtitle": "Every movement respects the balance between centuries of Swiss tradition and modern precision engineering.",
+      "items": [
+        {
+          "title": "72-Hour Calibration Ritual",
+          "desc": "Each caliber is regulated in five positions and three temperatures over three full days, so every second ticks true before it ever reaches your wrist."
+        },
+        {
+          "title": "Hand-Finished Côtes de Genève",
+          "desc": "Bridges and rotors are striped and bevelled by hand under magnification, a finishing detail visible only through the sapphire caseback, yet never skipped."
+        },
+        {
+          "title": "Anti-Magnetic, Shock-Safe Precision",
+          "desc": "Nivaflex mainspring, Glucydur balance and Incabloc shock protection keep timing stable through daily knocks, magnets and temperature swings."
+        }
+      ],
+      "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=1000",
+      "expert": {
+        "label": "TRADITIONAL HOROLOGY",
+        "quote": "Most modern watches trade finishing for volume. Aurelia's hand-regulated calibers keep the old discipline alive: slower to make, far longer to last.",
+        "author": "Henri V. Aurelia",
+        "role": "Master Horologist & Atelier Director"
+      },
+      "cta": {
+        "text": "Explore The Atelier →",
+        "link": "/shop/"
+      }
+    },
+    "gallery": {
+      "eyebrow": "OUR HOROLOGICAL CIRCLE",
+      "handle": "@aureliatime",
+      "ctaText": "Follow On Instagram ↗",
+      "ctaLink": "https://instagram.com/aureliatime",
+      "items": [
+        {
+          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=1000",
+          "label": "View Movement"
+        },
+        {
+          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=80&h=700&crop=focalpoint&fp-x=0.3&fp-y=0.5&fp-z=1.5",
+          "label": "View Collection"
+        },
+        {
+          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=80&h=700&crop=focalpoint&fp-x=0.7&fp-y=0.7&fp-z=2",
+          "label": "View Detail"
+        },
+        {
+          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=80&h=700&crop=focalpoint&fp-x=0.5&fp-y=0.2&fp-z=1.3",
+          "label": "Pure Precision"
+        }
+      ]
+    },
+    "offerPopup": {
+      "badge": "✨ LIMITED TIME SPECIAL PRIVILEGE",
+      "title": "Flat 15% OFF On Swiss Timepieces",
+      "text": "Use code AURELIA15 at checkout. Valid for a limited period.",
+      "code": "AURELIA15",
+      "copyText": "📋 Copy Code",
+      "ctaText": "Claim Privilege Now →",
+      "ctaLink": "/shop/"
+    },
+    "mysteryDiscount": {
+      "label": "🎁 MYSTERY DISCOUNT"
+    },
+    "nav": {
+      "links": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Shop Timepieces",
+          "href": "/shop/",
+          "dropdownProductIds": [
+            "AUR-CHRONO-001",
+            "AUR-DIVER-002",
+            "AUR-DUO-003"
+          ],
+          "dropdownFooter": "Explore Complete Atelier & All Timepieces"
+        },
+        {
+          "label": "About Us",
+          "href": "/about/"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact/"
+        }
+      ],
+      "signInText": "Sign In",
+      "bagText": "Bag"
+    },
+    "cart": {
+      "title": "Your Atelier Bag",
+      "emptyTitle": "Your bag is currently empty",
+      "emptyText": "Treat your wrist to Swiss precision.",
+      "emptyCta": "Explore Timepieces",
+      "upsellLabel": "✦ PERFECT PAIRING",
+      "upsellProductId": "AUR-STRAP-005",
+      "checkoutText": "Proceed To Secure Checkout →",
+      "footnote": "Inclusive of all taxes. 100% Satisfaction Guarantee."
+    }
+  },
+  "categories": [
+    "Automatic Chronometers",
+    "Diving Instruments",
+    "Collector Sets",
+    "Dress Watches",
+    "Horological Straps"
+  ],
+  "products": [
+    {
+      "id": "AUR-CHRONO-001",
+      "name": "Aurelia Sovereign Emerald 41",
+      "slug": "aurelia-sovereign-emerald-41",
+      "category": "Automatic Chronometers",
+      "brand": "Aurelia",
+      "price": 48500,
+      "compareAtPrice": 56000,
+      "stock": 14,
+      "sku": "AUR-CHRONO-001",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#064E3B",
+      "tagline": "Caliber 2824 • Sunburst Emerald",
+      "badge": {
+        "number": "COSC",
+        "unit": "SWISS",
+        "title": "Officially Certified Chronometer"
+      },
+      "description": "Flagship 41mm automatic mechanical timepiece featuring sunburst emerald dial, double-domed sapphire crystal, 72-hour power reserve, and solid 316L stainless steel bracelet.",
+      "shortDescription": "41mm Swiss automatic with sunburst emerald dial.",
+      "images": [
+        "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "caseDiameter": "41mm Surgical 316L Steel",
+        "movement": "Swiss Caliber 2824 Automatic",
+        "crystal": "Double-Domed Anti-Reflective Sapphire",
+        "waterResistance": "100 Meters (10 ATM)",
+        "warranty": "5-Year Global Atelier Guarantee"
+      },
+      "rating": 4.95,
+      "reviewCount": 84,
+      "transparentImage": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "AUR-DIVER-002",
+      "name": "Aurelia DeepOcean Ceramic Diver",
+      "slug": "aurelia-deepocean-ceramic-diver",
+      "category": "Diving Instruments",
+      "brand": "Aurelia",
+      "price": 54000,
+      "compareAtPrice": 62500,
+      "stock": 10,
+      "sku": "AUR-DIVER-002",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#1E293B",
+      "tagline": "300M Diver • Helium Escape Valve",
+      "badge": {
+        "number": "300M",
+        "unit": "DIVE",
+        "title": "Professional Oceanic Diver"
+      },
+      "description": "Professional diving instrument with 120-click ceramic bezel, automatic helium release valve, Super-LumiNova luminescence, and 300 meters water resistance.",
+      "shortDescription": "300m oceanic diver with ceramic bezel.",
+      "images": [
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "caseDiameter": "42.5mm Marine Grade Steel",
+        "bezel": "120-Click High-Tech Ceramic",
+        "lume": "Swiss Super-LumiNova BGW9",
+        "waterResistance": "300 Meters (30 ATM)",
+        "warranty": "5-Year Global Atelier Guarantee"
+      },
+      "rating": 4.9,
+      "reviewCount": 62,
+      "transparentImage": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "AUR-DUO-003",
+      "name": "The Aurelia Collector's Duo (Set of 2)",
+      "slug": "aurelia-collectors-duo",
+      "category": "Collector Sets",
+      "brand": "Aurelia",
+      "price": 87125,
+      "compareAtPrice": 102500,
+      "stock": 8,
+      "sku": "AUR-DUO-003",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#14532D",
+      "tagline": "Sovereign Emerald 41 + DeepOcean Diver",
+      "badge": {
+        "number": "DUO",
+        "unit": "SET",
+        "title": "Collector's Pairing"
+      },
+      "description": "Experience the complete Aurelia horological range. The Sovereign Emerald 41 for refined everyday elegance, paired with the DeepOcean Ceramic Diver for 300 metres of oceanic adventure. Delivered in a bespoke collector's presentation box.",
+      "shortDescription": "Sovereign Emerald 41 + DeepOcean Ceramic Diver at a 15% collector's saving.",
+      "images": [
+        "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "contents": "1x Sovereign Emerald 41 + 1x DeepOcean Ceramic Diver",
+        "presentation": "Bespoke Collector's Presentation Box",
+        "warranty": "5-Year Global Atelier Guarantee"
+      },
+      "bundleOf": [
+        "AUR-CHRONO-001",
+        "AUR-DIVER-002"
+      ],
+      "savings": 15375,
+      "rating": 4.97,
+      "reviewCount": 41
+    },
+    {
+      "id": "AUR-HERITAGE-004",
+      "name": "Aurelia Heritage Moonphase",
+      "slug": "aurelia-heritage-moonphase",
+      "category": "Dress Watches",
+      "brand": "Aurelia",
+      "price": 38900,
+      "compareAtPrice": 46000,
+      "stock": 18,
+      "sku": "AUR-HERITAGE-004",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#14532D",
+      "tagline": "Astronomical Moonphase • Rose Gold",
+      "badge": {
+        "number": "MOON",
+        "unit": "PHASE",
+        "title": "Astronomical Complication"
+      },
+      "description": "Exquisite dress timepiece showcasing hand-painted astronomical moonphase disk, Guilloché dial, blued steel hands, and genuine Italian alligator-embossed calfskin leather strap.",
+      "shortDescription": "Astronomical moonphase with Italian leather strap.",
+      "images": [
+        "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "caseDiameter": "39.5mm Slim Profile (9.8mm)",
+        "complication": "True Astronomical Moonphase & Date",
+        "strap": "Full-Grain Italian Calfskin",
+        "waterResistance": "50 Meters (5 ATM)",
+        "warranty": "5-Year Global Atelier Guarantee"
+      },
+      "rating": 4.88,
+      "reviewCount": 49
+    },
+    {
+      "id": "AUR-STRAP-005",
+      "name": "Aurelia Collector's Strap Kit (3 Straps)",
+      "slug": "aurelia-collectors-strap-kit",
+      "category": "Horological Straps",
+      "brand": "Aurelia",
+      "price": 6900,
+      "compareAtPrice": 8700,
+      "stock": 30,
+      "sku": "AUR-STRAP-005",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#14532D",
+      "tagline": "3 Italian Calfskin Straps • Quick-Release",
+      "badge": {
+        "number": "KIT",
+        "unit": "x3",
+        "title": "Interchangeable Strap Collection"
+      },
+      "description": "Three full-grain Italian calfskin straps in tan, black and emerald with tone-on-tone stitching, plus a spring bar tool for effortless quick-release changes.",
+      "shortDescription": "3 interchangeable Italian leather straps with tool.",
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "contents": "3 Straps + Spring Bar Tool",
+        "material": "Full-Grain Italian Calfskin",
+        "lugWidth": "20mm",
+        "warranty": "1-Year Atelier Guarantee"
+      },
+      "rating": 4.85,
+      "reviewCount": 37
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Aditya Kapoor",
+      "product_name": "The Aurelia Collector's Duo (Set of 2)",
+      "rating": 5,
+      "title": "Two Watches, One Perfect Set",
+      "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
+      "location": "Delhi, India"
+    },
+    {
+      "name": "Rohan Mehta",
+      "product_name": "Aurelia Sovereign Emerald 41",
+      "rating": 5,
+      "title": "The Emerald Dial Is Stunning",
+      "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
+      "location": "Mumbai, India"
+    },
+    {
+      "name": "Vikram Nair",
+      "product_name": "Aurelia DeepOcean Ceramic Diver",
+      "rating": 5,
+      "title": "Built Like A Tank",
+      "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
+      "location": "Kochi, India"
+    },
+    {
+      "name": "Ananya Krishnan",
+      "product_name": "Aurelia Heritage Moonphase",
+      "rating": 5,
+      "title": "Perfect Gift",
+      "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
+      "location": "Chennai, India"
+    },
+    {
+      "name": "Siddharth Rao",
+      "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
+      "rating": 4,
+      "title": "Great Value Straps",
+      "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
+      "location": "Bengaluru, India"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Are Aurelia watches really Swiss movement?",
+      "answer": "Yes. Every timepiece uses a Swiss automatic caliber, individually regulated and tested before dispatch."
+    },
+    {
+      "question": "What does the 5-year warranty cover?",
+      "answer": "It covers manufacturing defects in the movement and case worldwide, plus complimentary maintenance in the third year."
+    },
+    {
+      "question": "How is my watch shipped?",
+      "answer": "Fully insured via express air courier with signature on delivery. Shipping is complimentary on orders above ₹999."
+    },
+    {
+      "question": "Can I return a watch if I change my mind?",
+      "answer": "Yes. Unworn timepieces in original packaging can be returned within 7 days of delivery."
+    }
+  ],
+  "customCSS": "/* ===== Aurelia contact-form styling: paste at the END of your main CSS file ===== */\nform:not(footer form){--af-p:var(--primary,#064E3B);--af-s:var(--secondary,#E2B755);--af-t:var(--text,#0F291E);--af-m:var(--muted,#52796F)}\nform:not(footer form) label{display:block;margin:20px 0 8px;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--af-t)}\nform:not(footer form) :where(input:not([type=checkbox]):not([type=radio]):not([type=submit]),select,textarea){width:100%;box-sizing:border-box;padding:14px 16px;font:inherit;font-size:.95rem;color:var(--af-t);background:#fff;border:1.5px solid #d6e0db;border-radius:12px;outline:0;transition:border-color .2s,box-shadow .2s}\nform:not(footer form) :where(input,select,textarea)::placeholder{color:#9aaba4}\nform:not(footer form) :where(input:not([type=checkbox]):not([type=radio]):not([type=submit]),select,textarea):focus{border-color:var(--af-p);box-shadow:0 0 0 4px rgba(6,78,59,.12)}\nform:not(footer form) :where(select){appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:44px;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23064E3B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 16px center}\nform:not(footer form) :where(textarea){min-height:150px;resize:vertical;line-height:1.55}\nform:not(footer form) :where(button[type=submit],button:not([type]),input[type=submit]){display:inline-flex;align-items:center;gap:8px;margin-top:26px;padding:15px 30px;font:inherit;font-weight:700;font-size:.95rem;color:#0F291E;background:linear-gradient(135deg,var(--af-s),#047857);border:0;border-radius:999px;cursor:pointer;box-shadow:0 10px 24px rgba(6,78,59,.22);transition:transform .2s,box-shadow .2s}\nform:not(footer form) :where(button[type=submit],button:not([type]),input[type=submit]):hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(6,78,59,.3)}\n"
+}

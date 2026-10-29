@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="techGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#1D4ED8" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </radialGradient>
+  </defs>
+
+  <!-- Outer Dark Slate Medallion -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGlow)" stroke="url(#goldGrad)" stroke-width="12" />
+
+  <!-- Inner Tech Track Circle -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="url(#techGrad)" stroke-width="4" stroke-dasharray="14, 10" opacity="0.75" />
+
+  <!-- Hexagonal Core Frame -->
+  <polygon points="256,116 376,186 376,326 256,396 136,326 136,186" fill="none" stroke="url(#goldGrad)" stroke-width="5" opacity="0.5" />
+
+  <!-- Tech Monogram 'TN' Dynamic Emblem -->
+  <!-- Letter T -->
+  <path d="M 170 175 L 342 175 L 342 215 L 280 215 L 280 345 L 232 345 L 232 215 L 170 215 Z" fill="url(#goldGrad)" />
+
+  <!-- Tech Stylized Lightning Bolt Overlay -->
+  <polygon points="275,190 320,190 290,250 330,250 250,335 270,265 235,265" fill="url(#techGrad)" opacity="0.95" />
+
+  <!-- Glowing Tech Nodes -->
+  <circle cx="136" cy="186" r="8" fill="#38BDF8" />
+  <circle cx="376" cy="186" r="8" fill="#38BDF8" />
+  <circle cx="376" cy="326" r="8" fill="#38BDF8" />
+  <circle cx="136" cy="326" r="8" fill="#38BDF8" />
+  <circle cx="256" cy="116" r="8" fill="#FDE047" />
+  <circle cx="256" cy="396" r="8" fill="#FDE047" />
+</svg>

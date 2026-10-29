@@ -282,6 +282,7 @@
       }
     }
   </style>
+  <script src="theme-engine.js"></script>
 </head>
 <body class="page-body">
 
@@ -292,8 +293,8 @@
           <img src="assets/nachiyar-logo.png" alt="Nachiyar Logo" class="brand-logo-img">
         </div>
         <div class="brand-text-lockup">
-          <span class="brand-name">NACHIYAR</span>
-          <span class="brand-sub">HERBALS & COSMETICS</span>
+          <span class="brand-name">STORE</span>
+          <span class="brand-sub">OFFICIAL STORE</span>
         </div>
       </a>
       <span style="font-size:0.8125rem; font-weight:700; color:var(--color-gold-dark);">🔒 100% Encrypted Checkout</span>
@@ -942,7 +943,7 @@
         btnPlaceOrder.innerHTML = '<span>Processing Order...</span>';
 
         let orderId = 'ord_' + Date.now();
-        let orderNumber = 'NH-' + Math.floor(100000 + Math.random() * 900000);
+        let orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
 
         try {
           const res = await fetch('/api/orders', {

@@ -4,14 +4,14 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop All Formulations | Nachiyar Herbals & Cosmetics</title>
-  <!-- Nachiyar Royal Brand Favicon -->
-  <link rel="icon" type="image/png" href="assets/nachiyar-logo.png">
-  <link rel="shortcut icon" type="image/png" href="assets/nachiyar-logo.png">
-  <link rel="apple-touch-icon" href="assets/nachiyar-logo.png">
+  <title>Aurelia Chronometry | Shop Collections</title>
+  <!-- Dynamic Brand Favicon -->
+  <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=100&q=80">
+  <link rel="shortcut icon" type="image/png" href="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=100&q=80">
+  <link rel="apple-touch-icon" type="image/png" href="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=100&q=80">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=5.0">
   <link rel="stylesheet" href="customer-account.css">
   <style>
@@ -44,15 +44,45 @@
       border-color: var(--color-text-main);
     }
   </style>
+  <script src="/theme-engine.js"></script>
+  <style id="dynamicBrandTheme">
+    :root {
+      --color-canvas: #FDFBF7;
+      --color-canvas-alt: #F1EEE6;
+      --color-surface: #FFFFFF;
+      --color-text-main: #0F291E;
+      --color-text-muted: #52796F;
+      --color-lavender-primary: #064E3B;
+      --color-lavender-dark: #047857;
+      --color-lavender-light: rgba(6, 78, 59, 0.12);
+      --color-gold: #E2B755;
+      --color-gold-light: rgba(226, 183, 85, 0.18);
+      --color-gold-dark: #047857;
+      --gold-gradient: linear-gradient(135deg, #E2B755 0%, #047857 100%);
+      --gold-glow: 0 4px 20px rgba(226, 183, 85, 0.35);
+      --color-hibiscus-primary: #1E293B;
+      --color-hibiscus-dark: #1E293B;
+      --color-bundle-dark: #14532D;
+      --color-bundle-accent: #E2B755;
+      --card-bg-1: #064E3B;
+      --card-bg-2: #1E293B;
+      --card-bg-bundle: #14532D;
+      --promo-banner-bg: linear-gradient(135deg, #064E3B 0%, #14532D 100%);
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
 </head>
 <body class="page-body">
 
   <aside class="announcement-bar">
     <div class="announcement-ticker">
       <div class="ticker-track">
-        <span>ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599</span>
-        <span>•</span>
-        <span>COLD-PRESSED IN SMALL BATCHES ✦ 100% PURE ACTIVE HERBS</span>
+        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span aria-hidden="true">•</span>
+        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span aria-hidden="true">•</span>
+        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
       </div>
     </div>
   </aside>
@@ -68,18 +98,18 @@
 
       <a href="/" class="brand-link">
         <div class="brand-crest">
-          <img src="assets/nachiyar-logo.png" alt="Nachiyar Logo" class="brand-logo-img">
+          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80" alt="Aurelia Chronometry Logo" class="brand-logo-img">
         </div>
         <div class="brand-text-lockup">
-          <span class="brand-name">NACHIYAR</span>
-          <span class="brand-sub">HERBALS & COSMETICS</span>
+          <span class="brand-name">AURELIA</span>
+          <span class="brand-sub">MASTERING TIME WITH PRECISION & ELEGANCE</span>
         </div>
       </a>
 
       <nav class="desktop-nav">
         <ul class="nav-links">
           <li><a href="/" class="nav-link">Home</a></li>
-          <li><a href="/shop/" class="nav-link" style="color:var(--color-gold-dark);">Shop Rituals</a></li>
+          <li><a href="/shop/" class="nav-link" style="color:var(--color-gold-dark);">Shop Collection</a></li>
           <li><a href="/about/" class="nav-link">About Us</a></li>
           <li><a href="/contact/" class="nav-link">Contact</a></li>
         </ul>
@@ -117,13 +147,13 @@
       </div>
       <ul class="mobile-nav-list">
         <li><a href="/" class="mobile-link">Home</a></li>
-        <li><a href="/shop/" class="mobile-link" style="color:var(--color-lavender-primary); font-weight:800;">Shop Rituals (View & Buy) →</a></li>
+        <li><a href="/shop/" class="mobile-link" style="color:var(--color-lavender-primary); font-weight:800;">Shop Collection (View & Buy) →</a></li>
         <li><a href="/about/" class="mobile-link">About Us</a></li>
         <li><a href="/contact/" class="mobile-link">Contact</a></li>
         <li><a href="/account/" class="mobile-link">My Account & Orders</a></li>
       </ul>
       <div class="mobile-drawer-footer">
-        <p class="drawer-support">Customer Concierge: care@nachiyarherbals.com</p>
+        <p class="drawer-support">Customer Concierge: concierge@aureliatime.com</p>
       </div>
     </div>
   </div>
@@ -131,8 +161,8 @@
   <main>
     <section class="page-hero">
       <div class="section-container">
-        <span class="section-eyebrow">THE COMPLETE APOTHECARY</span>
-        <h1 class="section-heading">Sacred Hair Care Formulations</h1>
+        <span class="section-eyebrow">ALL PRODUCTS</span>
+        <h1 class="section-heading">All Catalog Products</h1>
         <p class="section-subtext" style="margin-inline:auto;">
           Handcrafted in small batches without mineral oil, sulfates, silicones, or synthetic fragrances.
         </p>
@@ -144,11 +174,12 @@
         
         <!-- Filter Tabs -->
         <div class="catalog-filters">
-          <button class="filter-btn active" data-cat="all">All Formulations</button>
-          <button class="filter-btn" data-cat="Hair Care">Hair Care</button>
-          <button class="filter-btn" data-cat="Scalp & Cleansing">Scalp & Cleansing</button>
-          <button class="filter-btn" data-cat="Ritual Sets">Ritual Sets & Combos</button>
-          <button class="filter-btn" data-cat="Royal Gifting">Royal Gifting</button>
+          <button class="filter-btn active" data-cat="all">All Collections</button>
+          <button class="filter-btn " data-cat="Automatic Chronometers">Automatic Chronometers</button>
+          <button class="filter-btn " data-cat="Diving Instruments">Diving Instruments</button>
+          <button class="filter-btn " data-cat="Collector Sets">Collector Sets</button>
+          <button class="filter-btn " data-cat="Dress Watches">Dress Watches</button>
+          <button class="filter-btn " data-cat="Horological Straps">Horological Straps</button>
         </div>
 
         <!-- Products Grid Loaded from API -->
@@ -162,11 +193,113 @@
 
   <footer class="site-footer">
     <div class="footer-container">
-      <div class="footer-legal-bar">
-        <p>© 2026 NACHIYAR HERBALS & COSMETICS. ALL RIGHTS RESERVED.</p>
-        <p class="footer-developer-credit">Developed by <a href="https://digitechzo.com" target="_blank" rel="noopener noreferrer" class="developer-link">Digitechzo</a></p>
-        <p class="legal-links"><a href="/">Home</a> • <a href="/shop/">Shop</a> • <a href="/contact/">Contact</a> • <a href="/privacy/">Privacy Policy</a> • <a href="/terms/">Terms of Service</a> • <a href="/shipping-policy/">Shipping & Returns</a> • <a href="/sitemap/">Sitemap</a></p>
+      
+      <!-- Newsletter Row -->
+      <div class="footer-newsletter-row">
+        <div class="newsletter-text-col">
+          <span class="footer-sub-eyebrow">THE AURELIA CIRCLE</span>
+          <h2 class="footer-newsletter-heading">RECEIVE 15% OFF YOUR FIRST TIMEPIECE</h2>
+          <p class="footer-newsletter-sub">Subscribe for private previews, limited editions and horological insights.</p>
+        </div>
+        <div class="newsletter-form-col">
+          <form class="footer-form" id="newsletterForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Welcome to AURELIA Insider! ✨', body: 'Privilege Code AURELIA15 has been applied for your order.', type: 'info' }); this.reset();">
+            <div class="form-input-group">
+              <input type="email" placeholder="Enter your email address" required aria-label="Email Address" autocomplete="email" spellcheck="false">
+              <button type="submit" class="newsletter-submit-btn" aria-label="Submit email">
+                <span>Subscribe</span>
+                <span class="submit-arrow">→</span>
+              </button>
+            </div>
+            <p class="form-fineprint">Your information is protected. Zero spam, ever.</p>
+          </form>
+        </div>
       </div>
+
+      <!-- Links Columns Grid -->
+      <div class="footer-nav-grid">
+        <div class="footer-col">
+          <h4 class="footer-col-title">SHOP COLLECTIONS</h4>
+          <ul class="footer-col-links">
+            <li><a href="/shop/?category=Automatic%20Chronometers">Automatic Chronometers</a></li>
+            <li><a href="/shop/?category=Diving%20Instruments">Diving Instruments</a></li>
+            <li><a href="/shop/?category=Collector%20Sets">Collector Sets</a></li>
+            <li><a href="/shop/?category=Dress%20Watches">Dress Watches</a></li>
+            <li><a href="/shop/">Browse All Collections</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">COMPANY &amp; ATELIER</h4>
+          <ul class="footer-col-links">
+            <li><a href="/about/">About Aurelia Chronometry</a></li>
+            <li><a href="/about/#architecture">Architecture &amp; Quality</a></li>
+            <li><a href="/about/#warranty">Official Guarantee</a></li>
+            <li><a href="/contact/">Store Concierge &amp; Inquiries</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">CUSTOMER CARE</h4>
+          <ul class="footer-col-links">
+            <li><a href="/order-status/">Track Your Order</a></li>
+            <li><a href="/contact/">Client Concierge &amp; Support</a></li>
+            <li><a href="/checkout/">Direct Web Checkout</a></li>
+            <li><a href="/shop/">Complete Catalog</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact & Connect Column -->
+        <div class="footer-col footer-col--contact">
+          <h4 class="footer-col-title">CONTACT US</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <span class="footer-contact-icon">&#128222;</span>
+              <a href="tel:+919445566778" id="footerContactPhone">+91 94455 66778</a>
+            </li>
+            <li>
+              <span class="footer-contact-icon">&#9993;&#65039;</span>
+              <a href="mailto:concierge@aureliatime.com" id="footerContactEmail">concierge@aureliatime.com</a>
+            </li>
+            <li class="footer-address-item">
+              <span class="footer-contact-icon">&#128205;</span>
+              <address id="footerContactAddress">Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001</address>
+            </li>
+          </ul>
+
+          <div class="footer-social-block">
+            <h4 class="footer-col-title footer-col-title--sm">CONNECT WITH US</h4>
+            <div class="footer-social-icons">
+              <a href="https://instagram.com/aureliatime" target="_blank" rel="noopener noreferrer" class="footer-social-link footer-social-link--instagram" aria-label="Follow Aurelia Chronometry on Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <span>Instagram</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand Information Column -->
+        <div class="footer-col brand-col">
+          <div class="footer-crest-wrap">
+            <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80" alt="Aurelia Chronometry Logo" class="footer-crest-img">
+          </div>
+          <p class="footer-brand-bio">
+            Aurelia Chronometry crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-watermark-row">
+        <span class="footer-watermark-text">AURELIA</span>
+      </div>
+
+      <div class="footer-legal-bar">
+        <p>© 2026 AURELIA CHRONOMETRY. ALL RIGHTS RESERVED.</p>
+        <p class="footer-developer-credit">Powered by Aurelia Atelier Platform</p>
+        <p class="legal-links">
+          <a href="/">Home</a> • <a href="/shop/">Shop</a> • <a href="/about/">About Us</a> • <a href="/contact/">Contact</a> • <a href="/privacy/">Privacy Policy</a> • <a href="/terms/">Terms of Service</a> • <a href="/shipping-policy/">Shipping & Returns</a> • <a href="/sitemap/">Sitemap</a>
+        </p>
+      </div>
+
     </div>
   </footer>
 
@@ -180,76 +313,96 @@
 
       // Update badge
       try {
-        const cart = JSON.parse(localStorage.getItem('nachiyar_cart') || '[]');
+        const cart = JSON.parse(localStorage.getItem('store_cart') || '[]');
         cartCountBadge.textContent = cart.reduce((s, i) => s + i.qty, 0);
       } catch (e) {}
 
-      const DEFAULT_PRODUCTS = [
-        {
-          id: 'prod_oil_01',
-          slug: 'herbal-hair-oil',
-          name: 'Herbal Hair Oil',
-          subtitle: 'Lavender Glass Dropper Bottle • 100% Cold-Pressed',
-          category: 'Hair Care',
-          price: 599,
-          mrp: 699,
-          images: [
-            'assets/new-oil-bottle-card.jpg',
-            'assets/clinical-oil-pour-hand.jpg',
-            'assets/lifestyle-oil-massage.jpg'
-          ],
-          themeColor: '#6B4E9B',
-          tagline: 'Cold-Pressed • 18 Rare Herbs • Root Activating',
-          metricBadge: '100% PURE',
-          shortDescription: 'Traditional 21-day solar-infused oil in pure lavender essence to stimulate roots and banish hair fall.',
-          description: 'Crafted in small batches according to classical Ayurvedic texts. Enriched with Bhringraj, Amla, Brahmi, and lavender blossom essence.'
-        },
-        {
-          id: 'prod_shampoo_02',
-          slug: 'hibiscus-flower-shampoo',
-          name: 'Hibiscus Flower Shampoo',
-          subtitle: 'Crimson Botanical Pump Bottle • Sulfate-Free pH 5.5',
-          category: 'Scalp & Cleansing',
-          price: 549,
-          mrp: 649,
-          images: [
-            'assets/new-shampoo-bottle-card.jpg',
-            'assets/lifestyle-shampoo-lather.jpg',
-            'assets/lifestyle-flowing-hair.jpg'
-          ],
-          themeColor: '#822234',
-          tagline: 'Sulfate-Free • Fresh Petal Infusion',
-          metricBadge: 'pH 5.5 BALANCED',
-          shortDescription: 'Petal-rich lather that cleanses without stripping natural moisture, restoring scalp microbiome balance.',
-          description: 'Formulated with handpicked South Indian hibiscus blossoms and gentle plant-derived saponins.'
-        },
-        {
-          id: 'prod_duo_03',
-          slug: 'royal-hair-ritual-duo',
-          name: 'The Royal Hair Ritual (Duo Set)',
-          subtitle: 'Complete 2-Step Routine | Oil 200ml + Shampoo 250ml',
-          category: 'Ritual Sets',
-          price: 999,
-          mrp: 1148,
-          images: [
-            'assets/duo-ritual-new.jpg',
-            'assets/hero-bottle-oil.png',
-            'assets/hero-bottle-shampoo.png'
-          ],
-          themeColor: '#271434',
-          tagline: 'Complete 2-Step Routine • Save 15%',
-          metricBadge: '15% OFF',
-          shortDescription: 'The ultimate Ayurvedic duo: Pre-wash deep oil nourishment + restorative gentle petal cleansing.',
-          description: 'The complete Ayurvedic scalp rejuvenation experience. Step 1: Pre-wash deep follicular nourishment with Lavender Herbal Hair Oil. Step 2: Gentle balancing wash with Hibiscus Flower Shampoo.'
-        }
-      ];
-
       // Fetch products from live backend API or use default products
+      function updateShopPageBranding(settings) {
+        if (!settings) return;
+        const bName = settings.brandName || 'Brand';
+        const isH = false;
+        const sWord = bName.trim().split(' ')[0].toUpperCase();
+        const inits = (bName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'BR';
+
+        document.title = `Shop All Products | ${bName}`;
+
+        document.querySelectorAll('.brand-name').forEach(el => el.textContent = sWord);
+        document.querySelectorAll('.brand-sub').forEach(el => el.textContent = (settings.tagline || '').toUpperCase());
+
+        let aLogo = settings.logoUrl || settings.branding?.logoUrl || '';
+        if (!isH && (aLogo.includes('store-logo') || !aLogo)) aLogo = '';
+
+        const crestSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="%231E1B24" stroke="%23D4AF37" stroke-width="2"/><text x="50%" y="54%" font-family="Cinzel,Playfair Display,serif" font-size="20" font-weight="700" fill="%23D4AF37" dominant-baseline="middle" text-anchor="middle">${inits}</text></svg>`;
+        document.querySelectorAll('.brand-logo-img, .footer-crest-img').forEach(img => {
+          if (aLogo) {
+            img.onerror = function() { this.onerror = null; this.src = crestSvg; };
+            img.src = aLogo;
+          } else {
+            img.src = crestSvg;
+          }
+        });
+
+        const ann = settings.content?.announcement || settings.announcementText;
+        if (ann) {
+          document.querySelectorAll('.ticker-track span:first-child').forEach(el => el.textContent = ann);
+        }
+
+        const eyebrow = document.querySelector('.page-hero .section-eyebrow') || document.querySelector('.shop-header .section-eyebrow');
+        const heading = document.querySelector('.page-hero .section-heading') || document.querySelector('.shop-header .section-heading');
+        const subtext = document.querySelector('.page-hero .section-subtext') || document.querySelector('.shop-header .section-subtext');
+
+        if (eyebrow) eyebrow.textContent = settings.content?.shop?.eyebrow || (isH ? 'ALL PRODUCTS' : 'EXPLORE COLLECTION');
+        if (heading) heading.textContent = settings.content?.shop?.title || (isH ? 'All Catalog Products' : `All ${bName} Products`);
+        if (subtext) subtext.textContent = settings.content?.shop?.subtitle || (isH ? 'Handcrafted in small batches without mineral oil, sulfates, silicones, or synthetic fragrances.' : `Browse through our complete collection of genuine, high performance products.`);
+
+        const footerLegal = document.querySelector('.footer-legal-bar p:first-child');
+        if (footerLegal) footerLegal.textContent = `© 2026 ${bName.toUpperCase()}. ALL RIGHTS RESERVED.`;
+      }
+
+      function updateCategoryFilters(prods, categories) {
+        const filtersContainer = document.querySelector('.catalog-filters');
+        if (!filtersContainer) return;
+
+        let cats = [];
+        if (Array.isArray(categories) && categories.length > 0) {
+          cats = categories.map(c => ({ id: c.id || c.slug, name: c.name || c.title }));
+        } else if (Array.isArray(prods) && prods.length > 0) {
+          const unique = [...new Set(prods.map(p => p.category).filter(Boolean))];
+          cats = unique.map(c => ({ id: c, name: c }));
+        }
+
+        const activeCat = filtersContainer.querySelector('.filter-btn.active')?.dataset.cat || 'all';
+        filtersContainer.innerHTML = `
+          <button class="filter-btn ${activeCat === 'all' ? 'active' : ''}" data-cat="all">All Products</button>
+          ${cats.map(c => `
+            <button class="filter-btn ${activeCat === c.id || activeCat === c.name ? 'active' : ''}" data-cat="${c.name || c.id}">${c.name}</button>
+          `).join('')}
+        `;
+
+        filtersContainer.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.onclick = () => {
+            filtersContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderCatalog(btn.dataset.cat);
+          };
+        });
+      }
+
       async function loadShopProducts() {
         try {
-          const res = await fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
-          if (res && res.success && Array.isArray(res.data)) {
-            allProducts = res.data;
+          const [pRes, sRes] = await Promise.all([
+            fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => ({ success: false })),
+            fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => ({ success: false }))
+          ]);
+
+          if (sRes && sRes.success && sRes.data) {
+            updateShopPageBranding(sRes.data);
+          }
+
+          if (pRes && pRes.success && Array.isArray(pRes.data)) {
+            allProducts = pRes.data;
+            updateCategoryFilters(allProducts, sRes?.data?.categories);
           } else {
             allProducts = [];
           }
@@ -262,51 +415,26 @@
 
       await loadShopProducts();
 
-      // Cross-tab real-time sync when admin edits products
+      // Cross-tab real-time sync when admin edits products or settings
+      try {
+        const bc = new BroadcastChannel('store_channel');
+        bc.onmessage = (event) => {
+          if (event.data && (event.data.type === 'PRODUCT_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'THEME_UPDATED')) {
+            loadShopProducts();
+          }
+        };
+      } catch (e) {}
       window.addEventListener('storage', (e) => {
-        if (e.key === 'nachiyar_products_updated' || e.key === 'nachiyar_store_products') {
+        if (e.key === 'store_products_updated' || e.key === 'store_products') {
           loadShopProducts();
         }
       });
 
       function matchesCategory(p, filter) {
         if (!filter || filter === 'all') return true;
-
-        const cat = (p.category || '').toLowerCase().trim();
-        const catId = (p.categoryId || '').toLowerCase().trim();
-        const name = (p.name || '').toLowerCase();
-        const slug = (p.slug || '').toLowerCase();
-        const tag = (p.tagline || '').toLowerCase();
+        const pCat = (p.category || p.category_id || p.categoryId || '').toLowerCase().trim();
         const f = filter.toLowerCase().trim();
-
-        // 1. SCALP & CLEANSING (Shampoos, gentle cleansing washes)
-        if (f.includes('scalp') || f.includes('cleans')) {
-          if (name.includes('combo') || name.includes('duo') || name.includes('set')) return false;
-          return cat === 'scalp & cleansing' || cat.includes('scalp') || cat.includes('cleans') ||
-                 catId.includes('scalp') || name.includes('shampoo') || slug.includes('shampoo') || tag.includes('cleans');
-        }
-
-        // 2. RITUAL SETS & COMBOS (Complete routine sets, duo combos, gift boxes)
-        if (f.includes('set') || f.includes('combo')) {
-          return cat === 'ritual sets' || cat === 'ritual combos' || cat.includes('set') || cat.includes('combo') ||
-                 catId.includes('set') || catId.includes('combo') ||
-                 name.includes('combo') || name.includes('duo') || name.includes('set') ||
-                 slug.includes('combo') || slug.includes('duo') || slug.includes('set');
-        }
-
-        // 3. ROYAL GIFTING (Gift boxes, luxury kits)
-        if (f.includes('gift')) {
-          return cat === 'royal gifting' || cat.includes('gift') || name.includes('gift') || name.includes('luxury box');
-        }
-
-        // 4. HAIR CARE (Herbal hair oil, hair growth vitalizer)
-        if (f.includes('hair')) {
-          if (name.includes('combo') || name.includes('duo') || name.includes('set')) return false;
-          if (name.includes('shampoo') && !name.includes('oil')) return false;
-          return cat === 'hair care' || catId.includes('hair') || name.includes('oil') || slug.includes('oil');
-        }
-
-        return cat === f || cat.includes(f);
+        return pCat === f || pCat.includes(f) || (p.category_id && p.category_id.toLowerCase() === f);
       }
 
       function renderCatalog(filter) {
@@ -318,7 +446,7 @@
             <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--color-text-muted, #71717A);">
               <div style="font-size: 2.5rem; margin-bottom: 12px; opacity: 0.8;">🌿</div>
               <h3 style="font-family: var(--font-heading, 'Playfair Display', serif); font-size: 1.5rem; color: var(--color-primary-dark, #2E1065); margin-bottom: 8px;">No Formulations Found</h3>
-              <p style="font-size: 0.95rem; max-width: 420px; margin: 0 auto; line-height: 1.6;">There are currently no active formulations in this category. New botanical creations will appear here as they are published.</p>
+              <p style="font-size: 0.95rem; max-width: 420px; margin: 0 auto; line-height: 1.6;">There are currently no active creations in this category. New items from Aurelia Chronometry will appear here as they are published.</p>
             </div>
           `;
           return;
@@ -327,11 +455,12 @@
         list.forEach(p => {
           const card = document.createElement('article');
           card.className = 'product-card';
-          card.style.setProperty('--card-bg', p.themeColor || '#6B4E9B');
+          const activeCardBg = p.themeColor || p.theme_color || '#1A1121';
+          card.style.setProperty('--card-bg', activeCardBg);
           card.style.setProperty('--card-color', '#FFFFFF');
 
           // Clean up tagline to remove any accidental duplicate "pH 5.5" when circle badge already says pH 5.5
-          const rawTagline = p.tagline || '100% Pure Botanical';
+          const rawTagline = p.tagline || '100% Guaranteed';
           const cleanTagline = rawTagline.replace(/\s*•\s*pH\s*5\.5/gi, '');
 
           // Split metricBadge into number & unit if it contains spaces (e.g. "pH 5.5 BALANCED" or "100% PURE" or "15% OFF")
@@ -344,8 +473,8 @@
             badgeUnit = rawBadge.substring(lastSpaceIdx + 1);
           }
 
-          const pImg = (p.images && p.images[0]) || 'assets/herbal-hair-oil.jpg';
-          const pDesc = p.shortDescription || (p.description ? p.description.slice(0, 140) + '...' : 'Traditional botanical formulation handcrafted with earth-born Ayurvedic ingredients.');
+          const pImg = (p.images && p.images[0]) || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80';
+          const pDesc = p.shortDescription || (p.description ? p.description.slice(0, 140) + '...' : 'High performance product crafted to perfection.');
 
           card.innerHTML = `
             <div class="card-inner">
@@ -413,7 +542,7 @@
           }
         }
 
-        const safeImg = imgSrc || 'assets/nachiyar-logo.png';
+        const safeImg = imgSrc || 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80';
         const isMobile = window.innerWidth <= 600;
         const pSize = isMobile ? 52 : 66;
         const pRadius = pSize / 2;
@@ -520,28 +649,28 @@
         const img = btn.dataset.img;
         const size = btn.dataset.size;
 
-        const cart = JSON.parse(localStorage.getItem('nachiyar_cart') || '[]');
+        const cart = JSON.parse(localStorage.getItem('store_cart') || '[]');
         const existing = cart.find(i => i.id === id);
         if (existing) {
           existing.qty += 1;
         } else {
           cart.push({ id, productId: id, name, price, img, size, qty: 1 });
         }
-        localStorage.setItem('nachiyar_cart', JSON.stringify(cart));
+        localStorage.setItem('store_cart', JSON.stringify(cart));
 
         updateShopCartBadge();
         flyProductToCart(btn, img);
 
         const toast = document.getElementById('cartToast');
         if (toast) {
-          toast.textContent = `Added ${name} to your Royal Bag! ✨`;
+          toast.textContent = `Added ${name} to your Bag! ✨`;
           toast.classList.add('is-visible');
           setTimeout(() => toast.classList.remove('is-visible'), 2800);
         }
       });
 
       function updateShopCartBadge() {
-        const cart = JSON.parse(localStorage.getItem('nachiyar_cart') || '[]');
+        const cart = JSON.parse(localStorage.getItem('store_cart') || '[]');
         const badge = document.getElementById('shopCartCount');
         if (badge) badge.textContent = cart.reduce((s, i) => s + i.qty, 0);
       }

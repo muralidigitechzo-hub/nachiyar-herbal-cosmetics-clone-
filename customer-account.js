@@ -496,7 +496,7 @@
             <div class="drawer-header-avatar" id="drawerAvatar">NH</div>
             <div class="drawer-header-info">
               <h3 id="drawerUserName">My Account</h3>
-              <p id="drawerUserSubtitle">Nachiyar Botanical Reverence</p>
+              <p id="drawerUserSubtitle">Nachiyar product Reverence</p>
             </div>
           </div>
           <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Account Panel">✕</button>
@@ -802,8 +802,8 @@
           <div style="background:#FFFFFF; border-radius:14px; padding:24px; text-align:center; border:1px solid rgba(0,0,0,0.06);">
             <span style="font-size:2rem; display:block; margin-bottom:8px;">📦</span>
             <strong style="display:block; font-size:0.9375rem; color:#191319; margin-bottom:4px;">No Orders Placed Yet</strong>
-            <p style="font-size:0.8125rem; color:#6B626A; margin-bottom:14px;">Explore our handcrafted Ayurvedic oils and gentle hair cleansers.</p>
-            <a href="shop.html" style="display:inline-block; padding:8px 18px; border-radius:999px; background:#7C5AAB; color:#FFF; font-size:0.75rem; font-weight:700; text-decoration:none;">Explore Apothecary →</a>
+            <p style="font-size:0.8125rem; color:#6B626A; margin-bottom:14px;">Explore our quality oils and gentle hair cleansers.</p>
+            <a href="shop.html" style="display:inline-block; padding:8px 18px; border-radius:999px; background:#7C5AAB; color:#FFF; font-size:0.75rem; font-weight:700; text-decoration:none;">Explore Catalog →</a>
           </div>
         `;
         return;
@@ -818,8 +818,8 @@
         <div style="background:#FFFFFF; border-radius:14px; padding:24px; text-align:center; border:1px solid rgba(0,0,0,0.06);">
           <span style="font-size:2rem; display:block; margin-bottom:8px;">📦</span>
           <strong style="display:block; font-size:0.9375rem; color:#191319; margin-bottom:4px;">No Orders Placed Yet</strong>
-          <p style="font-size:0.8125rem; color:#6B626A; margin-bottom:14px;">Explore our handcrafted Ayurvedic oils and gentle hair cleansers.</p>
-          <a href="shop.html" style="display:inline-block; padding:8px 18px; border-radius:999px; background:#7C5AAB; color:#FFF; font-size:0.75rem; font-weight:700; text-decoration:none;">Explore Apothecary →</a>
+          <p style="font-size:0.8125rem; color:#6B626A; margin-bottom:14px;">Explore our quality oils and gentle hair cleansers.</p>
+          <a href="shop.html" style="display:inline-block; padding:8px 18px; border-radius:999px; background:#7C5AAB; color:#FFF; font-size:0.75rem; font-weight:700; text-decoration:none;">Explore Catalog →</a>
         </div>
       `;
     }
@@ -831,7 +831,7 @@
 
     // Map status to 4 progress steps:
     // 1: Placed
-    // 2: Processing (Apothecary Prepared)
+    // 2: Processing / Preparing
     // 3: Shipped / In Transit
     // 4: Delivered
     let stepIndex = 1;
@@ -868,7 +868,7 @@
     const itemsHtml = items.map(it => `
       <div class="order-mini-item">
         <img src="${it.img || 'assets/hero-bottle-oil-transparent.png'}" class="order-mini-img" alt="${it.name || 'Herbal Product'}">
-        <span class="order-mini-name">${it.name || 'Botanical Formulation'}</span>
+        <span class="order-mini-name">${it.name || 'product Formulation'}</span>
         <span class="order-mini-qty">Qty: ${it.qty || 1}</span>
       </div>
     `).join('');

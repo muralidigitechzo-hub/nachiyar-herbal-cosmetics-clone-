@@ -1,0 +1,511 @@
+{
+  "brand": {
+    "name": "TechNova Electronics",
+    "shortName": "TECHNOVA",
+    "tagline": "Next-Generation Intelligent Hardware & Neural Audio",
+    "logo": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400&q=80",
+    "favicon": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400&q=80",
+    "colors": {
+      "primary": "#0F172A",
+      "secondary": "#3B82F6",
+      "accent": "#06B6D4",
+      "background": "#F8FAFC",
+      "backgroundAlt": "#F1F5F9",
+      "surface": "#FFFFFF",
+      "text": "#0F172A",
+      "muted": "#475569",
+      "cardBg1": "#0F172A",
+      "cardBg2": "#1E293B",
+      "bundleBg": "#0369A1"
+    },
+    "fonts": {
+      "heading": "Poppins",
+      "body": "Inter"
+    }
+  },
+  "business": {
+    "phone": "+91 98844 77889",
+    "email": "support@technovaelectronics.com",
+    "address": "TechNova Silicon Park, Electronic City Phase 1, Hosur Road, Bengaluru, Karnataka - 560100",
+    "gstin": "29CCCCD9012G3Z1",
+    "timings": "Mon - Sat: 9:30 AM - 8:00 PM",
+    "socialLinks": {
+      "whatsapp": "+91 98844 77889",
+      "instagram": "https://instagram.com/technovaelectronics",
+      "facebook": "https://facebook.com/technovaelectronics",
+      "youtube": "https://youtube.com/@technovaelectronics"
+    }
+  },
+  "content": {
+    "announcement": "⚡ COMPLIMENTARY PAN-INDIA AIR EXPRESS SHIPPING ON ALL TECHNOVA DEVICES ⚡",
+    "freeShippingThreshold": 999,
+    "coupon": {
+      "code": "TECHNOVA20",
+      "discountPercent": 20,
+      "active": true,
+      "tagline": "20% Exclusive Welcome Discount On All Flagship Tech"
+    },
+    "hero": {
+      "eyebrow": "NEURAL SILICON • SPATIAL AUDIO • TITANIUM CHASSIS",
+      "title": "Mastering The Architecture Of Intelligent Tech.",
+      "subtitle": "Engineered with 3nm neural processing units, active noise-cancelling planar transducers, and aerospace titanium alloy for uncompromising speed and clarity."
+    },
+    "features": [
+      {
+        "icon": "⚡",
+        "title": "3nm Neural Architecture",
+        "subtitle": "45 TOPS on-device artificial intelligence engine"
+      },
+      {
+        "icon": "🛡️",
+        "title": "2-Year Hardware Warranty",
+        "subtitle": "Complimentary pan-India doorstep replacement"
+      },
+      {
+        "icon": "🚀",
+        "title": "Insured Express Dispatch",
+        "subtitle": "Dispatched within 24 hours via air courier"
+      }
+    ],
+    "marquee": [
+      "TECHNOVA INTELLIGENT HARDWARE",
+      "3NM NEURAL SILICON CORES",
+      "ACTIVE PLANAR ACOUSTIC DRIVERS",
+      "AEROSPACE GRADE TITANIUM CASING",
+      "120HZ ADAPTIVE OLED SCREENS",
+      "SUPERCONDUCTING GRAPHENE COOLING",
+      "2-YEAR COMPREHENSIVE WARRANTY",
+      "PAN-INDIA EXPRESS AIR DELIVERY"
+    ],
+    "orbitStage": {
+      "eyebrow": "NEURAL SILICON ARCHITECTURE",
+      "heading": "18 Precision Computing & Acoustic Engineering Modules",
+      "subtext": "Constructed with 18 precision aerospace-grade hardware modules and neural silicon pipelines. Hover over any node to explore.",
+      "centerImage": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
+      "centerBadge": "3nm Neural NPU • 45 TOPS Performance",
+      "idleIcon": "⚡",
+      "idleText": "Hover over any hardware engineering node to inspect its technical specifications"
+    },
+    "orbit": [
+      {
+        "name": "3nm Silicon Die",
+        "icon": "⚡",
+        "tag": "Neural Compute",
+        "desc": "Nanometer fabrication packing 19 billion transistors with 45 TOPS dedicated neural speed."
+      },
+      {
+        "name": "Planar Magnetic Driver",
+        "icon": "🎧",
+        "tag": "Spatial Acoustic",
+        "desc": "Ultra-thin 50mm planar diaphragm delivering zero harmonic distortion between 5Hz and 48kHz."
+      },
+      {
+        "name": "Grade 5 Titanium",
+        "icon": "🛡️",
+        "tag": "Aerospace Frame",
+        "desc": "Laser-welded surgical titanium frame offering unparalleled strength-to-weight ratio."
+      },
+      {
+        "name": "Graphene Vapor Plate",
+        "icon": "❄️",
+        "tag": "Thermal Shield",
+        "desc": "Superconducting graphene thermal dissipation chamber maintaining optimal silicon speeds."
+      },
+      {
+        "name": "Hybrid Active ANC",
+        "icon": "🔇",
+        "tag": "48dB Attenuation",
+        "desc": "Six feedforward and feedback microphones sampling ambient sound 100,000 times per second."
+      },
+      {
+        "name": "120Hz ProMotion OLED",
+        "icon": "📱",
+        "tag": "Ultra-Fluid Display",
+        "desc": "Variable refresh rate LTPO OLED panel with 3,000 nits peak outdoor brightness."
+      },
+      {
+        "name": "GaN Fast Charge 120W",
+        "icon": "🔋",
+        "tag": "Gallium Nitride",
+        "desc": "Next-generation GaN semiconductor technology charging 0 to 100% in just 18 minutes."
+      },
+      {
+        "name": "Bluetooth 5.4 LE",
+        "icon": "📡",
+        "tag": "Sub-20ms Latency",
+        "desc": "Lossless LDAC and aptX Adaptive codecs streaming hi-res 24-bit 96kHz wireless audio."
+      },
+      {
+        "name": "Sapphire Lens Ring",
+        "icon": "💎",
+        "tag": "Scratch Proof",
+        "desc": "Synthetic monocrystalline sapphire glass protecting multi-spectral camera sensors."
+      },
+      {
+        "name": "Dual MEMS Mics",
+        "icon": "🎙️",
+        "tag": "Beamforming",
+        "desc": "Acoustic beamforming microphones isolating speech from wind and crowd interference."
+      },
+      {
+        "name": "65-Hour Battery",
+        "icon": "⏳",
+        "tag": "Silicon-Carbon Anode",
+        "desc": "Dense energy matrix providing uninterrupted power for up to 65 hours of continuous playback."
+      },
+      {
+        "name": "Ceramic Matte Back",
+        "icon": "🔘",
+        "tag": "Oleophobic Touch",
+        "desc": "Micro-etched high-temp ceramic rear cover repelling fingerprints and scratches."
+      },
+      {
+        "name": "IP68 Water Sealed",
+        "icon": "🌊",
+        "tag": "Submersible 6m",
+        "desc": "Hermetically sealed gaskets resisting fresh water submersion up to 6 meters for 30 minutes."
+      },
+      {
+        "name": "Zero-Lag Haptic",
+        "icon": "📳",
+        "tag": "Linear Resonator",
+        "desc": "Tactile precision motor delivering crisp realistic physical keystroke feedback."
+      },
+      {
+        "name": "Hardware Enclave",
+        "icon": "🔒",
+        "tag": "Biometric Vault",
+        "desc": "Isolated cryptographic coprocessor protecting on-device encryption keys and biometrics."
+      },
+      {
+        "name": "Wi-Fi 7 Tri-Band",
+        "icon": "📶",
+        "tag": "320MHz Channel",
+        "desc": "Multi-link operation routing data simultaneously across 2.4, 5, and 6GHz spectrums."
+      },
+      {
+        "name": "Memory Foam Cups",
+        "icon": "☁️",
+        "tag": "Ergonomic Seal",
+        "desc": "Protein leather wrapped memory foam ear cushions creating passive acoustic isolation."
+      },
+      {
+        "name": "2-Year Warranty",
+        "icon": "🏅",
+        "tag": "Priority Support",
+        "desc": "Official manufacturer warranty with complimentary door-to-door express device exchange."
+      }
+    ],
+    "collection": {
+      "eyebrow": "THE HARDWARE SELECTION",
+      "title": "Signature Intelligent Devices. Pure Distinction.",
+      "subtitle": "Individually calibrated electronics designed for creators, audiophiles, and discerning technology patrons."
+    },
+    "bundle": {
+      "eyebrow": "FLAGSHIP HARDWARE ECOSYSTEM",
+      "badge": "★ BEST VALUE: PHONE + AUDIO SUITE",
+      "features": [
+        "✔ TechNova Apex 16 Pro Flagship Smartphone",
+        "✔ TechNova SonicBeat Wireless Planar Headphones",
+        "✔ 120W GaN Rapid Charger & Free Express Delivery"
+      ]
+    },
+    "reviewsSection": {
+      "eyebrow": "VERIFIED TECH PATRON EXPERIENCES",
+      "title": "Trusted by Over 50,000+ Hardware Enthusiasts Worldwide",
+      "ratingScore": "4.92 / 5.0",
+      "ratingText": "Based on Verified Tech Enthusiast Reviews"
+    },
+    "story": {
+      "title": "The TechNova Engineering Philosophy",
+      "subtitle": "Bridging Pure Computational Power with Industrial Elegance",
+      "badge": "SILICON ARCHITECTURE",
+      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+      "quote": "True innovation does not compromise; it merges blistering silicon speed with acoustic perfection and timeless industrial architecture.",
+      "author": "Dr. Devendra Sharma",
+      "authorTitle": "Chief Technology Officer & Founder",
+      "description": "Every TechNova device is designed from the silicon die outward. We refuse off-the-shelf plastic molds, selecting aerospace titanium, sapphire optics, and custom planar transducers to create computing heirlooms."
+    },
+    "aboutPage": {
+      "heroEyebrow": "OUR HARDWARE MISSION",
+      "heroTitle": "Engineering Without Constraints",
+      "heroDesc": "TechNova was founded on a singular conviction: intelligent consumer electronics should be built with the durability, materials, and repairability of precision instruments."
+    },
+    "contactPage": {
+      "eyebrow": "HARDWARE CONCIERGE & ENTERPRISE",
+      "title": "Connect with Our Silicon Engineers",
+      "subtitle": "Have questions about device benchmarks, trade-in programs, developer kits, or enterprise fleet deployments? Our engineering concierge is here to help.",
+      "boutiqueTitle": "Flagship Hardware Lab & Experience Center",
+      "phoneTitle": "Technical Concierge & WhatsApp Support",
+      "emailTitle": "Direct Engineering Support Email",
+      "hoursTitle": "Experience Center Hours"
+    },
+    "policies": {
+      "privacySummary": "We respect client privacy. Zero telemetric data is collected without consent. On-device neural computation remains strictly local.",
+      "shippingSummary": "All orders over ₹999 receive complimentary pan-India insured air courier with real-time tracking.",
+      "returnsSummary": "14-day hassle-free doorstep returns and exchanges for any opened or unopened unit.",
+      "warrantySummary": "2-Year Comprehensive Hardware Warranty with pan-India pickup and replacement service."
+    },
+    "footer": {
+      "newsletterEyebrow": "TECHNOVA INSIDER LABS",
+      "newsletterTitle": "RECEIVE 20% OFF YOUR FIRST HARDWARE ACQUISITION",
+      "newsletterSub": "Subscribe for exclusive beta firmware access, silicon benchmark updates, and priority hardware pre-orders.",
+      "bio": "TechNova Electronics crafts precision intelligent hardware, neural silicon smartphones, and planar acoustic devices.",
+      "copyright": "© 2026 TECHNOVA ELECTRONICS PVT. LTD. ALL RIGHTS RESERVED.",
+      "developerCredit": "Powered by TechNova Neural Platform"
+    }
+  },
+  "categories": [
+    "Neural Smartphones",
+    "Planar Audio",
+    "Computing Accessories",
+    "Power Systems"
+  ],
+  "products": [
+    {
+      "id": "TN-PHONE-001",
+      "name": "TechNova Apex 16 Pro",
+      "slug": "technova-apex-16-pro",
+      "category": "Neural Smartphones",
+      "brand": "TechNova",
+      "price": 68900,
+      "compareAtPrice": 79900,
+      "stock": 18,
+      "sku": "TN-PHONE-001",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#0F172A",
+      "tagline": "3nm NPU • Grade 5 Titanium Frame",
+      "badge": {
+        "number": "3NM",
+        "unit": "CHIP",
+        "title": "Next-Gen Silicon Flagship"
+      },
+      "description": "Flagship smartphone engineered with aerospace Grade 5 titanium chassis, 120Hz LTPO OLED display, 45 TOPS neural AI engine, and 120W GaN hyper-charging.",
+      "shortDescription": "3nm neural silicon smartphone with titanium chassis.",
+      "images": [
+        "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "processor": "NovaCore 9400 3nm Hexa-Core Silicon",
+        "display": "6.7\" ProMotion 120Hz LTPO OLED (3000 nits)",
+        "camera": "50MP Triple Matrix with Optical Stabilization",
+        "battery": "5,000 mAh with 120W GaN SuperCharge",
+        "build": "Grade 5 Titanium & Ceramic Matte Finish"
+      },
+      "benefits": [
+        "Lightning-fast 3nm processor handling multi-tasking without thermal throttle",
+        "Aerospace Grade 5 titanium frame that resists drops, bends, and corrosion",
+        "Full day battery recharged to 100% in merely 18 minutes with GaN charging",
+        "2-Year manufacturer guarantee with doorstep pickup and replacement"
+      ],
+      "howToUse": "Power on via side biometric lock button. Follow the on-screen intelligent setup assistant to transfer data seamlessly in under 5 minutes.",
+      "rating": 4.97,
+      "reviewCount": 164,
+      "theme_color": "#0F172A"
+    },
+    {
+      "id": "TN-AUDIO-002",
+      "name": "TechNova SonicBeat Wireless Planar",
+      "slug": "technova-sonicbeat-wireless-planar",
+      "category": "Planar Audio",
+      "brand": "TechNova",
+      "price": 14900,
+      "compareAtPrice": 18500,
+      "stock": 25,
+      "sku": "TN-AUDIO-002",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#1E293B",
+      "tagline": "50mm Planar Transducers • 48dB ANC",
+      "badge": {
+        "number": "48DB",
+        "unit": "ANC",
+        "title": "Acoustic Masterwork"
+      },
+      "description": "Studio-grade wireless over-ear headphones featuring 50mm planar magnetic transducers, hybrid adaptive active noise cancellation, and 65 hours of battery reserve.",
+      "shortDescription": "Planar magnetic wireless headphones with 48dB active ANC.",
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "transducer": "50mm Planar Magnetic Diaphragms",
+        "frequencyResponse": "5Hz - 48,000Hz (Ultra-Wide)",
+        "noiseCancellation": "Adaptive Hybrid ANC up to 48dB",
+        "batteryLife": "65 Hours (ANC On) / 90 Hours (ANC Off)",
+        "connectivity": "Bluetooth 5.4 with LDAC & 3.5mm Analog Bypass"
+      },
+      "benefits": [
+        "Studio acoustic fidelity with planar magnetic diaphragms producing zero distortion",
+        "48dB active noise cancellation silencing jet engines and bustling offices",
+        "Ultralight memory foam ear cups for fatigue-free all-day comfort",
+        "Fast-charging providing 8 hours of playback from a quick 10-minute charge"
+      ],
+      "howToUse": "Press and hold the power toggle for 3 seconds to enter pairing mode. Connect via Bluetooth or plug in the included 3.5mm gold-plated audio cable for lossless listening.",
+      "rating": 4.93,
+      "reviewCount": 98,
+      "theme_color": "#1E293B"
+    },
+    {
+      "id": "TN-POWER-003",
+      "name": "TechNova GaN Multi-Port 140W Charger",
+      "slug": "technova-gan-multi-port-140w-charger",
+      "category": "Power Systems",
+      "brand": "TechNova",
+      "price": 3890,
+      "compareAtPrice": 4900,
+      "stock": 45,
+      "sku": "TN-POWER-003",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#0369A1",
+      "tagline": "140W GaN III • Triple USB-C + USB-A",
+      "badge": {
+        "number": "140W",
+        "unit": "GAN",
+        "title": "Next-Gen Rapid Power"
+      },
+      "description": "Compact gallium nitride (GaN III) high-output charger capable of powering a laptop, tablet, and smartphone simultaneously with intelligent thermal protection.",
+      "shortDescription": "140W triple USB-C GaN wall charger.",
+      "images": [
+        "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "technology": "Gallium Nitride (GaN III) Power ICs",
+        "totalPower": "140 Watts Max Output (Power Delivery 3.1)",
+        "ports": "3 x USB-C (140W/100W/65W) + 1 x USB-A (30W)",
+        "protection": "10-Layer Active Temperature & Surge Safeguards"
+      },
+      "benefits": [
+        "Charges laptops, phones, and accessories from a single palm-sized adapter",
+        "Advanced GaN III semiconductors remain cool under maximum wattage load",
+        "Worldwide 100-240V AC compatibility for international air travel",
+        "Backed by 2-Year unconditional equipment replacement warranty"
+      ],
+      "howToUse": "Plug into any standard wall outlet. Use a 100W or 140W certified USB-C cable for high-power laptop rapid charging.",
+      "rating": 4.89,
+      "reviewCount": 73,
+      "theme_color": "#0369A1"
+    },
+    {
+      "id": "TN-BUNDLE-004",
+      "name": "TechNova Executive Flagship Suite",
+      "slug": "technova-executive-flagship-suite",
+      "category": "Neural Smartphones",
+      "brand": "TechNova",
+      "price": 82900,
+      "compareAtPrice": 99900,
+      "stock": 10,
+      "sku": "TN-BUNDLE-004",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#0F172A",
+      "tagline": "Apex 16 Pro + SonicBeat Headphones + 140W GaN",
+      "badge": {
+        "number": "SUITE",
+        "unit": "PRO",
+        "title": "Complete Ecosystem"
+      },
+      "description": "The complete flagship technology suite. Includes the Apex 16 Pro Titanium smartphone, SonicBeat Planar Headphones, and the 140W GaN Multi-Port charger in an executive presentation kit.",
+      "shortDescription": "All-in-one flagship smartphone, planar headphones, and charger.",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "contents": "Apex 16 Pro (512GB) + SonicBeat Headphones + 140W GaN Charger",
+        "materials": "Aerospace Grade 5 Titanium & Matte Ceramic",
+        "warranty": "2-Year TechNova Care+ Priority Suite Coverage"
+      },
+      "benefits": [
+        "Substantial ₹17,000 savings over purchasing components separately",
+        "Unified intelligent ecosystem communicating over zero-latency bluetooth",
+        "Delivered in custom laser-engraved protective hardcase",
+        "Priority VIP concierge hotline for all technical queries"
+      ],
+      "howToUse": "Unbox your suite and use the 140W charger to power all units simultaneously. Connect headphones to Apex 16 Pro with instant one-tap NFC pairing.",
+      "rating": 4.99,
+      "reviewCount": 51,
+      "theme_color": "#0F172A"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_01",
+      "name": "Aditya Vardhan",
+      "product_name": "TechNova Apex 16 Pro",
+      "rating": 5,
+      "title": "The Best Smartphone Display and Build Quality on the Market",
+      "comment": "The Grade 5 titanium chassis feels unbelievably premium in hand. The 3nm silicon handles heavy 4K video rendering without getting warm. Battery easily lasts 1.5 days. Outstanding engineering.",
+      "location": "Bengaluru, India",
+      "created_at": "2026-10-22T09:30:00Z"
+    },
+    {
+      "id": "rev_02",
+      "name": "Sneha Roy",
+      "product_name": "TechNova SonicBeat Wireless Planar",
+      "rating": 5,
+      "title": "Planar Magnetic Clarity That Rivals $1,000 Studio Monitors",
+      "comment": "The acoustic separation on these headphones is jaw-dropping. The 48dB ANC completely erased the roar of my flight to Delhi. The memory foam pads are so soft I forgot I was wearing them.",
+      "location": "Gurugram, India",
+      "created_at": "2026-10-19T14:20:00Z"
+    },
+    {
+      "id": "rev_03",
+      "name": "Vikram Rathore",
+      "product_name": "TechNova GaN Multi-Port 140W Charger",
+      "rating": 5,
+      "title": "Replaced Three Heavy Charging Bricks in My Bag",
+      "comment": "Charges my MacBook Pro at full 140W speed while fast-charging my phone and earbuds at the same time. Compact, cool to the touch, and built like a tank.",
+      "location": "Mumbai, India",
+      "created_at": "2026-10-16T11:00:00Z"
+    },
+    {
+      "id": "rev_04",
+      "name": "Dr. Pranav Nair",
+      "product_name": "TechNova Executive Flagship Suite",
+      "rating": 5,
+      "title": "Flawless Hardware Ecosystem",
+      "comment": "The executive suite arrived via express courier in an armored box. The instant pairing between the phone and headphones is seamless. TechNova is building world-class hardware.",
+      "location": "Chennai, India",
+      "created_at": "2026-10-13T17:45:00Z"
+    },
+    {
+      "id": "rev_05",
+      "name": "Kavya Menon",
+      "product_name": "TechNova Apex 16 Pro",
+      "rating": 5,
+      "title": "Camera and Screen are Pure Magic",
+      "comment": "The 50MP optical stabilization takes crisp shots in pitch black environments. The 3000 nits display is easily readable under harsh afternoon Indian sunlight.",
+      "location": "Hyderabad, India",
+      "created_at": "2026-10-10T12:15:00Z"
+    },
+    {
+      "id": "rev_06",
+      "name": "Harish Chawla",
+      "product_name": "TechNova SonicBeat Wireless Planar",
+      "rating": 5,
+      "title": "Battery Life is Simply Insane",
+      "comment": "Used it for two full weeks of daily commute and Zoom calls before needing a recharge. Fast charge gave me another full day in just 10 minutes. A masterpiece.",
+      "location": "Noida, India",
+      "created_at": "2026-10-06T15:30:00Z"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What does the 2-Year TechNova Warranty cover?",
+      "answer": "Our warranty covers all hardware manufacturing defects, battery health degradation below 80%, planar acoustic drivers, and GaN power circuitry with free doorstep pickup and replacement."
+    },
+    {
+      "question": "How quickly are devices dispatched?",
+      "answer": "Orders placed before 2:00 PM are verified and dispatched the same business day via insured air courier with real-time OTP tracking."
+    },
+    {
+      "question": "Can I return a device if I change my mind?",
+      "answer": "Yes. We offer a 14-day doorstep return and replacement privilege for all devices in their original condition."
+    },
+    {
+      "question": "Are software and firmware updates supported?",
+      "answer": "All TechNova flagship smartphones and wireless headphones receive 5 years of regular over-the-air firmware, security, and neural feature upgrades."
+    }
+  ]
+}

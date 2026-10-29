@@ -17,6 +17,7 @@ const customersRouter = require('./routes/customers');
 const reviewsRouter = require('./routes/reviews');
 const messagesRouter = require('./routes/messages');
 const marketplacesRouter = require('./routes/marketplaces');
+const configRouter = require('./routes/config');
 const { router: authRouter, verifyToken, requireAdminAuth } = require('./routes/auth');
 
 const app = express();
@@ -42,6 +43,33 @@ app.use((req, res, next) => {
 });
 
 const projectRoot = config.projectRoot;
+
+// =========================================================================
+// DYNAMIC BRAND-DRIVEN FAVICON HANDLER (100% JSON Single Source of Truth)
+// =========================================================================
+app.get(['/favicon.ico', '/favicon.png'], (req, res) => {
+  try {
+    const cfgPath = path.resolve(__dirname, '../../data/site-config.json');
+    if (fs.existsSync(cfgPath)) {
+      const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+      const favRel = cfg.brand?.favicon || cfg.brand?.logo;
+      if (favRel) {
+        const fullFavPath = path.resolve(__dirname, '../../', favRel);
+        if (fs.existsSync(fullFavPath)) {
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+          return res.sendFile(fullFavPath);
+        }
+      }
+    }
+  } catch (e) {}
+  const defaultLogo = path.resolve(__dirname, '../../assets/technova-logo.png');
+  if (fs.existsSync(defaultLogo)) {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    return res.sendFile(defaultLogo);
+  }
+  res.status(204).end();
+});
+
 
 // =========================================================================
 // CLEAN URL REDIRECTION MIDDLEWARE (No .html, Trailing Slash URLs)
@@ -257,6 +285,7 @@ app.use('/api/customer', customersRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/reviews', reviewsRouter);
+app.use('/api/config', configRouter);
 app.use(['/api/messages', '/api/contact/messages'], messagesRouter);
 
 // One-Click Database Setup, Bootstrap & Permissions Fix

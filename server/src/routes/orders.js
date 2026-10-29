@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const router = express.Router();
 const { pool, query } = require('../config/db');
 const {
@@ -69,7 +71,18 @@ router.post('/', async (req, res) => {
     // Get order count for orderNumber
     const countRes = await client.query('SELECT COUNT(*) FROM orders');
     const orderIndex = Number(countRes.rows[0].count) + 1;
-    const orderNumber = `NH-ON-${1000 + orderIndex}`;
+    // Load active brand config for dynamic prefix
+    let brandPrefix = 'ORD';
+    try {
+      const cfgPath = path.resolve(__dirname, '..', '..', '..', 'data', 'site-config.json');
+      if (fs.existsSync(cfgPath)) {
+        const sCfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+        const bShort = sCfg.brand?.shortName;
+        const bName = sCfg.brand?.name || 'Store';
+        brandPrefix = (bShort ? bShort.substring(0, 3) : (bName.trim().split(/\s+/).map(w => w[0]).join('').substring(0, 3) || 'ORD')).toUpperCase();
+      }
+    } catch (e) {}
+    const orderNumber = `${brandPrefix}-ON-${1000 + orderIndex}`;
     const orderId = `ord_${Date.now()}`;
 
     // Load site settings for payment validation and combo bundle tracking
@@ -79,6 +92,31 @@ router.post('/', async (req, res) => {
       : {};
     const pmSettings = siteSettings.paymentMethods || {};
     const comboSettings = siteSettings?.homeShowcase?.combo || null;
+
+    // Enforce real catalog names and images from active master config
+    let masterCatalog = [];
+    try {
+      const cfgPath = path.resolve(__dirname, '..', '..', '..', 'data', 'site-config.json');
+      if (fs.existsSync(cfgPath)) {
+        const sCfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+        if (Array.isArray(sCfg.products)) masterCatalog = sCfg.products;
+      }
+    } catch (e) {}
+
+    body.items = (body.items || []).map(it => {
+      const pId = it.productId || it.id;
+      const matched = masterCatalog.find(p => p.id === pId || p.slug === pId);
+      if (matched) {
+        return {
+          ...it,
+          productId: pId,
+          name: matched.name || it.name,
+          img: (matched.images && matched.images[0]) || matched.image || it.img,
+          price: Number(matched.price) || Number(it.price)
+        };
+      }
+      return it;
+    });
 
     // Deduct stock and write inventory logs
     for (const item of body.items) {

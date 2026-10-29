@@ -24,8 +24,72 @@ if (!fs.existsSync(dataDir)) {
 let dbCache = null;
 
 // Helper to safely load data/db.json
+let lastConfigMtime = 0;
+
+function syncMasterConfig() {
+  const siteConfigPath = path.join(dataDir, 'site-config.json');
+  if (fs.existsSync(siteConfigPath) && dbCache) {
+    try {
+      const stat = fs.statSync(siteConfigPath);
+      if (stat.mtimeMs !== lastConfigMtime) {
+        lastConfigMtime = stat.mtimeMs;
+        const cfg = JSON.parse(fs.readFileSync(siteConfigPath, 'utf8'));
+        if (Array.isArray(cfg.products) && cfg.products.length > 0) {
+          dbCache.products = cfg.products.map(p => ({
+            ...p,
+            themeColor: p.themeColor || p.theme_color || '#6B4E9B',
+            theme_color: p.themeColor || p.theme_color || '#6B4E9B'
+          }));
+        }
+        if (Array.isArray(cfg.categories) && cfg.categories.length > 0) dbCache.categories = cfg.categories;
+        if (Array.isArray(cfg.reviews) && cfg.reviews.length > 0) {
+          dbCache.reviews = cfg.reviews.map((r, i) => ({
+            id: r.id || `rev_${i + 1}`,
+            name: r.name || r.customerName || 'Verified Customer',
+          product_name: r.product_name || r.productName || 'Verified Creation',
+            rating: Number(r.rating) || 5,
+            title: r.title || 'Verified Purchase',
+            comment: r.comment || '',
+            status: 'approved',
+            created_at: r.created_at || new Date().toISOString()
+          }));
+        }
+        if (cfg.brand || cfg.business || cfg.content) {
+          dbCache.site_settings = {
+            ...(dbCache.site_settings || {}),
+            brandName: cfg.brand?.name || 'Nachiyar Herbals & Cosmetics',
+            tagline: cfg.brand?.tagline || '',
+            logoUrl: cfg.brand?.logo || 'assets/nachiyar-logo.png',
+            faviconUrl: cfg.brand?.favicon || 'assets/nachiyar-logo.png',
+            branding: cfg.brand || {},
+            themeColors: cfg.brand?.colors || {},
+            modules: cfg.modules || {},
+            content: cfg.content || {},
+            business: cfg.business || {},
+            supportPhone: cfg.business?.phone || '+91 94440 88990',
+            supportEmail: cfg.business?.email || 'care@nachiyarherbals.com',
+            storeAddress: cfg.business?.address || '',
+            gstin: cfg.business?.gstin || '',
+            storeTimings: cfg.business?.timings || '',
+            announcementText: cfg.content?.announcement || '',
+            freeShippingThreshold: cfg.content?.freeShippingThreshold || 599,
+            couponCode: cfg.content?.coupon?.code || 'ROYAL15',
+            discountPercent: cfg.content?.coupon?.discountPercent || 15,
+            couponActive: cfg.content?.coupon?.active !== false
+          };
+        }
+      }
+    } catch (e) {
+      console.warn('Sync site-config.json note:', e.message);
+    }
+  }
+}
+
 function loadDatabase() {
-  if (dbCache) return dbCache;
+  if (dbCache) {
+    syncMasterConfig();
+    return dbCache;
+  }
 
   if (fs.existsSync(dbFilePath)) {
     try {
@@ -52,6 +116,59 @@ function loadDatabase() {
   if (!Array.isArray(dbCache.marketplace_channels)) dbCache.marketplace_channels = [];
   if (!Array.isArray(dbCache.marketplace_skus)) dbCache.marketplace_skus = [];
   if (!Array.isArray(dbCache.marketplace_orders)) dbCache.marketplace_orders = [];
+
+  // Synchronize from Single Source of Truth Master Config (data/site-config.json)
+  const siteConfigPath = path.join(dataDir, 'site-config.json');
+  if (fs.existsSync(siteConfigPath)) {
+    try {
+      const cfg = JSON.parse(fs.readFileSync(siteConfigPath, 'utf8'));
+      if (Array.isArray(cfg.products) && cfg.products.length > 0) {
+          dbCache.products = cfg.products.map(p => ({
+            ...p,
+            themeColor: p.themeColor || p.theme_color || '#6B4E9B',
+            theme_color: p.themeColor || p.theme_color || '#6B4E9B'
+          }));
+        }
+      if (Array.isArray(cfg.categories) && cfg.categories.length > 0) dbCache.categories = cfg.categories;
+      if (Array.isArray(cfg.reviews) && cfg.reviews.length > 0) {
+        dbCache.reviews = cfg.reviews.map((r, i) => ({
+          id: r.id || `rev_${i + 1}`,
+          name: r.name || r.customerName || 'Verified Customer',
+          rating: Number(r.rating) || 5,
+          title: r.title || 'Verified Purchase',
+          comment: r.comment || '',
+          status: 'approved',
+          created_at: r.created_at || new Date().toISOString()
+        }));
+      }
+      if (cfg.brand || cfg.business || cfg.content) {
+        dbCache.site_settings = {
+          ...(dbCache.site_settings || {}),
+          brandName: cfg.brand?.name || 'Nachiyar Herbals & Cosmetics',
+          tagline: cfg.brand?.tagline || '',
+          logoUrl: cfg.brand?.logo || 'assets/nachiyar-logo.png',
+          faviconUrl: cfg.brand?.favicon || 'assets/nachiyar-logo.png',
+          branding: cfg.brand || {},
+          themeColors: cfg.brand?.colors || {},
+          modules: cfg.modules || {},
+          content: cfg.content || {},
+          business: cfg.business || {},
+          supportPhone: cfg.business?.phone || '+91 94440 88990',
+          supportEmail: cfg.business?.email || 'care@nachiyarherbals.com',
+          storeAddress: cfg.business?.address || '',
+          gstin: cfg.business?.gstin || '',
+          storeTimings: cfg.business?.timings || '',
+          announcementText: cfg.content?.announcement || '',
+          freeShippingThreshold: cfg.content?.freeShippingThreshold || 599,
+          couponCode: cfg.content?.coupon?.code || 'ROYAL15',
+          discountPercent: cfg.content?.coupon?.discountPercent || 15,
+          couponActive: cfg.content?.coupon?.active !== false
+        };
+      }
+    } catch (e) {
+      console.warn('Sync site-config.json note:', e.message);
+    }
+  }
 
   // Default site_settings
   if (!dbCache.site_settings || typeof dbCache.site_settings !== 'object') {
@@ -129,6 +246,27 @@ function saveDatabase() {
 
 // Initialize database in memory
 loadDatabase();
+
+// Automatic watch on site-config.json for instant disk-edit synchronization
+let siteConfigWatchDebounce = null;
+try {
+  const cfgWatchPath = path.join(dataDir, 'site-config.json');
+  if (fs.existsSync(cfgWatchPath)) {
+    fs.watch(cfgWatchPath, (evt) => {
+      if (siteConfigWatchDebounce) clearTimeout(siteConfigWatchDebounce);
+      siteConfigWatchDebounce = setTimeout(() => {
+        try {
+          console.log('🔄 [FileDB] Detected disk change in data/site-config.json, re-synchronizing...');
+          reloadDatabase();
+          saveDatabase();
+        } catch (err) {
+          console.warn('Sync watch error:', err.message);
+        }
+      }, 250);
+    });
+  }
+} catch (e) {}
+
 
 /**
  * Universal SQL Query Emulator for File-based Storage
@@ -316,13 +454,70 @@ async function query(sql, params = []) {
       );
 
       if (isTarget || !idParam) {
+        // Full product update support
+        if (tableName === 'products' && params.length >= 10) {
+          if (params[0] !== undefined && params[0] !== null) item.name = params[0];
+          if (params[1] !== undefined && params[1] !== null) item.subtitle = params[1];
+          if (params[2] !== undefined && params[2] !== null) item.category = params[2];
+          if (params[3] !== undefined && params[3] !== null) item.category_id = params[3];
+          if (params[4] !== undefined && params[4] !== null) item.price = Number(params[4]);
+          if (params[5] !== undefined && params[5] !== null) {
+            item.mrp = Number(params[5]);
+            item.compareAtPrice = Number(params[5]);
+          }
+          if (params[6] !== undefined && params[6] !== null) item.stock = Number(params[6]);
+          if (params[7] !== undefined && params[7] !== null) item.sku = params[7];
+          if (params[8] !== undefined && params[8] !== null) {
+            try { item.images = typeof params[8] === 'string' ? JSON.parse(params[8]) : params[8]; } catch (e) { item.images = [params[8]]; }
+          }
+          if (params[9] !== undefined && params[9] !== null) {
+            item.themeColor = params[9];
+            item.theme_color = params[9];
+          }
+          if (params[10] !== undefined && params[10] !== null) item.tagline = params[10];
+          if (params[11] !== undefined && params[11] !== null) {
+            try { item.badge = typeof params[11] === 'string' ? JSON.parse(params[11]) : params[11]; } catch (e) { item.badge = params[11]; }
+          }
+          if (params[12] !== undefined && params[12] !== null) item.shortDescription = params[12];
+          if (params[13] !== undefined && params[13] !== null) item.description = params[13];
+          if (params[15] !== undefined && params[15] !== null) item.ingredients = params[15];
+          if (params[17] !== undefined && params[17] !== null) {
+            try { item.variants = typeof params[17] === 'string' ? JSON.parse(params[17]) : params[17]; } catch (e) {}
+          }
+          if (params[18] !== undefined && params[18] !== null) item.status = params[18];
+          if (params[19] !== undefined && params[19] !== null) item.slug = params[19];
+        }
         // Apply updates
         if (upper.includes('STOCK =') && params.length >= 2) {
           item.stock = Number(params[0]);
           if (params.length >= 3) item.online_sold = Number(params[1]);
         }
-        if (upper.includes('STATUS =') && params.length >= 1) {
-          item.status = params[0];
+        
+        // Robust Order Cancellation & Status Update Handler
+        if (upper.includes("STATUS = 'CANCEL_REQUESTED'") || upper.includes('STATUS = "CANCEL_REQUESTED"')) {
+          item.status = 'cancel_requested';
+          if (params[0]) {
+            try { item.cancellation_details = typeof params[0] === 'string' ? JSON.parse(params[0]) : params[0]; }
+            catch (e) { item.cancellation_details = params[0]; }
+          }
+        } else if (upper.includes("STATUS = 'CANCELLED'") || upper.includes('STATUS = "CANCELLED"')) {
+          item.status = 'cancelled';
+          if (params[0]) {
+            try { item.cancellation_details = typeof params[0] === 'string' ? JSON.parse(params[0]) : params[0]; }
+            catch (e) { item.cancellation_details = params[0]; }
+          }
+        } else if (upper.includes('STATUS =') && params.length >= 1) {
+          const val = params[0];
+          if (typeof val === 'string' && val.trim().startsWith('{')) {
+            try {
+              item.cancellation_details = JSON.parse(val);
+              item.status = 'cancel_requested';
+            } catch (e) {
+              item.status = val;
+            }
+          } else {
+            item.status = val;
+          }
         }
         item.updated_at = new Date().toISOString();
         affected.push(item);
@@ -362,13 +557,19 @@ const pool = {
   }
 };
 
+function reloadDatabase() {
+  dbCache = null;
+  return loadDatabase();
+}
+
 module.exports = {
   pool,
   query,
   isConnected: () => true,
   getConnectionError: () => null,
+  reloadDatabase,
   autoBootstrapSchema: async () => {
-    loadDatabase();
+    reloadDatabase();
     return Promise.resolve();
   }
 };

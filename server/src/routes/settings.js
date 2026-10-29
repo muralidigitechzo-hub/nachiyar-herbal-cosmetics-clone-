@@ -1,61 +1,85 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
 const { query } = require('../config/db');
 
 // Default Branding & System Configuration Fallbacks
-const DEFAULT_SETTINGS = {
-  announcementText: 'ROYAL BOTANICAL CARE • FREE PAN-INDIA SHIPPING OVER ₹599',
-  freeShippingThreshold: 599,
-  brandName: 'Nachiyar Herbals & Cosmetics',
-  tagline: 'Pure Botanical Elegance & Ayurvedic Care',
-  logoUrl: 'assets/nachiyar-logo.png',
-  faviconUrl: 'assets/nachiyar-logo.png',
-  themeColors: {
-    primary: '#1b4332',
-    secondary: '#d4af37',
-    accent: '#2d6a4f',
-    bg: '#fdfbf7',
-    text: '#1a1a1a'
-  },
-  modules: {
-    reviews: true,
-    marketplaces: true,
-    billing: true,
-    coupons: true,
-    whatsapp_chat: true,
-    announcements: true
-  },
-  socialLinks: {
-    whatsapp: '+919444088990',
-    instagram: 'https://instagram.com/nachiyarherbals',
-    facebook: 'https://facebook.com/nachiyarherbals',
-    youtube: ''
-  },
-  seo: {
-    metaTitle: 'Nachiyar Herbals & Cosmetics | Pure Ayurvedic Hair & Skin Care',
-    metaDescription: 'Authentic botanical and Ayurvedic personal care formulations handcrafted in Madurai.',
-    ogImage: 'assets/new-oil-bottle-card.jpg'
-  },
-  gstin: '33AAACH9876K1Z2',
-  supportPhone: '+91 94440 88990',
-  supportEmail: 'care@nachiyarherbals.com',
-  storeTimings: 'Mon - Sat: 9:30 AM - 8:30 PM',
-  storeAddress: 'Nachiyar Botanical Heritage, No. 18 Temple Ring Road, Madurai, Tamil Nadu - 625001',
-  couponCode: 'ROYAL15',
-  discountPercent: 15,
-  couponExpiryDate: '',
-  couponActive: true,
-  couponTagline: 'Surprise Royal Privilege Voucher',
-  paymentMethods: {
-    cod: { enabled: true, label: 'Cash on Delivery' },
-    upi: { enabled: true, label: 'Instant UPI Payments', upiId: 'nachiyarherbals18@okaxis', merchantName: 'Nachiyar Herbals' },
-    card: { enabled: true, label: 'Credit & Debit Cards' },
-    netbanking: { enabled: true, label: 'Net Banking' }
-  }
-};
+// Dynamic site-config synchronization
+function getMasterSiteConfig() {
+  try {
+    const cfgFile = path.resolve(__dirname, '..', '..', '..', 'data', 'site-config.json');
+    if (fs.existsSync(cfgFile)) {
+      return JSON.parse(fs.readFileSync(cfgFile, 'utf8'));
+    }
+  } catch (e) {}
+  return {};
+}
 
-// Helper to deep merge settings with defaults
+function getDefaultSettings() {
+  const master = getMasterSiteConfig();
+  const b = master.brand || {};
+  const bus = master.business || {};
+  const c = master.content || {};
+  const colors = b.colors || {};
+  const brandName = b.name || 'Store';
+  const shortName = b.shortName || brandName.trim().split(' ')[0].toUpperCase();
+  const handle = shortName.toLowerCase();
+
+  return {
+    announcementText: c.announcement || 'SPECIAL PRIVILEGE OFFER • FREE EXPRESS SHIPPING ON ALL ELIGIBLE ORDERS',
+    freeShippingThreshold: c.freeShippingThreshold || 999,
+    brandName: brandName,
+    tagline: b.tagline || 'Excellence in Quality & Performance',
+    logoUrl: b.logo || 'assets/logo.png',
+    faviconUrl: b.favicon || b.logo || 'assets/logo.png',
+    themeColors: {
+      primary: colors.primary || '#0F172A',
+      secondary: colors.secondary || '#2563EB',
+      accent: colors.accent || '#F59E0B',
+      bg: colors.background || '#fdfbf7',
+      text: colors.text || '#111827'
+    },
+    modules: {
+      reviews: true,
+      marketplaces: true,
+      billing: true,
+      coupons: true,
+      whatsapp_chat: true,
+      announcements: true
+    },
+    socialLinks: {
+      whatsapp: bus.phone || '',
+      instagram: '',
+      facebook: '',
+      youtube: ''
+    },
+    seo: {
+      metaTitle: brandName + ' | Official Store',
+      metaDescription: b.tagline || brandName,
+      ogImage: b.logo || ''
+    },
+    gstin: bus.gstin || '',
+    supportPhone: bus.phone || '',
+    supportEmail: bus.email || '',
+    storeTimings: bus.timings || 'Mon - Sat: 9:00 AM - 8:00 PM',
+    storeAddress: bus.address || '',
+    couponCode: c.coupon?.code || (shortName + '15'),
+    discountPercent: c.coupon?.discountPercent || 15,
+    couponExpiryDate: '',
+    couponActive: true,
+    couponTagline: c.coupon?.tagline || (shortName + ' Privilege Voucher'),
+    paymentMethods: {
+      cod: { enabled: true, label: 'Cash on Delivery (COD)', description: 'Pay cash to courier executive upon delivery' },
+      upi: { enabled: true, label: 'UPI (Google Pay, PhonePe, Paytm, BHIM)', description: 'Instant UPI payment with dynamic QR & VPA', upiId: handle + '@okhdfcbank', merchantName: brandName },
+      card: { enabled: true, label: 'Credit / Debit Card', description: 'Visa, MasterCard, RuPay, Maestro' },
+      netbanking: { enabled: true, label: 'Net Banking', description: 'All major Indian banks supported' }
+    }
+  };
+}
+
 function mergeWithDefaults(current) {
+  const DEFAULT_SETTINGS = getDefaultSettings();
   const settings = current || {};
   return {
     ...DEFAULT_SETTINGS,
@@ -97,6 +121,20 @@ router.get('/public', async (req, res) => {
     const raw = result.rows.length > 0 ? (typeof result.rows[0].data === 'string' ? JSON.parse(result.rows[0].data) : result.rows[0].data) : {};
     const settings = mergeWithDefaults(raw);
 
+    const master = getMasterSiteConfig();
+    const masterProds = master.products || [];
+    let homeShowcase = null;
+    if (masterProds.length > 0) {
+      const p0 = masterProds[0] || {};
+      const p1 = masterProds[1] || p0;
+      const p2 = masterProds[2] || p0;
+      homeShowcase = {
+        slot1: { productId: p0.id, title: p0.name, subtitle: p0.tagline || p0.shortDescription || '', price: p0.price, mrp: p0.compareAtPrice, customImage: p0.images?.[0] || '' },
+        slot2: { productId: p1.id, title: p1.name, subtitle: p1.tagline || p1.shortDescription || '', price: p1.price, mrp: p1.compareAtPrice, customImage: p1.images?.[0] || '' },
+        combo: { productId: p2.id, title: p2.name, subtitle: p2.tagline || p2.shortDescription || '', price: p2.price, mrp: p2.compareAtPrice, customImage: p2.images?.[0] || '', tag: 'BEST VALUE' }
+      };
+    }
+
     res.json({
       success: true,
       data: {
@@ -111,6 +149,9 @@ router.get('/public', async (req, res) => {
         branding: settings.branding,
         modules: settings.modules,
         socialLinks: settings.socialLinks,
+        content: raw.content || null,
+        hero: raw.content?.hero || null,
+        story: raw.content?.story || null,
         seo: settings.seo,
         gstin: settings.gstin,
         supportPhone: settings.supportPhone,
@@ -132,11 +173,7 @@ router.get('/public', async (req, res) => {
           appId: process.env.FIREBASE_APP_ID || '',
           measurementId: process.env.FIREBASE_MEASUREMENT_ID || ''
         } : null,
-        homeShowcase: raw.homeShowcase || {
-          slot1: { productId: 'prod_oil_01', title: 'Herbal Hair Oil', price: 299, mrp: 599, customImage: 'assets/new-oil-bottle-card.jpg' },
-          slot2: { productId: 'prod_shampoo_02', title: 'Hibiscus Flower Shampoo', price: 249, mrp: 549, customImage: 'assets/new-shampoo-bottle-card.jpg' },
-          combo: { productId: 'prod_duo_03', title: 'The Royal Hair Ritual (Duo Set)', price: 499, mrp: 1148, customImage: 'assets/duo-ritual-new.jpg', tag: 'BEST VALUE: SAVE ₹149' }
-        }
+        homeShowcase: homeShowcase
       }
     });
   } catch (err) {
@@ -216,6 +253,63 @@ router.put('/', async (req, res) => {
       ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data
     `, [JSON.stringify(updated)]);
 
+    
+    // Synchronize saved settings directly into data/site-config.json
+    try {
+      const cfgFile = path.resolve(__dirname, '..', '..', '..', 'data', 'site-config.json');
+      if (fs.existsSync(cfgFile)) {
+        let masterCfg = JSON.parse(fs.readFileSync(cfgFile, 'utf8'));
+        if (body.brandName || body.tagline || body.logoUrl || body.faviconUrl) {
+          if (!masterCfg.brand) masterCfg.brand = {};
+          if (body.brandName) {
+            masterCfg.brand.name = body.brandName;
+            masterCfg.brand.shortName = body.brandName.trim().split(' ')[0].toUpperCase();
+          }
+          if (body.tagline) masterCfg.brand.tagline = body.tagline;
+          if (body.logoUrl) masterCfg.brand.logo = body.logoUrl;
+          if (body.faviconUrl) masterCfg.brand.favicon = body.faviconUrl;
+        }
+        const incomingColors = body.branding?.themeColors || body.themeColors;
+        if (incomingColors) {
+          if (!masterCfg.brand) masterCfg.brand = {};
+          if (!masterCfg.brand.colors) masterCfg.brand.colors = {};
+          if (incomingColors.primary) masterCfg.brand.colors.primary = incomingColors.primary;
+          if (incomingColors.secondary) masterCfg.brand.colors.secondary = incomingColors.secondary;
+          if (incomingColors.accent) masterCfg.brand.colors.accent = incomingColors.accent;
+          if (incomingColors.bg) masterCfg.brand.colors.background = incomingColors.bg;
+          if (incomingColors.background) masterCfg.brand.colors.background = incomingColors.background;
+          if (incomingColors.text) masterCfg.brand.colors.text = incomingColors.text;
+          if (incomingColors.muted) masterCfg.brand.colors.muted = incomingColors.muted;
+        }
+        if (body.storeAddress || body.supportPhone || body.supportEmail || body.gstin || body.storeTimings) {
+          if (!masterCfg.business) masterCfg.business = {};
+          if (body.storeAddress) masterCfg.business.address = body.storeAddress;
+          if (body.supportPhone) masterCfg.business.phone = body.supportPhone;
+          if (body.supportEmail) masterCfg.business.email = body.supportEmail;
+          if (body.gstin) masterCfg.business.gstin = body.gstin;
+          if (body.storeTimings) masterCfg.business.timings = body.storeTimings;
+        }
+        if (body.announcementText || body.freeShippingThreshold || body.couponCode) {
+          if (!masterCfg.content) masterCfg.content = {};
+          if (body.announcementText) masterCfg.content.announcement = body.announcementText;
+          if (body.freeShippingThreshold) masterCfg.content.freeShippingThreshold = Number(body.freeShippingThreshold);
+          if (body.couponCode) {
+            if (!masterCfg.content.coupon) masterCfg.content.coupon = {};
+            masterCfg.content.coupon.code = body.couponCode;
+            masterCfg.content.coupon.discountPercent = Number(body.discountPercent) || 15;
+            masterCfg.content.coupon.active = body.couponActive !== false;
+          }
+        }
+        fs.writeFileSync(cfgFile, JSON.stringify(masterCfg, null, 2), 'utf8');
+        try {
+          const { syncAll } = require('../utils/sync-site-config');
+          syncAll();
+        } catch (sErr) {}
+      }
+    } catch (cfgErr) {
+      console.warn('Sync site-config.json on settings save note:', cfgErr.message);
+    }
+  
     const fullResponse = mergeWithDefaults(updated);
     res.json({ success: true, data: fullResponse });
   } catch (err) {

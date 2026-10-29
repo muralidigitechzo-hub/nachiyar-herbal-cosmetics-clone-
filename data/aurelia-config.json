@@ -1,0 +1,313 @@
+{
+  "brand": {
+    "name": "Aurelia Chronometry",
+    "shortName": "AURELIA",
+    "tagline": "Mastering Time with Precision & Elegance",
+    "logo": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80",
+    "favicon": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80",
+    "colors": {
+      "primary": "#064E3B",
+      "secondary": "#E2B755",
+      "accent": "#047857",
+      "background": "#FDFBF7",
+      "surface": "#FFFFFF",
+      "text": "#0F291E",
+      "muted": "#52796F",
+      "cardBg1": "#064E3B",
+      "cardBg2": "#1E293B",
+      "bundleBg": "#14532D"
+    },
+    "fonts": {
+      "heading": "Cinzel",
+      "body": "Plus Jakarta Sans"
+    }
+  },
+  "business": {
+    "phone": "+91 94455 66778",
+    "email": "concierge@aureliatime.com",
+    "address": "Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001",
+    "gstin": "29AAACA1234E1Z8",
+    "timings": "Mon - Sat: 10:00 AM - 7:30 PM"
+  },
+  "content": {
+    "announcement": "✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨",
+    "freeShippingThreshold": 999,
+    "coupon": {
+      "code": "AURELIA15",
+      "discountPercent": 15,
+      "active": true,
+      "tagline": "15% Welcome Privilege On First Timepiece Acquisition"
+    },
+    "hero": {
+      "eyebrow": "HAUTE HORLOGERIE • SWISS HERITAGE",
+      "title": "Mastering The Art Of Timeless Precision.",
+      "subtitle": "Hand-assembled automatic chronometers engineered with sapphire crystal, 72-hour power reserve, and surgical-grade 316L stainless steel."
+    },
+    "collection": {
+      "eyebrow": "THE ATELIER SELECTION",
+      "title": "Signature Masterpieces. Pure Distinction.",
+      "subtitle": "Individually calibrated mechanical timepieces designed for connoisseurs of timeless horological craft."
+    },
+    "orbitCenterImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+    "orbitBadge": "Swiss Caliber 2824 • Certified Chronometer",
+    "orbitEyebrow": "HOROLOGICAL ARCHITECTURE",
+    "orbitHeading": "18 Precision Mechanical Engineering Modules",
+    "orbitSubtext": "Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.",
+    "orbitIdleIcon": "⌚",
+    "orbitIdleText": "Hover over any chronometer component to inspect its horological specifications",
+    "orbit": [
+      {
+        "name": "Sapphire Crystal",
+        "icon": "💎",
+        "tag": "Scratch Armor",
+        "desc": "Double-domed anti-reflective synthetic sapphire crystal with 9 Mohs hardness rating."
+      },
+      {
+        "name": "Automatic Caliber",
+        "icon": "⚙️",
+        "tag": "Swiss Movement",
+        "desc": "Self-winding mechanical heart beating at 28,800 vibrations per hour for seamless sweep."
+      },
+      {
+        "name": "72h Power Reserve",
+        "icon": "⏳",
+        "tag": "Twin Barrels",
+        "desc": "Twin-barrel spring mechanism maintaining uninterrupted precision for 3 full days off the wrist."
+      },
+      {
+        "name": "316L Stainless Steel",
+        "icon": "🛡️",
+        "tag": "Marine Grade",
+        "desc": "Corrosion-resistant surgical alloy hand-polished with alternating brushed satin bevels."
+      },
+      {
+        "name": "Ceramic Bezel",
+        "icon": "🔘",
+        "tag": "Unidirectional",
+        "desc": "120-click laser-engraved scratch-proof ceramic diving bezel with platinum numerals."
+      },
+      {
+        "name": "Super-LumiNova",
+        "icon": "✨",
+        "tag": "Swiss Lume",
+        "desc": "Grade A Swiss photoluminescent pigment ensuring vivid low-light dial legibility."
+      },
+      {
+        "name": "200M Water Proof",
+        "icon": "🌊",
+        "tag": "Screw-Down Crown",
+        "desc": "Triple-sealed gasket assembly pressure-tested to withstand deep oceanic expeditions."
+      },
+      {
+        "name": "Exhibition Caseback",
+        "icon": "🔍",
+        "tag": "Côtes de Genève",
+        "desc": "Transparent sapphire rear display showcasing gold rotor and Geneva stripes decoration."
+      },
+      {
+        "name": "Incabloc Shock",
+        "icon": "⚡",
+        "tag": "Impact Shield",
+        "desc": "Spring-loaded jewel bearing absorbing severe sudden mechanical shocks and drops."
+      },
+      {
+        "name": "Glucydur Balance",
+        "icon": "⚖️",
+        "tag": "Thermal Stable",
+        "desc": "Beryllium-bronze alloy balance wheel resisting extreme temperature fluctuations."
+      },
+      {
+        "name": "Nivaflex Mainspring",
+        "icon": "🌀",
+        "tag": "Anti-Magnetic",
+        "desc": "Space-age alloy providing consistent kinetic energy torque with zero magnetic distortion."
+      },
+      {
+        "name": "Sunburst Dial",
+        "icon": "☀️",
+        "tag": "Guilloché",
+        "desc": "Hand-lacquered emerald dial with radial sunburst brushing and applied gold hour indices."
+      },
+      {
+        "name": "25 Jeweled Bearings",
+        "icon": "💍",
+        "tag": "Synthetic Rubies",
+        "desc": "High-purity ruby bearings virtually eliminating mechanical friction on internal pivot points."
+      },
+      {
+        "name": "Italian Calfskin",
+        "icon": "🧵",
+        "tag": "Handcrafted Strap",
+        "desc": "Full-grain Tuscan leather strap with artisanal tone-on-tone edge stitching."
+      },
+      {
+        "name": "Butterfly Clasp",
+        "icon": "🔒",
+        "tag": "Dual Deployment",
+        "desc": "Spring-actuated double folding security buckle with laser-etched brand insignia."
+      },
+      {
+        "name": "COSC Certified",
+        "icon": "📜",
+        "tag": "Official Chronometer",
+        "desc": "Independently certified by the Official Swiss Chronometer Testing Institute within -4/+6s."
+      },
+      {
+        "name": "Helium Escape Valve",
+        "icon": "💨",
+        "tag": "Deep Saturation",
+        "desc": "Automatic pressure release valve preventing crystal dislodgement during decompression."
+      },
+      {
+        "name": "5-Year Guarantee",
+        "icon": "🏅",
+        "tag": "Global Atelier Service",
+        "desc": "Comprehensive worldwide manufacturer warranty with complimentary 3rd-year maintenance."
+      }
+    ],
+    "features": [
+      {
+        "title": "Swiss Certified Chronometer",
+        "subtitle": "Tested across 5 positions & 3 temperatures"
+      },
+      {
+        "title": "5-Year Atelier Warranty",
+        "subtitle": "Complimentary global service coverage"
+      },
+      {
+        "title": "Insured Air Courier",
+        "subtitle": "Doorstep white-glove security delivery"
+      }
+    ],
+    "story": {
+      "title": "The Aurelia Atelier Heritage",
+      "badge": "SWISS CALIBER ARCHITECTURE",
+      "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
+      "quote": "In an era of fleeting digital seconds, Aurelia celebrates the timeless poetry of mechanical movements calibrated by master horologists.",
+      "author": "Aurelia Horological Atelier",
+      "authorTitle": "Geneva & Bengaluru Studios",
+      "description": "Every Aurelia timepiece begins as a symphony of raw marine-grade steel, synthetic ruby jewels, and hand-beveled balance springs. We bridge centuries of Swiss watchmaking heritage with contemporary industrial ergonomics."
+    },
+    "quote": {
+      "text": "True luxury does not shout; it ticks with resolute, silent perfection upon your wrist.",
+      "author": "Henri V. Aurelia, Master Horologist",
+      "role": "Founder & Atelier Director"
+    },
+    "footer": {
+      "bio": "Aurelia Chronometry crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide."
+    }
+  },
+  "categories": [
+    "Automatic Chronometers",
+    "Diving Instruments",
+    "Dress Watches",
+    "Horological Straps"
+  ],
+  "products": [
+    {
+      "id": "AUR-CHRONO-001",
+      "name": "Aurelia Sovereign Emerald 41",
+      "slug": "aurelia-sovereign-emerald-41",
+      "category": "Automatic Chronometers",
+      "brand": "Aurelia",
+      "price": 48500,
+      "compareAtPrice": 56000,
+      "stock": 14,
+      "sku": "AUR-CHRONO-001",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#064E3B",
+      "tagline": "Caliber 2824 • Sunburst Emerald",
+      "badge": {
+        "number": "COSC",
+        "unit": "SWISS",
+        "title": "Officially Certified Chronometer"
+      },
+      "description": "Flagship 41mm automatic mechanical timepiece featuring sunburst emerald dial, double-domed sapphire crystal, 72-hour power reserve, and solid 316L stainless steel bracelet.",
+      "shortDescription": "41mm Swiss automatic with sunburst emerald dial.",
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "caseDiameter": "41mm Surgical 316L Steel",
+        "movement": "Swiss Caliber 2824 Automatic",
+        "crystal": "Double-Domed Anti-Reflective Sapphire",
+        "waterResistance": "100 Meters (10 ATM)",
+        "warranty": "5-Year Global Atelier Guarantee"
+      },
+      "rating": 4.95,
+      "reviewCount": 84,
+      "theme_color": "#064E3B"
+    },
+    {
+      "id": "AUR-DIVER-002",
+      "name": "Aurelia DeepOcean Ceramic Diver",
+      "slug": "aurelia-deepocean-ceramic-diver",
+      "category": "Diving Instruments",
+      "brand": "Aurelia",
+      "price": 54000,
+      "compareAtPrice": 62500,
+      "stock": 10,
+      "sku": "AUR-DIVER-002",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#1E293B",
+      "tagline": "300M Diver • Helium Escape Valve",
+      "badge": {
+        "number": "300M",
+        "unit": "DIVE",
+        "title": "Professional Oceanic Diver"
+      },
+      "description": "Professional diving instrument with 120-click ceramic bezel, automatic helium release valve, Super-LumiNova luminescence, and 300 meters water resistance.",
+      "shortDescription": "300m oceanic diver with ceramic bezel.",
+      "images": [
+        "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "caseDiameter": "42.5mm Marine Grade Steel",
+        "bezel": "120-Click High-Tech Ceramic",
+        "lume": "Swiss Super-LumiNova BGW9",
+        "waterResistance": "300 Meters (30 ATM)",
+        "warranty": "5-Year Global Atelier Guarantee"
+      },
+      "rating": 4.9,
+      "reviewCount": 62,
+      "theme_color": "#1E293B"
+    },
+    {
+      "id": "AUR-HERITAGE-003",
+      "name": "Aurelia Heritage Moonphase",
+      "slug": "aurelia-heritage-moonphase",
+      "category": "Dress Watches",
+      "brand": "Aurelia",
+      "price": 38900,
+      "compareAtPrice": 46000,
+      "stock": 18,
+      "sku": "AUR-HERITAGE-003",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#14532D",
+      "tagline": "Astronomical Moonphase • Rose Gold",
+      "badge": {
+        "number": "MOON",
+        "unit": "PHASE",
+        "title": "Astronomical Complication"
+      },
+      "description": "Exquisite dress timepiece showcasing hand-painted astronomical moonphase disk, Guilloché dial, blued steel hands, and genuine Italian alligator-embossed calfskin leather strap.",
+      "shortDescription": "Astronomical moonphase with Italian leather strap.",
+      "images": [
+        "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "caseDiameter": "39.5mm Slim Profile (9.8mm)",
+        "complication": "True Astronomical Moonphase & Date",
+        "strap": "Full-Grain Italian Calfskin",
+        "waterResistance": "50 Meters (5 ATM)",
+        "warranty": "5-Year Global Atelier Guarantee"
+      },
+      "rating": 4.88,
+      "reviewCount": 49,
+      "theme_color": "#14532D"
+    }
+  ]
+}

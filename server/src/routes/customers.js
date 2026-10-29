@@ -371,57 +371,47 @@ router.get('/orders', async (req, res) => {
     const cleanEmail = (email || '').trim().toLowerCase();
     const cleanDigits = (phone || '').replace(/\D/g, '').slice(-10);
 
-    let sql = 'SELECT * FROM orders WHERE 1=0';
-    const params = [];
+    const result = await query('SELECT * FROM orders ORDER BY created_at DESC');
 
-    if (cleanEmail && cleanDigits) {
-      sql = `
-        SELECT * FROM orders 
-        WHERE LOWER(TRIM(COALESCE(customer->>'email', ''))) = $1 
-           OR (LENGTH($2) >= 8 AND REGEXP_REPLACE(COALESCE(customer->>'phone', ''), '[^0-9]', '', 'g') LIKE '%' || $2)
-           OR (LENGTH($1) > 3 AND LOWER(COALESCE(customer->>'email', '')) LIKE '%' || $1 || '%')
-           OR LOWER(COALESCE(customer->>'id', '')) = $1
-        ORDER BY created_at DESC
-      `;
-      params.push(cleanEmail, cleanDigits);
-    } else if (cleanEmail) {
-      sql = `
-        SELECT * FROM orders 
-        WHERE LOWER(TRIM(COALESCE(customer->>'email', ''))) = $1 
-           OR (LENGTH($1) > 3 AND LOWER(COALESCE(customer->>'email', '')) LIKE '%' || $1 || '%')
-           OR LOWER(COALESCE(customer->>'id', '')) = $1
-        ORDER BY created_at DESC
-      `;
-      params.push(cleanEmail);
-    } else if (cleanDigits) {
-      sql = `
-        SELECT * FROM orders 
-        WHERE (LENGTH($1) >= 8 AND REGEXP_REPLACE(COALESCE(customer->>'phone', ''), '[^0-9]', '', 'g') LIKE '%' || $1)
-        ORDER BY created_at DESC
-      `;
-      params.push(cleanDigits);
-    } else {
-      return res.json({ success: true, data: [] });
-    }
+    const matched = result.rows.filter(o => {
+      const c = o.customer || {};
+      const cEmail = (c.email || '').trim().toLowerCase();
+      const cPhone = (c.phone || '').replace(/\D/g, '').slice(-10);
+      const cId = (c.id || '').trim().toLowerCase();
 
-    const result = await query(sql, params);
+      if (cleanEmail && (cEmail === cleanEmail || cId === cleanEmail || (cleanEmail.length > 3 && cEmail.includes(cleanEmail)))) return true;
+      if (cleanDigits && cPhone && (cPhone.endsWith(cleanDigits) || cleanDigits.endsWith(cPhone))) return true;
+      return false;
+    });
 
-    const orders = result.rows.map(o => ({
-      id: o.id,
-      orderNumber: o.order_number,
-      channel: o.channel,
-      customer: o.customer,
-      items: typeof o.items === 'string' ? JSON.parse(o.items) : o.items,
-      subtotal: Number(o.subtotal),
-      discount: Number(o.discount),
-      shipping: Number(o.shipping),
-      total: Number(o.total),
-      paymentMethod: o.payment_method,
-      paymentStatus: o.payment_status,
-      status: o.status || 'placed',
-      cancellationDetails: o.cancellation_details ? (typeof o.cancellation_details === 'string' ? JSON.parse(o.cancellation_details) : o.cancellation_details) : null,
-      createdAt: o.created_at
-    }));
+    const orders = matched.map(o => {
+      let status = o.status || 'placed';
+      let cancelInfo = o.cancellation_details ? (typeof o.cancellation_details === 'string' ? JSON.parse(o.cancellation_details) : o.cancellation_details) : null;
+      if (typeof status === 'string' && status.trim().startsWith('{')) {
+        try {
+          cancelInfo = JSON.parse(status);
+          status = cancelInfo.status === 'approved' ? 'cancelled' : 'cancel_requested';
+        } catch (e) {
+          status = 'cancel_requested';
+        }
+      }
+      return {
+        id: o.id,
+        orderNumber: o.order_number,
+        channel: o.channel,
+        customer: o.customer,
+        items: typeof o.items === 'string' ? JSON.parse(o.items) : o.items,
+        subtotal: Number(o.subtotal || o.total),
+        discount: Number(o.discount || 0),
+        shipping: Number(o.shipping || 0),
+        total: Number(o.total || o.subtotal),
+        paymentMethod: o.payment_method,
+        paymentStatus: o.payment_status,
+        status: status,
+        cancellationDetails: cancelInfo,
+        createdAt: o.created_at
+      };
+    });
 
     res.json({ success: true, data: orders });
   } catch (err) {

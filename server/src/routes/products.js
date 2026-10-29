@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const router = express.Router();
 const { query } = require('../config/db');
@@ -29,7 +31,8 @@ function mapProduct(row) {
     offlineSold: Number(row.offline_sold),
     sku: row.sku,
     images: typeof row.images === 'string' ? JSON.parse(row.images) : (row.images || []),
-    themeColor: row.theme_color,
+    themeColor: row.themeColor || row.theme_color || '#6B4E9B',
+    theme_color: row.themeColor || row.theme_color || '#6B4E9B',
     tagline: row.tagline,
     metricBadge: row.metric_badge,
     badge: row.badge,

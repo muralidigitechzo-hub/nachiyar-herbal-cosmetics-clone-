@@ -1,0 +1,421 @@
+{
+  "brand": {
+    "name": "Nachiyar Herbals & Cosmetics",
+    "shortName": "NACHIYAR",
+    "tagline": "Pure Botanical Elegance & Ayurvedic Care",
+    "logo": "assets/nachiyar-logo.png",
+    "favicon": "assets/nachiyar-logo.png",
+    "colors": {
+      "primary": "#7C5AAB",
+      "secondary": "#D4AF37",
+      "accent": "#583B82",
+      "background": "#F9F8F5",
+      "text": "#191319"
+    }
+  },
+  "business": {
+    "phone": "+91 94440 88990",
+    "email": "care@nachiyarherbals.com",
+    "address": "Nachiyar Botanical Heritage, No. 18 Temple Ring Road, Madurai, Tamil Nadu - 625001",
+    "gstin": "33AAACH9876K1Z2",
+    "timings": "Mon - Sat: 9:30 AM - 8:30 PM",
+    "socialLinks": {
+      "whatsapp": "+919444088990",
+      "instagram": "https://instagram.com/nachiyarherbals",
+      "facebook": "https://facebook.com/nachiyarherbals",
+      "youtube": ""
+    }
+  },
+  "content": {
+    "announcement": "ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES",
+    "freeShippingThreshold": 599,
+    "coupon": {
+      "code": "ROYAL15",
+      "discountPercent": 15,
+      "tagline": "Surprise Royal Privilege Voucher",
+      "active": true,
+      "expiryDate": ""
+    },
+    "hero": {
+      "eyebrow": "ROYAL BOTANICAL CARE",
+      "title": "Ancient Ayurvedic Botanicals For Royal Hair Radiance",
+      "subtitle": "Small-batch restorative formulations deeply steeped with 18 rare cold-pressed botanicals according to traditional texts.",
+      "badge": "100% PURE ACTIVE BOTANICALS",
+      "primaryCta": "Shop All Formulations",
+      "primaryCtaLink": "#collection-grid",
+      "secondaryCta": "Our Heritage",
+      "secondaryCtaLink": "#story"
+    },
+    "features": [
+      {
+        "icon": "🌿",
+        "title": "18 Rare Botanicals",
+        "desc": "Cold-steeped with Amla, Bhringraj, Brahmi and lavender extracts."
+      },
+      {
+        "icon": "☀️",
+        "title": "21-Day Solar Infusion",
+        "desc": "Naturally potentiated under golden solar warmth for maximum bioactive potency."
+      },
+      {
+        "icon": "✨",
+        "title": "Zero Harsh Synthetics",
+        "desc": "Free from mineral oil, silicones, sulfates, parabens, and synthetic colorants."
+      },
+      {
+        "icon": "🚚",
+        "title": "Pan-India Express Shipping",
+        "desc": "Direct from our Madurai botanical facility safely to your doorstep."
+      }
+    ],
+    "story": {
+      "eyebrow": "BOTANICAL TRADITION",
+      "title": "Crafted with 21-Day Solar Steeping",
+      "subtitle": "Honoring the ancient heritage of Ayurvedic formulation in Madurai",
+      "description": "Every formulation at Nachiyar Herbals begins with handpicked sacred botanicals, cold-pressed seed oils, and gentle botanical extracts. We reject chemical shortcuts, giving each botanical blend the full 21 days of natural solar maturation.",
+      "quote": "Pure botanicals work in harmony with your scalp biology, nurturing dense root vitality and lasting hair strength.",
+      "image": "assets/heritage-ritual.jpg"
+    },
+    "newsletter": {
+      "eyebrow": "ROYAL HERBAL CIRCLE",
+      "heading": "RECEIVE 10% OFF YOUR FIRST RITUAL",
+      "subtitle": "Subscribe for limited small-batch release notifications, scalp wellness guides, and exclusive private discounts."
+    },
+    "footer": {
+      "bio": "Nachiyar Herbals & Cosmetics celebrates the timeless grace of royal personal care. Formulated without synthetic shortcuts. Handcrafted in India.",
+      "watermark": "NACHIYAR",
+      "copyright": "© 2026 NACHIYAR HERBALS & COSMETICS. ALL RIGHTS RESERVED."
+    },
+    "orbitEyebrow": "SACRED BOTANICAL CRAFTSMANSHIP",
+    "orbitHeading": "18 Sacred Earth-Born Botanicals",
+    "orbitSubtext": "Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.",
+    "orbitCenterImage": "assets/hero-bottle-oil-transparent.png",
+    "orbitBadge": "18 Rare Herbs • Cold-Pressed",
+    "orbit": [
+      {
+        "name": "Coconut Oil",
+        "icon": "assets/ingredients/coconut-oil.jpg",
+        "tag": "Pure Base",
+        "desc": "Pure cold-pressed virgin oil that penetrates deep into hair shafts, sealing in moisture and halting protein loss."
+      },
+      {
+        "name": "Hibiscus Flower",
+        "icon": "assets/ingredients/hibiscus-flower.jpg",
+        "tag": "Follicle Revival",
+        "desc": "Rich in natural amino acids and vitamin C that stimulate dormant hair follicles and promote thick regrowth."
+      },
+      {
+        "name": "Fenugreek",
+        "icon": "assets/ingredients/fenugreek.jpg",
+        "tag": "Scalp Moisture",
+        "desc": "Packed with natural lecithin and proteins that deeply hydrate strands, repair damage, and impart silky shine."
+      },
+      {
+        "name": "Aloe Vera",
+        "icon": "assets/ingredients/aloe-vera.jpg",
+        "tag": "Soothing Repair",
+        "desc": "Succulent botanical gel with proteolytic enzymes that soothe scalp inflammation and balance healthy pH levels."
+      },
+      {
+        "name": "Neem Leaves",
+        "icon": "assets/ingredients/neem.jpg",
+        "tag": "Scalp Purifier",
+        "desc": "Potent antiseptic green leaves that clear dandruff flakes, purify scalp pores, and prevent persistent itching."
+      },
+      {
+        "name": "Curry Leaves",
+        "icon": "assets/ingredients/curry-leaves.jpg",
+        "tag": "Melanin Boost",
+        "desc": "Abundant in beta-carotene and essential amino acids that preserve natural dark pigmentation and prevent greying."
+      },
+      {
+        "name": "Amla (Gooseberry)",
+        "icon": "assets/ingredients/amla.jpg",
+        "tag": "Vitamin C Shield",
+        "desc": "Sacred Ayurvedic rasayana packed with ascorbic acid that strengthens keratin bonds and stops premature thinning."
+      },
+      {
+        "name": "Brahmi",
+        "icon": "assets/ingredients/brahmi.jpg",
+        "tag": "Cranial Calmer",
+        "desc": "Traditional brain tonic herb that cools excess cranial heat, alleviates mental tension, and reinforces root fibers."
+      },
+      {
+        "name": "Bhringraj",
+        "icon": "assets/ingredients/bhringraj.jpg",
+        "tag": "King of Hair",
+        "desc": "The revered classical sovereign of Ayurvedic hair science. Activates micro-circulation across scalp beds."
+      },
+      {
+        "name": "Tulsi (Holy Basil)",
+        "icon": "assets/ingredients/tulsi.jpg",
+        "tag": "Adaptogenic Tonic",
+        "desc": "Sacred adaptogenic foliage with antimicrobial eugenol that defends follicles against environmental toxins."
+      },
+      {
+        "name": "Rose Petals",
+        "icon": "assets/ingredients/rose-petals.jpg",
+        "tag": "Velvet Softener",
+        "desc": "Handpicked crimson petals that impart a soothing floral aromatherapy while toning sensitive scalp dermal layers."
+      },
+      {
+        "name": "Vetiver Root",
+        "icon": "assets/ingredients/vetiver.jpg",
+        "tag": "Root Grounding",
+        "desc": "Earthy golden grass roots with profound cooling properties that eliminate scalp irritation and excessive oiliness."
+      },
+      {
+        "name": "Shikakai",
+        "icon": "assets/ingredients/shikakai.jpg",
+        "tag": "Natural Cleanser",
+        "desc": "Mild botanical pods with natural saponins that wash away sebum without disrupting delicate cuticle integrity."
+      },
+      {
+        "name": "Reetha (Soapnut)",
+        "icon": "assets/ingredients/reetha.jpg",
+        "tag": "Silken Saponin",
+        "desc": "Gentle fruit pods that yield a luxuriously cushiony cloud foam, leaving hair buoyant, detangled, and radiant."
+      },
+      {
+        "name": "Indigo Leaves",
+        "icon": "assets/ingredients/indigo.jpg",
+        "tag": "Lustre Enhancer",
+        "desc": "Ancient indigo leaves that enrich natural hair gloss, intensify strand depth, and shield against UV sun-bleaching."
+      },
+      {
+        "name": "Black Sesame Oil",
+        "icon": "assets/ingredients/black-sesame.jpg",
+        "tag": "Solar Carrier",
+        "desc": "Deep-penetrating dark seed oil that acts as the bioavailable carrier for 21 days of natural solar maturation."
+      },
+      {
+        "name": "Castor Oil",
+        "icon": "assets/ingredients/castor.jpg",
+        "tag": "Strand Thickener",
+        "desc": "Viscous ricinoleic acid-rich oil that coats each shaft, dramatically minimizing breakage and sealing split ends."
+      },
+      {
+        "name": "Lavender Flower",
+        "icon": "assets/ingredients/lavender.jpg",
+        "tag": "Aromatherapy",
+        "desc": "Pure calming lavender blossom essential oil that relaxes the nervous system and delivers our signature fragrance."
+      }
+    ]
+  },
+  "modules": {
+    "reviews": true,
+    "whatsapp_chat": true,
+    "coupons": true,
+    "announcements": true,
+    "marketplaces": true,
+    "billing": true
+  },
+  "categories": [
+    {
+      "id": "cat_hair_care",
+      "name": "Hair Care",
+      "slug": "hair-care",
+      "count": 2
+    },
+    {
+      "id": "cat_scalp",
+      "name": "Scalp & Cleansing",
+      "slug": "scalp-cleansing",
+      "count": 1
+    },
+    {
+      "id": "cat_sets",
+      "name": "Ritual Sets & Combos",
+      "slug": "ritual-sets",
+      "count": 1
+    },
+    {
+      "id": "cat_gifting",
+      "name": "Royal Gifting",
+      "slug": "royal-gifting",
+      "count": 0
+    }
+  ],
+  "products": [
+    {
+      "id": "prod_oil_01",
+      "slug": "herbal-hair-oil",
+      "name": "Herbal Hair Oil",
+      "subtitle": "Lavender Glass Dropper Bottle • 100% Cold-Pressed",
+      "category": "Hair Care",
+      "category_id": "cat_hair_care",
+      "price": 299,
+      "mrp": 699,
+      "stock": 98,
+      "initial_stock": 100,
+      "online_sold": 2,
+      "offline_sold": 0,
+      "sku": "NH-OIL-200ML",
+      "images": [
+        "assets/new-oil-bottle-card.jpg"
+      ],
+      "theme_color": "#6b4e9b",
+      "tagline": "Cold-Pressed • 18 Rare Herbs • Root Activating",
+      "metric_badge": "100% PURE",
+      "badge": "Bestseller",
+      "short_description": "Traditional 21-day solar-infused oil in pure lavender essence to stimulate roots and banish hair fall.",
+      "description": "Crafted in small batches according to classical Ayurvedic texts. Nachiyar Herbal Hair Oil features deep-steeped cold-pressed oils enriched with Bhringraj, Amla, Brahmi, and delicate lavender blossom essence. Calms scalp inflammation, repairs dry split ends, and delivers noticeable root strength within two weeks of regular application.",
+      "benefits": [
+        "Clinically proven hair fall reduction in 14 days",
+        "Soothes irritated, dry scalp with calming lavender aromatherapy",
+        "Deeply bioavailable: absorbs without heavy mineral grease",
+        "Encourages dense follicle growth and strand thickness"
+      ],
+      "ingredients": "Cold-Pressed Black Sesame Oil, Virgin Coconut Oil, Pure French Lavender Oil (Lavandula Angustifolia), Bhringraj, Amla, Brahmi, Hibiscus Blossom, Fenugreek, Rosemary, Indian Nardostachys (Jatamansi).",
+      "how_to_use": "Dispense 1-2 droppers directly across scalp partings. Gently massage using circular fingertip motions for 5-10 minutes. Leave on for a minimum of 1 hour or overnight before cleansing.",
+      "variants": [
+        {
+          "id": "v_oil_100",
+          "name": "100ml Travel Edition",
+          "price": 349,
+          "mrp": 399,
+          "sku": "NH-OIL-100",
+          "stock": 45
+        },
+        {
+          "id": "v_oil_200",
+          "name": "200ml Glass Dropper Bottle",
+          "price": 299,
+          "mrp": 699,
+          "sku": "NH-OIL-200",
+          "stock": 85
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "hair-vitalizer",
+        "18-botanicals",
+        "cold-pressed"
+      ]
+    },
+    {
+      "id": "prod_shampoo_02",
+      "slug": "hibiscus-flower-shampoo",
+      "name": "Hibiscus Flower Shampoo",
+      "subtitle": "Sulphate-Free Scalp Cleanser • Handpicked Red Hibiscus",
+      "category": "Scalp & Cleansing",
+      "category_id": "cat_scalp",
+      "price": 249,
+      "mrp": 549,
+      "stock": 90,
+      "initial_stock": 100,
+      "online_sold": 0,
+      "offline_sold": 0,
+      "sku": "NH-SHMP-250ML",
+      "images": [
+        "assets/new-shampoo-bottle-card.jpg"
+      ],
+      "theme_color": "#872134",
+      "tagline": "Fresh Hibiscus Petals • Coconut Surfactants",
+      "metric_badge": "SULPHATE FREE",
+      "badge": "Popular",
+      "short_description": "Gentle scalp cleanser infused with fresh red hibiscus flowers and natural coconut surfactants.",
+      "description": "Rich conditioning foam powered by handpicked crimson hibiscus petals, shikakai, and reetha. Gently eliminates build-up without stripping natural sebum, preserving moisture balance.",
+      "benefits": [
+        "Sulphate-free gentle daily cleansing",
+        "Maintains scalp pH balance naturally",
+        "Adds lustrous shine and voluminous bounce",
+        "Prevents premature greying with natural anthocyanins"
+      ],
+      "ingredients": "Aqua, Fresh Red Hibiscus Flower Infusion, Sodium Cocoyl Isethionate (Coconut derived), Shikakai Extract, Reetha Extract, Aloe Vera Leaf Juice, Vegetable Glycerin, Rosemary Essential Oil.",
+      "how_to_use": "Apply to wet scalp. Massage gently to generate rich natural lather. Rinse thoroughly with cool or lukewarm water.",
+      "variants": [
+        {
+          "id": "v_shmp_250",
+          "name": "250ml Pump Bottle",
+          "price": 249,
+          "mrp": 549,
+          "sku": "NH-SHMP-250",
+          "stock": 90
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "scalp-cleanser",
+        "hibiscus",
+        "sulphate-free"
+      ]
+    },
+    {
+      "id": "prod_duo_03",
+      "slug": "royal-hair-ritual-duo",
+      "name": "The Royal Hair Ritual (Duo Set)",
+      "subtitle": "Complete 2-Step Restorative Ayurvedic System",
+      "category": "Ritual Sets & Combos",
+      "category_id": "cat_sets",
+      "price": 499,
+      "mrp": 1148,
+      "stock": 85,
+      "initial_stock": 100,
+      "online_sold": 1,
+      "offline_sold": 0,
+      "sku": "NH-DUO-SET",
+      "images": [
+        "assets/duo-ritual-new.jpg"
+      ],
+      "theme_color": "#4a2870",
+      "tagline": "Complete Restorative Duo • Save ₹149",
+      "metric_badge": "BEST VALUE",
+      "badge": "Luxury Set",
+      "short_description": "The complete 2-step royal restorative haircare routine featuring our Herbal Hair Oil and Hibiscus Shampoo.",
+      "description": "The ultimate royal regimen. Includes 200ml Herbal Hair Oil and 250ml Hibiscus Flower Shampoo packed in an exquisite luxury box. Delivers holistic scalp nourishment and gentle purification.",
+      "benefits": [
+        "Complete synergistic root-to-tip care routine",
+        "Maximum cost savings: Save ₹149 instantly",
+        "Comes packaged in signature gold-embossed gift packaging"
+      ],
+      "ingredients": "Herbal Hair Oil (200ml) + Hibiscus Flower Shampoo (250ml).",
+      "how_to_use": "Step 1: Oil scalp and let rest for 1 hour. Step 2: Cleanse with Hibiscus Shampoo.",
+      "variants": [
+        {
+          "id": "v_duo_box",
+          "name": "Standard Duo Box",
+          "price": 499,
+          "mrp": 1148,
+          "sku": "NH-DUO-BOX",
+          "stock": 85
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "complete-ritual",
+        "bestseller",
+        "ayurvedic-duo"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_01",
+      "name": "Dr. Ananya Sundaram",
+      "rating": 5,
+      "title": "Dramatic reduction in hair fall within 10 days",
+      "comment": "The lavender aroma is divine and not overpowering. My hair texture feels noticeably denser and softer. Exceptional small-batch quality!",
+      "status": "approved",
+      "created_at": "2026-10-15T10:00:00Z"
+    },
+    {
+      "id": "rev_02",
+      "name": "Kavitha Rangarajan",
+      "rating": 5,
+      "title": "Best sulphate-free shampoo I have ever used",
+      "comment": "The Hibiscus Shampoo lathers gently and does not dry out my curly hair. Paired with the oil, it is truly a royal ritual.",
+      "status": "approved",
+      "created_at": "2026-10-18T14:30:00Z"
+    },
+    {
+      "id": "rev_03",
+      "name": "Siddharth Menon",
+      "rating": 5,
+      "title": "Authentic cold-pressed oil, zero mineral additives",
+      "comment": "You can immediately feel the herbal absorption. Non-sticky and deeply nourishing. Highly recommended!",
+      "status": "approved",
+      "created_at": "2026-10-21T09:15:00Z"
+    }
+  ]
+}

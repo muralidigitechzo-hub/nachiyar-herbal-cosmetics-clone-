@@ -1,0 +1,513 @@
+{
+  "brand": {
+    "name": "Roastcraft Artisanal Roasters",
+    "shortName": "ROASTCRAFT",
+    "tagline": "Single-Origin Specialty Coffee Roasted to Perfection",
+    "logo": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80",
+    "favicon": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80",
+    "colors": {
+      "primary": "#3E2723",
+      "secondary": "#C7A17A",
+      "accent": "#5D4037",
+      "background": "#FAF7F2",
+      "backgroundAlt": "#F0EAE1",
+      "surface": "#FFFFFF",
+      "text": "#2B1B17",
+      "muted": "#795548",
+      "cardBg1": "#3E2723",
+      "cardBg2": "#4E342E",
+      "bundleBg": "#2E1C18"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Plus Jakarta Sans"
+    }
+  },
+  "business": {
+    "phone": "+91 98840 12345",
+    "email": "brewmaster@roastcraftcoffee.com",
+    "address": "Roastcraft Roastery & Lab, Indiranagar 100ft Road, Bengaluru, Karnataka - 560038",
+    "gstin": "29BBBCB5678F2Z9",
+    "timings": "Mon - Sun: 7:00 AM - 9:00 PM",
+    "socialLinks": {
+      "whatsapp": "+91 98840 12345",
+      "instagram": "https://instagram.com/roastcraftcoffee",
+      "facebook": "https://facebook.com/roastcraftcoffee",
+      "youtube": "https://youtube.com/@roastcraftcoffee"
+    }
+  },
+  "content": {
+    "announcement": "☕ FRESH WHOLE BEAN ROASTS DISPATCHED WITHIN 24 HOURS OF ROASTING ☕",
+    "freeShippingThreshold": 499,
+    "coupon": {
+      "code": "FIRSTBREW20",
+      "discountPercent": 20,
+      "active": true,
+      "tagline": "20% Welcome Discount On Your First Roastery Selection"
+    },
+    "hero": {
+      "eyebrow": "SPECIALTY GRADE ARABICA • ETHICAL DIRECT TRADE",
+      "title": "Mastering The Art Of Artisanal Coffee Roasting.",
+      "subtitle": "Micro-lot single origin beans sourced directly from high-altitude estates, profile-roasted in small batches to unleash sublime floral and fruit tasting notes."
+    },
+    "features": [
+      {
+        "icon": "☕",
+        "title": "SCA Certified 87+ Score",
+        "subtitle": "Specialty grade single origin micro-lots"
+      },
+      {
+        "icon": "🔥",
+        "title": "Roasted Fresh to Order",
+        "subtitle": "Degassed in valved bags within 24h of roast"
+      },
+      {
+        "icon": "📦",
+        "title": "Pan-India Express Air Shipping",
+        "subtitle": "Complimentary air courier on orders ₹499+"
+      }
+    ],
+    "marquee": [
+      "ROASTCRAFT ARTISANAL ROASTERS",
+      "100% ARABICA SPECIALTY LOTS",
+      "CAST-IRON DRUM ROASTING",
+      "CHIKMAGALUR ESTATE ELEVATION 1400M",
+      "ETHIOPIAN YIRGACHEFFE HEIRLOOM",
+      "NITRO-FLUSHED VALVED PACKAGING",
+      "BARISTA CHAMPIONSHIP PROFILES",
+      "DIRECT TRADE COFFEE FARMERS"
+    ],
+    "orbitStage": {
+      "eyebrow": "ROASTERY ENGINEERING & FLAVOR SCIENCE",
+      "heading": "18 Precision Artisanal Roasting & Brewing Modules",
+      "subtext": "From soil mineralogy and high-altitude micro-climates to thermodynamic curve profiles. Hover over any node to explore our roasting science.",
+      "centerImage": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80",
+      "centerBadge": "SCA Specialty 88.5 • 100% High Altitude Arabica",
+      "idleIcon": "☕",
+      "idleText": "Hover over any roasting & extraction node to explore its flavor architecture"
+    },
+    "orbit": [
+      {
+        "name": "1400m Altitude",
+        "icon": "⛰️",
+        "tag": "Dense Bean",
+        "desc": "High volcanic elevation creating denser beans with concentrated sugars and vibrant acidity."
+      },
+      {
+        "name": "Cast-Iron Drum",
+        "icon": "🔥",
+        "tag": "Radiant Heat",
+        "desc": "Cast-iron roasting drum delivering smooth thermal conduction without scorching delicate beans."
+      },
+      {
+        "name": "First Crack Monitor",
+        "icon": "⚡",
+        "tag": "Thermodynamics",
+        "desc": "Acoustic audio sensors tracking the precise cellular expansion and caramelization threshold."
+      },
+      {
+        "name": "Anaerobic Ferment",
+        "icon": "🧪",
+        "tag": "72h Sealed Tank",
+        "desc": "Oxygen-free fermentation developing luscious wild berries and champagne-like tasting notes."
+      },
+      {
+        "name": "Washed Processing",
+        "icon": "💧",
+        "tag": "Spring Water",
+        "desc": "Mountain spring water washing revealing crystal-clear floral jasmine and citrus brightness."
+      },
+      {
+        "name": "Agtron Color Index",
+        "icon": "🎯",
+        "tag": "Spectroscopy",
+        "desc": "Infrared spectrophotometer verifying exact roast development degree across every batch."
+      },
+      {
+        "name": "Degassing Valve",
+        "icon": "💨",
+        "tag": "CO2 Outflow",
+        "desc": "One-way freshness valve allowing carbon dioxide to escape while keeping oxygen out."
+      },
+      {
+        "name": "Burr Calibration",
+        "icon": "⚙️",
+        "tag": "Uniform Microns",
+        "desc": "Titanium coated 64mm flat burrs ensuring identical particle distribution for sweet extraction."
+      },
+      {
+        "name": "Honey Process",
+        "icon": "🍯",
+        "tag": "Pulp Drying",
+        "desc": "Sun-dried with sweet fruit mucilage intact for rich caramelized brown sugar and toffee finish."
+      },
+      {
+        "name": "TDS Refractometer",
+        "icon": "📊",
+        "tag": "Extraction Yield",
+        "desc": "Digital optical refractometer targeting the golden extraction ratio between 18% and 22%."
+      },
+      {
+        "name": "Rate of Rise (RoR)",
+        "icon": "📈",
+        "tag": "Thermal Velocity",
+        "desc": "Mathematical roast curve monitoring preventing baking and preserving volatile aromatics."
+      },
+      {
+        "name": "Cupping Protocol",
+        "icon": "🥄",
+        "tag": "SCA Standard",
+        "desc": "Triple blind cupping protocol scoring fragrance, aroma, flavor, aftertaste, and balance."
+      },
+      {
+        "name": "Natural Sun-Drying",
+        "icon": "☀️",
+        "tag": "Raised African Beds",
+        "desc": "21 days of slow hand-raked sun drying ensuring uniform moisture equilibrium at 10.5%."
+      },
+      {
+        "name": "Nitrogen Flush",
+        "icon": "🛡️",
+        "tag": "Oxidation Shield",
+        "desc": "Food-grade nitrogen displacement keeping roasted beans at peak sensory vibrancy for months."
+      },
+      {
+        "name": "Water Mineral Recipe",
+        "icon": "🌊",
+        "tag": "Magnesium / Calcium",
+        "desc": "Custom 120 PPM mineral water formula extracting nuanced fruit esters without bitterness."
+      },
+      {
+        "name": "Direct Farm Trade",
+        "icon": "🤝",
+        "tag": "Fair Equity",
+        "desc": "Paying 120% above fair-trade market prices directly to smallholder estate cultivators."
+      },
+      {
+        "name": "Cold Drip Towers",
+        "icon": "⏳",
+        "tag": "12-Hour Extraction",
+        "desc": "Slow slow-drip Dutch cold brew towers yielding chocolate liqueur complexity with zero bite."
+      },
+      {
+        "name": "100% Compostable",
+        "icon": "🌿",
+        "tag": "Eco Packaging",
+        "desc": "Certified bio-degradable plant-based kraft outer pouch breaking down harmlessly in soil."
+      }
+    ],
+    "collection": {
+      "eyebrow": "THE ROASTERY SELECTION",
+      "title": "Signature Estate Coffees. Pure Distinction.",
+      "subtitle": "Micro-lot single origin whole bean and artisanal grounds roasted fresh to order every morning."
+    },
+    "bundle": {
+      "eyebrow": "ROASTER'S CHOICE TASTING FLIGHT",
+      "badge": "★ BEST VALUE: 3 SIGNATURE ESTATES",
+      "features": [
+        "✔ 3 x 250g Distinct Specialty Single Origin Lots",
+        "✔ Complimentary Cupping Spoon & Brew Guide",
+        "✔ Free Pan-India Insured Express Air Delivery"
+      ]
+    },
+    "reviewsSection": {
+      "eyebrow": "VERIFIED COFFEE CONNOISSEURS",
+      "title": "Loved by Over 30,000+ Coffee Lovers Worldwide",
+      "ratingScore": "4.95 / 5.0",
+      "ratingText": "Based on Verified Specialty Coffee Reviews"
+    },
+    "story": {
+      "title": "The Roastcraft Roastery Heritage",
+      "subtitle": "From High-Altitude Shaded Canopy to Your Morning Cup",
+      "badge": "FARM-TO-CUP EXCELLENCE",
+      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80",
+      "quote": "Great coffee is not manufactured; it is coaxed from volcanic soil, slow-ripened under misted mountain canopies, and respected in the roasting drum.",
+      "author": "Aditya Rao",
+      "authorTitle": "Founder & Head of Roasting",
+      "description": "At Roastcraft, we partner directly with generational coffee estates in the Western Ghats and Ethiopian highlands. We roast exclusively on vintage cast-iron drums in small 12kg batches to preserve the delicate terroir of every harvest."
+    },
+    "aboutPage": {
+      "heroEyebrow": "OUR ROASTERY PHILOSOPHY",
+      "heroTitle": "Uncompromising Dedication to the Perfect Cup",
+      "heroDesc": "From soil nutrition to the exact second of first crack in the roasting drum, Roastcraft is built on reverence for the humble coffee cherry."
+    },
+    "contactPage": {
+      "eyebrow": "ROASTERY VISITS & CLIENT CONCIERGE",
+      "title": "Connect with Our Brewmasters",
+      "subtitle": "Have questions about grind sizes for your brewing gear, espresso machine calibration, or bulk corporate subscriptions? Our barista team is ready.",
+      "boutiqueTitle": "Flagship Tasting Room & Roastery Lab",
+      "phoneTitle": "Barista Hotline & WhatsApp Orders",
+      "emailTitle": "Direct Roastery Correspondence",
+      "hoursTitle": "Tasting Room Hours"
+    },
+    "policies": {
+      "privacySummary": "We respect patron confidentiality. Your address and payment details are never shared with any marketing parties.",
+      "shippingSummary": "All coffee is roasted and dispatched within 24 hours via express air delivery pan-India. Free delivery on orders over ₹499.",
+      "returnsSummary": "Freshness guarantee: If your beans do not meet your expectations, we will replace or refund your order immediately.",
+      "warrantySummary": "Guaranteed freshly roasted within 24-48 hours of dispatch with roast date stamped on every pouch."
+    },
+    "footer": {
+      "newsletterEyebrow": "ROASTCRAFT BREW CLUB",
+      "newsletterTitle": "RECEIVE 20% OFF YOUR FIRST ROAST",
+      "newsletterSub": "Subscribe for early access to limited micro-lots, private cupping sessions, and brewing recipe guides.",
+      "bio": "Roastcraft Artisanal Roasters crafts small-batch single-origin specialty coffees sourced through direct ethical trade.",
+      "copyright": "© 2026 ROASTCRAFT ARTISANAL ROASTERS. ALL RIGHTS RESERVED.",
+      "developerCredit": "Powered by Roastcraft Specialty Coffee Platform"
+    }
+  },
+  "categories": [
+    "Single-Origin Arabica",
+    "Espresso Blends",
+    "Cold Brew Reserve",
+    "Brewing Equipment"
+  ],
+  "products": [
+    {
+      "id": "RC-COFFEE-001",
+      "name": "Chikmagalur Balur Estate Arabica",
+      "slug": "chikmagalur-balur-estate-arabica",
+      "category": "Single-Origin Arabica",
+      "brand": "Roastcraft",
+      "price": 540,
+      "compareAtPrice": 650,
+      "stock": 35,
+      "sku": "RC-COFFEE-001",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#3E2723",
+      "tagline": "Washed Arabica • Milk Chocolate & Citrus",
+      "badge": {
+        "number": "87.5",
+        "unit": "SCA",
+        "title": "Specialty Grade Arabica"
+      },
+      "description": "Grown under silver oak shade at 1,400 meters altitude. Features silky milk chocolate body, sweet clementine citrus acidity, and a clean roasted hazelnut finish.",
+      "shortDescription": "Single-origin washed Arabica with chocolate and citrus notes.",
+      "images": [
+        "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "origin": "Chikmagalur, Western Ghats (1,400m MSL)",
+        "varietal": "Selection 795 & SLN 9 Arabica",
+        "process": "Fully Washed & Sun-Dried on Raised Beds",
+        "roastLevel": "Medium Light (City Roast)",
+        "tastingNotes": "Milk Chocolate, Sweet Clementine, Roasted Hazelnut"
+      },
+      "benefits": [
+        "SCA cupping score of 87.5 points ensuring specialty tier complexity",
+        "Nitrogen-flushed foil valved packaging guaranteeing peak freshness",
+        "Direct trade purchase supporting high-altitude sustainable farming",
+        "Roasted within 24 hours of dispatch with exact roast date stamped"
+      ],
+      "howToUse": "Recommended brew ratios: 1:16 for Pour-Over (V60), 1:15 for AeroPress, 1:2 for Espresso. Use water at 92°C to 94°C.",
+      "rating": 4.96,
+      "reviewCount": 112,
+      "theme_color": "#3E2723"
+    },
+    {
+      "id": "RC-COFFEE-002",
+      "name": "Ethiopian Yirgacheffe Natural",
+      "slug": "ethiopian-yirgacheffe-natural",
+      "category": "Single-Origin Arabica",
+      "brand": "Roastcraft",
+      "price": 790,
+      "compareAtPrice": 920,
+      "stock": 20,
+      "sku": "RC-COFFEE-002",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#4E342E",
+      "tagline": "Natural Micro-Lot • Blueberry & Jasmine",
+      "badge": {
+        "number": "89.0",
+        "unit": "SCA",
+        "title": "Grand Cru Specialty"
+      },
+      "description": "Legendary wild heirloom Arabica dried inside whole cherries on raised African beds. Explodes with fragrant jasmine aroma, ripe wild blueberry, and bergamot finish.",
+      "shortDescription": "Heirloom Ethiopian natural with wild blueberry notes.",
+      "images": [
+        "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "origin": "Gedeo Zone, Yirgacheffe, Ethiopia (2,000m MSL)",
+        "varietal": "Indigenous Wild Heirloom Varieties",
+        "process": "Natural Whole Cherry Sun-Dried",
+        "roastLevel": "Light (New England Roast)",
+        "tastingNotes": "Ripe Blueberry, Floral Jasmine, Bergamot Tea"
+      },
+      "benefits": [
+        "Spectacular 89-point cup profile with radiant fruit complexity",
+        "Unrivaled pour-over clarity for Kalita Wave and Hario V60 brewing",
+        "Delicate tea-like body with zero residual bitterness",
+        "Packaged in 100% recyclable foil pouch with one-way degassing valve"
+      ],
+      "howToUse": "Best enjoyed as filter pour-over or iced brew without milk. Grind medium-fine and brew with 93°C filtered water.",
+      "rating": 4.98,
+      "reviewCount": 89,
+      "theme_color": "#4E342E"
+    },
+    {
+      "id": "RC-COFFEE-003",
+      "name": "Velvet Crema Dark Espresso Blend",
+      "slug": "velvet-crema-dark-espresso-blend",
+      "category": "Espresso Blends",
+      "brand": "Roastcraft",
+      "price": 480,
+      "compareAtPrice": 590,
+      "stock": 40,
+      "sku": "RC-COFFEE-003",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#2E1C18",
+      "tagline": "Dark Roast • Molasses, Dark Cocoa & Caramel",
+      "badge": {
+        "number": "CREMA",
+        "unit": "BLUR",
+        "title": "Barista Competition Espresso"
+      },
+      "description": "Crafted for traditional espresso aficionados and milk-based cortados, flat whites, and lattes. Delivers heavy molten chocolate, toasted walnut, and thick golden crema.",
+      "shortDescription": "Heavy-bodied espresso blend with dark cocoa and caramel.",
+      "images": [
+        "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "blend": "85% High Grown Arabica + 15% Washed Specialty Robusta",
+        "origin": "Coorg & Chikmagalur Micro-Estates",
+        "roastLevel": "Full City Dark Roast",
+        "tastingNotes": "Molasses, Dark Dutch Cocoa, Toasted Walnut, Butterscotch",
+        "cremaProfile": "Ultra-Thick Golden Hazelnut Crema"
+      },
+      "benefits": [
+        "Cuts through steamed milk with velvety richness and zero astringency",
+        "Formulated specifically for home and commercial espresso machines",
+        "Produces thick, enduring tiger-striped crema on every pull",
+        "Outstanding value for daily morning flat whites and lattes"
+      ],
+      "howToUse": "Espresso recipe: 18g dose in, 36g espresso liquid out, extraction time 27-30 seconds at 9 bar pressure.",
+      "rating": 4.92,
+      "reviewCount": 145,
+      "theme_color": "#2E1C18"
+    },
+    {
+      "id": "RC-COFFEE-004",
+      "name": "Estate Tasting Flight (3 x 250g)",
+      "slug": "estate-tasting-flight",
+      "category": "Single-Origin Arabica",
+      "brand": "Roastcraft",
+      "price": 1290,
+      "compareAtPrice": 1650,
+      "stock": 15,
+      "sku": "RC-COFFEE-004",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#3E2723",
+      "tagline": "Tasting Trio • Chikmagalur, Yirgacheffe & Velvet",
+      "badge": {
+        "number": "TRIO",
+        "unit": "BOX",
+        "title": "Curated Roaster's Flight"
+      },
+      "description": "The ultimate sensory expedition through world specialty coffee. Includes 250g Chikmagalur Washed, 250g Ethiopian Yirgacheffe Natural, and 250g Velvet Crema Espresso.",
+      "shortDescription": "Tasting trio of 3 signature roasts with cupping spoon.",
+      "images": [
+        "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"
+      ],
+      "specifications": {
+        "contents": "3 x 250g Freshly Roasted Valved Pouches",
+        "origins": "India (Chikmagalur & Coorg) & Ethiopia (Yirgacheffe)",
+        "roastSpectrum": "Light, Medium, and Dark Roasts Included",
+        "extras": "Includes Artisanal Cupping Spoon & Flavor Compass Guide"
+      },
+      "benefits": [
+        "Explore contrasting washed, natural, and espresso processing methods",
+        "Substantial 25% savings compared to purchasing individual bags",
+        "Includes complimentary stainless steel cupping spoon and guide",
+        "Arrives in handsome kraft gift presentation box"
+      ],
+      "howToUse": "Host your own home cupping session: grind 12g of each coffee coarse, steep in 200ml water at 94°C for 4 minutes, and break the crust to evaluate aroma.",
+      "rating": 4.99,
+      "reviewCount": 64,
+      "theme_color": "#3E2723"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_01",
+      "name": "Prateek Sundaram",
+      "product_name": "Chikmagalur Balur Estate Arabica",
+      "rating": 5,
+      "title": "The Best Indian Single Origin I Have Ever Tasted",
+      "comment": "Brewed on my Chemex with a 1:16 ratio. The hazelnut aroma filled the entire apartment, and the milk chocolate note is velvety smooth with zero bitterness. Unbelievable roast consistency.",
+      "location": "Bengaluru, India",
+      "created_at": "2026-10-20T08:30:00Z"
+    },
+    {
+      "id": "rev_02",
+      "name": "Meera Venkat",
+      "product_name": "Ethiopian Yirgacheffe Natural",
+      "rating": 5,
+      "title": "Like Drinking Fresh Wild Blueberry Tea",
+      "comment": "The Ethiopian Yirgacheffe is extraordinary. Light, crisp, with distinct notes of ripe blueberry and jasmine florals. Arrived just 2 days after roasting. Will never buy commercial beans again.",
+      "location": "Chennai, India",
+      "created_at": "2026-10-18T11:15:00Z"
+    },
+    {
+      "id": "rev_03",
+      "name": "Karan Malhotra",
+      "product_name": "Velvet Crema Dark Espresso Blend",
+      "rating": 5,
+      "title": "Incredible Golden Crema on My Gaggia Classic",
+      "comment": "Pulled an 18g in, 36g out shot in 28 seconds. The crema was over 5mm thick with gorgeous tiger striping. Makes the finest flat whites you can experience outside of Milan.",
+      "location": "Mumbai, India",
+      "created_at": "2026-10-15T16:00:00Z"
+    },
+    {
+      "id": "rev_04",
+      "name": "Dr. Shalini Iyer",
+      "product_name": "Estate Tasting Flight (3 x 250g)",
+      "rating": 5,
+      "title": "Phenomenal Gift For Coffee Connoisseurs",
+      "comment": "Ordered the tasting trio for my partner's birthday. The packaging is stunning, the beans were roasted 36 hours prior, and the cupping spoon was a wonderful surprise.",
+      "location": "Pune, India",
+      "created_at": "2026-10-12T10:45:00Z"
+    },
+    {
+      "id": "rev_05",
+      "name": "Arjun Nambiar",
+      "product_name": "Chikmagalur Balur Estate Arabica",
+      "rating": 5,
+      "title": "Daily Driver for Aeropress",
+      "comment": "Super clean finish and very forgiving to brew. Even when I adjust the grind slightly, it always produces a sweet, balanced cup without any unpleasant sourness.",
+      "location": "Kochi, India",
+      "created_at": "2026-10-09T09:20:00Z"
+    },
+    {
+      "id": "rev_06",
+      "name": "Nandita Sen",
+      "product_name": "Ethiopian Yirgacheffe Natural",
+      "rating": 5,
+      "title": "Exquisite Iced Pour-Over",
+      "comment": "Brewed hot over Japanese ice spheres. The jasmine and bergamot notes shine through even more when chilled. Hands down the highest quality micro-lot available in India.",
+      "location": "Kolkata, India",
+      "created_at": "2026-10-04T14:10:00Z"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "When was my coffee roasted?",
+      "answer": "All Roastcraft coffees are roasted fresh to order every morning and dispatched within 24 to 48 hours of roasting. The exact roast date is hand-stamped on the back of each valved bag."
+    },
+    {
+      "question": "Should I order whole bean or pre-ground?",
+      "answer": "We strongly recommend whole bean for maximum flavor and aroma. However, we also offer precision commercial grinding calibrated for Espresso, Pour-Over, Aeropress, French Press, and Cold Brew."
+    },
+    {
+      "question": "What is the best way to store my coffee beans?",
+      "answer": "Store your beans inside our valved foil pouch in a cool, dark, dry pantry. Do not freeze or refrigerate roasted whole beans as condensation compromises delicate aromatic oils."
+    },
+    {
+      "question": "How does your free shipping policy work?",
+      "answer": "All orders over ₹499 qualify for 100% complimentary express air courier delivery across India. Orders below ₹499 carry a nominal subsidized flat delivery charge of ₹70."
+    }
+  ]
+}

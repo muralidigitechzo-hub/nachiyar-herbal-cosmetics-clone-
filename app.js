@@ -112,52 +112,234 @@ async function initStorefrontApp() {
       localStorage.setItem('nachiyar_store_settings', JSON.stringify(settings));
     } catch (e) {}
 
-    // Update Phone Links & Text
-    if (settings.supportPhone) {
-      const cleanPhone = settings.supportPhone.replace(/\s+/g, '');
-      const phoneEls = document.querySelectorAll('#footerContactPhone, #contactStorePhone, .dynamic-store-phone');
-      phoneEls.forEach(el => {
-        el.textContent = settings.supportPhone;
-        if (el.tagName === 'A') el.href = `tel:${cleanPhone}`;
+    const brandName = settings.brandName || settings.brand?.name || 'TechNova Electronics';
+    const isHerbal = brandName.toLowerCase().includes('nachiyar') || brandName.toLowerCase().includes('herbal') || brandName.toLowerCase().includes('botanical');
+    const shortWord = (settings.brand?.shortName || brandName.trim().split(' ')[0]).toUpperCase();
+    const initials = (brandName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'TN';
+
+    // 1. Document Title
+    if (document.title && !document.title.includes('Admin') && !document.title.includes('Nimda')) {
+      document.title = `${brandName} | ${settings.tagline || settings.brand?.tagline || 'Official Store'}`;
+    }
+
+    // 2. Brand Name, Tagline & Watermark
+    document.querySelectorAll('.brand-name, #footerBrandName, .dynamic-store-brand').forEach(el => {
+      el.textContent = shortWord;
+    });
+    document.querySelectorAll('.footer-watermark-text').forEach(el => el.textContent = shortWord);
+
+    const tagline = settings.tagline || settings.brand?.tagline;
+    if (tagline) {
+      document.querySelectorAll('.brand-sub').forEach(el => el.textContent = tagline.toUpperCase());
+    }
+
+    // 3. Dynamic Logo & Favicon from JSON
+    const logoUrl = settings.brand?.logo || settings.logoUrl || settings.branding?.logoUrl || '';
+    const activeLogo = logoUrl;
+    const primaryCol = settings.brand?.colors?.primary || settings.themeColors?.primary || '#1E1B24';
+    const secCol = settings.brand?.colors?.secondary || settings.themeColors?.secondary || '#D4AF37';
+    const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="${encodeURIComponent(primaryCol)}" stroke="${encodeURIComponent(secCol)}" stroke-width="2.5"/><text x="50%" y="54%" font-family="sans-serif" font-size="20" font-weight="700" fill="${encodeURIComponent(secCol)}" dominant-baseline="middle" text-anchor="middle">${initials}</text></svg>`;
+
+    document.querySelectorAll('.brand-logo-img, .footer-crest-img, .admin-logo').forEach(img => {
+      if (activeLogo) {
+        img.onerror = function() {
+          this.onerror = null;
+          this.src = fallbackSvg;
+        };
+        img.src = activeLogo;
+      } else {
+        img.src = fallbackSvg;
+      }
+    });
+
+    // Dynamic Browser Tab Favicon from JSON
+    const faviconHref = settings.brand?.favicon || settings.faviconUrl || activeLogo || fallbackSvg;
+    document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => {
+      el.href = faviconHref;
+    });
+
+    // 4. Contact Details
+    const phone = settings.supportPhone || settings.business?.phone;
+    if (phone) {
+      document.querySelectorAll('#footerContactPhone, .contact-phone, .drawer-phone, a[href^="tel:"]').forEach(el => {
+        el.textContent = phone;
+        if (el.tagName === 'A') el.href = `tel:${phone.replace(/\s+/g, '')}`;
       });
     }
 
-    // Update Email Links & Text
-    if (settings.supportEmail) {
-      const emailEls = document.querySelectorAll('#footerContactEmail, #contactStoreEmail, .drawer-support, .dynamic-store-email');
-      emailEls.forEach(el => {
-        if (el.classList.contains('drawer-support')) {
-          el.textContent = `Customer Concierge: ${settings.supportEmail}`;
-        } else {
-          el.textContent = settings.supportEmail;
-        }
-        if (el.tagName === 'A') el.href = `mailto:${settings.supportEmail}`;
+    const email = settings.supportEmail || settings.business?.email;
+    if (email) {
+      document.querySelectorAll('#footerContactEmail, .contact-email, .drawer-email, .drawer-support, a[href^="mailto:"]').forEach(el => {
+        el.textContent = el.classList.contains('drawer-support') ? `Customer Concierge: ${email}` : email;
+        if (el.tagName === 'A') el.href = `mailto:${email}`;
       });
     }
 
-    // Update Registered Address
-    if (settings.storeAddress) {
-      const addrEls = document.querySelectorAll('#footerContactAddress, #contactStoreAddress, .dynamic-store-address');
-      addrEls.forEach(el => {
-        el.textContent = settings.storeAddress;
+    const address = settings.storeAddress || settings.business?.address;
+    if (address) {
+      document.querySelectorAll('#footerContactAddress, .contact-address, #contactStoreAddress').forEach(el => {
+        el.textContent = address;
       });
     }
 
-    // Update Store / Boutique Hours
-    if (settings.storeTimings) {
-      const timeEls = document.querySelectorAll('#contactStoreTimings, .dynamic-store-timings');
-      timeEls.forEach(el => {
-        el.textContent = `(${settings.storeTimings})`;
+    const timings = settings.storeTimings || settings.business?.timings;
+    if (timings) {
+      document.querySelectorAll('.contact-timings').forEach(el => {
+        el.textContent = `(${timings})`;
       });
     }
 
-    // Update Brand Name & Bio
-    if (settings.brandName) {
-      const brandEls = document.querySelectorAll('#footerBrandName, .dynamic-store-brand');
-      brandEls.forEach(el => {
-        el.textContent = settings.brandName;
-      });
+    // 5. Dynamic Announcement Bar & Promo Banner
+    const announcement = settings.content?.announcement || settings.announcementText;
+    if (announcement) {
+      document.querySelectorAll('.ticker-track span:first-child').forEach(el => el.textContent = announcement);
     }
+
+    const promoBadge = document.getElementById('promoBannerBadge');
+    const promoTitle = document.getElementById('promoBannerTitle');
+    const promoSub = document.getElementById('promoBannerSub');
+    const promoCode = document.getElementById('promoBannerCode');
+    const promoCodePill = document.getElementById('promoBannerCodePill');
+    const promoDiscount = document.getElementById('promoBannerDiscount');
+    const coupon = settings.content?.coupon || {};
+    const discount = coupon.discountPercent || coupon.discount || settings.discountPercent || 15;
+    const code = (coupon.code || settings.couponCode || 'TECH15').toUpperCase();
+    const couponTag = coupon.tagline || coupon.description || 'Special Privilege Voucher';
+
+    if (promoBadge) promoBadge.textContent = 'LIMITED TIME SPECIAL PRIVILEGE';
+    if (promoDiscount) promoDiscount.textContent = `${discount}%`;
+    if (promoTitle) promoTitle.innerHTML = `Flat <span class="promo-highlight-pct">${discount}%</span> OFF On All ${brandName} Orders`;
+    if (promoCode) promoCode.textContent = code;
+    if (promoCodePill) promoCodePill.textContent = code;
+    if (promoSub) promoSub.innerHTML = `Use code <strong class="promo-code-box">${code}</strong> at checkout. <span>${couponTag}</span>`;
+
+    // 6. Dynamic Hero Content
+    const hero = settings.content?.hero || settings.hero;
+    if (hero) {
+      if (hero.eyebrow) {
+        document.querySelectorAll('.hero-badge-pill').forEach(el => el.innerHTML = `<span class="gold-sparkle">✦</span> ${hero.eyebrow}`);
+      }
+      if (hero.title) {
+        const words = hero.title.trim().split(' ');
+        const lastWord = words.length > 1 ? words.pop() : '';
+        const formattedTitle = lastWord ? `${words.join(' ')} <span class="title-italic-accent">${lastWord}</span>` : hero.title;
+        document.querySelectorAll('.hero-title, .m-hero-title').forEach(el => el.innerHTML = formattedTitle);
+      }
+      if (hero.description || hero.subtitle) {
+        document.querySelectorAll('.hero-description').forEach(el => el.textContent = hero.description || hero.subtitle);
+      }
+      if (hero.primaryCta) {
+        const pCta = document.querySelector('.hero-cta-group a:first-child span');
+        if (pCta) pCta.textContent = hero.primaryCta;
+      }
+      if (hero.secondaryCta) {
+        const sCta = document.querySelector('.hero-cta-group a:last-child span');
+        if (sCta) sCta.textContent = hero.secondaryCta;
+      }
+    }
+
+    // 7. Dynamic Collection Section Header
+    const colHeading = document.querySelector('#collection .section-heading');
+    const colEyebrow = document.querySelector('#collection .section-eyebrow');
+    const colSubtext = document.querySelector('#collection .section-subtext');
+    if (colHeading) {
+      colHeading.textContent = settings.content?.collection?.title || (isHerbal ? 'Two Formulations. Zero Compromise.' : 'Featured Selection. Zero Compromise.');
+    }
+    if (colEyebrow) {
+      colEyebrow.textContent = settings.content?.collection?.eyebrow || (isHerbal ? 'THE FLAGSHIP DUO' : 'FEATURED PRODUCTS');
+    }
+    if (colSubtext) {
+      colSubtext.textContent = settings.content?.collection?.subtitle || (isHerbal ? 'Designed to work synergistically as a complete restorative hair care ritual.' : `Handpicked premier products from the ${brandName} catalog.`);
+    }
+
+    // 8. Dynamic Reviews Section Heading
+    const reviewsHeading = document.querySelector('#customer-reviews-section .section-heading');
+    const reviewsEyebrow = document.querySelector('#customer-reviews-section .section-eyebrow');
+    if (reviewsHeading) reviewsHeading.textContent = isHerbal ? 'Loved by Royal Patrons' : `Loved by ${brandName} Customers`;
+    if (reviewsEyebrow) reviewsEyebrow.textContent = isHerbal ? 'VERIFIED PATRON EXPERIENCES' : 'VERIFIED CUSTOMER EXPERIENCES';
+
+    // 9. 100% JSON-DRIVEN ROTATING ORBIT ANIMATION SECTION
+    const orbitSection = document.getElementById('botanical-ingredients');
+    if (orbitSection) {
+      orbitSection.style.display = ''; // Never hide!
+      const orbitEyebrow = orbitSection.querySelector('.section-eyebrow');
+      const orbitHeading = orbitSection.querySelector('.section-heading');
+      const orbitSubtext = orbitSection.querySelector('.section-subtext');
+      const orbitImg = document.getElementById('orbitCenterBottle');
+      const orbitBadge = orbitSection.querySelector('.bottle-caption-badge span:last-child');
+      const idleIcon = orbitSection.querySelector('.spotlight-idle-icon');
+      const idleText = orbitSection.querySelector('.spotlight-idle-text');
+
+      const orbitData = settings.content?.orbit || settings.orbit;
+      const centerImg = settings.content?.orbitCenterImage || (settings.products && settings.products[0]?.images?.[0]) || (isHerbal ? 'assets/hero-bottle-oil-transparent.png' : 'assets/technova-phone-transparent.png');
+
+      if (orbitEyebrow) orbitEyebrow.textContent = settings.content?.orbitEyebrow || (isHerbal ? 'SACRED BOTANICAL CRAFTSMANSHIP' : 'ENGINEERED ARCHITECTURE');
+      if (orbitHeading) orbitHeading.textContent = settings.content?.orbitHeading || (isHerbal ? '18 Sacred Earth-Born Botanicals' : '18 Precision Smart Architecture Modules');
+      if (orbitSubtext) orbitSubtext.textContent = settings.content?.orbitSubtext || (isHerbal ? 'Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.' : 'Engineered with 18 high-precision hardware modules, sensors, and intelligent algorithms. Hover over any node to explore.');
+      if (orbitImg) {
+        orbitImg.src = centerImg;
+        orbitImg.alt = `${brandName} Flagship Architecture`;
+      }
+      if (orbitBadge) orbitBadge.textContent = settings.content?.orbitBadge || (isHerbal ? '18 Rare Herbs • Cold-Pressed' : 'Flagship Architecture • Precision Built');
+      if (idleIcon) idleIcon.textContent = settings.content?.orbitIdleIcon || (isHerbal ? '🌿' : '⚡');
+      if (idleText) idleText.textContent = settings.content?.orbitIdleText || (isHerbal ? 'Hover over any botanical herb to discover its sacred hair-care benefits' : 'Hover over any precision architecture module to explore its specifications');
+
+      // Populate orbit nodes directly from JSON data
+      if (Array.isArray(orbitData) && orbitData.length > 0) {
+        document.querySelectorAll('.orbit-node').forEach((node, idx) => {
+          const item = orbitData[idx];
+          if (!item) return;
+
+          node.dataset.name = item.name;
+          node.dataset.tag = item.tag || '';
+          node.dataset.desc = item.desc || item.description || '';
+          node.dataset.icon = item.icon || '';
+
+          const avatarWrap = node.querySelector('.node-avatar-wrap');
+          const label = node.querySelector('.node-label');
+          const tTag = node.querySelector('.tooltip-tag');
+          const tTitle = node.querySelector('.tooltip-title');
+          const tDesc = node.querySelector('.tooltip-desc');
+
+          if (label) label.textContent = item.name;
+          if (tTag) tTag.textContent = item.tag || 'Feature';
+          if (tTitle) tTitle.textContent = item.name;
+          if (tDesc) tDesc.textContent = item.desc || item.description || '';
+
+          if (avatarWrap && item.icon) {
+            if (item.icon.startsWith('http') || item.icon.startsWith('assets/')) {
+              avatarWrap.innerHTML = `<img src="${item.icon}" alt="${item.name}" class="node-avatar" loading="lazy">`;
+            } else {
+              avatarWrap.innerHTML = `<span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: #1E293B; border-radius: 50%; border: 1.5px solid rgba(212,175,55,0.6); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">${item.icon}</span>`;
+            }
+          }
+        });
+      }
+    }
+
+    // 10. Dynamic Story & Quote Content
+    const story = settings.content?.story || settings.story;
+    if (story) {
+      if (story.description || story.quote) {
+        document.querySelectorAll('.quote-text').forEach(el => el.textContent = story.description || story.quote);
+      }
+      if (story.image) {
+        document.querySelectorAll('.quote-bg-img').forEach(img => img.src = story.image);
+      }
+    }
+
+    // 11. Footer Bio & Legal Copyright
+    if (settings.content?.footer?.bio) {
+      document.querySelectorAll('.footer-brand-bio').forEach(el => el.textContent = settings.content.footer.bio);
+    }
+    document.querySelectorAll('.footer-legal-bar p:first-child').forEach(el => {
+      el.textContent = `© 2026 ${brandName.toUpperCase()}. ALL RIGHTS RESERVED.`;
+    });
+
+    // 12. Hide hair-specific lifestyle photos for non-herbal stores
+    document.querySelectorAll('.lifestyle-narrative-section, .community-section').forEach(el => {
+      el.style.display = isHerbal ? '' : 'none';
+    });
 
     // Sync with Reusable CRM Theme & Dynamic Branding Engine
     if (window.ThemeEngine && typeof window.ThemeEngine.applyDirect === 'function') {
@@ -399,19 +581,23 @@ async function initStorefrontApp() {
       let activeName = pName;
       let activeSub = pSub;
 
-      if (isSlot1 && slot1Cfg) {
+      const isSlot1Matching = slot1Cfg && (slot1Cfg.productId === pId || slot1Cfg.productId === pSlug);
+      const isSlot2Matching = slot2Cfg && (slot2Cfg.productId === pId || slot2Cfg.productId === pSlug);
+      const isComboMatching = comboCfg && (comboCfg.productId === pId || comboCfg.productId === pSlug);
+
+      if (isSlot1 && isSlot1Matching) {
         if (slot1Cfg.price !== undefined && slot1Cfg.price !== '') activePrice = Number(slot1Cfg.price);
         if (slot1Cfg.mrp !== undefined && slot1Cfg.mrp !== '') activeMrp = Number(slot1Cfg.mrp);
         if (slot1Cfg.customImage) activeImg = slot1Cfg.customImage;
         if (slot1Cfg.title) activeName = slot1Cfg.title;
         if (slot1Cfg.subtitle) activeSub = slot1Cfg.subtitle;
-      } else if (isSlot2 && slot2Cfg) {
+      } else if (isSlot2 && isSlot2Matching) {
         if (slot2Cfg.price !== undefined && slot2Cfg.price !== '') activePrice = Number(slot2Cfg.price);
         if (slot2Cfg.mrp !== undefined && slot2Cfg.mrp !== '') activeMrp = Number(slot2Cfg.mrp);
         if (slot2Cfg.customImage) activeImg = slot2Cfg.customImage;
         if (slot2Cfg.title) activeName = slot2Cfg.title;
         if (slot2Cfg.subtitle) activeSub = slot2Cfg.subtitle;
-      } else if (isCombo && comboCfg) {
+      } else if (isCombo && isComboMatching) {
         if (comboCfg.price !== undefined && comboCfg.price !== '') activePrice = Number(comboCfg.price);
         if (comboCfg.mrp !== undefined && comboCfg.mrp !== '') activeMrp = Number(comboCfg.mrp);
         if (comboCfg.customImage) activeImg = comboCfg.customImage;
@@ -481,67 +667,75 @@ async function initStorefrontApp() {
         }
       }
 
-      // 2. Desktop Hero Flank Cards (ORIGINAL: always fixed transparent bottles & original pricing)
-      if (isOil) {
+      // 2. Desktop Hero Flank Cards (Dynamic 100% JSON Connected)
+      if (isSlot1) {
         const flankOil = document.querySelector('.hero-product-flank--left .hero-flank-card') || document.querySelector('.flank-oil');
         if (flankOil) {
           const title = flankOil.querySelector('.flank-name') || flankOil.querySelector('.flank-title');
-          if (title) title.textContent = pName;
+          if (title) title.textContent = activeName;
           const sub = flankOil.querySelector('.flank-sub');
-          if (sub && pSub) sub.textContent = pSub;
+          if (sub && activeSub) sub.textContent = activeSub;
           const price = flankOil.querySelector('.flank-price');
-          if (price) price.textContent = `₹${pPrice}`;
+          if (price) price.textContent = `₹${activePrice}`;
+          const flankImg = flankOil.querySelector('.flank-img');
+          if (flankImg && activeImg) flankImg.src = activeImg;
           const btn = flankOil.querySelector('.btn-quick-add');
           if (btn) {
             btn.dataset.id = pId;
-            btn.dataset.name = pName;
-            btn.dataset.price = pPrice;
-            if (pImg) btn.dataset.img = pImg;
+            btn.dataset.name = activeName;
+            btn.dataset.price = activePrice;
+            if (activeImg) btn.dataset.img = activeImg;
           }
         }
-      } else if (isShampoo) {
+      } else if (isSlot2) {
         const flankShamp = document.querySelector('.hero-product-flank--right .hero-flank-card') || document.querySelector('.flank-shampoo');
         if (flankShamp) {
           const title = flankShamp.querySelector('.flank-name') || flankShamp.querySelector('.flank-title');
-          if (title) title.textContent = pName;
+          if (title) title.textContent = activeName;
           const sub = flankShamp.querySelector('.flank-sub');
-          if (sub && pSub) sub.textContent = pSub;
+          if (sub && activeSub) sub.textContent = activeSub;
           const price = flankShamp.querySelector('.flank-price');
-          if (price) price.textContent = `₹${pPrice}`;
+          if (price) price.textContent = `₹${activePrice}`;
+          const flankImg = flankShamp.querySelector('.flank-img');
+          if (flankImg && activeImg) flankImg.src = activeImg;
           const btn = flankShamp.querySelector('.btn-quick-add');
           if (btn) {
             btn.dataset.id = pId;
-            btn.dataset.name = pName;
-            btn.dataset.price = pPrice;
-            if (pImg) btn.dataset.img = pImg;
+            btn.dataset.name = activeName;
+            btn.dataset.price = activePrice;
+            if (activeImg) btn.dataset.img = activeImg;
           }
         }
       }
 
-      // 3. Mobile Hero Showcase (ORIGINAL: always fixed transparent bottles & original pricing)
-      if (isOil) {
+      // 3. Mobile Hero Showcase (Dynamic 100% JSON Connected)
+      if (isSlot1) {
         const nameEl = document.querySelector('.m-hero-stage--oil .m-bottle-name');
-        if (nameEl) nameEl.textContent = pName;
+        if (nameEl) nameEl.textContent = activeName;
         const subEl = document.querySelector('.m-hero-stage--oil .m-bottle-sub');
-        if (subEl) subEl.textContent = `200ml • ₹${pPrice}`;
+        if (subEl) subEl.textContent = `${activeSub ? activeSub + ' • ' : ''}₹${activePrice}`;
+        const mImg = document.querySelector('.m-hero-stage--oil img.m-bottle-img');
+        if (mImg && activeImg) mImg.src = activeImg;
         const mBuyOil = document.querySelector('.m-hero-stage--buy-oil .btn-quick-add');
         if (mBuyOil) {
           mBuyOil.dataset.id = pId;
-          mBuyOil.dataset.name = pName;
-          mBuyOil.dataset.price = pPrice;
-          if (pImg) mBuyOil.dataset.img = pImg;
+          mBuyOil.dataset.name = activeName;
+          mBuyOil.dataset.price = activePrice;
+          if (activeImg) mBuyOil.dataset.img = activeImg;
         }
-      } else if (isShampoo) {
+      } else if (isSlot2) {
         const nameEl = document.querySelector('.m-hero-stage--shampoo .m-bottle-name');
-        if (nameEl) nameEl.textContent = pName;
+        if (nameEl) nameEl.textContent = activeName;
         const subEl = document.querySelector('.m-hero-stage--shampoo .m-bottle-sub');
-        if (subEl) subEl.textContent = `250ml • ₹${pPrice}`;
+        if (subEl) subEl.textContent = `${activeSub ? activeSub + ' • ' : ''}₹${activePrice}`;
+        const mImg = document.querySelector('.m-hero-stage--shampoo img.m-bottle-img');
+        if (mImg && activeImg) mImg.src = activeImg;
         const mBuyShamp = document.querySelector('.m-hero-stage--buy-shampoo .btn-quick-add');
         if (mBuyShamp) {
           mBuyShamp.dataset.id = pId;
-          mBuyShamp.dataset.name = pName;
-          mBuyShamp.dataset.price = pPrice;
-          if (pImg) mBuyShamp.dataset.img = pImg;
+          mBuyShamp.dataset.name = activeName;
+          mBuyShamp.dataset.price = activePrice;
+          if (activeImg) mBuyShamp.dataset.img = activeImg;
         }
       }
 
@@ -1622,79 +1816,47 @@ async function initStorefrontApp() {
   };
 
   const DEFAULT_REVIEWS = [
-    {
-      id: 'rev_01',
-      name: 'Karthikeyan V',
-      product_name: 'Herbal Hair Oil',
-      rating: 5,
-      title: 'Dandruff flakes completely vanished',
-      comment: 'Started using after a friend recommended it. In just five uses, dandruff flakes and dry scalp irritation completely vanished.',
-      created_at: '2026-10-08T12:00:00Z'
-    },
-    {
-      id: 'rev_02',
-      name: 'Divya Ramesh',
-      product_name: 'Hibiscus Flower Shampoo',
-      rating: 5,
-      title: 'Gentle on color-treated hair',
-      comment: 'Very gentle on color-treated hair. Subtle botanical fragrance lasts throughout the day.',
-      created_at: '2026-10-07T12:00:00Z'
-    },
-    {
-      id: 'rev_03',
-      name: 'Pooja Madhavan',
-      product_name: 'Herbal Hair Oil',
-      rating: 5,
-      title: 'Monsoon hair fall stopped completely',
-      comment: 'The authentic lavender aroma and 18-herb Ayurvedic infusion restored my hair density within 3 weeks. Absolutely crown-worthy!',
-      created_at: '2026-10-06T09:15:00Z'
-    },
-    {
-      id: 'rev_04',
-      name: 'Dr. Radhika Krishnan',
-      product_name: 'The Royal Hair Ritual (Duo Set)',
-      rating: 5,
-      title: 'Clinical quality pure formulation',
-      comment: 'As a clinician, I truly appreciate the pure solar steeping without sulfates or mineral oil. Noticeable improvement in strand resilience and shine.',
-      created_at: '2026-10-05T12:00:00Z'
-    },
-    {
-      id: 'rev_05',
-      name: 'Kavitha Sundar',
-      product_name: 'The Royal Hair Ritual (Duo Set)',
-      rating: 5,
-      title: 'Transformed dry frizzy hair',
-      comment: 'The ritual combo worked wonders on my rough ends. Both formulations complement each other flawlessly. Will repurchase forever!',
-      created_at: '2026-09-26T16:00:00Z'
-    },
-    {
-      id: 'rev_06',
-      name: 'Smt. Meenakshi Sundaram',
-      product_name: 'Herbal Hair Oil',
-      rating: 5,
-      title: 'Traditional apothecary at its finest',
-      comment: 'Sacred South Indian herbal wisdom in a modern glass dropper. Absorbs smoothly overnight with zero greasy residue on pillows.',
-      created_at: '2026-09-28T14:30:00Z'
-    },
-    {
-      id: 'rev_07',
-      name: 'Ananya Sharma',
-      product_name: 'Hibiscus Flower Shampoo',
-      rating: 5,
-      title: 'Gentle on scalp, incredible natural gloss',
-      comment: 'A genuine sulfate-free cleanser that purifies without stripping moisture. The fresh hibiscus petal infusion leaves hair silky and light.',
-      created_at: '2026-09-22T10:00:00Z'
-    },
-    {
-      id: 'rev_08',
-      name: 'Bharathi',
-      product_name: 'Hibiscus Flower Shampoo',
-      rating: 5,
-      title: 'Nachiyar Hair Oil & Shampoo',
-      comment: 'This product is very good and effective for hair health.',
-      created_at: '2026-10-09T12:00:00Z'
-    }
-  ];
+  {
+    "name": "Aditya Kapoor",
+    "product_name": "The Aurelia Collector's Duo (Set of 2)",
+    "rating": 5,
+    "title": "Two Watches, One Perfect Set",
+    "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
+    "location": "Delhi, India"
+  },
+  {
+    "name": "Rohan Mehta",
+    "product_name": "Aurelia Sovereign Emerald 41",
+    "rating": 5,
+    "title": "The Emerald Dial Is Stunning",
+    "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
+    "location": "Mumbai, India"
+  },
+  {
+    "name": "Vikram Nair",
+    "product_name": "Aurelia DeepOcean Ceramic Diver",
+    "rating": 5,
+    "title": "Built Like A Tank",
+    "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
+    "location": "Kochi, India"
+  },
+  {
+    "name": "Ananya Krishnan",
+    "product_name": "Aurelia Heritage Moonphase",
+    "rating": 5,
+    "title": "Perfect Gift",
+    "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
+    "location": "Chennai, India"
+  },
+  {
+    "name": "Siddharth Rao",
+    "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
+    "rating": 4,
+    "title": "Great Value Straps",
+    "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
+    "location": "Bengaluru, India"
+  }
+];
 
   async function loadPublicReviews() {
     if (!reviewsScrollerTrack) return;
@@ -2123,16 +2285,22 @@ async function initStorefrontApp() {
     adjustTooltip(node);
 
     const name = node.dataset.name || '';
-    const tag = node.dataset.tag || 'Botanical';
+    const tag = node.dataset.tag || 'Feature';
     const desc = node.dataset.desc || '';
     const avatarImg = node.querySelector('.node-avatar');
+    const avatarIcon = node.querySelector('.node-avatar-icon');
 
     if (spotlightTitle) spotlightTitle.textContent = name;
     if (spotlightTag) spotlightTag.textContent = tag;
     if (spotlightDesc) spotlightDesc.textContent = desc;
-    if (spotlightImg && avatarImg) {
-      spotlightImg.src = avatarImg.src;
-      spotlightImg.alt = name;
+
+    const spotlightIconWrap = document.getElementById('spotlightIconWrap');
+    if (spotlightIconWrap) {
+      if (avatarImg && avatarImg.src) {
+        spotlightIconWrap.innerHTML = `<img src="${avatarImg.src}" alt="${name}" id="spotlightImg">`;
+      } else if (avatarIcon) {
+        spotlightIconWrap.innerHTML = `<span class="spotlight-icon-badge" style="font-size: 2.2rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: #1E293B; border-radius: 50%; color: #FFF; border: 2px solid #D4AF37;">${avatarIcon.innerHTML || avatarIcon.textContent}</span>`;
+      }
     }
 
     if (spotlightIdleWrap) spotlightIdleWrap.style.display = 'none';

@@ -1,0 +1,461 @@
+{
+  "brand": {
+    "name": "TechNova Electronics",
+    "shortName": "TECHNOVA",
+    "tagline": "Technology That Moves You Forward",
+    "logo": "assets/technova-logo.png",
+    "favicon": "assets/technova-logo.png",
+    "colors": {
+      "primary": "#0F172A",
+      "secondary": "#2563EB",
+      "accent": "#38BDF8",
+      "background": "#F8FAFC",
+      "surface": "#FFFFFF",
+      "text": "#0F172A",
+      "muted": "#475569",
+      "cardBg1": "#1E293B",
+      "cardBg2": "#0F2942",
+      "bundleBg": "#1E1B4B"
+    },
+    "fonts": {
+      "heading": "Cinzel",
+      "body": "Plus Jakarta Sans"
+    }
+  },
+  "business": {
+    "phone": "+91 98765 43210",
+    "email": "support@technova.com",
+    "address": "TechNova Innovation Hub, IT Park Road, Bengaluru, Karnataka - 560100",
+    "gstin": "29AABCT1234F1Z5",
+    "timings": "Mon - Sat: 9:00 AM - 8:00 PM"
+  },
+  "content": {
+    "announcement": "⚡ FREE EXPRESS AIR SHIPPING ON ALL SMARTPHONE & AUDIO ORDERS OVER ₹999 ⚡",
+    "freeShippingThreshold": 999,
+    "coupon": {
+      "code": "NOVA15",
+      "discountPercent": 15,
+      "active": true,
+      "tagline": "15% Instant Savings On Flagship Devices"
+    },
+    "hero": {
+      "eyebrow": "NEXT GENERATION ARCHITECTURE",
+      "title": "Engineered For The Future.",
+      "subtitle": "Experience flagship speed, edge-to-edge AMOLED clarity, and AI-powered performance crafted for daily brilliance."
+    },
+    "collection": {
+      "eyebrow": "THE FLAGSHIP SELECTION",
+      "title": "Featured Innovations. Zero Compromise.",
+      "subtitle": "Handpicked premier hardware designed for speed, durability, and daily elegance."
+    },
+    "orbitCenterImage": "assets/technova-phone-transparent.png",
+    "orbitBadge": "Flagship Architecture • Precision Built",
+    "orbitEyebrow": "ENGINEERED ARCHITECTURE",
+    "orbitHeading": "18 Precision Smart Architecture Modules",
+    "orbitSubtext": "Engineered with 18 high-precision hardware modules, sensors, and intelligent algorithms. Hover over any node to explore.",
+    "orbitIdleIcon": "⚡",
+    "orbitIdleText": "Hover over any precision architecture module to explore its specifications",
+    "orbit": [
+      {
+        "name": "120Hz AMOLED",
+        "icon": "📱",
+        "tag": "Ultra Display",
+        "desc": "FHD+ crystal clear 120Hz refresh rate with 1500 nits peak outdoor brightness."
+      },
+      {
+        "name": "50MP Sony AI",
+        "icon": "📷",
+        "tag": "Flagship Optics",
+        "desc": "Precision 50-megapixel camera sensor with optical image stabilization and night vision."
+      },
+      {
+        "name": "5000mAh Battery",
+        "icon": "🔋",
+        "tag": "All-Day Power",
+        "desc": "High-density lithium cell engineered to provide over 36 hours of continuous usage."
+      },
+      {
+        "name": "Dimensity 9200+",
+        "icon": "⚡",
+        "tag": "4nm Processor",
+        "desc": "Flagship octa-core silicon architecture designed for lightning-fast responsiveness."
+      },
+      {
+        "name": "67W Turbo Charge",
+        "icon": "🔌",
+        "tag": "Rapid Power",
+        "desc": "0 to 100% full capacity charge in under 38 minutes with cold-charge management."
+      },
+      {
+        "name": "Stereo Dolby",
+        "icon": "🔊",
+        "tag": "Studio Audio",
+        "desc": "Acoustically tuned dual speakers with spatial Dolby Atmos certification."
+      },
+      {
+        "name": "Vapor Cooling",
+        "icon": "❄️",
+        "tag": "Thermal Tech",
+        "desc": "Multi-layered graphite thermal cooling chamber preventing throttle during gaming."
+      },
+      {
+        "name": "Gorilla Glass 7",
+        "icon": "🛡️",
+        "tag": "Armor Defense",
+        "desc": "Drop and scratch-resistant military-grade front glass protection."
+      },
+      {
+        "name": "IP68 Certified",
+        "icon": "💧",
+        "tag": "Water Sealed",
+        "desc": "Tested water and dust resistance up to 1.5 meters depth for 30 minutes."
+      },
+      {
+        "name": "In-Display Sensor",
+        "icon": "👆",
+        "tag": "Biometrics",
+        "desc": "Ultrasonic under-screen fingerprint sensor unlocking in 0.18 seconds."
+      },
+      {
+        "name": "Wi-Fi 6E Dual",
+        "icon": "📶",
+        "tag": "Gigabit Link",
+        "desc": "Ultra-low latency wireless networking supporting 6GHz band connectivity."
+      },
+      {
+        "name": "16GB RAM Boost",
+        "icon": "🧠",
+        "tag": "Multitasking",
+        "desc": "LPDDR5X high-speed RAM with virtual memory extension for effortless app switching."
+      },
+      {
+        "name": "512GB UFS 3.1",
+        "icon": "💾",
+        "tag": "High Speed Read",
+        "desc": "Blazing fast flash storage transferring 4K video files in seconds."
+      },
+      {
+        "name": "NFC Payments",
+        "icon": "💳",
+        "tag": "Tap & Go",
+        "desc": "Hardware-secured tokenized NFC reader for Google Pay and digital access cards."
+      },
+      {
+        "name": "10-Bit Color",
+        "icon": "🎨",
+        "tag": "True Visuals",
+        "desc": "1.07 billion colors reproducing photorealistic cinema-standard hues."
+      },
+      {
+        "name": "Dual 5G Standby",
+        "icon": "📡",
+        "tag": "Network Ready",
+        "desc": "Simultaneous dual-SIM 5G connectivity with smart tower handover algorithms."
+      },
+      {
+        "name": "Micro Haptics",
+        "icon": "📳",
+        "tag": "Tactile Engine",
+        "desc": "Precision linear vibration motor offering natural haptic touch feedback."
+      },
+      {
+        "name": "Eco Packaging",
+        "icon": "♻️",
+        "tag": "Sustainable",
+        "desc": "100% recyclable soy-ink paper packaging reducing environmental footprint."
+      }
+    ],
+    "features": [
+      {
+        "title": "2-Year Official Warranty",
+        "subtitle": "Comprehensive replacement coverage"
+      },
+      {
+        "title": "Free Express Shipping",
+        "subtitle": "Doorstep delivery in 24-48 hours"
+      },
+      {
+        "title": "7-Day Easy Replacement",
+        "subtitle": "Hassle-free verified returns policy"
+      }
+    ],
+    "story": {
+      "title": "The TechNova Story",
+      "badge": "FLAGSHIP INNOVATION",
+      "image": "assets/technova-story-banner.jpg",
+      "quote": "Founded with a vision to democratize elite electronics, TechNova builds cutting-edge technology combining precision engineering with accessible elegance.",
+      "author": "TECHNOVA Engineering Labs",
+      "authorTitle": "Bengaluru Innovation Center",
+      "ctaText": "Explore All Innovations →",
+      "ctaUrl": "/shop/"
+    },
+    "footer": {
+      "bio": "TechNova is a premier consumer electronics brand dedicated to delivering flagship-tier smartphones, laptops, audio systems, and accessories across India."
+    }
+  },
+  "products": [
+    {
+      "id": "TN-MOB-001",
+      "name": "Nova X5 Smartphone",
+      "slug": "nova-x5-smartphone",
+      "category": "Mobiles",
+      "brand": "TechNova",
+      "price": 24999,
+      "compareAtPrice": 28999,
+      "stock": 45,
+      "sku": "TN-MOB-001",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#1E293B",
+      "tagline": "5G Ultra • 120Hz AMOLED",
+      "badge": {
+        "number": "5G",
+        "unit": "ULTRA",
+        "title": "Ultra Performance 5G Smartphone"
+      },
+      "description": "Flagship 5G smartphone equipped with 120Hz FHD+ AMOLED display, 50MP Sony AI camera, and 5000mAh battery with 67W Turbo Charging.",
+      "shortDescription": "Powerful performance with 120Hz AMOLED.",
+      "images": [
+        "assets/technova-phone-transparent.png"
+      ],
+      "specifications": {
+        "display": "6.7-inch Full HD+ AMOLED",
+        "storage": "256GB UFS 3.1",
+        "memory": "8GB LPDDR5X",
+        "battery": "5000mAh with 67W Charger",
+        "warranty": "2 Years"
+      },
+      "rating": 4.9,
+      "reviewCount": 142,
+      "theme_color": "#1E293B"
+    },
+    {
+      "id": "TN-AUD-002",
+      "name": "SonicBeat Wireless Headphones",
+      "slug": "sonicbeat-wireless-headphones",
+      "category": "Audio",
+      "brand": "TechNova",
+      "price": 4999,
+      "compareAtPrice": 6999,
+      "stock": 35,
+      "sku": "TN-AUD-002",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#0F2942",
+      "tagline": "Hi-Res Audio • 40dB ANC",
+      "badge": {
+        "number": "40dB",
+        "unit": "ANC",
+        "title": "Active Noise Cancellation"
+      },
+      "description": "Studio-grade wireless over-ear headphones featuring 40dB Hybrid Active Noise Cancellation, 40mm titanium drivers, and 60 hours battery backup.",
+      "shortDescription": "Pure studio silence and 60-hour playtime.",
+      "images": [
+        "assets/technova-headphones-transparent.png"
+      ],
+      "specifications": {
+        "driver": "40mm Titanium Dynamic",
+        "anc": "40dB Hybrid ANC",
+        "battery": "60 Hours",
+        "connectivity": "Bluetooth 5.3 & 3.5mm Aux",
+        "warranty": "1 Year"
+      },
+      "rating": 4.8,
+      "reviewCount": 96,
+      "theme_color": "#0F2942"
+    },
+    {
+      "id": "TN-WEA-003",
+      "name": "NovaFit Smartwatch",
+      "slug": "novafit-smartwatch",
+      "category": "Wearables",
+      "brand": "TechNova",
+      "price": 3499,
+      "compareAtPrice": 4999,
+      "stock": 40,
+      "sku": "TN-WEA-003",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#1E1B4B",
+      "tagline": "AMOLED • SpO2 & Heart Rate",
+      "badge": {
+        "number": "PRO",
+        "unit": "FIT",
+        "title": "Continuous Health Tracker"
+      },
+      "description": "Premium smartwatch with 1.43-inch Always-on AMOLED display, Bluetooth calling, 100+ sports modes, and 12-day battery life.",
+      "shortDescription": "Sleek AMOLED health tracker with BT calling.",
+      "images": [
+        "assets/technova-watch-transparent.png"
+      ],
+      "specifications": {
+        "display": "1.43-inch AMOLED (466x466)",
+        "battery": "12 Days Normal Use",
+        "sensors": "Heart Rate, SpO2, Sleep, Pedometer",
+        "waterResistance": "IP68 Water Proof",
+        "warranty": "1 Year"
+      },
+      "rating": 4.7,
+      "reviewCount": 78,
+      "theme_color": "#1E1B4B"
+    },
+    {
+      "id": "TN-LAP-004",
+      "name": "NovaBook Pro 14",
+      "slug": "novabook-pro-14",
+      "category": "Laptops",
+      "brand": "TechNova",
+      "price": 58999,
+      "compareAtPrice": 64999,
+      "stock": 18,
+      "sku": "TN-LAP-004",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#1E293B",
+      "tagline": "Core i7 • 16GB RAM • 512GB SSD",
+      "badge": {
+        "number": "i7",
+        "unit": "PRO",
+        "title": "Pro Productivity Workstation"
+      },
+      "description": "Ultra-thin aluminum chassis laptop with Intel Core i7 13th Gen processor, 16GB DDR5 RAM, 512GB NVMe SSD, and 14-inch 2.8K IPS anti-glare screen.",
+      "shortDescription": "High-performance laptop for coders & creators.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "specifications": {
+        "processor": "Intel Core i7 13th Gen",
+        "ram": "16GB LPDDR5",
+        "storage": "512GB NVMe M.2 SSD",
+        "screen": "14-inch 2.8K 90Hz",
+        "weight": "1.38kg"
+      },
+      "rating": 4.8,
+      "reviewCount": 64,
+      "theme_color": "#1E293B"
+    },
+    {
+      "id": "TN-ACC-005",
+      "name": "PowerMax 30W USB-C Charger",
+      "slug": "powermax-30w-usb-c-charger",
+      "category": "Accessories",
+      "brand": "TechNova",
+      "price": 1299,
+      "compareAtPrice": 1799,
+      "stock": 60,
+      "sku": "TN-ACC-005",
+      "featured": true,
+      "newArrival": false,
+      "themeColor": "#0F172A",
+      "tagline": "GaN Fast • Multi-Device",
+      "badge": {
+        "number": "30W",
+        "unit": "FAST",
+        "title": "Gallium Nitride Charger"
+      },
+      "description": "Pocket-sized GaN fast charger with Power Delivery 3.0 and PPS support. Charges smartphones, tablets, and headphones safely and rapidly.",
+      "shortDescription": "Ultra-compact 30W GaN wall adapter.",
+      "images": [
+        "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "specifications": {
+        "output": "30W Max PD 3.0",
+        "ports": "Dual USB-C & USB-A",
+        "safety": "Over-voltage, Overheat & Surge Guard",
+        "warranty": "1 Year"
+      },
+      "rating": 4.6,
+      "reviewCount": 112,
+      "theme_color": "#0F172A"
+    },
+    {
+      "id": "TN-AUD-006",
+      "name": "AirWave True Wireless Earbuds",
+      "slug": "airwave-true-wireless-earbuds",
+      "category": "Audio",
+      "brand": "TechNova",
+      "price": 2499,
+      "compareAtPrice": 3499,
+      "stock": 50,
+      "sku": "TN-AUD-006",
+      "featured": true,
+      "newArrival": true,
+      "themeColor": "#312E81",
+      "tagline": "ENC Quad Mic • 32h Playtime",
+      "badge": {
+        "number": "32H",
+        "unit": "PLAY",
+        "title": "Ultra-Long Endurance"
+      },
+      "description": "True wireless in-ear earbuds with environmental noise cancellation quad microphones for crystal-clear calls and deep bass stereo sound.",
+      "shortDescription": "Ergonomic earbuds with rich acoustic bass.",
+      "images": [
+        "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "specifications": {
+        "batteryLife": "8h Earbuds + 24h Case",
+        "latency": "45ms Low Latency Game Mode",
+        "rating": "IPX5 Sweat Resistant",
+        "warranty": "1 Year"
+      },
+      "rating": 4.7,
+      "reviewCount": 88,
+      "theme_color": "#312E81"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_mob",
+      "name": "Mobiles",
+      "slug": "mobiles",
+      "count": 1
+    },
+    {
+      "id": "cat_aud",
+      "name": "Audio",
+      "slug": "audio",
+      "count": 2
+    },
+    {
+      "id": "cat_wea",
+      "name": "Wearables",
+      "slug": "wearables",
+      "count": 1
+    },
+    {
+      "id": "cat_lap",
+      "name": "Laptops",
+      "slug": "laptops",
+      "count": 1
+    },
+    {
+      "id": "cat_acc",
+      "name": "Accessories",
+      "slug": "accessories",
+      "count": 1
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_01",
+      "name": "Karthik R.",
+      "rating": 5,
+      "title": "Unbeatable Phone Performance",
+      "comment": "The 120Hz display is buttery smooth and the battery easily lasts 1.5 days. Delivered in 24 hours to Chennai!"
+    },
+    {
+      "id": "rev_02",
+      "name": "Pooja Sharma",
+      "rating": 5,
+      "title": "Superb ANC Quality",
+      "comment": "The SonicBeat headphones block out all office noise. Sound quality is rich and battery life is unbelievable."
+    },
+    {
+      "id": "rev_03",
+      "name": "Arjun Verma",
+      "rating": 5,
+      "title": "Reliable and Fast",
+      "comment": "Ordered the charger and smartwatch. Genuine brand quality and fast shipping. Highly recommended!"
+    }
+  ]
+}

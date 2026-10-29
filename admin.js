@@ -6,8 +6,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // Authentication & Session Guard
-  const adminToken = localStorage.getItem('nachiyar_admin_token');
-  const storedUserJson = localStorage.getItem('nachiyar_admin_user');
+  const adminToken = localStorage.getItem('store_admin_token') || localStorage.getItem('nachiyar_admin_token') || localStorage.getItem('admin_token') || (document.cookie.match(/(?:store_admin_token|nachiyar_admin_token|admin_token)=([^;]+)/) || [])[1];
+  const storedUserJson = localStorage.getItem('store_admin_user') || localStorage.getItem('nachiyar_admin_user') || localStorage.getItem('admin_user');
 
   if (!adminToken) {
     window.location.replace('/nimda-login/');
@@ -219,6 +219,30 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ordRes.success) orders = ordRes.data;
       if (invcRes.success) invoices = invcRes.data;
       if (setRes.success) storeSettings = setRes.data;
+
+      // adminBrandingSyncApplied: Update Admin Header & Welcome branding dynamically
+      if (storeSettings) {
+        const bName = storeSettings.brandName || storeSettings.branding?.brandName || 'NACHIYAR HERBALS';
+        const isH = bName.toLowerCase().includes('nachiyar') || bName.toLowerCase().includes('herbal');
+        const bInitials = (bName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'NH';
+        let bLogo = storeSettings.logoUrl || storeSettings.branding?.logoUrl || '';
+        if (!isH && (bLogo.includes('nachiyar-logo') || !bLogo)) bLogo = '';
+
+        document.querySelectorAll('.admin-title').forEach(el => el.textContent = bName.toUpperCase());
+        const wSub = document.querySelector('.welcome-sub');
+        if (wSub) wSub.textContent = `Welcome to your ${bName} Command Center. Live synchronization across online website orders and retail counter sales.`;
+
+        const fallbackCrest = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="%231E1B24" stroke="%23D4AF37" stroke-width="2"/><text x="50%" y="54%" font-family="sans-serif" font-size="20" font-weight="700" fill="%23D4AF37" dominant-baseline="middle" text-anchor="middle">${bInitials}</text></svg>`;
+        document.querySelectorAll('.admin-logo').forEach(img => {
+          if (bLogo) {
+            img.onerror = function() { this.onerror = null; this.src = fallbackCrest; };
+            img.src = bLogo;
+          } else {
+            img.src = fallbackCrest;
+          }
+        });
+      }
+
       if (anaRes.success) latestAnalytics = anaRes.data;
 
       // Update UI Views
@@ -1025,6 +1049,57 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 3. PRODUCT CATALOG MANAGEMENT
   // ==========================================
+  function populateAdminCategoryDropdowns() {
+    let catList = [];
+    if (window._cachedConfigCategories && window._cachedConfigCategories.length) {
+      catList = window._cachedConfigCategories;
+    } else if (Array.isArray(products) && products.length) {
+      const set = new Set();
+      products.forEach(p => { if (p.category) set.add(p.category.trim()); });
+      catList = Array.from(set);
+    }
+    if (!catList.length) {
+      catList = ['Mobiles', 'Audio', 'Wearables', 'Laptops', 'Accessories'];
+    }
+
+    // 1. Populate productCategoryFilter
+    const filterSelect = document.getElementById('productCategoryFilter');
+    if (filterSelect) {
+      const prevFilter = filterSelect.value;
+      let filterHtml = '<option value="">All Categories</option>';
+      catList.forEach(c => {
+        filterHtml += `<option value="${escapeAdminHtml(c)}">${escapeAdminHtml(c)}</option>`;
+      });
+      filterSelect.innerHTML = filterHtml;
+      if (prevFilter && catList.includes(prevFilter)) {
+        filterSelect.value = prevFilter;
+      }
+      if (typeof filterSelect._syncCustomSelect === 'function') {
+        filterSelect._syncCustomSelect();
+      }
+    }
+
+    // 2. Populate formProdCategory
+    const formSelect = document.getElementById('formProdCategory');
+    if (formSelect) {
+      const prevForm = formSelect.value;
+      let formHtml = '';
+      catList.forEach(c => {
+        formHtml += `<option value="${escapeAdminHtml(c)}">${escapeAdminHtml(c)}</option>`;
+      });
+      formSelect.innerHTML = formHtml;
+      if (prevForm && catList.includes(prevForm)) {
+        formSelect.value = prevForm;
+      } else if (catList[0]) {
+        formSelect.value = catList[0];
+      }
+      if (typeof formSelect._syncCustomSelect === 'function') {
+        formSelect._syncCustomSelect();
+      }
+    }
+  }
+
+  // ==========================================
   function renderProductsTable() {
     productsTableBody.innerHTML = '';
     const searchVal = (document.getElementById('productSearchInput')?.value || '').toLowerCase().trim();
@@ -1436,15 +1511,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('comboFormProductId').value = targetCatalogId;
 
     // 2. Set Initial Form Values from Saved Showcase (NOT overwritten by random row click)
-    document.getElementById('comboFormTitle').value = showcase.title || 'The Royal Hair Ritual (Duo Set)';
+    document.getElementById('comboFormTitle').value = showcase.title || (products[2] ? products[2].name : 'Featured Innovation Bundle');
     document.getElementById('comboFormTag').value = showcase.tag || 'BEST VALUE: SAVE ₹699';
     document.getElementById('comboFormPrice').value = (showcase.price !== undefined && showcase.price !== '') ? showcase.price : 449;
     document.getElementById('comboFormMrp').value = (showcase.mrp !== undefined && showcase.mrp !== '') ? showcase.mrp : 1148;
 
-    const comboImg = showcase.customImage || 'assets/duo-ritual-new.jpg';
+    const comboImg = showcase.customImage || (products[2]?.images?.[0] || 'assets/technova-watch-transparent.png');
     document.getElementById('comboFormImageUrl').value = comboImg;
     document.getElementById('comboImagePreview').src = comboImg;
-    document.getElementById('comboFormDesc').value = showcase.description || 'Experience complete follicular revitalisation. Step 1: Pre-wash deep scalp nourishment with the Lavender Herbal Hair Oil. Step 2: Gentle balancing wash with the Hibiscus Flower Shampoo. Includes custom gold travel pouch.';
+    document.getElementById('comboFormDesc').value = showcase.description || (products[2]?.description || 'Handpicked flagship devices engineered for high-performance productivity and seamless connectivity.');
 
     const statusEl = document.getElementById('comboUploadStatus');
     if (statusEl) statusEl.style.display = 'none';
@@ -1454,13 +1529,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Interactive Multi-Product Selector Population
     // Filter out combo bundle items (e.g. Ritual Sets / prod_duo_03) so only single products are selectable
     const pickerList = document.getElementById('comboProductsPickerList');
-    const singleProducts = Array.isArray(products)
-      ? products.filter(p => p.id !== 'prod_duo_03' && p.category !== 'Ritual Sets')
-      : [];
+    const singleProducts = Array.isArray(products) ? products.filter(p => p.id !== 'prod_duo_03' && p.id !== 'TN-ACC-006' && p.category !== 'Ritual Sets' && p.category !== 'Bundles') : [];
 
     let selectedIds = Array.isArray(showcase.selectedProductIds) && showcase.selectedProductIds.length > 0
       ? [...showcase.selectedProductIds]
-      : ['prod_oil_01', 'prod_shampoo_02'];
+      : [products[0]?.id || 'prod_oil_01', products[1]?.id || 'prod_shampoo_02'];
 
     // If an individual product was passed when opening modal, ensure it is selected
     if (prod && prod.id && prod.id !== 'prod_duo_03' && prod.category !== 'Ritual Sets') {
@@ -1588,8 +1661,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (tagInput && (!tagInput.value || tagInput.value.includes('BEST VALUE') || tagInput.value.includes('SAVE'))) {
             tagInput.value = `BEST VALUE: SAVE ₹${Math.max(0, savings)}`;
           }
-          if (titleInput && (!titleInput.value || titleInput.value === 'The Royal Hair Ritual (Duo Set)' || titleInput.value.includes('Ritual Set'))) {
-            titleInput.value = names.length > 1 ? `${names.join(' + ')} Ritual Set` : (names[0] ? `${names[0]} Combo Pack` : 'The Royal Hair Ritual (Duo Set)');
+          if (titleInput && (!titleInput.value || titleInput.value === (products[2] ? products[2].name : 'Featured Innovation Bundle') || titleInput.value.includes('Ritual Set'))) {
+            titleInput.value = names.length > 1 ? `${names.join(' + ')} Ritual Set` : (names[0] ? `${names[0]} Combo Pack` : (products[2] ? products[2].name : 'Featured Innovation Bundle'));
           }
 
           // Auto-generate composite pack image if admin hasn't explicitly uploaded their own file
@@ -1704,7 +1777,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const comboUrlInput = document.getElementById('comboFormImageUrl');
   if (comboUrlInput) {
     comboUrlInput.addEventListener('input', () => {
-      document.getElementById('comboImagePreview').src = comboUrlInput.value.trim() || 'assets/duo-ritual-new.jpg';
+      document.getElementById('comboImagePreview').src = comboUrlInput.value.trim() || (products[2]?.images?.[0] || 'assets/technova-watch-transparent.png');
     });
   }
 
@@ -1848,11 +1921,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const imgPreview = document.getElementById('formProdImagePreview');
     const uploadStatus = document.getElementById('imageUploadStatus');
     if (uploadStatus) uploadStatus.style.display = 'none';
+    if (typeof populateAdminCategoryDropdowns === 'function') populateAdminCategoryDropdowns();
 
     if (productId) {
       const p = products.find(x => x.id === productId);
       if (!p) return;
-      modalProductTitle.textContent = `Edit Formulation: ${p.name}`;
+      modalProductTitle.textContent = `Edit Product: ${p.name}`;
       document.getElementById('formProductId').value = p.id;
       document.getElementById('formProdName').value = p.name;
       document.getElementById('formProdCategory').value = p.category;
@@ -1864,7 +1938,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const prodImg = (p.images && p.images[0]) || 'assets/herbal-hair-oil.jpg';
       document.getElementById('formProdImage').value = prodImg;
       if (imgPreview) imgPreview.src = prodImg;
-      document.getElementById('formProdColor').value = p.themeColor || '#6B4E9B';
+      document.getElementById('formProdColor').value = p.themeColor || p.theme_color || '#1A1121';
       document.getElementById('formProdTagline').value = p.tagline || '';
       document.getElementById('formProdDesc').value = p.description || '';
       document.getElementById('formProdIngredients').value = p.ingredients || '';
@@ -1875,10 +1949,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('formProdKeywords').value = p.seo.keywords || '';
       }
     } else {
-      modalProductTitle.textContent = 'Add New Formulation';
+      modalProductTitle.textContent = 'Add New Product';
       if (formProdSlug) delete formProdSlug.dataset.manual;
       document.getElementById('formProdSlug').value = '';
-      const defaultImg = 'assets/herbal-hair-oil.jpg';
+      const defaultImg = (products[0]?.images?.[0] || 'assets/technova-phone-transparent.png');
       document.getElementById('formProdImage').value = defaultImg;
       if (imgPreview) imgPreview.src = defaultImg;
     }
@@ -2099,6 +2173,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (res.success) {
       showToast(id ? 'Product updated successfully.' : 'New product created.');
+      try {
+        const bc = new BroadcastChannel('nachiyar_store_channel');
+        bc.postMessage({ type: 'PRODUCT_UPDATED', productId: createdId, product: payload });
+      } catch (e) {}
       productModalOverlay.classList.remove('is-active');
 
       // Check showcase placement slot selection
@@ -3197,9 +3275,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     orders.forEach(ord => {
       const tr = document.createElement('tr');
-      const isCancelRequested = ord.status === 'cancel_requested';
-      const isCancelled = ord.status === 'cancelled';
       const isCod = (ord.paymentMethod || '').toLowerCase().includes('cash') || (ord.paymentMethod || '').toLowerCase().includes('cod');
+
+      // Robust Status & Cancellation Parser (never display raw JSON)
+      let currentStatus = String(ord.status || 'placed').toLowerCase();
+      let cancelInfo = ord.cancellationDetails;
+      if (currentStatus.startsWith('{') || currentStatus.includes('reason')) {
+        try {
+          cancelInfo = JSON.parse(ord.status);
+          currentStatus = cancelInfo.status === 'approved' ? 'cancelled' : 'cancel_requested';
+        } catch (e) {
+          currentStatus = 'cancel_requested';
+        }
+      }
+
+      const cachedCancels = (() => {
+        try { return JSON.parse(localStorage.getItem('nachiyar_cancellations') || '{}'); } catch(e) { return {}; }
+      })();
+      if (!cancelInfo) cancelInfo = cachedCancels[ord.orderNumber] || cachedCancels[ord.id];
+
+      const isCancelRequested = currentStatus === 'cancel_requested';
+      const isCancelled = currentStatus === 'cancelled';
 
       if (isCancelRequested) {
         tr.style.backgroundColor = '#FFF7ED';
@@ -3217,16 +3313,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Products description
       const prodsInfo = (ord.items || []).map(i => `${i.name} <strong>(x${i.qty})</strong>`).join('<br>');
 
-      // Status pill HTML
       let statusPillHtml = '';
-      const cachedCancels = (() => {
-        try { return JSON.parse(localStorage.getItem('nachiyar_cancellations') || '{}'); } catch(e) { return {}; }
-      })();
-      const cancelInfo = ord.cancellationDetails || cachedCancels[ord.orderNumber] || cachedCancels[ord.id];
-
       if (isCancelRequested) {
         statusPillHtml = `
-          <span class="badge-tag" style="background:#FFEDD5; color:#C2410C; border:1px solid #FDBA74; font-weight:800; display:inline-block;">
+          <span class="badge-tag" style="background:#FFEDD5; color:#C2410C; border:1px solid #FDBA74; font-weight:800; display:inline-block; padding:4px 10px; border-radius:12px;">
             ⚠️ CANCEL REQUESTED
           </span>
           <div style="background:#FFF1F2; border:1px solid #FECDD3; border-radius:6px; padding:6px 8px; margin-top:6px; font-size:0.75rem;">
@@ -3237,14 +3327,15 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       } else if (isCancelled) {
         statusPillHtml = `
-          <span class="badge-tag" style="background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5; font-weight:800;">
+          <span class="badge-tag" style="background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5; font-weight:800; padding:4px 10px; border-radius:12px;">
             🚫 CANCELLED
           </span>
           ${cancelInfo?.refundAmount ? `<div style="font-size:0.75rem; color:#059669; font-weight:700; margin-top:4px;">₹${cancelInfo.refundAmount} Refunded</div>` : ''}
         `;
       } else {
+        const cleanDisplayStatus = (currentStatus.replace(/[^a-zA-Z0-9_ -]/g, '') || 'PLACED').toUpperCase();
         statusPillHtml = `
-          <span class="badge-tag channel-online status-tag-${ord.id}">${ord.status.toUpperCase()}</span>
+          <span class="badge-tag channel-online status-tag-${ord.id}">${cleanDisplayStatus}</span>
         `;
       }
 
@@ -3532,6 +3623,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const payPane = document.getElementById('settingsSubpanePayments');
         const brandPane = document.getElementById('settingsSubpaneBranding');
         const modPane = document.getElementById('settingsSubpaneModules');
+        const jsonPane = document.getElementById('settingsSubpaneJsonConfig');
+        if (jsonPane) jsonPane.style.display = target === 'jsonConfig' ? 'block' : 'none';
+        if (target === 'jsonConfig') loadMasterJsonToTextarea();
         if (bannerPane) bannerPane.style.display = target === 'banner' ? 'block' : 'none';
         if (bizPane) bizPane.style.display = target === 'business' ? 'block' : 'none';
         if (payPane) payPane.style.display = target === 'payments' ? 'block' : 'none';
@@ -3901,7 +3995,10 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem('nachiyar_store_settings', JSON.stringify(payload));
           localStorage.setItem('crm_active_theme', JSON.stringify(res.data));
           const ch = new BroadcastChannel('nachiyar_store_channel');
+          ch.postMessage({ type: 'SETTINGS_UPDATED', settings: res.data, timestamp: Date.now() });
           ch.postMessage({ type: 'THEME_UPDATED', settings: res.data, timestamp: Date.now() });
+          localStorage.setItem('nachiyar_store_settings', JSON.stringify(res.data));
+          localStorage.setItem('nachiyar_products_updated', Date.now().toString());
         } catch (err) {}
         updateBannerLivePreview();
       } else {
@@ -5535,7 +5632,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateAdminGreeting() {
-    const storedUserJson = localStorage.getItem('nachiyar_admin_user');
+    const storedUserJson = localStorage.getItem('store_admin_user') || localStorage.getItem('nachiyar_admin_user') || localStorage.getItem('admin_user');
     let adminName = 'Admin';
     if (storedUserJson) {
       try {
@@ -6214,3 +6311,246 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 25000);
 
 });
+  // ==========================================
+  // 8.6. SINGLE MASTER BRAND JSON CONFIG ENGINE
+  // ==========================================
+  async function loadMasterJsonToTextarea() {
+    const txtArea = document.getElementById('txtMasterConfigJson');
+    const statusTxt = document.getElementById('jsonConfigStatusText');
+    if (!txtArea) return;
+    try {
+      if (statusTxt) statusTxt.textContent = '⏳ Loading data/site-config.json...';
+      const res = await fetch('/api/config?_t=' + Date.now()).then(r => r.json());
+      if (res.success && res.data) {
+        txtArea.value = JSON.stringify(res.data, null, 2);
+        if (statusTxt) statusTxt.textContent = '✅ Loaded latest configuration from data/site-config.json';
+      }
+    } catch (err) {
+      if (statusTxt) statusTxt.textContent = '⚠️ Failed to fetch config: ' + err.message;
+    }
+  }
+
+  // File Upload Chooser
+  const fileInput = document.getElementById('fileImportMasterJson');
+  const btnChooseFile = document.getElementById('btnChooseJsonFile');
+  if (btnChooseFile && fileInput) {
+    btnChooseFile.onclick = () => fileInput.click();
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const parsed = JSON.parse(event.target.result);
+          const txtArea = document.getElementById('txtMasterConfigJson');
+          if (txtArea) txtArea.value = JSON.stringify(parsed, null, 2);
+          showToast('📂 Loaded JSON from file: ' + file.name);
+          const statusTxt = document.getElementById('jsonConfigStatusText');
+          if (statusTxt) statusTxt.textContent = 'Loaded ' + file.name + '. Click "Apply Entire Brand JSON" to activate.';
+        } catch (jsonErr) {
+          alert('Invalid JSON file format: ' + jsonErr.message);
+        }
+      };
+      reader.readAsText(file);
+    };
+  }
+
+  // Export / Download Config Button
+  const btnExport = document.getElementById('btnExportMasterJson');
+  if (btnExport) {
+    btnExport.onclick = () => {
+      const txtArea = document.getElementById('txtMasterConfigJson');
+      const dataStr = txtArea ? txtArea.value : '{}';
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'site-config.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('💾 Downloaded site-config.json');
+    };
+  }
+
+  // Apply Entire Brand JSON Button
+  const btnApplyMaster = document.getElementById('btnApplyMasterJson');
+  if (btnApplyMaster) {
+    btnApplyMaster.onclick = async () => {
+      const txtArea = document.getElementById('txtMasterConfigJson');
+      const statusTxt = document.getElementById('jsonConfigStatusText');
+      if (!txtArea || !txtArea.value.trim()) {
+        alert('Please provide JSON configuration.');
+        return;
+      }
+
+      let parsedConfig;
+      try {
+        parsedConfig = JSON.parse(txtArea.value);
+      } catch (err) {
+        alert('JSON Syntax Error: ' + err.message);
+        return;
+      }
+
+      try {
+        if (statusTxt) statusTxt.textContent = '⏳ Saving and rebranding entire store...';
+        btnApplyMaster.disabled = true;
+
+        const res = await fetch('/api/config', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(parsedConfig)
+        }).then(r => r.json());
+
+        if (res.success) {
+          showToast('🚀 Whole Store Rebranded Successfully!');
+          if (statusTxt) statusTxt.textContent = '✅ Whole store configuration active and published!';
+          
+          // Broadcast to all open tabs for instant re-theming and re-cataloging
+          try {
+            const ch = new BroadcastChannel('nachiyar_store_channel');
+            ch.postMessage({ type: 'CONFIG_UPDATED', config: parsedConfig, timestamp: Date.now() });
+          } catch (e) {}
+
+          // Also reload admin settings & products
+          await loadAllData();
+        } else {
+          alert('Failed to apply config: ' + res.message);
+          if (statusTxt) statusTxt.textContent = '❌ Failed to apply config: ' + res.message;
+        }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        btnApplyMaster.disabled = false;
+      }
+    };
+  }
+
+  // ==========================================
+  // 1-CLICK MASTER BRAND JSON CONFIGURATOR LOGIC
+  // ==========================================
+  async function loadMasterJsonEditor() {
+    const editor = document.getElementById('masterJsonEditor');
+    const status = document.getElementById('masterJsonUploadStatus');
+    if (!editor) return;
+    try {
+      if (status) status.textContent = 'Fetching current site-config.json...';
+      const res = await fetch('/api/config?_t=' + Date.now(), { cache: 'no-store' });
+      const json = await res.json();
+      if (json.success && json.data) {
+        editor.value = JSON.stringify(json.data, null, 2);
+        if (status) status.textContent = 'Active Brand: ' + (json.data.brand?.name || 'Unknown');
+      }
+    } catch (err) {
+      if (status) status.textContent = 'Error loading config: ' + err.message;
+    }
+  }
+
+  // Hook into switchTab
+  const origSwitchTab = window.switchTab;
+  if (typeof origSwitchTab === 'function') {
+    window.switchTab = function(tabId, updateHistory, push) {
+      origSwitchTab(tabId, updateHistory, push);
+      if (tabId === 'master-json') {
+        loadMasterJsonEditor();
+      }
+    };
+  }
+
+  // Save & Deploy
+  const btnSaveMasterJson = document.getElementById('btnSaveMasterJson');
+  if (btnSaveMasterJson) {
+    btnSaveMasterJson.onclick = async () => {
+      const editor = document.getElementById('masterJsonEditor');
+      const status = document.getElementById('masterJsonUploadStatus');
+      try {
+        const parsed = JSON.parse(editor.value);
+        if (status) status.textContent = 'Saving configuration...';
+        const res = await fetch('/api/config', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(parsed)
+        });
+        const resJson = await res.json();
+        if (resJson.success) {
+          if (status) status.textContent = '✅ Saved & Deployed! Entire store updated.';
+          try {
+            const ch = new BroadcastChannel('nachiyar_store_channel');
+            ch.postMessage({ type: 'CONFIG_UPDATED', config: parsed });
+          } catch(e) {}
+          alert('Configuration deployed successfully! Storefront has been updated.');
+        } else {
+          alert('Save failed: ' + (resJson.message || 'Unknown error'));
+        }
+      } catch (err) {
+        alert('Invalid JSON! Please check formatting: ' + err.message);
+      }
+    };
+  }
+
+  // Upload file
+  const masterJsonFileInputEl = document.getElementById('masterJsonFileInput');
+  if (masterJsonFileInputEl) {
+    masterJsonFileInputEl.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          document.getElementById('masterJsonEditor').value = JSON.stringify(parsed, null, 2);
+          const status = document.getElementById('masterJsonUploadStatus');
+          if (status) status.textContent = 'Loaded file: ' + file.name + ' (' + (parsed.brand?.name || '') + ') - Click Save & Deploy to apply!';
+        } catch (err) {
+          alert('Uploaded file is not valid JSON: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    };
+  }
+
+  // Download active JSON
+  const btnDownload = document.getElementById('btnDownloadMasterJson');
+  if (btnDownload) {
+    btnDownload.onclick = () => {
+      const val = document.getElementById('masterJsonEditor').value;
+      const blob = new Blob([val], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'site-config.json';
+      a.click();
+    };
+  }
+
+  // Quick Switch TechNova
+  const btnSwitchTech = document.getElementById('btnQuickSwitchTechNova');
+  if (btnSwitchTech) {
+    btnSwitchTech.onclick = async () => {
+      if (!confirm('Deploy TechNova Electronics Master JSON now?')) return;
+      try {
+        const res = await fetch('/data/technova-config.json');
+        const cfg = await res.json();
+        document.getElementById('masterJsonEditor').value = JSON.stringify(cfg, null, 2);
+        btnSaveMasterJson.click();
+      } catch (err) {
+        alert('Failed to load technova-config.json: ' + err.message);
+      }
+    };
+  }
+
+  // Quick Switch Nachiyar
+  const btnSwitchNach = document.getElementById('btnQuickSwitchNachiyar');
+  if (btnSwitchNach) {
+    btnSwitchNach.onclick = async () => {
+      if (!confirm('Deploy Nachiyar Herbals Master JSON now?')) return;
+      try {
+        const res = await fetch('/data/nachiyar-herbals-config.json');
+        const cfg = await res.json();
+        document.getElementById('masterJsonEditor').value = JSON.stringify(cfg, null, 2);
+        btnSaveMasterJson.click();
+      } catch (err) {
+        alert('Failed to load nachiyar-herbals-config.json: ' + err.message);
+      }
+    };
+  }
