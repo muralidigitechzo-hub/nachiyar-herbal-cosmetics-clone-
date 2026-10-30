@@ -27,49 +27,21 @@
 <body class="admin-body">
 
   <!-- ==================== TOP NAVIGATION / APP BAR ==================== -->
-  <header class="admin-topbar">
-    <div class="topbar-left">
-      <button class="admin-sidebar-toggle" id="adminSidebarToggle" aria-label="Toggle navigation menu">
-        <span class="admin-hamburger-line"></span>
-        <span class="admin-hamburger-line"></span>
-        <span class="admin-hamburger-line"></span>
-      </button>
-      <div class="admin-brand">
-        <img src="assets/nachiyar-logo.png" alt="Nachiyar Logo" class="admin-logo">
-        <div class="brand-info">
-          <span class="admin-title">NACHIYAR HERBALS</span>
-          <span class="admin-subtitle">BUSINESS OPERATIONS & POS CONSOLE</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Clean Admin Topbar Actions -->
-    <div class="topbar-right">
-      <div class="admin-user-pill" style="display: flex; align-items: center; gap: 8px; background: rgba(124, 90, 171, 0.08); border: 1.5px solid rgba(124, 90, 171, 0.25); padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
-        <span style="font-size: 1rem;">👑</span>
-        <span>Hello, <strong id="topbarAdminName" style="color: #6B21A8;">Admin</strong></span>
-      </div>
-      <a href="/" target="_blank" class="btn-view-store">
-        <span>View Storefront</span>
-        <span class="icon-external">↗</span>
-      </a>
-
-      <button id="adminLogoutBtn" class="btn-logout" title="Sign out of operations console">
-        <span>Sign Out</span>
-        <span>🔒</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- ==================== MAIN DASHBOARD LAYOUT ==================== -->
   <div class="admin-layout">
 
     <!-- SIDEBAR NAVIGATION -->
     <aside class="admin-sidebar" id="adminSidebar">
-      <div class="sidebar-header-mobile">
-        <span class="sidebar-mobile-title">Console Navigation</span>
+      
+      <!-- SIDEBAR BRAND LOCKUP (Starts at the very top of sidebar) -->
+      <div class="sidebar-brand-lockup">
+        <img src="assets/nachiyar-logo.png" alt="Brand Logo" class="admin-logo">
+        <div class="brand-info">
+          <span class="admin-title">AURELIA CHRONOMETRY</span>
+          <span class="admin-subtitle">OPERATIONS & POS CONSOLE</span>
+        </div>
         <button class="admin-sidebar-close" id="adminSidebarClose" aria-label="Close menu">✕</button>
       </div>
+  
       <nav class="sidebar-nav">
         <button class="nav-tab active" data-tab="dashboard">
           <span class="nav-icon">📊</span>
@@ -147,6 +119,38 @@
     <div class="admin-sidebar-backdrop" id="adminSidebarBackdrop"></div>
 
     <!-- CONTENT WORKSPACE -->
+    <div class="admin-main-wrapper">
+    <!-- Topbar located ONLY to the right of the sidebar, above workspace -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="admin-sidebar-toggle" id="adminSidebarToggle" aria-label="Toggle navigation menu">
+          <span class="admin-hamburger-line"></span>
+          <span class="admin-hamburger-line"></span>
+          <span class="admin-hamburger-line"></span>
+        </button>
+        <div class="topbar-breadcrumb" style="display: flex; align-items: center; font-size: 0.875rem;">
+          <span style="color: #64748B; font-weight: 600;">Console</span>
+          <span style="color: #CBD5E1; margin: 0 8px;">/</span>
+          <span id="topbarCurrentTab" style="color: #1E293B; font-weight: 700;">Dashboard Overview</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+      <div class="admin-user-pill" style="display: flex; align-items: center; gap: 8px; background: rgba(87, 183, 27, 0.08); border: 1.5px solid rgba(87, 183, 27, 0.25); padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
+        <span style="font-size: 1rem;">👑</span>
+        <span>Hello, <strong id="topbarAdminName" style="color: #57B71B;">Admin</strong></span>
+      </div>
+      <a href="/" target="_blank" class="btn-view-store">
+        <span>View Storefront</span>
+        <span class="icon-external">↗</span>
+      </a>
+
+      <button id="adminLogoutBtn" class="btn-logout" title="Sign out of operations console">
+        <span>Sign Out</span>
+        <span>🔒</span>
+      </button>
+    </div>
+    </header>
+  
     <main class="admin-workspace">
 
       <!-- ==================== TAB 1: DASHBOARD OVERVIEW ==================== -->
@@ -1563,7 +1567,8 @@
       </section>
 
     </main>
-  </div>
+    </div> <!-- .admin-main-wrapper -->
+  </div> <!-- .admin-layout -->
 
   <!-- ==================== MODAL: CUSTOMER MESSAGE DETAIL & CONCIERGE REPLY ==================== -->
   <div class="modal-overlay" id="messageDetailModalOverlay">

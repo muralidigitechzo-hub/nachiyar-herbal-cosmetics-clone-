@@ -6071,6 +6071,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Save active tab so browser refresh stays on the exact same page
     localStorage.setItem('nachiyar_admin_active_tab', tabId);
+    const tabTitles = { dashboard: 'Dashboard Overview', products: 'Product Manager', inventory: 'Unified Stock Matrix', billing: 'POS & Offline Billing', invoices: 'Invoice History', orders: 'Online Orders', marketplaces: 'Marketplace Hub', reviews: 'Customer Reviews', messages: 'Customer Inquiries', staff: 'Nimda Accounts', settings: 'Store Settings & SEO' };
+    const curEl = document.getElementById('topbarCurrentTab');
+    if (curEl) curEl.textContent = tabTitles[tabId] || (tabId.charAt(0).toUpperCase() + tabId.slice(1));
 
     // Clean URL: /nimda/dashboard/, /nimda/products/, etc. (No '#' anywhere)
     const targetUrl = `/nimda/${tabId}/`;
