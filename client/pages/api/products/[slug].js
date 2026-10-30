@@ -1,8 +1,6 @@
 import { getSiteConfig, saveSiteConfig } from '../../../lib/db';
 
 export default function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-
   try {
     const { slug } = req.query;
     const config = getSiteConfig();
@@ -15,6 +13,7 @@ export default function handler(req, res) {
     );
 
     if (req.method === 'GET') {
+      res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=60, stale-while-revalidate=120');
       if (idx === -1) {
         return res.status(404).json({ success: false, error: 'Product not found' });
       }

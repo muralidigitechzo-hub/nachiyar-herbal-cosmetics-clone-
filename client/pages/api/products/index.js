@@ -8,6 +8,7 @@ export default function handler(req, res) {
     if (!Array.isArray(config.products)) config.products = [];
 
     if (req.method === 'GET') {
+      res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=60, stale-while-revalidate=120');
       const { category, q } = req.query;
       let products = config.products.map(p => ({
         ...p,

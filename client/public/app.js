@@ -1014,7 +1014,7 @@ async function initStorefrontApp() {
     const storeChannel = new BroadcastChannel('nachiyar_store_channel');
     storeChannel.onmessage = (event) => {
       loadAndApplyFromLocalStorage();
-      if (event.data && (event.data.type === 'PRODUCTS_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'settings_updated' || event.data.type === 'THEME_UPDATED' || event.data.type === 'CONFIG_UPDATED')) {
+      if (event.data && (event.data.type === 'PRODUCTS_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'settings_updated' || event.data.type === 'THEME_UPDATED' || event.data.type === 'CONFIG_UPDATED' || event.data.type === 'NEW_ORDER' || event.data.type === 'STOCK_UPDATED')) {
         if (event.data.settings) updateStorefrontBusinessDetails(event.data.settings);
         if (event.data.config && event.data.config.products) applyLiveProductsToDOM(event.data.config.products);
         if (event.data.products) applyLiveProductsToDOM(event.data.products);
@@ -1025,8 +1025,8 @@ async function initStorefrontApp() {
   // Fetch live products & settings from REST API (cache-busting enabled)
   try {
     const [pRes, sRes] = await Promise.all([
-      fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => ({ success: false })),
-      fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => ({ success: false }))
+      fetch('/api/products').then(r => r.json()).catch(() => ({ success: false })),
+      fetch('/api/settings/public').then(r => r.json()).catch(() => ({ success: false }))
     ]);
 
     if (localStorage.getItem('nachiyar_has_local_customization') === 'true') {

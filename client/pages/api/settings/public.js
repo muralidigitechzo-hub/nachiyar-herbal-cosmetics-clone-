@@ -1,7 +1,7 @@
 import { getSiteConfig } from '../../../lib/db';
 
 export default function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=120, stale-while-revalidate=300');
 
   try {
     const config = getSiteConfig();

@@ -1373,11 +1373,20 @@ img, svg, video {
         });
       }
 
+      // Instant cache-first render (0ms)
+      try {
+        const cached = JSON.parse(localStorage.getItem('store_products') || 'null');
+        if (Array.isArray(cached) && cached.length > 0) {
+          allProducts = cached;
+          renderCatalog('all');
+        }
+      } catch (e) {}
+
       async function loadShopProducts() {
         try {
           const [pRes, sRes] = await Promise.all([
-            fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null),
-            fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null)
+            fetch('/api/products').then(r => r.json()).catch(() => null),
+            fetch('/api/settings/public').then(r => r.json()).catch(() => null)
           ]);
 
           if (sRes && sRes.success && sRes.data) {
@@ -1388,7 +1397,7 @@ img, svg, video {
             allProducts = pRes.data;
           } else {
             // Direct fallback to static /data/db.json
-            const dbFallback = await fetch('/data/db.json?_t=' + Date.now()).then(r => r.json()).catch(() => null);
+            const dbFallback = await fetch('/data/db.json').then(r => r.json()).catch(() => null);
             if (dbFallback && Array.isArray(dbFallback.products)) {
               allProducts = dbFallback.products.map(p => ({
                 ...p,
@@ -1407,7 +1416,7 @@ img, svg, video {
         } catch (e) {
           console.warn('API unavailable, attempting db.json fallback:', e);
           try {
-            const dbFallback = await fetch('/data/db.json?_t=' + Date.now()).then(r => r.json()).catch(() => null);
+            const dbFallback = await fetch('/data/db.json').then(r => r.json()).catch(() => null);
             if (dbFallback && Array.isArray(dbFallback.products)) {
               allProducts = dbFallback.products.map(p => ({
                 ...p,
@@ -1487,6 +1496,16 @@ img, svg, video {
           const pImg = (p.images && p.images[0]) || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80';
           const pDesc = p.shortDescription || (p.description ? p.description.slice(0, 140) + '...' : 'High performance product crafted to perfection.');
 
+          const stockNum = p.stock !== undefined ? Number(p.stock) : 25;
+          let stockBadge = '';
+          if (stockNum <= 0) {
+            stockBadge = '<span style="display:inline-block; font-size:0.75rem; font-weight:700; color:#DC2626; background:#FEF2F2; border:1px solid #FECACA; padding:2px 8px; border-radius:12px; margin-bottom:6px;">✕ Out of Stock</span>';
+          } else if (stockNum <= 5) {
+            stockBadge = `<span style="display:inline-block; font-size:0.75rem; font-weight:700; color:#D97706; background:#FFFBEB; border:1px solid #FDE68A; padding:2px 8px; border-radius:12px; margin-bottom:6px;">⚡ Only ${stockNum} left!</span>`;
+          } else {
+            stockBadge = `<span style="display:inline-block; font-size:0.75rem; font-weight:600; color:#059669; background:#ECFDF5; border:1px solid #A7F3D0; padding:2px 8px; border-radius:12px; margin-bottom:6px;">● In Stock (${stockNum})</span>`;
+          }
+
           card.innerHTML = `
             <div class="card-inner">
               <div class="card-top-bar">
@@ -1510,6 +1529,7 @@ img, svg, video {
                 </a>
                 <p class="product-card-subtitle">${p.subtitle || ''}</p>
                 <p class="product-card-desc">${pDesc}</p>
+                <div style="margin-top:6px;">${stockBadge}</div>
                 <div class="card-action-bar">
                   <div class="card-pricing">
                     <span class="price-current">₹${p.price}</span>

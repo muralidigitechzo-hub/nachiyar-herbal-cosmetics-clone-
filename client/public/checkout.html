@@ -1009,6 +1009,7 @@
 
         let orderId = 'ord_' + Date.now();
         let orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+        let apiData = null;
 
         try {
           const res = await fetch('/api/orders', {
@@ -1017,6 +1018,7 @@
             body: JSON.stringify(payload)
           });
           const data = await res.json().catch(() => null);
+          apiData = data;
 
           if (!res.ok || !data || !data.success) {
             btnPlaceOrder.disabled = false;
@@ -1079,6 +1081,30 @@
           localStorage.setItem('store_customer_orders', JSON.stringify(storedOrders));
           localStorage.setItem('nachiyar_customer_orders', JSON.stringify(storedOrders));
           localStorage.setItem('nachiyar_store_orders', JSON.stringify(storedOrders));
+
+          // Real-time Stock Deduction & Multi-tab Broadcast to Admin & Storefront
+          try {
+            const localProds = JSON.parse(localStorage.getItem('nachiyar_store_products') || '[]');
+            payload.items.forEach(it => {
+              const itId = it.productId || it.id;
+              const p = localProds.find(x => x.id === itId || x.productId === itId || x.slug === it.slug || (x.name && x.name.toLowerCase() === (it.name || '').toLowerCase()));
+              if (p) {
+                p.stock = Math.max(0, Number(p.stock || 0) - Number(it.qty || 1));
+                p.online_sold = Number(p.online_sold || 0) + Number(it.qty || 1);
+              }
+            });
+            const finalProds = (apiData && Array.isArray(apiData.updatedProducts) && apiData.updatedProducts.length > 0) ? apiData.updatedProducts : localProds;
+            localStorage.setItem('nachiyar_store_products', JSON.stringify(finalProds));
+            localStorage.setItem('nachiyar_products_updated', Date.now().toString());
+
+            const bc = new BroadcastChannel('nachiyar_store_channel');
+            bc.postMessage({
+              type: 'NEW_ORDER',
+              order: orderRecord,
+              products: finalProds,
+              timestamp: Date.now()
+            });
+          } catch (err) {}
         } catch (e) {
           console.warn('LocalStorage save error:', e);
         }

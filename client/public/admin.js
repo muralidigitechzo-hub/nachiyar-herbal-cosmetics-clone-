@@ -243,7 +243,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (invRes.success) inventoryLogs = invRes.data.logs || [];
-      if (ordRes.success) orders = ordRes.data;
+      if (ordRes.success && Array.isArray(ordRes.data)) {
+        orders = ordRes.data;
+      }
+      // Merge with local orders store so zero orders are missed
+      try {
+        const localOrders = JSON.parse(localStorage.getItem('nachiyar_store_orders') || localStorage.getItem('store_customer_orders') || '[]');
+        if (Array.isArray(localOrders) && localOrders.length > 0) {
+          const knownIds = new Set((orders || []).map(o => String(o.id || o.orderNumber)));
+          localOrders.forEach(lo => {
+            const k = String(lo.id || lo.orderNumber);
+            if (!knownIds.has(k)) {
+              orders.unshift(lo);
+              knownIds.add(k);
+            }
+          });
+        }
+      } catch (err) {}
       if (invcRes.success) invoices = invcRes.data;
 
       // adminBrandingSyncApplied: Update Admin Header & Welcome branding dynamically
@@ -283,6 +299,54 @@ document.addEventListener('DOMContentLoaded', () => {
       loadAdminMessages();
       renderMarketplaceHub();
       updateNotificationBadges();
+
+      // Zero-latency BroadcastChannel listener for live online orders & stock changes
+      try {
+        const liveChannel = new BroadcastChannel('nachiyar_store_channel');
+        liveChannel.onmessage = (event) => {
+          if (!event.data) return;
+          if (event.data.type === 'NEW_ORDER' && event.data.order) {
+            handleLiveIncomingOrder(event.data.order, event.data.products);
+          } else if (event.data.type === 'STOCK_UPDATED' || event.data.type === 'PRODUCTS_UPDATED') {
+            if (Array.isArray(event.data.products)) {
+              products = event.data.products;
+              try { localStorage.setItem('nachiyar_store_products', JSON.stringify(products)); } catch(e) {}
+              renderInventoryMatrix();
+              renderProductsTable();
+              renderPOSProductPicker();
+            }
+          }
+        };
+      } catch (e) {}
+
+      // Cross-tab storage detection for orders
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'store_customer_orders' || e.key === 'nachiyar_customer_orders' || e.key === 'nachiyar_store_orders') {
+          try {
+            const parsed = JSON.parse(e.newValue || '[]');
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              const latest = parsed[0];
+              handleLiveIncomingOrder(latest);
+            }
+          } catch(err) {}
+        }
+      });
+
+      // Background order polling every 8s to catch mobile/remote orders
+      setInterval(async () => {
+        try {
+          const res = await fetch('/api/orders').then(r => r.json());
+          if (res && res.success && Array.isArray(res.data)) {
+            const knownKeys = new Set((orders || []).map(o => String(o.id || o.orderNumber)));
+            const newArrivals = res.data.filter(o => !knownKeys.has(String(o.id || o.orderNumber)));
+            if (newArrivals.length > 0) {
+              newArrivals.slice().reverse().forEach(ord => {
+                handleLiveIncomingOrder(ord);
+              });
+            }
+          }
+        } catch(e) {}
+      }, 8000);
 
     } catch (e) {
       console.error('Failed to load admin data', e);
@@ -3316,6 +3380,169 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 7. ONLINE ORDERS MANAGEMENT
   // ==========================================
+  // Synthesize audio chime using HTML5 Web Audio API
+  function playOrderArrivalSound() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+      const now = ctx.currentTime;
+      
+      // Tone 1: High crisp chime (E6 ~ 1318.5 Hz)
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(1318.5, now);
+      gain1.gain.setValueAtTime(0.28, now);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.32);
+
+      // Tone 2: Harmonious pleasant chime (G6 ~ 1567.98 Hz)
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(1567.98, now + 0.12);
+      gain2.gain.setValueAtTime(0.32, now + 0.12);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(now + 0.12);
+      osc2.stop(now + 0.55);
+    } catch(e) {
+      console.warn('Audio alert error:', e);
+    }
+  }
+
+  // Eye-catching floating interactive toast message for incoming online orders
+  function showOrderArrivalAlert(order) {
+    let toastContainer = document.getElementById('liveOrderAlertToastContainer');
+    if (!toastContainer) {
+      toastContainer = document.createElement('div');
+      toastContainer.id = 'liveOrderAlertToastContainer';
+      toastContainer.style.cssText = 'position:fixed; bottom:24px; right:24px; z-index:999999; display:flex; flex-direction:column; gap:12px; pointer-events:none; max-width:420px; width:calc(100vw - 32px);';
+      document.body.appendChild(toastContainer);
+    }
+
+    const toast = document.createElement('div');
+    toast.style.cssText = 'pointer-events:auto; background:linear-gradient(135deg, #0F291E 0%, #17382B 100%); color:#FFFFFF; border:1px solid #D4AF37; border-radius:12px; padding:16px 18px; box-shadow:0 12px 36px rgba(0,0,0,0.35); display:flex; align-items:flex-start; gap:14px; animation:slideInToast 0.35s cubic-bezier(0.16,1,0.3,1); cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;';
+    
+    const customerName = (order.customer && order.customer.name) || 'Store Customer';
+    const orderTotal = Number(order.total || order.subtotal || 0).toLocaleString();
+    const orderNum = order.orderNumber || order.id || 'NEW';
+    const itemCount = (order.items && order.items.length) || 1;
+
+    toast.innerHTML = `
+      <div style="width:42px; height:42px; border-radius:50%; background:rgba(212,175,55,0.18); border:1px solid #D4AF37; display:flex; align-items:center; justify-content:center; font-size:1.35rem; flex-shrink:0;">
+        🛍️
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+          <span style="font-weight:800; font-size:0.88rem; color:#D4AF37; letter-spacing:0.04em; text-transform:uppercase;">New Online Order!</span>
+          <span style="font-size:0.75rem; color:#A7F3D0;">Just now</span>
+        </div>
+        <div style="font-size:0.95rem; font-weight:700; color:#FFFFFF; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+          ${customerName} placed Order #${orderNum}
+        </div>
+        <div style="font-size:0.82rem; color:#E2E8F0; margin-top:2px;">
+          ₹${orderTotal} • ${itemCount} ${itemCount === 1 ? 'item' : 'items'}
+        </div>
+        <div style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:0.82rem; font-weight:700; color:#F59E0B; text-decoration:underline;">
+          Click to open Online Orders →
+        </div>
+      </div>
+      <button type="button" aria-label="Close" style="background:none; border:none; color:#94A3B8; font-size:1.2rem; cursor:pointer; padding:0 4px; line-height:1;" onclick="event.stopPropagation(); this.parentElement.remove();">×</button>
+    `;
+
+    toast.onclick = () => {
+      switchTab('orders');
+      toast.remove();
+    };
+
+    toastContainer.appendChild(toast);
+    setTimeout(() => {
+      if (toast.parentElement) {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'opacity 0.3s, transform 0.3s';
+        setTimeout(() => toast.remove(), 300);
+      }
+    }, 9000);
+  }
+
+  // Central Live Order Arrival Handler
+  function handleLiveIncomingOrder(order, updatedProducts) {
+    if (!order) return;
+    const ordKey = String(order.id || order.orderNumber);
+    const alreadyExists = (orders || []).some(o => String(o.id) === ordKey || String(o.orderNumber) === ordKey);
+    if (alreadyExists) return;
+
+    // 1. Add order to in-memory array
+    orders.unshift(order);
+
+    // 2. Play audible sound chime
+    playOrderArrivalSound();
+
+    // 3. Show message alert toast
+    showOrderArrivalAlert(order);
+
+    // 4. Update products & real-time stock
+    if (Array.isArray(updatedProducts) && updatedProducts.length > 0) {
+      products = updatedProducts;
+      try { localStorage.setItem('nachiyar_store_products', JSON.stringify(products)); } catch(e) {}
+    } else if (Array.isArray(order.items)) {
+      order.items.forEach(it => {
+        const prodId = it.productId || it.id;
+        const prod = (products || []).find(p => 
+          (prodId && (p.id === prodId || p.productId === prodId)) || 
+          (it.slug && p.slug === it.slug) || 
+          (it.name && p.name && p.name.toLowerCase() === it.name.toLowerCase())
+        );
+        if (prod) {
+          const qty = Number(it.qty || 1);
+          prod.stock = Math.max(0, Number(prod.stock || 0) - qty);
+          prod.online_sold = Number(prod.online_sold || 0) + qty;
+        }
+      });
+      try { localStorage.setItem('nachiyar_store_products', JSON.stringify(products)); } catch(e) {}
+    }
+
+    // 5. Update UI Views
+    renderOrdersTable();
+    renderInventoryMatrix();
+    renderProductsTable();
+    renderPOSProductPicker();
+
+    // 6. Update KPIs
+    if (kpiOnlineOrders) {
+      const curVal = parseInt(kpiOnlineOrders.textContent.replace(/\D/g, '') || '0', 10);
+      kpiOnlineOrders.textContent = (curVal + 1).toString();
+    }
+    if (kpiTotalOrders) {
+      const curVal = parseInt(kpiTotalOrders.textContent.replace(/\D/g, '') || '0', 10);
+      kpiTotalOrders.textContent = (curVal + 1).toString();
+    }
+
+    // 7. Pulse Badge
+    const badgeOrderCount = document.getElementById('badgeOrderCount');
+    if (badgeOrderCount) {
+      const curTab = getCurrentActiveTab();
+      if (curTab !== 'orders') {
+        const curCount = parseInt(badgeOrderCount.textContent.replace(/\D/g, '') || '0', 10);
+        badgeOrderCount.textContent = (curCount + 1).toString();
+        badgeOrderCount.style.display = 'inline-block';
+        badgeOrderCount.classList.add('badge-pulse-active');
+      }
+    }
+  }
+
+  window.handleLiveIncomingOrder = handleLiveIncomingOrder;
+
   function renderOrdersTable() {
     allOrdersTableBody.innerHTML = '';
     updateNotificationBadges();
