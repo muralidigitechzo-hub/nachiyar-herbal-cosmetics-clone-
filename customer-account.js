@@ -1132,7 +1132,7 @@
             iconBg: '#FEE2E2',
             iconColor: '#DC2626',
             title: 'Email Not Registered',
-            message: `The email "${email}" is not registered with Nachiyar Herbals. Please create an account first.`,
+            message: `The email "${email}" is not registered. Please create an account first.`,
             btnText: 'Create Account Now →',
             onConfirm: () => {
               window.toggleDrawerForgotPassword(false);
@@ -1386,7 +1386,7 @@
 
       if (data.success && data.customer) {
         syncCustomerLoginState(data.customer, data.token);
-        showSideToast({ title: 'Account Created!', message: `Welcome to Nachiyar Herbals, ${data.customer.name}!`, type: 'success' });
+        showSideToast({ title: 'Account Created!', message: `Welcome to Aurelia, ${data.customer.name}!`, type: 'success' });
         if (window.location.pathname.includes('account')) {
           setTimeout(() => window.location.reload(), 300);
         }
@@ -1516,7 +1516,7 @@
       return;
     }
 
-    showSideToast({ title: 'Signing In...', message: 'Verifying Google credentials with Nachiyar Herbals...', type: 'info' });
+    showSideToast({ title: 'Signing In...', message: 'Verifying Google credentials ...', type: 'info' });
 
     try {
       const res = await fetch('/api/customer/google-auth', {
