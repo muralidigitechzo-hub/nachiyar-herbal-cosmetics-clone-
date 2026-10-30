@@ -1579,7 +1579,11 @@ ${orbitNodesHtml}
       ['product.html', 'product.html'],
       ['app.js', 'app.js'],
       ['styles.css', 'styles.css'],
-      ['theme-engine.js', 'theme-engine.js']
+      ['theme-engine.js', 'theme-engine.js'],
+      ['admin.js', 'admin.js'],
+      ['admin.css', 'admin.css'],
+      ['nimda.html', 'nimda.html'],
+      ['nimda-login.html', 'nimda-login.html']
     ];
     filesToSync.forEach(([src, dest]) => {
       const srcPath = path.join(rootDir, src);

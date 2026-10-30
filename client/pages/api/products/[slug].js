@@ -1,57 +1,57 @@
-import fs from 'fs';
-import path from 'path';
-
-function getDbData() {
-  const possiblePaths = [
-    path.join(process.cwd(), 'public', 'data', 'db.json'),
-    path.join(process.cwd(), 'data', 'db.json'),
-    path.join(__dirname, '..', '..', '..', 'public', 'data', 'db.json'),
-    path.join(__dirname, '..', '..', '..', '..', 'data', 'db.json')
-  ];
-
-  for (const p of possiblePaths) {
-    if (fs.existsSync(p)) {
-      try {
-        return JSON.parse(fs.readFileSync(p, 'utf8'));
-      } catch (e) {}
-    }
-  }
-  return null;
-}
+import { getDb, saveDb } from '../../../lib/db';
 
 export default function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
 
   try {
     const { slug } = req.query;
-    const db = getDbData();
-    if (!db || !Array.isArray(db.products)) {
-      return res.status(404).json({ success: false, error: 'Product not found' });
-    }
+    const db = getDb();
+    if (!Array.isArray(db.products)) db.products = [];
 
     const cleanSlug = (slug || '').toString().toLowerCase();
-    const product = db.products.find(p => 
+    const idx = db.products.findIndex(p => 
       (p.slug && p.slug.toLowerCase() === cleanSlug) ||
       (p.id && p.id.toLowerCase() === cleanSlug)
     );
 
-    if (!product) {
-      return res.status(404).json({ success: false, error: 'Product not found' });
+    if (req.method === 'GET') {
+      if (idx === -1) {
+        return res.status(404).json({ success: false, error: 'Product not found' });
+      }
+      const product = db.products[idx];
+      const mapped = {
+        ...product,
+        price: Number(product.price || 0),
+        mrp: Number(product.mrp || product.compareAtPrice || product.price || 0),
+        category: product.category || 'General',
+        categoryId: product.categoryId || product.category_id || '',
+        themeColor: product.themeColor || product.theme_color || '#064E3B',
+        theme_color: product.themeColor || product.theme_color || '#064E3B',
+        images: Array.isArray(product.images) ? product.images : (product.images ? [product.images] : []),
+        metricBadge: product.metricBadge || (typeof product.badge === 'string' ? product.badge : (product.badge?.number ? `${product.badge.number} ${product.badge.unit || ''}`.trim() : 'PREMIUM'))
+      };
+      return res.status(200).json({ success: true, data: mapped });
     }
 
-    const mapped = {
-      ...product,
-      price: Number(product.price || 0),
-      mrp: Number(product.mrp || product.compareAtPrice || product.price || 0),
-      category: product.category || 'General',
-      categoryId: product.categoryId || product.category_id || '',
-      themeColor: product.themeColor || product.theme_color || '#064E3B',
-      theme_color: product.themeColor || product.theme_color || '#064E3B',
-      images: Array.isArray(product.images) ? product.images : (product.images ? [product.images] : []),
-      metricBadge: product.metricBadge || (typeof product.badge === 'string' ? product.badge : (product.badge?.number ? `${product.badge.number} ${product.badge.unit || ''}`.trim() : 'PREMIUM'))
-    };
+    if (req.method === 'DELETE') {
+      if (idx === -1) {
+        return res.status(404).json({ success: false, message: 'Product not found' });
+      }
+      db.products.splice(idx, 1);
+      saveDb(db);
+      return res.status(200).json({ success: true, message: 'Product deleted successfully' });
+    }
 
-    return res.status(200).json({ success: true, data: mapped });
+    if (req.method === 'PUT' || req.method === 'PATCH') {
+      if (idx === -1) {
+        return res.status(404).json({ success: false, message: 'Product not found' });
+      }
+      db.products[idx] = { ...db.products[idx], ...req.body };
+      saveDb(db);
+      return res.status(200).json({ success: true, message: 'Product updated successfully', data: db.products[idx] });
+    }
+
+    return res.status(405).json({ success: false, message: 'Method not allowed' });
   } catch (error) {
     console.error('Error in /api/products/[slug]:', error);
     return res.status(500).json({ success: false, error: error.message });

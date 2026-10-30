@@ -205,13 +205,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   async function loadAllData() {
     try {
+      const safeFetchJson = (url, fallback = { success: false, data: [] }) => 
+        authFetch(url).then(r => r.ok ? r.json() : fallback).catch(() => fallback);
+
       const [prodRes, invRes, ordRes, invcRes, setRes, anaRes] = await Promise.all([
-        authFetch('/api/products').then(r => r.json()),
-        authFetch('/api/inventory').then(r => r.json()),
-        authFetch('/api/orders').then(r => r.json()),
-        authFetch('/api/invoices').then(r => r.json()),
-        authFetch('/api/settings').then(r => r.json()),
-        authFetch('/api/analytics').then(r => r.json())
+        safeFetchJson('/api/products', { success: true, data: [] }),
+        safeFetchJson('/api/inventory', { success: true, data: { matrix: [], logs: [] } }),
+        safeFetchJson('/api/orders', { success: true, data: [] }),
+        safeFetchJson('/api/invoices', { success: true, data: [] }),
+        safeFetchJson('/api/settings', { success: true, data: {} }),
+        safeFetchJson('/api/analytics', { success: true, data: {} })
       ]);
 
       if (prodRes.success) products = prodRes.data;
