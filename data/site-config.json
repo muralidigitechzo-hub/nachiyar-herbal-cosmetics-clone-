@@ -520,7 +520,7 @@
           "href": "/"
         },
         {
-          "label": "Shop Timepieces",
+          "label": "Shop Collections",
           "href": "/shop/",
           "dropdownProductIds": [
             "AUR-CHRONO-001",
