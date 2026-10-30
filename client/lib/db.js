@@ -164,7 +164,14 @@ export function getDb() {
       announcementText: config.content?.announcement || '',
       homeShowcase: config.content?.homeShowcase || config.homeShowcase || extraDb.site_settings?.homeShowcase || {},
       themeColors: config.brand?.colors || {},
+      paymentMethods: config.paymentMethods || extraDb.paymentMethods || extraDb.site_settings?.paymentMethods || {},
       ...(extraDb.site_settings || {})
+    },
+    paymentMethods: config.paymentMethods || extraDb.paymentMethods || {
+      cod: { enabled: true, label: 'Cash on Delivery (COD)', description: 'Pay cash to courier executive upon delivery' },
+      upi: { enabled: true, label: 'UPI / QR (GPay, PhonePe, Paytm, BHIM)', upiId: 'nachiyarherbals18@okaxis', merchantName: 'Aurelia Chronometry' },
+      card: { enabled: true, label: 'Credit or Debit Card' },
+      netbanking: { enabled: true, label: 'Net Banking' }
     }
   };
 }

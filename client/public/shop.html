@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <base href="/">
@@ -1375,20 +1375,6 @@ img, svg, video {
 
       async function loadShopProducts() {
         try {
-          // 1. Primary check: localStorage live store (Instant rendering & offline/serverless resilience)
-          try {
-            const localList = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
-            if (Array.isArray(localList) && localList.length > 0) {
-              allProducts = localList;
-              renderCatalog('All');
-              updateCategoryFilters(allProducts);
-            }
-            const localSettings = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
-            if (localSettings) {
-              updateShopPageBranding(localSettings);
-            }
-          } catch (e) {}
-
           const [pRes, sRes] = await Promise.all([
             fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null),
             fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null)

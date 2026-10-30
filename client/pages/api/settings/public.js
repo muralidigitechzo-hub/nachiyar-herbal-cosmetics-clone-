@@ -69,6 +69,12 @@ export default function handler(req, res) {
         reviews: true,
         whatsapp_chat: true,
         announcements: true
+      },
+      paymentMethods: config.paymentMethods || {
+        cod: { enabled: true, label: 'Cash on Delivery (COD)', description: 'Pay cash to courier executive upon delivery' },
+        upi: { enabled: true, label: 'UPI / QR (GPay, PhonePe, Paytm, BHIM)', upiId: 'nachiyarherbals18@okaxis', merchantName: brand.name || 'Aurelia' },
+        card: { enabled: true, label: 'Credit or Debit Card' },
+        netbanking: { enabled: true, label: 'Net Banking' }
       }
     };
 

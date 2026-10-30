@@ -1845,27 +1845,6 @@ img, svg, video {
       // Fetch product data from API or use default product map
       async function loadProductPage() {
         try {
-          const cleanSlug = (slug || '').toLowerCase();
-          // 1. Check primary localStorage live store
-          try {
-            const localList = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
-            if (Array.isArray(localList)) {
-              const localMatch = localList.find(p => (p.slug && p.slug.toLowerCase() === cleanSlug) || (p.id && p.id.toLowerCase() === cleanSlug));
-              if (localMatch) {
-                currentProduct = {
-                  ...localMatch,
-                  price: Number(localMatch.price || 0),
-                  mrp: Number(localMatch.mrp || localMatch.compareAtPrice || localMatch.price || 0),
-                  category: localMatch.category || 'General',
-                  themeColor: localMatch.themeColor || localMatch.theme_color || '#064E3B',
-                  images: Array.isArray(localMatch.images) ? localMatch.images : (localMatch.images ? [localMatch.images] : []),
-                  metricBadge: localMatch.metricBadge || (typeof localMatch.badge === 'string' ? localMatch.badge : 'PREMIUM')
-                };
-                renderProductPage(currentProduct);
-              }
-            }
-          } catch(e) {}
-
           const res = await fetch(`/api/products/${slug}?_t=${Date.now()}`, { cache: 'no-store' }).then(r => r.json()).catch(() => null);
           if (res && res.success && res.data) {
             currentProduct = res.data;

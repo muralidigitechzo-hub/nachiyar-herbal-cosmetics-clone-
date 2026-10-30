@@ -27,6 +27,12 @@
       .checkout-grid {
         grid-template-columns: 1.2fr 0.8fr;
         gap: 50px;
+        align-items: start;
+      }
+      .checkout-summary-card {
+        position: sticky;
+        top: 100px;
+        align-self: start;
       }
     }
     .checkout-form-card, .checkout-summary-card {
@@ -442,8 +448,23 @@
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      let cart = JSON.parse(localStorage.getItem('store_cart') || '[]');
+    document.addEventListener('DOMContentLoaded', () => {
+      // Unified Multi-Storage Cart Getter
+      function getActiveCart() {
+        try {
+          const keys = ['nachiyar_cart', 'store_cart', 'cart'];
+          for (const k of keys) {
+            const raw = localStorage.getItem(k);
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            }
+          }
+        } catch (e) {}
+        return [];
+      }
+
+      let cart = getActiveCart();
       const itemsList = document.getElementById('checkoutItemsList');
       const subtotalVal = document.getElementById('chkSubtotalVal');
       const discountRow = document.getElementById('chkDiscountRow');
@@ -461,29 +482,31 @@
       let activePaymentMethod = 'cod'; // default selection
       let selectedUpiApp = 'Google Pay';
       let selectedBank = 'HDFC Bank';
-      let paymentMethodsConfig = {};
+
+      // Robust Instant Default Payment Configuration (Zero Waiting / Zero Blank Loading State)
+      let paymentMethodsConfig = {
+        cod: { enabled: true, label: 'Cash on Delivery (COD)', description: 'Pay cash to courier executive upon delivery' },
+        upi: { enabled: true, label: 'UPI / QR (GPay, PhonePe, Paytm, BHIM)', upiId: 'nachiyarherbals18@okaxis', merchantName: 'Aurelia Chronometry' },
+        card: { enabled: true, label: 'Credit or Debit Card' },
+        netbanking: { enabled: true, label: 'Net Banking' }
+      };
       let storePublicSettings = {};
 
-      // 1. Fetch Admin Payment & Coupon Settings
-      try {
-        const settingsRes = await fetch('/api/settings/public').then(r => r.json());
-        if (settingsRes.success && settingsRes.data) {
-          storePublicSettings = settingsRes.data;
-          if (settingsRes.data.paymentMethods) {
-            paymentMethodsConfig = settingsRes.data.paymentMethods;
+      // 1. Background Fetch for Admin Payment & Coupon Settings without blocking initial render
+      fetch('/api/settings/public?_t=' + Date.now())
+        .then(r => r.json())
+        .then(settingsRes => {
+          if (settingsRes && settingsRes.success && settingsRes.data) {
+            storePublicSettings = settingsRes.data;
+            if (settingsRes.data.paymentMethods && Object.keys(settingsRes.data.paymentMethods).length > 0) {
+              paymentMethodsConfig = { ...paymentMethodsConfig, ...settingsRes.data.paymentMethods };
+            }
+            renderCheckout();
           }
-        } else {
-          // Fallback if settings not yet initialized
-          paymentMethodsConfig = {
-            cod: { enabled: true, label: 'Cash on Delivery (COD)', description: 'Pay cash to courier upon delivery' },
-            upi: { enabled: true, label: 'UPI Payments', upiId: 'payments@okaxis', merchantName: 'Aurelia Chronometry' },
-            card: { enabled: true, label: 'Credit / Debit Card' },
-            netbanking: { enabled: true, label: 'Net Banking' }
-          };
-        }
-      } catch (e) {
-        console.error('Failed to fetch payment settings:', e);
-      }
+        })
+        .catch(err => {
+          console.warn('Settings background fetch completed with fallback:', err);
+        });
 
       function calculateTotals() {
         const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
@@ -711,11 +734,22 @@
       }
 
       function renderCheckout() {
+        // Always render payment methods immediately so it NEVER gets stuck on loading
+        renderPaymentMethods();
+
         if (cart.length === 0) {
-          itemsList.innerHTML = '<p style="color:var(--color-text-muted); padding:20px; text-align:center;">Your bag is empty. <a href="/shop/">Shop Collection</a></p>';
+          itemsList.innerHTML = `
+            <div style="padding:28px 16px; text-align:center; color:var(--color-text-muted);">
+              <span style="font-size:2.2rem; display:block; margin-bottom:10px;">🛍️</span>
+              <p style="margin:0 0 8px; font-weight:700; color:var(--color-text-main); font-size:1.05rem;">Your shopping bag is empty</p>
+              <p style="margin:0 0 16px; font-size:0.8125rem;">Select your desired timepiece or accessories to complete your order.</p>
+              <a href="/shop/" class="btn-checkout" style="display:inline-block; padding:10px 24px; font-size:0.84rem; text-decoration:none; border-radius:999px;">Explore Collection →</a>
+            </div>
+          `;
           subtotalVal.textContent = '₹0';
           totalVal.textContent = '₹0';
           btnPlaceOrder.disabled = true;
+          btnPlaceOrder.innerHTML = '<span>Your Bag is Empty</span>';
           return;
         }
 
@@ -724,21 +758,24 @@
         let subtotal = 0;
 
         cart.forEach(item => {
-          subtotal += (item.price * item.qty);
+          const itemPrice = Number(item.price || 0);
+          const itemQty = Number(item.qty || 1);
+          subtotal += (itemPrice * itemQty);
           const div = document.createElement('div');
           div.className = 'checkout-item-row';
           div.innerHTML = `
-            <img src="${item.img}" alt="${item.name}" class="chk-img">
+            <img src="${item.img || '/assets/logo.png'}" alt="${item.name || 'Product'}" class="chk-img">
             <div class="chk-info">
-              <h5>${item.name}</h5>
-              <p>${item.size || ''} • Qty: ${item.qty}</p>
+              <h5>${item.name || 'Aurelia Timepiece'}</h5>
+              <p>${item.size || 'Standard Edition'} • Qty: ${itemQty}</p>
             </div>
-            <span class="chk-price">₹${item.price * item.qty}</span>
+            <span class="chk-price">₹${itemPrice * itemQty}</span>
           `;
           itemsList.appendChild(div);
         });
 
-        const shipping = subtotal >= 599 ? 0 : 70;
+        const freeShipMin = Number(storePublicSettings?.freeShippingThreshold) || 599;
+        const shipping = subtotal >= freeShipMin ? 0 : 70;
         shippingVal.textContent = shipping === 0 ? 'FREE' : `₹${shipping}`;
 
         const grandTotal = Math.max(0, subtotal - discountAmount) + shipping;
@@ -753,6 +790,7 @@
           discountRow.style.display = 'none';
         }
 
+        // Re-run payment options with updated grand total
         renderPaymentMethods();
       }
 
@@ -857,7 +895,7 @@
       function isCustomerAuthenticated() {
         let cust = null;
         try {
-          const saved = localStorage.getItem('store_customer');
+          const saved = localStorage.getItem('store_customer') || localStorage.getItem('nachiyar_customer');
           if (saved) cust = JSON.parse(saved);
         } catch (e) {}
         return Boolean(cust && (cust.email || cust.phone) && cust.name);
