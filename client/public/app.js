@@ -20,7 +20,7 @@ async function initStorefrontApp() {
       statNumber: '100%',
       statUnit: 'PURE',
       themeBg: '#6B4E9B',
-      image: 'assets/new-oil-bottle-card.jpg',
+      image: 'assets/aurelia-emerald-watch.png',
       price: 599,
       subPrice: 539,
       stars: '★★★★★',
@@ -882,7 +882,7 @@ async function initStorefrontApp() {
       megaGrid.innerHTML = availableProds.slice(0, 3).map((prod, idx) => {
         const pSlug = prod.slug || prod.id;
         const tag = prod.subtitle || prod.category || 'Ayurvedic Care';
-        const img = (prod.images && prod.images[0]) || prod.imageUrl || 'assets/new-oil-bottle-card.jpg';
+        const img = (prod.images && prod.images[0]) || prod.imageUrl || 'assets/aurelia-emerald-watch.png';
         const price = Number(prod.price) || 299;
         const mrp = Number(prod.mrp) || Number(prod.comparePrice) || Math.round(price * 1.2);
         const saveTxt = mrp > price ? `<s class="old-price" style="text-decoration: line-through; opacity: 0.6; font-size: 0.8em; margin-left: 4px;">₹${mrp}</s>` : '';
@@ -1376,7 +1376,7 @@ async function initStorefrontApp() {
       }
     }
 
-    const safeImg = imgSrc || 'assets/new-oil-bottle-card.jpg';
+    const safeImg = imgSrc || 'assets/aurelia-emerald-watch.png';
     const isMobile = window.innerWidth <= 600;
     const pSize = isMobile ? 52 : 66;
     const pRadius = pSize / 2;
@@ -2509,7 +2509,7 @@ async function initStorefrontApp() {
           id: PRODUCTS.oil.id || 'prod_oil_01',
           name: PRODUCTS.oil.title || 'Herbal Hair Oil',
           price: Number(PRODUCTS.oil.price) || 599,
-          img: PRODUCTS.oil.image || 'assets/new-oil-bottle-card.jpg',
+          img: PRODUCTS.oil.image || 'assets/aurelia-emerald-watch.png',
           size: '200ml Glass Bottle',
           qty: 1
         }, e);

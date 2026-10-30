@@ -2926,40 +2926,41 @@ img, svg, video {
           <div class="form-row">
             <div class="form-group flex-2">
               <label>Product Name *</label>
-              <input type="text" id="formProdName" class="form-input" placeholder="e.g. Royal Jasmine Hair Mask" required>
+              <input type="text" id="formProdName" class="form-input" placeholder="e.g. Aurelia Sovereign Emerald 41" required>
             </div>
             <div class="form-group">
               <label>Category *</label>
               <select id="formProdCategory" class="form-input" required>
-                <option value="Hair Care">Hair Care</option>
-                <option value="Scalp & Cleansing">Scalp & Cleansing</option>
-                <option value="Ritual Sets & Combos">Ritual Sets & Combos</option>
-                <option value="Royal Gifting">Royal Gifting</option>
+                <option value="Automatic Chronometers">Automatic Chronometers</option>
+                <option value="Ceramic Divers">Ceramic Divers</option>
+                <option value="Collector Sets">Collector Sets</option>
+                <option value="Dress Watches">Dress Watches</option>
+                <option value="Horological Straps">Horological Straps</option>
               </select>
             </div>
           </div>
 
           <div class="form-group">
             <label>Subtitle / Packaging Details</label>
-            <input type="text" id="formProdSubtitle" class="form-input" placeholder="e.g. 200ml Glass Jar • Cold-Pressed">
+            <input type="text" id="formProdSubtitle" class="form-input" placeholder="e.g. 41mm Case • Swiss Automatic Caliber 2824">
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Selling Price (₹) *</label>
-              <input type="number" id="formProdPrice" class="form-input" placeholder="599" required>
+              <input type="number" id="formProdPrice" class="form-input" placeholder="48500" required>
             </div>
             <div class="form-group">
               <label>Original MRP (₹)</label>
-              <input type="number" id="formProdMrp" class="form-input" placeholder="699">
+              <input type="number" id="formProdMrp" class="form-input" placeholder="56000">
             </div>
             <div class="form-group">
               <label>Current Stock Inventory *</label>
-              <input type="number" id="formProdStock" class="form-input" placeholder="100" required>
+              <input type="number" id="formProdStock" class="form-input" placeholder="25" required>
             </div>
             <div class="form-group">
               <label>SKU Code</label>
-              <input type="text" id="formProdSku" class="form-input" placeholder="NH-PROD-01">
+              <input type="text" id="formProdSku" class="form-input" placeholder="AUR-CHRONO-001">
             </div>
           </div>
 
@@ -2968,7 +2969,7 @@ img, svg, video {
             <div class="form-group flex-2">
               <label>Primary Image URL or Asset Path</label>
               <div style="display: flex; gap: 8px; align-items: center;">
-                <input type="text" id="formProdImage" class="form-input" value="assets/herbal-hair-oil.jpg" style="flex: 1;">
+                <input type="text" id="formProdImage" class="form-input" value="" placeholder="e.g. assets/aurelia-emerald-watch.png or https://..." style="flex: 1;">
                 <label for="formProdImageFile" class="btn-secondary btn-sm" style="cursor: pointer; white-space: nowrap; margin: 0; display: inline-flex; align-items: center; gap: 6px;">
                   📁 Upload Image
                 </label>
@@ -2979,18 +2980,18 @@ img, svg, video {
             <div class="form-group" style="max-width: 130px;">
               <label>Image Preview</label>
               <div style="width: 60px; height: 60px; border-radius: 8px; border: 1px solid var(--admin-border); overflow: hidden; background: #F8FAFC; display: flex; align-items: center; justify-content: center;">
-                <img id="formProdImagePreview" src="assets/herbal-hair-oil.jpg" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;">
+                <img id="formProdImagePreview" src="assets/aurelia-emerald-watch.png" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;">
               </div>
             </div>
             <div class="form-group">
               <label>Brand Theme Color</label>
-              <input type="color" id="formProdColor" class="form-input-color" value="#6B4E9B">
+              <input type="color" id="formProdColor" class="form-input-color" value="#064E3B">
             </div>
           </div>
 
           <h4 class="form-section-title">3. Content & Descriptions</h4>
           <div class="form-group">
-            <label>Short Tagline (e.g. Cold-Pressed • 18 Rare Herbs)</label>
+            <label>Short Tagline (e.g. Caliber 2824 • Sunburst Emerald)</label>
             <input type="text" id="formProdTagline" class="form-input">
           </div>
           <div class="form-group">
@@ -2998,13 +2999,13 @@ img, svg, video {
             <textarea id="formProdDesc" class="form-input" rows="3"></textarea>
           </div>
           <div class="form-group">
-            <label>Ingredients List</label>
+            <label>Horological Specifications / Complications</label>
             <textarea id="formProdIngredients" class="form-input" rows="2"></textarea>
           </div>
 
           <h4 class="form-section-title">4. SEO & Search Engine Information</h4>
           <div class="form-group">
-            <label>SEO URL Slug (e.g. herbal-hair-oil)</label>
+            <label>SEO URL Slug (e.g. aurelia-sovereign-emerald-41)</label>
             <input type="text" id="formProdSlug" class="form-input" placeholder="leave blank to auto-generate">
           </div>
           <div class="form-group">
@@ -3017,7 +3018,7 @@ img, svg, video {
           </div>
           <div class="form-group">
             <label>Target Keywords (comma-separated)</label>
-            <input type="text" id="formProdKeywords" class="form-input" placeholder="hair oil, ayurveda, TechNova Electronics">
+            <input type="text" id="formProdKeywords" class="form-input" placeholder="automatic chronometers, luxury watches, swiss caliber">
           </div>
 
           <h4 class="form-section-title">5. Storefront Home Page Showcase Placement</h4>
@@ -3027,7 +3028,7 @@ img, svg, video {
               <option value="">None (Standard Product Catalog / Shop Only)</option>
               <option value="slot1">⭐ Featured Flagship 1 (Home Page Left Product Card)</option>
               <option value="slot2">⭐ Featured Flagship 2 (Home Page Right Product Card)</option>
-              <option value="combo">🎁 Royal Combo Ritual Banner</option>
+              <option value="combo">🎁 Collector Duo / Bundle Showcase</option>
             </select>
             <small style="color: var(--admin-text-muted); font-size: 0.75rem; margin-top: 4px; display: block;">
               Select a position to immediately feature this product directly on the customer storefront front page upon saving.

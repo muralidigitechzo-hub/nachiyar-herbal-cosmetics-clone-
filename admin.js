@@ -217,23 +217,34 @@ document.addEventListener('DOMContentLoaded', () => {
         safeFetchJson('/api/analytics', { success: true, data: {} })
       ]);
 
-      if (prodRes.success) products = prodRes.data;
+      // Integrate localStorage live customization if active
+      let hasLocalCustom = (localStorage.getItem('nachiyar_has_local_customization') === 'true');
+      if (hasLocalCustom) {
+        try {
+          const lp = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
+          if (Array.isArray(lp) && lp.length > 0) {
+            products = lp;
+          } else if (prodRes.success) {
+            products = prodRes.data;
+          }
+          const ls = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
+          if (ls) storeSettings = { ...(storeSettings || {}), ...ls };
+          else if (setRes.success) storeSettings = setRes.data;
+
+          const lh = JSON.parse(localStorage.getItem('nachiyar_home_showcase') || 'null');
+          if (lh && storeSettings) storeSettings.homeShowcase = lh;
+        } catch(e) {
+          if (prodRes.success) products = prodRes.data;
+          if (setRes.success) storeSettings = setRes.data;
+        }
+      } else {
+        if (prodRes.success) products = prodRes.data;
+        if (setRes.success) storeSettings = setRes.data;
+      }
+
       if (invRes.success) inventoryLogs = invRes.data.logs || [];
       if (ordRes.success) orders = ordRes.data;
       if (invcRes.success) invoices = invcRes.data;
-      if (setRes.success) storeSettings = setRes.data;
-
-      // Integrate localStorage live customization if active
-      if (localStorage.getItem('nachiyar_has_local_customization') === 'true') {
-        try {
-          const lp = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
-          if (Array.isArray(lp) && lp.length > 0) products = lp;
-          const ls = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
-          if (ls) storeSettings = { ...(storeSettings || {}), ...ls };
-          const lh = JSON.parse(localStorage.getItem('nachiyar_home_showcase') || 'null');
-          if (lh && storeSettings) storeSettings.homeShowcase = lh;
-        } catch(e) {}
-      }
 
       // adminBrandingSyncApplied: Update Admin Header & Welcome branding dynamically
       if (storeSettings) {
@@ -331,10 +342,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (kpiNetBankingCount) kpiNetBankingCount.textContent = `${pb['Net Banking']?.count || 0} Transactions`;
 
     // 4. Stock Sync Display
-    const oil = products.find(p => p.slug === 'herbal-hair-oil' || (p.name && p.name.includes('Oil')));
-    const shampoo = products.find(p => p.slug === 'hibiscus-flower-shampoo' || (p.name && p.name.includes('Shampoo')));
-    if (syncOilStock) syncOilStock.textContent = oil ? `${oil.stock} units` : '0 units';
-    if (syncShampooStock) syncShampooStock.textContent = shampoo ? `${shampoo.stock} units` : '0 units';
+    const p1 = products[0];
+    const p2 = products[1];
+    if (syncOilStock) syncOilStock.textContent = p1 ? `${p1.stock} units` : '0 units';
+    if (syncShampooStock) syncShampooStock.textContent = p2 ? `${p2.stock} units` : '0 units';
+    const s1Name = syncOilStock?.parentElement?.querySelector('.stat-name');
+    if (s1Name && p1) s1Name.textContent = `${p1.name} Stock`;
+    const s2Name = syncShampooStock?.parentElement?.querySelector('.stat-name');
+    if (s2Name && p2) s2Name.textContent = `${p2.name} Stock`;
 
     // 5. Revenue by Payment Method Visualizer
     renderPaymentBreakdown(pb, analytics.totalRevenue);
@@ -1609,7 +1624,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pickerList) {
       pickerList.innerHTML = singleProducts.map(p => {
         const isChecked = selectedIds.includes(p.id);
-        const pImg = (p.images && p.images[0]) || 'assets/herbal-hair-oil.jpg';
+        const pImg = (p.images && p.images[0]) || p.image || '/assets/logo.png';
         const pPrice = Number(p.price) || 0;
         const pMrp = Number(p.mrp) || Math.round(pPrice * 1.5);
         return `
@@ -1962,7 +1977,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('formProdMrp').value = p.mrp || '';
       document.getElementById('formProdStock').value = p.stock;
       document.getElementById('formProdSku').value = p.sku || '';
-      const prodImg = (p.images && p.images[0]) || 'assets/herbal-hair-oil.jpg';
+      const prodImg = (p.images && p.images[0]) || (products[0]?.images?.[0]) || '';
       document.getElementById('formProdImage').value = prodImg;
       if (imgPreview) imgPreview.src = prodImg;
       document.getElementById('formProdColor').value = p.themeColor || p.theme_color || '#1A1121';
@@ -2019,7 +2034,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (formProdImageInput && formProdImagePreview) {
     formProdImageInput.addEventListener('input', () => {
-      formProdImagePreview.src = formProdImageInput.value.trim() || 'assets/herbal-hair-oil.jpg';
+      formProdImagePreview.src = formProdImageInput.value.trim() || (products[0]?.images?.[0]) || '/assets/logo.png';
     });
   }
 
@@ -2146,7 +2161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   productForm.onsubmit = async (e) => {
     e.preventDefault();
     const id = document.getElementById('formProductId').value;
-    const imgVal = document.getElementById('formProdImage').value.trim() || 'assets/herbal-hair-oil.jpg';
+    const imgVal = document.getElementById('formProdImage').value.trim() || (products[0]?.images?.[0]) || '/assets/logo.png';
     const newPrice = Number(document.getElementById('formProdPrice').value);
     const newMrp = Number(document.getElementById('formProdMrp').value);
 
@@ -2267,17 +2282,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // Broadcast update to all open storefront tabs and refresh cache
       try {
         localStorage.setItem('nachiyar_products_updated', Date.now().toString());
-        const freshList = await fetch('/api/products?_t=' + Date.now()).then(r => r.json());
-        if (freshList && freshList.success && freshList.data) {
-          localStorage.setItem('nachiyar_store_products', JSON.stringify(freshList.data));
-        }
-        try {
-          const channel = new BroadcastChannel('nachiyar_store_channel');
-          channel.postMessage({ type: 'PRODUCTS_UPDATED', timestamp: Date.now() });
-        } catch (e) {}
-      } catch (err) {}
+        const channel = new BroadcastChannel('nachiyar_store_channel');
+        channel.postMessage({ type: 'PRODUCTS_UPDATED', products: products, timestamp: Date.now() });
+      } catch (e) {}
 
-      loadAllData();
+      // Render products table immediately from updated memory/localStorage without overwriting
+      renderProductsTable();
+      renderInventoryTable();
     } else {
       alert(`Error: ${res.message}`);
     }
