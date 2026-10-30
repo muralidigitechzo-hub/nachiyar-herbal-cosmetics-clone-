@@ -89,6 +89,25 @@
     const isBadFav = rawFav.includes('unsplash.com') || rawFav.includes('technova-logo') || rawFav.includes('nachiyar-logo');
     const fav = (rawFav && !isBadFav) ? rawFav : '/favicon.png';
     document.querySelectorAll('link[rel*="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => el.href = fav);
+    
+    /* DIGITECHZO_BRAND_SYNC */
+    const bName = settings.brand?.name || settings.brandName || 'Digitechzo DigiWatches';
+    const shortBName = settings.brand?.shortName || bName;
+    document.querySelectorAll('.brand-name, #footerBrandName, .dynamic-store-brand').forEach(el => {
+      el.textContent = shortBName;
+    });
+    const tag = settings.tagline !== undefined ? settings.tagline : (settings.brand?.tagline !== undefined ? settings.brand?.tagline : '');
+    document.querySelectorAll('.brand-sub').forEach(el => {
+      if (tag && tag.trim()) {
+        el.textContent = tag.toUpperCase();
+        el.style.display = '';
+      } else {
+        el.textContent = '';
+        el.style.display = 'none';
+      }
+    });
+    document.querySelectorAll('.admin-title').forEach(el => el.textContent = bName.toUpperCase());
+
     if (settings.customCSS) {
       let customStyleEl = document.getElementById('dynamicCustomCSS');
       if (!customStyleEl) {

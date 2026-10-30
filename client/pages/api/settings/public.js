@@ -11,14 +11,14 @@ export default function handler(req, res) {
     const colors = brand.colors || {};
 
     const publicSettings = {
-      brandName: brand.name || 'Aurelia Chronometry',
-      tagline: brand.tagline || 'Mastering The Art Of Timeless Precision',
+      brandName: brand.name || 'Digitechzo DigiWatches',
+      tagline: brand.tagline !== undefined ? brand.tagline : '',
       logoUrl: brand.logo || 'assets/logo.png',
       faviconUrl: brand.favicon || 'favicon.png',
       brand: {
-        name: brand.name || 'Aurelia Chronometry',
-        shortName: brand.shortName || (brand.name || 'Aurelia').split(' ')[0].toUpperCase(),
-        tagline: brand.tagline || 'Mastering The Art Of Timeless Precision',
+        name: brand.name || 'Digitechzo DigiWatches',
+        shortName: brand.shortName || brand.shortName || brand.name || 'DIGITECHZO DIGIWATCHES',
+        tagline: brand.tagline !== undefined ? brand.tagline : '',
         logo: brand.logo || 'assets/logo.png',
         favicon: brand.favicon || 'favicon.png',
         colors: {

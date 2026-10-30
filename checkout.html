@@ -4,7 +4,7 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aurelia Chronometry | Secure Web Checkout</title>
+  <title>Digitechzo DigiWatches | Secure Web Checkout</title>
   <!-- Dynamic Brand Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="shortcut icon" type="image/png" href="/favicon.png">
@@ -1384,11 +1384,11 @@ img, svg, video {
     <div class="header-container">
       <a href="/" class="brand-link">
         <div class="brand-crest">
-          <img src="/assets/logo.png" alt="Aurelia Chronometry Logo" class="brand-logo-img">
+          <img src="/assets/logo.png" alt="Digitechzo DigiWatches Logo" class="brand-logo-img">
         </div>
         <div class="brand-text-lockup">
-          <span class="brand-name">AURELIA</span>
-          <span class="brand-sub">MASTERING TIME WITH PRECISION & ELEGANCE</span>
+          <span class="brand-name">DIGITECHZO DIGIWATCHES</span>
+          <span class="brand-sub">EXCELLENCE & PRECISION</span>
         </div>
       </a>
       <span style="font-size:0.8125rem; font-weight:700; color:var(--color-gold-dark);">🔒 100% Encrypted Checkout</span>
@@ -1547,7 +1547,7 @@ img, svg, video {
       // Robust Instant Default Payment Configuration (Zero Waiting / Zero Blank Loading State)
       let paymentMethodsConfig = {
         cod: { enabled: true, label: 'Cash on Delivery (COD)', description: 'Pay cash to courier executive upon delivery' },
-        upi: { enabled: true, label: 'UPI / QR (GPay, PhonePe, Paytm, BHIM)', upiId: 'nachiyarherbals18@okaxis', merchantName: 'Aurelia Chronometry' },
+        upi: { enabled: true, label: 'UPI / QR (GPay, PhonePe, Paytm, BHIM)', upiId: 'nachiyarherbals18@okaxis', merchantName: 'Digitechzo DigiWatches' },
         card: { enabled: true, label: 'Credit or Debit Card' },
         netbanking: { enabled: true, label: 'Net Banking' }
       };
@@ -1620,7 +1620,7 @@ img, svg, video {
           // 1. UPI Subform
           if (m.key === 'upi') {
             const upiId = (paymentMethodsConfig.upi && paymentMethodsConfig.upi.upiId) || 'payments@okaxis';
-            const merchantName = (paymentMethodsConfig.upi && paymentMethodsConfig.upi.merchantName) || 'Aurelia Chronometry';
+            const merchantName = (paymentMethodsConfig.upi && paymentMethodsConfig.upi.merchantName) || 'Digitechzo DigiWatches';
             const upiQrUri = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(merchantName)}&am=${total}&cu=INR`;
             const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiQrUri)}`;
 

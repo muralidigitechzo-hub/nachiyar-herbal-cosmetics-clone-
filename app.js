@@ -114,7 +114,7 @@ async function initStorefrontApp() {
 
     const brandName = settings.brandName || settings.brand?.name || 'TechNova Electronics';
     const isHerbal = brandName.toLowerCase().includes('nachiyar') || brandName.toLowerCase().includes('herbal') || brandName.toLowerCase().includes('botanical');
-    const shortWord = (settings.brand?.shortName || brandName.trim().split(' ')[0]).toUpperCase();
+    const shortWord = settings.brand?.shortName || brandName || 'DIGITECHZO DIGIWATCHES';
     const initials = (brandName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'TN';
 
     // 1. Document Title
@@ -128,9 +128,16 @@ async function initStorefrontApp() {
     });
     document.querySelectorAll('.footer-watermark-text').forEach(el => el.textContent = shortWord);
 
-    const tagline = settings.tagline || settings.brand?.tagline;
-    if (tagline) {
-      document.querySelectorAll('.brand-sub').forEach(el => el.textContent = tagline.toUpperCase());
+    const tagline = settings.tagline !== undefined ? settings.tagline : (settings.brand?.tagline !== undefined ? settings.brand?.tagline : '');
+    document.querySelectorAll('.brand-sub').forEach(el => {
+      if (tagline && tagline.trim()) {
+        el.textContent = tagline.toUpperCase();
+        el.style.display = '';
+      } else {
+        el.textContent = '';
+        el.style.display = 'none';
+      }
+    });
     }
 
     // 3. Fixed Brand Logo & Favicon across the clone
