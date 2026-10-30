@@ -21,6 +21,8 @@
       if (colors.primary) {
         root.style.setProperty('--color-lavender-primary', colors.primary);
         root.style.setProperty('--theme-color-primary', colors.primary);
+        root.style.setProperty('--admin-primary', colors.primary);
+        root.style.setProperty('--admin-primary-dark', colors.secondary || colors.primary);
         const pRgba = hexToRgba(colors.primary, 0.12);
         if (pRgba) root.style.setProperty('--color-lavender-light', pRgba);
       }

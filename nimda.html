@@ -26,31 +26,105 @@
   <script src="/theme-engine.js"></script>
   <style id="dynamicBrandTheme">
     :root {
-      --color-canvas: #FDFBF7;
-      --color-canvas-alt: #F1EEE6;
+      --color-canvas: #FFFFFF;
+      --color-canvas-alt: #F8FAFC;
       --color-surface: #FFFFFF;
-      --color-text-main: #0F291E;
-      --color-text-muted: #52796F;
-      --color-lavender-primary: #064E3B;
-      --color-lavender-dark: #047857;
-      --color-lavender-light: rgba(6, 78, 59, 0.12);
-      --color-gold: #E2B755;
-      --color-gold-light: rgba(226, 183, 85, 0.18);
-      --color-gold-dark: #047857;
-      --gold-gradient: linear-gradient(135deg, #E2B755 0%, #047857 100%);
-      --gold-glow: 0 4px 20px rgba(226, 183, 85, 0.35);
+      --color-text-main: #1E242B;
+      --color-text-muted: #556070;
+      --color-lavender-primary: #57B71B;
+      --color-lavender-dark: #00f5a0;
+      --color-lavender-light: rgba(87, 183, 27, 0.12);
+      --color-gold: #469815;
+      --color-gold-light: rgba(70, 152, 21, 0.18);
+      --color-gold-dark: #00f5a0;
+      --gold-gradient: linear-gradient(135deg, #469815 0%, #00f5a0 100%);
+      --gold-glow: 0 4px 20px rgba(70, 152, 21, 0.35);
       --color-hibiscus-primary: #1E293B;
       --color-hibiscus-dark: #1E293B;
       --color-bundle-dark: #14532D;
-      --color-bundle-accent: #E2B755;
+      --color-bundle-accent: #469815;
       --card-bg-1: #064E3B;
       --card-bg-2: #1E293B;
       --card-bg-bundle: #14532D;
-      --promo-banner-bg: linear-gradient(135deg, #064E3B 0%, #14532D 100%);
+      --promo-banner-bg: linear-gradient(135deg, #57B71B 0%, #14532D 100%);
       --font-heading: 'Cinzel', serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
-    /* ==========================================================================
+    
+/* ==========================================================================
+   DIGITECHZO THEME OVERRIDES (DRIVEN VIA site-config.json)
+   ========================================================================== */
+:root {
+  --color-lavender-primary: #57B71B !important;
+  --theme-color-primary: #57B71B !important;
+  --color-lavender-dark: #469815 !important;
+  --color-gold: #57B71B !important;
+  --color-gold-dark: #469815 !important;
+  --gold-gradient: linear-gradient(135deg, #57B71B 0%, #469815 100%) !important;
+  --gold-glow: 0 4px 20px rgba(87, 183, 27, 0.35) !important;
+  --admin-primary: #57B71B !important;
+  --admin-primary-dark: #469815 !important;
+}
+
+/* Storefront Action Buttons & Accents */
+.btn-primary,
+.btn-explore,
+.btn-cta,
+.btn-submit,
+.btn-checkout,
+.mystery-discount-banner,
+.announcement-bar,
+.hero-cta-group .btn-primary {
+  background: #57B71B !important;
+  border-color: #57B71B !important;
+  color: #FFFFFF !important;
+}
+
+.btn-primary:hover,
+.btn-explore:hover,
+.hero-cta-group .btn-primary:hover {
+  background: #469815 !important;
+  border-color: #469815 !important;
+}
+
+/* Admin Console Top Action, Sidebar Active Tab, and POS Buttons */
+.admin-sidebar-nav .nav-item.is-active,
+.admin-sidebar-nav .nav-item.active,
+#nav-dashboard.is-active {
+  background: #57B71B !important;
+  color: #FFFFFF !important;
+}
+
+.admin-sidebar-nav .nav-item.is-active .nav-icon svg,
+.admin-sidebar-nav .nav-item.active .nav-icon svg {
+  stroke: #FFFFFF !important;
+}
+
+#btnHeaderNewSale,
+#btnOpenPosModal,
+.btn-pos-primary,
+#btnGenerateInvoice,
+#btnReceiptOkClose {
+  background: #57B71B !important;
+  border-color: #57B71B !important;
+  color: #FFFFFF !important;
+}
+
+#btnHeaderNewSale:hover,
+#btnGenerateInvoice:hover {
+  background: #469815 !important;
+  border-color: #469815 !important;
+}
+
+/* Badges & Metrics in DigiTechzo Green */
+.badge-primary,
+.badge-success {
+  background: rgba(87, 183, 27, 0.12) !important;
+  color: #57B71B !important;
+  border-color: rgba(87, 183, 27, 0.25) !important;
+}
+
+/* ==========================================================================
    AURELIA CHRONOMETRY — COMPREHENSIVE MOBILE RESPONSIVE ENGINE
    Configured in & driven exclusively from site-config.json
    ========================================================================== */
@@ -251,7 +325,7 @@ img, svg, video {
 
   .m-title-accent,
   .title-italic-accent {
-    color: #064E3B !important;
+    color: #57B71B !important;
     font-style: italic !important;
   }
 
@@ -277,9 +351,9 @@ img, svg, video {
     letter-spacing: 0.06em !important;
     padding: 2px 8px !important;
     border-radius: 999px !important;
-    background: rgba(6, 78, 59, 0.08) !important;
-    border: 1px solid #064E3B !important;
-    color: #064E3B !important;
+    background: rgba(87, 183, 27, 0.08) !important;
+    border: 1px solid #57B71B !important;
+    color: #57B71B !important;
     margin-bottom: 4px !important;
   }
 
@@ -323,7 +397,7 @@ img, svg, video {
   .m-bottle-sub {
     font-size: 0.75rem !important;
     font-weight: 700 !important;
-    color: #064E3B !important;
+    color: #57B71B !important;
     margin-top: 2px !important;
   }
 
@@ -337,14 +411,14 @@ img, svg, video {
     max-width: 130px !important;
     padding: 8px 14px !important;
     border-radius: 999px !important;
-    background-color: #064E3B !important;
+    background-color: #57B71B !important;
     color: #FFFFFF !important;
     font-size: 0.8rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.03em !important;
     border: none !important;
     cursor: pointer !important;
-    box-shadow: 0 4px 12px rgba(6, 78, 59, 0.28) !important;
+    box-shadow: 0 4px 12px rgba(87, 183, 27, 0.28) !important;
   }
 
   .m-hero-stage--buy-shampoo .m-btn-buy,
@@ -391,16 +465,16 @@ img, svg, video {
   }
 
   .m-cta-btn--primary {
-    background: #064E3B !important;
+    background: #57B71B !important;
     color: #FFFFFF !important;
     border: none !important;
-    box-shadow: 0 4px 14px rgba(6, 78, 59, 0.3) !important;
+    box-shadow: 0 4px 14px rgba(87, 183, 27, 0.3) !important;
   }
 
   .m-cta-btn--secondary {
     background: transparent !important;
-    border: 1.5px solid #064E3B !important;
-    color: #064E3B !important;
+    border: 1.5px solid #57B71B !important;
+    color: #57B71B !important;
   }
 }
 
@@ -585,7 +659,7 @@ img, svg, video {
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     box-sizing: border-box !important;
-    background: rgba(6, 78, 59, 0.95) !important;
+    background: rgba(87, 183, 27, 0.95) !important;
     color: #E2B755 !important;
     border: 1px solid rgba(226, 183, 85, 0.6) !important;
     border-radius: 999px !important;
@@ -991,8 +1065,8 @@ img, svg, video {
     height: 70px !important;
     background: #FFFFFF !important;
     border-radius: 20px 20px 0 0 !important;
-    border-top: 1px solid rgba(6, 78, 59, 0.12) !important;
-    box-shadow: 0 -8px 24px rgba(6, 78, 59, 0.08) !important;
+    border-top: 1px solid rgba(87, 183, 27, 0.12) !important;
+    box-shadow: 0 -8px 24px rgba(87, 183, 27, 0.08) !important;
     z-index: 9999 !important;
     user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
@@ -1002,8 +1076,8 @@ img, svg, video {
   /* Active elevated circular bubble with Aurelia emerald & gold theme */
   .nav-bubble-circle,
   #navBubbleCircle {
-    background: linear-gradient(135deg, #064E3B 0%, #047857 50%, #064E3B 100%) !important;
-    box-shadow: 0 6px 18px rgba(6, 78, 59, 0.42) !important;
+    background: linear-gradient(135deg, #57B71B 0%, #469815 50%, #57B71B 100%) !important;
+    box-shadow: 0 6px 18px rgba(87, 183, 27, 0.42) !important;
     border: 1.5px solid rgba(226, 183, 85, 0.6) !important;
   }
 
@@ -1014,12 +1088,12 @@ img, svg, video {
 
   /* Wave arch border stroke */
   .nav-wave-shape svg path:last-child {
-    stroke: rgba(6, 78, 59, 0.22) !important;
+    stroke: rgba(87, 183, 27, 0.22) !important;
   }
 
   /* Active tab text in Emerald brand color */
   .mobile-nav-tab.is-active .tab-label {
-    color: #064E3B !important;
+    color: #57B71B !important;
     font-weight: 800 !important;
   }
 
