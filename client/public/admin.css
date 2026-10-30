@@ -3823,13 +3823,12 @@ body.admin-body {
 .sidebar-brand-lockup .admin-title {
   font-family: var(--font-heading) !important;
   font-weight: 800 !important;
-  font-size: 0.95rem !important;
-  letter-spacing: 0.06em !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.04em !important;
   color: #FFFFFF !important;
-  line-height: 1.15 !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  line-height: 1.25 !important;
+  white-space: normal !important;
+  word-break: break-word !important;
 }
 
 .sidebar-brand-lockup .admin-subtitle {

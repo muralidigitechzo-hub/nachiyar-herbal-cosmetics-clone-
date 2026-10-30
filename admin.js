@@ -204,6 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. DATA INITIALIZATION & FETCHING
   // ==========================================
   async function loadAllData() {
+      /* PURGE_STALE_AURELIA_CACHE */
+      try {
+        const cachedSt = JSON.parse(localStorage.getItem('nachiyar_store_settings') || '{}');
+        if (cachedSt && ((cachedSt.brandName && cachedSt.brandName.includes('Aurelia')) || (cachedSt.brand && cachedSt.brand.name && cachedSt.brand.name.includes('Aurelia')))) {
+          localStorage.removeItem('nachiyar_store_settings');
+        }
+      } catch (e) {}
+
     try {
       const safeFetchJson = (url, fallback = { success: false, data: [] }) => 
         authFetch(url).then(r => r.ok ? r.json() : fallback).catch(() => fallback);
@@ -241,13 +249,15 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (e) {}
 
       // 2. SETTINGS
-      if (setRes && setRes.success && setRes.data) {
+      if (setRes && setRes.success && setRes.data && setRes.data.brandName) {
         storeSettings = setRes.data;
+        try { localStorage.setItem('nachiyar_store_settings', JSON.stringify(storeSettings)); } catch(e) {}
+      } else {
+        try {
+          const ls = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
+          if (ls) storeSettings = ls;
+        } catch (e) {}
       }
-      try {
-        const ls = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
-        if (ls) storeSettings = { ...(storeSettings || {}), ...ls };
-      } catch (e) {}
 
       // 3. ORDERS: merge server and dual local stores
       if (ordRes && ordRes.success && Array.isArray(ordRes.data)) {
@@ -310,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 6. BRANDING SYNC
       if (storeSettings) {
-        const bName = storeSettings.brandName || storeSettings.branding?.brandName || 'NACHIYAR HERBALS';
+        const bName = storeSettings.brand?.name || storeSettings.brandName || storeSettings.branding?.brandName || 'Digitechzo DigiWatches';
         const bInitials = (bName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'NH';
         let bLogo = storeSettings.logoUrl || storeSettings.branding?.logoUrl || '/assets/logo.png';
         if (bLogo.includes('unsplash.com') || bLogo.includes('nachiyar-logo') || bLogo.includes('technova-logo') || !bLogo) bLogo = '/assets/logo.png';

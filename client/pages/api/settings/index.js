@@ -14,8 +14,8 @@ export default function handler(req, res) {
     const settingsObj = {
       announcementText: c.announcement || 'SPECIAL PRIVILEGE OFFER • FREE EXPRESS SHIPPING ON ALL ORDERS',
       freeShippingThreshold: c.freeShippingThreshold || 999,
-      brandName: b.name || 'Aurelia Chronometry',
-      tagline: b.tagline || 'Mastering The Art Of Timeless Precision',
+      brandName: b.name || 'Digitechzo DigiWatches',
+      tagline: b.tagline !== undefined ? b.tagline : '',
       logoUrl: b.logo || 'assets/logo.png',
       faviconUrl: b.favicon || 'favicon.png',
       themeColors: {
