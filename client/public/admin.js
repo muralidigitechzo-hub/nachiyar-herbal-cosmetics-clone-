@@ -223,6 +223,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (invcRes.success) invoices = invcRes.data;
       if (setRes.success) storeSettings = setRes.data;
 
+      // Integrate localStorage live customization if active
+      if (localStorage.getItem('nachiyar_has_local_customization') === 'true') {
+        try {
+          const lp = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
+          if (Array.isArray(lp) && lp.length > 0) products = lp;
+          const ls = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
+          if (ls) storeSettings = { ...(storeSettings || {}), ...ls };
+          const lh = JSON.parse(localStorage.getItem('nachiyar_home_showcase') || 'null');
+          if (lh && storeSettings) storeSettings.homeShowcase = lh;
+        } catch(e) {}
+      }
+
       // adminBrandingSyncApplied: Update Admin Header & Welcome branding dynamically
       if (storeSettings) {
         const bName = storeSettings.brandName || storeSettings.branding?.brandName || 'NACHIYAR HERBALS';
@@ -1267,7 +1279,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.btn-del-prod').forEach(b => {
       b.onclick = async () => {
         if (confirm('Are you sure you want to delete this product?')) {
-          await authFetch(`/api/products/${b.dataset.id}`, { method: 'DELETE' });
+          const delId = b.dataset.id;
+          try { await authFetch(`/api/products/${delId}`, { method: 'DELETE' }); } catch(e) {}
+          products = products.filter(p => p.id !== delId);
+          localStorage.setItem('nachiyar_has_local_customization', 'true');
+          localStorage.setItem('nachiyar_store_products', JSON.stringify(products));
+          localStorage.setItem('nachiyar_products_updated', Date.now().toString());
+          try {
+            const curCfg = JSON.parse(localStorage.getItem('site_config_live') || '{}');
+            curCfg.products = products;
+            localStorage.setItem('site_config_live', JSON.stringify(curCfg));
+            const bc = new BroadcastChannel('nachiyar_store_channel');
+            bc.postMessage({ type: 'PRODUCTS_UPDATED', products: products, timestamp: Date.now() });
+          } catch(e) {}
           showToast('Product removed.');
           loadAllData();
         }
@@ -2175,16 +2199,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }).then(r => r.json());
 
     if (res.success) {
+      const createdId = res.data?.id || id || ('AUR-PROD-' + Date.now().toString().slice(-4));
       showToast(id ? 'Product updated successfully.' : 'New product created.');
+      
+      // Update in-memory products array
+      const existingIdx = products.findIndex(p => p.id === createdId || (payload.slug && p.slug === payload.slug));
+      const savedProdObj = { ...(products[existingIdx] || {}), ...payload, id: createdId };
+      if (existingIdx >= 0) {
+        products[existingIdx] = savedProdObj;
+      } else {
+        products.unshift(savedProdObj);
+      }
+      
+      // Persist to localStorage immediately
+      localStorage.setItem('nachiyar_has_local_customization', 'true');
+      localStorage.setItem('nachiyar_store_products', JSON.stringify(products));
+      localStorage.setItem('nachiyar_products_updated', Date.now().toString());
+      try {
+        const curCfg = JSON.parse(localStorage.getItem('site_config_live') || '{}');
+        curCfg.products = products;
+        localStorage.setItem('site_config_live', JSON.stringify(curCfg));
+      } catch(e) {}
+
       try {
         const bc = new BroadcastChannel('nachiyar_store_channel');
-        bc.postMessage({ type: 'PRODUCT_UPDATED', productId: createdId, product: payload });
+        bc.postMessage({ type: 'PRODUCTS_UPDATED', productId: createdId, products: products, timestamp: Date.now() });
       } catch (e) {}
       productModalOverlay.classList.remove('is-active');
 
       // Check showcase placement slot selection
       const chosenSlot = document.getElementById('formProdShowcaseSlot')?.value;
-      const createdId = res.data?.id || id;
       const currentHs = storeSettings && storeSettings.homeShowcase;
 
       if (chosenSlot && createdId) {
@@ -3989,6 +4033,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast(`✅ ${notificationText}`);
         storeSettings = res.data;
         try {
+          localStorage.setItem('nachiyar_has_local_customization', 'true');
           localStorage.setItem('nachiyar_active_coupon', JSON.stringify({
             couponCode: payload.couponCode,
             discountPercent: payload.discountPercent,
@@ -3996,11 +4041,27 @@ document.addEventListener('DOMContentLoaded', () => {
             couponActive: payload.couponActive
           }));
           localStorage.setItem('nachiyar_store_settings', JSON.stringify(payload));
-          localStorage.setItem('crm_active_theme', JSON.stringify(res.data));
+          localStorage.setItem('crm_active_theme', JSON.stringify(res.data || payload));
+          
+          const curLiveCfg = JSON.parse(localStorage.getItem('site_config_live') || '{}');
+          if (!curLiveCfg.brand) curLiveCfg.brand = {};
+          if (!curLiveCfg.business) curLiveCfg.business = {};
+          if (!curLiveCfg.content) curLiveCfg.content = {};
+          if (payload.brandName) curLiveCfg.brand.name = payload.brandName;
+          if (payload.tagline) curLiveCfg.brand.tagline = payload.tagline;
+          if (payload.logoUrl) curLiveCfg.brand.logo = payload.logoUrl;
+          if (payload.faviconUrl) curLiveCfg.brand.favicon = payload.faviconUrl;
+          if (payload.themeColors) curLiveCfg.brand.colors = { ...(curLiveCfg.brand.colors || {}), ...payload.themeColors };
+          if (payload.supportPhone) curLiveCfg.business.phone = payload.supportPhone;
+          if (payload.supportEmail) curLiveCfg.business.email = payload.supportEmail;
+          if (payload.storeAddress) curLiveCfg.business.address = payload.storeAddress;
+          if (payload.announcementText) curLiveCfg.content.announcement = payload.announcementText;
+          if (payload.freeShippingThreshold) curLiveCfg.content.freeShippingThreshold = payload.freeShippingThreshold;
+          localStorage.setItem('site_config_live', JSON.stringify(curLiveCfg));
+
           const ch = new BroadcastChannel('nachiyar_store_channel');
-          ch.postMessage({ type: 'SETTINGS_UPDATED', settings: res.data, timestamp: Date.now() });
-          ch.postMessage({ type: 'THEME_UPDATED', settings: res.data, timestamp: Date.now() });
-          localStorage.setItem('nachiyar_store_settings', JSON.stringify(res.data));
+          ch.postMessage({ type: 'SETTINGS_UPDATED', settings: res.data || payload, timestamp: Date.now() });
+          ch.postMessage({ type: 'THEME_UPDATED', settings: res.data || payload, timestamp: Date.now() });
           localStorage.setItem('nachiyar_products_updated', Date.now().toString());
         } catch (err) {}
         updateBannerLivePreview();

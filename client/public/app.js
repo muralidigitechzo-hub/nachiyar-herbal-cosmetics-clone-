@@ -926,24 +926,68 @@ async function initStorefrontApp() {
   // Expose global methods for testing or direct inter-window communication
   window.applyLiveProductsToDOM = applyLiveProductsToDOM;
 
-  // Pre-apply cached settings & products from localStorage for instant zero-flicker render
-  try {
-    const cachedSettings = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
-    if (cachedSettings) updateStorefrontBusinessDetails(cachedSettings);
+  // Helper to load and render live state from localStorage
+  function loadAndApplyFromLocalStorage() {
+    try {
+      const liveConfig = JSON.parse(localStorage.getItem('site_config_live') || 'null');
+      if (liveConfig) {
+        if (liveConfig.brand || liveConfig.business || liveConfig.content) {
+          updateStorefrontBusinessDetails({
+            brandName: liveConfig.brand?.name,
+            tagline: liveConfig.brand?.tagline,
+            logoUrl: liveConfig.brand?.logo,
+            faviconUrl: liveConfig.brand?.favicon,
+            themeColors: liveConfig.brand?.colors,
+            announcementText: liveConfig.content?.announcement,
+            freeShippingThreshold: liveConfig.content?.freeShippingThreshold,
+            couponCode: liveConfig.content?.coupon?.code,
+            discountPercent: liveConfig.content?.coupon?.discountPercent,
+            couponActive: liveConfig.content?.coupon?.active !== false,
+            supportPhone: liveConfig.business?.phone,
+            supportEmail: liveConfig.business?.email,
+            storeAddress: liveConfig.business?.address,
+            storeTimings: liveConfig.business?.timings,
+            socialLinks: liveConfig.business?.socialLinks,
+            homeShowcase: liveConfig.content?.homeShowcase || liveConfig.homeShowcase || {},
+            content: liveConfig.content,
+            brand: liveConfig.brand,
+            business: liveConfig.business
+          });
+        }
+        if (Array.isArray(liveConfig.products) && liveConfig.products.length > 0) {
+          applyLiveProductsToDOM(liveConfig.products, liveConfig.content?.homeShowcase || liveConfig.homeShowcase || null);
+          return true;
+        }
+      }
 
-    const cachedProducts = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
-    if (cachedProducts !== null && Array.isArray(cachedProducts)) {
-      applyLiveProductsToDOM(cachedProducts);
-    }
-  } catch (e) {}
+      const cachedSettings = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
+      if (cachedSettings) updateStorefrontBusinessDetails(cachedSettings);
+
+      const cachedProducts = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
+      const cachedShowcase = JSON.parse(localStorage.getItem('nachiyar_home_showcase') || 'null');
+      if (cachedProducts !== null && Array.isArray(cachedProducts)) {
+        applyLiveProductsToDOM(cachedProducts, cachedShowcase);
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  // Pre-apply cached settings & products from localStorage for instant zero-flicker render
+  loadAndApplyFromLocalStorage();
 
   // Function to reload live products with cache-busting
   async function reloadLiveProducts() {
+    if (localStorage.getItem('nachiyar_has_local_customization') === 'true') {
+      loadAndApplyFromLocalStorage();
+    }
     try {
       const pRes = await fetch('/api/products?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
       if (pRes && pRes.success && Array.isArray(pRes.data)) {
-        try { localStorage.setItem('nachiyar_store_products', JSON.stringify(pRes.data)); } catch (e) {}
-        applyLiveProductsToDOM(pRes.data);
+        if (localStorage.getItem('nachiyar_has_local_customization') !== 'true') {
+          try { localStorage.setItem('nachiyar_store_products', JSON.stringify(pRes.data)); } catch (e) {}
+          applyLiveProductsToDOM(pRes.data);
+        }
       }
     } catch (err) {
       console.warn('Failed to refresh products:', err);
@@ -954,8 +998,8 @@ async function initStorefrontApp() {
 
   // Cross-tab real-time listener: when admin updates any product or settings, instantly update storefront without page refresh!
   window.addEventListener('storage', (e) => {
-    if (e.key === 'nachiyar_products_updated' || e.key === 'nachiyar_store_products') {
-      reloadLiveProducts();
+    if (e.key === 'nachiyar_products_updated' || e.key === 'nachiyar_store_products' || e.key === 'site_config_live') {
+      loadAndApplyFromLocalStorage();
     }
     if (e.key === 'nachiyar_store_settings') {
       try {
@@ -969,9 +1013,11 @@ async function initStorefrontApp() {
   try {
     const storeChannel = new BroadcastChannel('nachiyar_store_channel');
     storeChannel.onmessage = (event) => {
-      if (event.data && (event.data.type === 'PRODUCTS_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'settings_updated')) {
-        reloadLiveProducts();
+      loadAndApplyFromLocalStorage();
+      if (event.data && (event.data.type === 'PRODUCTS_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'settings_updated' || event.data.type === 'THEME_UPDATED' || event.data.type === 'CONFIG_UPDATED')) {
         if (event.data.settings) updateStorefrontBusinessDetails(event.data.settings);
+        if (event.data.config && event.data.config.products) applyLiveProductsToDOM(event.data.config.products);
+        if (event.data.products) applyLiveProductsToDOM(event.data.products);
       }
     };
   } catch (e) {}
@@ -983,23 +1029,27 @@ async function initStorefrontApp() {
       fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => ({ success: false }))
     ]);
 
-    if (sRes.success && sRes.data) {
-      const data = sRes.data;
-      if (data.homeShowcase) {
-        try {
-          localStorage.setItem('nachiyar_home_showcase', JSON.stringify(data.homeShowcase));
-        } catch (e) {}
-        window.__NACHIYAR_SETTINGS = { ...(window.__NACHIYAR_SETTINGS || {}), homeShowcase: data.homeShowcase };
+    if (localStorage.getItem('nachiyar_has_local_customization') === 'true') {
+      loadAndApplyFromLocalStorage();
+    } else {
+      if (sRes.success && sRes.data) {
+        const data = sRes.data;
+        if (data.homeShowcase) {
+          try {
+            localStorage.setItem('nachiyar_home_showcase', JSON.stringify(data.homeShowcase));
+          } catch (e) {}
+          window.__NACHIYAR_SETTINGS = { ...(window.__NACHIYAR_SETTINGS || {}), homeShowcase: data.homeShowcase };
+        }
       }
-    }
 
-    if (pRes.success && Array.isArray(pRes.data)) {
-      try {
-        localStorage.setItem('nachiyar_store_products', JSON.stringify(pRes.data));
-      } catch (e) {}
+      if (pRes.success && Array.isArray(pRes.data)) {
+        try {
+          localStorage.setItem('nachiyar_store_products', JSON.stringify(pRes.data));
+        } catch (e) {}
 
-      const activeShowcase = (sRes.success && sRes.data && sRes.data.homeShowcase) || null;
-      applyLiveProductsToDOM(pRes.data, activeShowcase);
+        const activeShowcase = (sRes.success && sRes.data && sRes.data.homeShowcase) || null;
+        applyLiveProductsToDOM(pRes.data, activeShowcase);
+      }
     }
 
     if (sRes.success && sRes.data) {

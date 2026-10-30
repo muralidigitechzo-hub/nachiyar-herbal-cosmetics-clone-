@@ -106,33 +106,40 @@
 
   // Hydrate immediately from cache
   try {
-    const cachedSettings = JSON.parse(localStorage.getItem('nachiyar_store_settings') || localStorage.getItem('crm_active_theme') || 'null');
-    if (cachedSettings) {
-      if (cachedSettings.brand) {
-        if (cachedSettings.brand.logo && (cachedSettings.brand.logo.includes('unsplash.com') || cachedSettings.brand.logo.includes('technova-logo') || cachedSettings.brand.logo.includes('nachiyar-logo'))) {
-          cachedSettings.brand.logo = '/assets/logo.png';
+    const liveConfig = JSON.parse(localStorage.getItem('site_config_live') || 'null');
+    if (liveConfig && (liveConfig.brand || liveConfig.themeColors)) {
+      applyTheme(liveConfig.brand || liveConfig);
+    } else {
+      const cachedSettings = JSON.parse(localStorage.getItem('nachiyar_store_settings') || localStorage.getItem('crm_active_theme') || 'null');
+      if (cachedSettings) {
+        if (cachedSettings.brand) {
+          if (cachedSettings.brand.logo && (cachedSettings.brand.logo.includes('unsplash.com') || cachedSettings.brand.logo.includes('technova-logo') || cachedSettings.brand.logo.includes('nachiyar-logo'))) {
+            cachedSettings.brand.logo = '/assets/logo.png';
+          }
+          if (cachedSettings.brand.favicon && (cachedSettings.brand.favicon.includes('unsplash.com') || cachedSettings.brand.favicon.includes('technova-logo') || cachedSettings.brand.favicon.includes('nachiyar-logo'))) {
+            cachedSettings.brand.favicon = '/favicon.png';
+          }
         }
-        if (cachedSettings.brand.favicon && (cachedSettings.brand.favicon.includes('unsplash.com') || cachedSettings.brand.favicon.includes('technova-logo') || cachedSettings.brand.favicon.includes('nachiyar-logo'))) {
-          cachedSettings.brand.favicon = '/favicon.png';
+        if (cachedSettings.faviconUrl && (cachedSettings.faviconUrl.includes('unsplash.com') || cachedSettings.faviconUrl.includes('technova-logo') || cachedSettings.faviconUrl.includes('nachiyar-logo'))) {
+          cachedSettings.faviconUrl = '/favicon.png';
         }
+        applyTheme(cachedSettings);
       }
-      if (cachedSettings.faviconUrl && (cachedSettings.faviconUrl.includes('unsplash.com') || cachedSettings.faviconUrl.includes('technova-logo') || cachedSettings.faviconUrl.includes('nachiyar-logo'))) {
-        cachedSettings.faviconUrl = '/favicon.png';
-      }
-      applyTheme(cachedSettings);
     }
   } catch (e) {}
 
   // Async fetch fresh settings from API to guarantee latest live theme
   try {
-    fetch('/api/settings/public')
+    fetch('/api/settings/public?_t=' + Date.now(), { cache: 'no-store' })
       .then(r => r.json())
       .then(d => {
         if (d && d.success && d.data) {
-          applyTheme(d.data);
-          try {
-            localStorage.setItem('nachiyar_store_settings', JSON.stringify(d.data));
-          } catch (e) {}
+          if (localStorage.getItem('nachiyar_has_local_customization') !== 'true') {
+            applyTheme(d.data);
+            try {
+              localStorage.setItem('nachiyar_store_settings', JSON.stringify(d.data));
+            } catch (e) {}
+          }
         }
       })
       .catch(() => {});
