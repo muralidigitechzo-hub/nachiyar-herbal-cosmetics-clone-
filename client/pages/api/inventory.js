@@ -1,12 +1,13 @@
-import { getDb, saveDb } from '../../lib/db';
+import { getSiteConfig, saveSiteConfig } from '../../lib/db';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
 
   try {
-    const db = getDb();
-    const products = Array.isArray(db.products) ? db.products : [];
-    const logs = Array.isArray(db.inventory_logs) ? db.inventory_logs : [];
+    const config = getSiteConfig();
+    const products = Array.isArray(config.products) ? config.products : [];
+    if (!Array.isArray(config.inventory_logs)) config.inventory_logs = [];
+    const logs = config.inventory_logs;
 
     if (req.method === 'GET') {
       const matrix = products.map(p => {
@@ -35,7 +36,7 @@ export default function handler(req, res) {
 
     if (req.method === 'POST') {
       const { productId, adjustment, reason } = req.body || {};
-      const prod = products.find(p => p.id === productId);
+      const prod = products.find(p => p.id === productId || p.slug === productId);
       if (prod) {
         prod.stock = Math.max(0, Number(prod.stock || 0) + Number(adjustment || 0));
         logs.unshift({
@@ -47,10 +48,10 @@ export default function handler(req, res) {
           reason: reason || 'Manual Admin Adjustment',
           timestamp: new Date().toISOString()
         });
-        db.inventory_logs = logs.slice(0, 50);
-        saveDb(db);
+        config.inventory_logs = logs.slice(0, 50);
+        saveSiteConfig(config);
       }
-      return res.status(200).json({ success: true, message: 'Inventory updated' });
+      return res.status(200).json({ success: true, message: 'Inventory updated in site-config.json' });
     }
 
     return res.status(405).json({ success: false, message: 'Method not allowed' });

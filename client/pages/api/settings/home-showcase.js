@@ -1,4 +1,4 @@
-import { getDb, saveDb } from '../../../lib/db';
+import { getSiteConfig, saveSiteConfig } from '../../../lib/db';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
@@ -8,20 +8,27 @@ export default function handler(req, res) {
   }
 
   try {
-    const db = getDb();
-    if (!db.site_settings) db.site_settings = {};
-    if (!db.site_settings.homeShowcase) db.site_settings.homeShowcase = {};
+    const config = getSiteConfig();
+    if (!config.content) config.content = {};
+    if (!config.content.homeShowcase) config.content.homeShowcase = {};
 
     const { slot, remove, ...data } = req.body || {};
     if (slot) {
       if (remove) {
-        delete db.site_settings.homeShowcase[slot];
+        delete config.content.homeShowcase[slot];
       } else {
-        db.site_settings.homeShowcase[slot] = data;
+        config.content.homeShowcase[slot] = data;
       }
+      config.homeShowcase = config.content.homeShowcase;
     }
-    saveDb(db);
-    return res.status(200).json({ success: true, message: 'Home showcase updated', data: db.site_settings.homeShowcase });
+
+    saveSiteConfig(config);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Home showcase updated in site-config.json',
+      data: config.content.homeShowcase
+    });
   } catch (error) {
     console.error('Error in /api/settings/home-showcase:', error);
     return res.status(500).json({ success: false, message: 'Server error' });

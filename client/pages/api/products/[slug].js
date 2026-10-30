@@ -1,15 +1,15 @@
-import { getDb, saveDb } from '../../../lib/db';
+import { getSiteConfig, saveSiteConfig } from '../../../lib/db';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
 
   try {
     const { slug } = req.query;
-    const db = getDb();
-    if (!Array.isArray(db.products)) db.products = [];
+    const config = getSiteConfig();
+    if (!Array.isArray(config.products)) config.products = [];
 
     const cleanSlug = (slug || '').toString().toLowerCase();
-    const idx = db.products.findIndex(p => 
+    const idx = config.products.findIndex(p => 
       (p.slug && p.slug.toLowerCase() === cleanSlug) ||
       (p.id && p.id.toLowerCase() === cleanSlug)
     );
@@ -18,16 +18,17 @@ export default function handler(req, res) {
       if (idx === -1) {
         return res.status(404).json({ success: false, error: 'Product not found' });
       }
-      const product = db.products[idx];
+      const product = config.products[idx];
       const mapped = {
         ...product,
         price: Number(product.price || 0),
         mrp: Number(product.mrp || product.compareAtPrice || product.price || 0),
-        category: product.category || 'General',
+        compareAtPrice: Number(product.compareAtPrice || product.mrp || product.price || 0),
+        category: product.category || 'Collection',
         categoryId: product.categoryId || product.category_id || '',
         themeColor: product.themeColor || product.theme_color || '#064E3B',
         theme_color: product.themeColor || product.theme_color || '#064E3B',
-        images: Array.isArray(product.images) ? product.images : (product.images ? [product.images] : []),
+        images: Array.isArray(product.images) ? product.images : (product.images ? [product.images] : (product.image ? [product.image] : [])),
         metricBadge: product.metricBadge || (typeof product.badge === 'string' ? product.badge : (product.badge?.number ? `${product.badge.number} ${product.badge.unit || ''}`.trim() : 'PREMIUM'))
       };
       return res.status(200).json({ success: true, data: mapped });
@@ -37,18 +38,22 @@ export default function handler(req, res) {
       if (idx === -1) {
         return res.status(404).json({ success: false, message: 'Product not found' });
       }
-      db.products.splice(idx, 1);
-      saveDb(db);
-      return res.status(200).json({ success: true, message: 'Product deleted successfully' });
+      config.products.splice(idx, 1);
+      saveSiteConfig(config);
+      return res.status(200).json({ success: true, message: 'Product deleted from site-config.json' });
     }
 
     if (req.method === 'PUT' || req.method === 'PATCH') {
       if (idx === -1) {
         return res.status(404).json({ success: false, message: 'Product not found' });
       }
-      db.products[idx] = { ...db.products[idx], ...req.body };
-      saveDb(db);
-      return res.status(200).json({ success: true, message: 'Product updated successfully', data: db.products[idx] });
+      config.products[idx] = { ...config.products[idx], ...req.body };
+      saveSiteConfig(config);
+      return res.status(200).json({
+        success: true,
+        message: 'Product updated in site-config.json',
+        data: config.products[idx]
+      });
     }
 
     return res.status(405).json({ success: false, message: 'Method not allowed' });

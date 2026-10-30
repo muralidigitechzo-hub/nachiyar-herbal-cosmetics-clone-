@@ -1,11 +1,10 @@
-import { getDb, saveDb, getSiteConfig, saveSiteConfig } from '../../../lib/db';
+import { getSiteConfig, saveSiteConfig } from '../../../lib/db';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
 
   try {
     const config = getSiteConfig();
-    const db = getDb();
 
     const b = config.brand || {};
     const bus = config.business || {};
@@ -13,7 +12,7 @@ export default function handler(req, res) {
     const colors = b.colors || {};
 
     const settingsObj = {
-      announcementText: c.announcement || 'SPECIAL PRIVILEGE OFFER • FREE EXPRESS SHIPPING ON ALL ELIGIBLE ORDERS',
+      announcementText: c.announcement || 'SPECIAL PRIVILEGE OFFER • FREE EXPRESS SHIPPING ON ALL ORDERS',
       freeShippingThreshold: c.freeShippingThreshold || 999,
       brandName: b.name || 'Aurelia Chronometry',
       tagline: b.tagline || 'Mastering The Art Of Timeless Precision',
@@ -24,7 +23,10 @@ export default function handler(req, res) {
         secondary: colors.secondary || '#E2B755',
         accent: colors.accent || '#047857',
         bg: colors.background || '#FDFBF7',
-        text: colors.text || '#0F291E'
+        text: colors.text || '#0F291E',
+        cardBg1: colors.cardBg1 || colors.primary || '#064E3B',
+        cardBg2: colors.cardBg2 || colors.secondary || '#822234',
+        bundleBg: colors.bundleBg || '#271434'
       },
       supportPhone: bus.phone || '+91 94455 66778',
       supportEmail: bus.email || 'concierge@aureliatime.com',
@@ -34,9 +36,10 @@ export default function handler(req, res) {
       couponCode: c.coupon?.code || 'AURELIA15',
       discountPercent: c.coupon?.discountPercent || 15,
       couponActive: c.coupon?.active !== false,
+      couponExpiryDate: c.coupon?.expiryDate || '',
       socialLinks: bus.socialLinks || {},
-      paymentMethods: db.site_settings?.paymentMethods || { cod: true, upi: true, card: true, netbanking: true },
-      homeShowcase: db.site_settings?.homeShowcase || {}
+      paymentMethods: config.paymentMethods || { cod: true, upi: true, card: true, netbanking: true },
+      homeShowcase: c.homeShowcase || config.homeShowcase || {}
     };
 
     if (req.method === 'GET') {
@@ -45,26 +48,54 @@ export default function handler(req, res) {
 
     if (req.method === 'PUT' || req.method === 'POST') {
       const updates = req.body || {};
+
       if (updates.brandName) b.name = updates.brandName;
       if (updates.tagline) b.tagline = updates.tagline;
+      if (updates.logoUrl) b.logo = updates.logoUrl;
+      if (updates.faviconUrl) b.favicon = updates.faviconUrl;
+
+      if (updates.themeColors) {
+        b.colors = { ...(b.colors || {}), ...updates.themeColors };
+      }
+
       if (updates.supportPhone) bus.phone = updates.supportPhone;
       if (updates.supportEmail) bus.email = updates.supportEmail;
       if (updates.storeAddress) bus.address = updates.storeAddress;
+      if (updates.gstin) bus.gstin = updates.gstin;
+      if (updates.storeTimings) bus.timings = updates.storeTimings;
+
       if (updates.announcementText) c.announcement = updates.announcementText;
-      if (updates.couponCode) {
+      if (updates.freeShippingThreshold) c.freeShippingThreshold = Number(updates.freeShippingThreshold);
+
+      if (updates.couponCode || updates.discountPercent !== undefined || updates.couponActive !== undefined) {
         if (!c.coupon) c.coupon = {};
-        c.coupon.code = updates.couponCode;
+        if (updates.couponCode) c.coupon.code = updates.couponCode;
+        if (updates.discountPercent !== undefined) c.coupon.discountPercent = Number(updates.discountPercent);
+        if (updates.couponActive !== undefined) c.coupon.active = updates.couponActive === true;
+        if (updates.couponExpiryDate !== undefined) c.coupon.expiryDate = updates.couponExpiryDate;
+      }
+
+      if (updates.homeShowcase) {
+        c.homeShowcase = { ...(c.homeShowcase || {}), ...updates.homeShowcase };
+        config.homeShowcase = c.homeShowcase;
+      }
+
+      if (updates.paymentMethods) {
+        config.paymentMethods = updates.paymentMethods;
       }
 
       config.brand = b;
       config.business = bus;
       config.content = c;
+
+      // Save directly to site-config.json (Single source of truth)
       saveSiteConfig(config);
 
-      db.site_settings = { ...(db.site_settings || {}), ...updates };
-      saveDb(db);
-
-      return res.status(200).json({ success: true, message: 'Settings saved successfully', data: { ...settingsObj, ...updates } });
+      return res.status(200).json({
+        success: true,
+        message: 'Settings saved successfully to site-config.json',
+        data: { ...settingsObj, ...updates }
+      });
     }
 
     return res.status(405).json({ success: false, message: 'Method not allowed' });
