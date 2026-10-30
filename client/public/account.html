@@ -2022,8 +2022,13 @@
 
         // 2. Also check any orders placed locally by THIS specific customer
         try {
-          const localStored = JSON.parse(localStorage.getItem('store_customer_orders') || '[]');
+          const localStored = [
+            ...JSON.parse(localStorage.getItem('store_customer_orders') || '[]'),
+            ...JSON.parse(localStorage.getItem('nachiyar_customer_orders') || '[]'),
+            ...JSON.parse(localStorage.getItem('nachiyar_store_orders') || '[]')
+          ];
           localStored.forEach(o => {
+            if (!o) return;
             const c = o.customer || {};
             const oPhone = (c.phone || '').replace(/\D/g, '').slice(-10);
             const oEmail = (c.email || '').trim().toLowerCase();

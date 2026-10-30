@@ -204,6 +204,7 @@ export function saveDb(data, syncToConfig = true) {
       if (Array.isArray(data.invoices)) config.invoices = data.invoices;
       if (Array.isArray(data.inventory_logs)) config.inventory_logs = data.inventory_logs;
       if (Array.isArray(data.users)) config.users = data.users;
+      if (Array.isArray(data.customers)) config.customers = data.customers;
       if (Array.isArray(data.contact_messages)) config.contact_messages = data.contact_messages;
 
       if (data.site_settings) {

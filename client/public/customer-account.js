@@ -133,7 +133,7 @@
   // State
   let currentCustomer = null;
   try {
-    const saved = localStorage.getItem('nachiyar_customer');
+    const saved = localStorage.getItem('nachiyar_customer') || localStorage.getItem('store_customer');
     if (saved) currentCustomer = JSON.parse(saved);
   } catch (e) {}
 
@@ -1406,24 +1406,46 @@
   };
 
   // =========================================================================
-  // SECURE BACKEND SESSION VALIDATION & SIGN OUT
+  // SECURE BACKEND SESSION VALIDATION & SIGN OUT (PERSISTENT & SERVERLESS-RESILIENT)
   // =========================================================================
   async function validateBackendSession() {
     try {
-      const res = await fetch('/api/customer/session?_t=' + Date.now(), { cache: 'no-store' });
-      const data = await res.json();
+      const token = localStorage.getItem('nachiyar_token') || localStorage.getItem('store_customer_token') || '';
+      const res = await fetch('/api/customer/session?_t=' + Date.now(), {
+        cache: 'no-store',
+        headers: token ? { 'Authorization': 'Bearer ' + token, 'x-customer-token': token } : {}
+      });
+      const data = await res.json().catch(() => null);
       if (data && data.success && data.authenticated && data.customer) {
         currentCustomer = data.customer;
         localStorage.setItem('nachiyar_customer', JSON.stringify(data.customer));
+        localStorage.setItem('store_customer', JSON.stringify(data.customer));
         updateNavbarUserState();
+      } else if (data && data.forceLogout === true) {
+        clearCustomerSession(false);
       } else {
-        // If server indicates session is invalid or expired, clear local state
-        if (currentCustomer) {
-          clearCustomerSession(false);
+        // Keep cached localStorage customer! Do NOT clear session on serverless cold starts.
+        if (!currentCustomer) {
+          const saved = localStorage.getItem('nachiyar_customer') || localStorage.getItem('store_customer');
+          if (saved) {
+            try {
+              currentCustomer = JSON.parse(saved);
+              updateNavbarUserState();
+            } catch (err) {}
+          }
         }
       }
     } catch (e) {
       // Offline fallback: keep cached customer info
+      if (!currentCustomer) {
+        try {
+          const saved = localStorage.getItem('nachiyar_customer') || localStorage.getItem('store_customer');
+          if (saved) {
+            currentCustomer = JSON.parse(saved);
+            updateNavbarUserState();
+          }
+        } catch (err) {}
+      }
     }
   }
 

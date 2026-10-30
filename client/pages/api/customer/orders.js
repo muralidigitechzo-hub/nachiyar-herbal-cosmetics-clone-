@@ -1,4 +1,4 @@
-import { getDb } from '../../../lib/db';
+import { getDb, getSiteConfig } from '../../../lib/db';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
@@ -6,15 +6,24 @@ export default function handler(req, res) {
   try {
     const { email, phone } = req.query;
     const db = getDb();
-    const orders = Array.isArray(db.orders) ? db.orders : [];
+    const config = getSiteConfig();
+
+    const orders = Array.isArray(config.orders) && config.orders.length > 0
+      ? config.orders
+      : (Array.isArray(db.orders) ? db.orders : []);
 
     const cleanEmail = (email || '').toLowerCase().trim();
-    const cleanPhone = (phone || '').replace(/\D/g, '');
+    const cleanPhone = (phone || '').replace(/\D/g, '').slice(-10);
 
     const customerOrders = orders.filter(o => {
-      const oEmail = (o.customerEmail || o.email || o.shippingAddress?.email || '').toLowerCase().trim();
-      const oPhone = (o.customerPhone || o.phone || o.shippingAddress?.phone || '').replace(/\D/g, '');
-      return (cleanEmail && oEmail === cleanEmail) || (cleanPhone && oPhone.includes(cleanPhone));
+      if (!o) return false;
+      const oEmail = (o.customer?.email || o.customerEmail || o.email || o.shippingAddress?.email || '').toLowerCase().trim();
+      const oPhone = (o.customer?.phone || o.customerPhone || o.phone || o.shippingAddress?.phone || '').replace(/\D/g, '').slice(-10);
+
+      const emailMatches = Boolean(cleanEmail && oEmail && oEmail === cleanEmail);
+      const phoneMatches = Boolean(cleanPhone && cleanPhone.length === 10 && oPhone && oPhone === cleanPhone);
+
+      return emailMatches || phoneMatches;
     });
 
     return res.status(200).json({ success: true, data: customerOrders });

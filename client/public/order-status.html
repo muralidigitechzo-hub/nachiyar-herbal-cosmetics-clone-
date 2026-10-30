@@ -458,15 +458,27 @@
         } catch (err) {}
       }
 
-      // 3. Fallback to local customer orders cache
+      // 3. Fallback to local customer orders cache (Comprehensive multi-key search)
       if (!order) {
         try {
-          const storedOrders = JSON.parse(localStorage.getItem('store_customer_orders') || '[]');
-          order = storedOrders.find(o => 
-            (o.id && o.id.toLowerCase() === queryKey.toLowerCase()) || 
-            (o.orderNumber && o.orderNumber.toLowerCase() === queryKey.toLowerCase()) ||
-            (o.customer && (o.customer.phone === queryKey || o.customer.email === queryKey))
-          );
+          const storedOrders = [
+            ...JSON.parse(localStorage.getItem('store_customer_orders') || '[]'),
+            ...JSON.parse(localStorage.getItem('nachiyar_customer_orders') || '[]'),
+            ...JSON.parse(localStorage.getItem('nachiyar_store_orders') || '[]')
+          ];
+          const cleanQPhone = queryKey.replace(/\D/g, '').slice(-10);
+          const cleanQEmail = queryKey.trim().toLowerCase();
+
+          order = storedOrders.find(o => {
+            if (!o) return false;
+            const matchId = (o.id && o.id.toLowerCase() === queryKey.toLowerCase());
+            const matchNum = (o.orderNumber && o.orderNumber.toLowerCase() === queryKey.toLowerCase());
+            const oPhone = o.customer && o.customer.phone ? o.customer.phone.replace(/\D/g, '').slice(-10) : '';
+            const oEmail = o.customer && o.customer.email ? o.customer.email.trim().toLowerCase() : '';
+            const matchPhone = (cleanQPhone.length === 10 && oPhone === cleanQPhone);
+            const matchEmail = (cleanQEmail.length > 3 && oEmail === cleanQEmail);
+            return matchId || matchNum || matchPhone || matchEmail;
+          });
         } catch (e) {}
       }
 

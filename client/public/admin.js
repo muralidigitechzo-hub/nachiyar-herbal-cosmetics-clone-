@@ -217,27 +217,26 @@ document.addEventListener('DOMContentLoaded', () => {
         safeFetchJson('/api/analytics', { success: true, data: {} })
       ]);
 
-      // Integrate localStorage live customization if active
-      let hasLocalCustom = (localStorage.getItem('nachiyar_has_local_customization') === 'true');
-      if (hasLocalCustom) {
-        try {
-          const lp = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
-          if (Array.isArray(lp) && lp.length > 0) {
-            products = lp;
-          } else if (prodRes.success) {
-            products = prodRes.data;
-          }
-          const ls = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
-          if (ls) storeSettings = { ...(storeSettings || {}), ...ls };
-          else if (setRes.success) storeSettings = setRes.data;
-
-          const lh = JSON.parse(localStorage.getItem('nachiyar_home_showcase') || 'null');
-          if (lh && storeSettings) storeSettings.homeShowcase = lh;
-        } catch(e) {
-          if (prodRes.success) products = prodRes.data;
-          if (setRes.success) storeSettings = setRes.data;
+      // Primary Client Store: LocalStorage Live Customization (Never reverts to stale server defaults)
+      try {
+        const lp = JSON.parse(localStorage.getItem('nachiyar_store_products') || 'null');
+        if (Array.isArray(lp) && lp.length > 0) {
+          products = lp;
+        } else if (prodRes.success && Array.isArray(prodRes.data) && prodRes.data.length > 0) {
+          products = prodRes.data;
+          localStorage.setItem('nachiyar_store_products', JSON.stringify(products));
         }
-      } else {
+
+        const ls = JSON.parse(localStorage.getItem('nachiyar_store_settings') || 'null');
+        if (ls && typeof ls === 'object' && Object.keys(ls).length > 0) {
+          storeSettings = { ...(storeSettings || {}), ...ls };
+        } else if (setRes.success && setRes.data) {
+          storeSettings = setRes.data;
+        }
+
+        const lh = JSON.parse(localStorage.getItem('nachiyar_home_showcase') || 'null');
+        if (lh && storeSettings) storeSettings.homeShowcase = lh;
+      } catch(e) {
         if (prodRes.success) products = prodRes.data;
         if (setRes.success) storeSettings = setRes.data;
       }

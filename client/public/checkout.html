@@ -999,11 +999,10 @@
           return;
         }
 
-        // Always save order and customer into session stores
+        // Always save order and customer into session stores (Dual LocalStorage Keys for 100% persistence)
         try {
-          // 1. Sync active customer profile
-          localStorage.setItem('store_customer', JSON.stringify({
-            id: 'cust_' + Date.now(),
+          const custObj = {
+            id: payload.customer.id || ('cust_' + Date.now()),
             name: payload.customer.name,
             email: payload.customer.email,
             phone: payload.customer.phone,
@@ -1011,7 +1010,11 @@
             city: payload.customer.city,
             state: payload.customer.state,
             pincode: payload.customer.pincode
-          }));
+          };
+
+          // 1. Sync active customer profile
+          localStorage.setItem('store_customer', JSON.stringify(custObj));
+          localStorage.setItem('nachiyar_customer', JSON.stringify(custObj));
 
           // 2. Track placed order numbers
           const placedNumbers = JSON.parse(localStorage.getItem('store_placed_orders') || '[]');
@@ -1019,8 +1022,7 @@
           localStorage.setItem('store_placed_orders', JSON.stringify(placedNumbers));
 
           // 3. Save order into customer orders store
-          const storedOrders = JSON.parse(localStorage.getItem('store_customer_orders') || '[]');
-          storedOrders.unshift({
+          const orderRecord = {
             id: orderId,
             orderNumber: orderNumber,
             customer: payload.customer,
@@ -1032,13 +1034,20 @@
             paymentMethod: payload.paymentMethod,
             status: 'placed',
             createdAt: new Date().toISOString()
-          });
+          };
+
+          const storedOrders = JSON.parse(localStorage.getItem('store_customer_orders') || '[]');
+          storedOrders.unshift(orderRecord);
           localStorage.setItem('store_customer_orders', JSON.stringify(storedOrders));
+          localStorage.setItem('nachiyar_customer_orders', JSON.stringify(storedOrders));
+          localStorage.setItem('nachiyar_store_orders', JSON.stringify(storedOrders));
         } catch (e) {
           console.warn('LocalStorage save error:', e);
         }
 
         localStorage.removeItem('store_cart');
+        localStorage.removeItem('nachiyar_cart');
+        localStorage.removeItem('cart');
         window.location.href = `order-status.html?orderId=${orderId}&orderNumber=${orderNumber}`;
       });
 
