@@ -1,4 +1,4 @@
-import { getSiteConfig, saveSiteConfig } from '../../../lib/db';
+import { getSiteConfig, saveSiteConfig } from '../../../lib/db.js';
 
 export default function handler(req, res) {
   try {

@@ -1,4 +1,4 @@
-import { getDb, getSiteConfig } from '../../../lib/db';
+import { getDb, getSiteConfig } from '../../../lib/db.js';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');

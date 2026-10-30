@@ -16,7 +16,7 @@
   <script>
     // Immediate client-side security auth gate
     (function() {
-      const token = localStorage.getItem('nachiyar_admin_token');
+      const token = localStorage.getItem('nachiyar_admin_token') || localStorage.getItem('store_admin_token') || localStorage.getItem('admin_token');\n      if (token) { localStorage.setItem('nachiyar_admin_token', token); localStorage.setItem('store_admin_token', token); }
       if (!token) {
         window.location.replace('/admin-login.html');
       }

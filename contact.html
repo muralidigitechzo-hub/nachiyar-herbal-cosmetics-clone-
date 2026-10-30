@@ -1987,13 +1987,31 @@ img, svg, video {
 
     function saveLocalMessageBackup(msg) {
       try {
-        const key = 'store_offline_inquiries';
-        const list = JSON.parse(localStorage.getItem(key) || '[]');
-        msg.id = 'msg_local_' + Date.now();
-        msg.created_at = new Date().toISOString();
-        msg.status = 'unread';
-        list.unshift(msg);
-        localStorage.setItem(key, JSON.stringify(list));
+        const item = {
+          id: msg.id || ('msg_' + Date.now()),
+          name: msg.name,
+          email: msg.email,
+          phone: msg.phone,
+          subject: msg.subject,
+          message: msg.message,
+          status: 'unread',
+          created_at: msg.created_at || new Date().toISOString()
+        };
+
+        ['store_offline_inquiries', 'store_offline_inquiries'].forEach(key => {
+          const list = JSON.parse(localStorage.getItem(key) || '[]');
+          list.unshift(item);
+          localStorage.setItem(key, JSON.stringify(list));
+        });
+
+        try {
+          const bc = new BroadcastChannel('nachiyar_store_channel');
+          bc.postMessage({
+            type: 'NEW_INQUIRY',
+            message: item,
+            timestamp: Date.now()
+          });
+        } catch(bErr) {}
       } catch (e) {}
     }
     document.addEventListener('DOMContentLoaded', () => {

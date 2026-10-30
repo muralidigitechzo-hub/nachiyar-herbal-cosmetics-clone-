@@ -1,4 +1,4 @@
-import { getSiteConfig } from '../../../lib/db';
+import { getSiteConfig } from '../../../lib/db.js';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=120, stale-while-revalidate=300');

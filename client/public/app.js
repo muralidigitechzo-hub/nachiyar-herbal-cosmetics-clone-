@@ -2290,12 +2290,63 @@ async function initStorefrontApp() {
           })
         });
 
+        let reviewObj = {
+          id: 'rev_' + Date.now(),
+          author_name: authorName,
+          author_email: authorEmail,
+          product_name: productName,
+          rating: rating,
+          title: title,
+          comment: comment,
+          status: 'pending',
+          created_at: new Date().toISOString()
+        };
+
         if (res.ok && res.headers.get('content-type')?.includes('application/json')) {
           const data = await res.json();
-          if (data.success) reviewSaved = true;
+          if (data && data.success && data.data) {
+            reviewSaved = true;
+            reviewObj = data.data;
+          }
         }
+
+        // Save to local stores & broadcast to Admin Console
+        try {
+          ['nachiyar_store_reviews', 'store_customer_reviews'].forEach(k => {
+            const list = JSON.parse(localStorage.getItem(k) || '[]');
+            list.unshift(reviewObj);
+            localStorage.setItem(k, JSON.stringify(list));
+          });
+
+          const bc = new BroadcastChannel('nachiyar_store_channel');
+          bc.postMessage({
+            type: 'NEW_REVIEW',
+            review: reviewObj,
+            timestamp: Date.now()
+          });
+        } catch(bErr) {}
       } catch (err) {
         console.warn('API submission failed, using local confirmation fallback:', err);
+        try {
+          const fallbackRev = {
+            id: 'rev_' + Date.now(),
+            author_name: authorName,
+            author_email: authorEmail,
+            product_name: productName,
+            rating: rating,
+            title: title,
+            comment: comment,
+            status: 'pending',
+            created_at: new Date().toISOString()
+          };
+          ['nachiyar_store_reviews', 'store_customer_reviews'].forEach(k => {
+            const list = JSON.parse(localStorage.getItem(k) || '[]');
+            list.unshift(fallbackRev);
+            localStorage.setItem(k, JSON.stringify(list));
+          });
+          const bc = new BroadcastChannel('nachiyar_store_channel');
+          bc.postMessage({ type: 'NEW_REVIEW', review: fallbackRev, timestamp: Date.now() });
+        } catch(fErr) {}
       }
 
       // Always show positive confirmation to patron and reset modal
