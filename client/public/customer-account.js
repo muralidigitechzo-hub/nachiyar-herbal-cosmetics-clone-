@@ -978,9 +978,11 @@
     currentCustomer = customer;
     if (customer) {
       localStorage.setItem('nachiyar_customer', JSON.stringify(customer));
+      localStorage.setItem('store_customer', JSON.stringify(customer));
     }
     if (token) {
       localStorage.setItem('nachiyar_token', token);
+      localStorage.setItem('store_customer_token', token);
     }
     updateNavbarUserState();
     closeAccountDrawer();
@@ -1386,10 +1388,15 @@
 
       if (data.success && data.customer) {
         syncCustomerLoginState(data.customer, data.token);
-        showSideToast({ title: 'Account Created!', message: `Welcome to Aurelia, ${data.customer.name}!`, type: 'success' });
-        if (window.location.pathname.includes('account')) {
-          setTimeout(() => window.location.reload(), 300);
-        }
+        const bName = JSON.parse(localStorage.getItem('nachiyar_store_settings') || '{}').brandName || 'Aurelia';
+        showSideToast({ title: 'Account Created!', message: `Welcome to ${bName}, ${data.customer.name}!`, type: 'success' });
+        setTimeout(() => {
+          if (window.location.pathname.includes('account')) {
+            window.location.reload();
+          } else {
+            window.location.href = '/account/';
+          }
+        }, 400);
       } else {
         alert(data.message || 'Registration failed');
       }
@@ -1452,8 +1459,11 @@
   function clearCustomerSession(reRender = true) {
     currentCustomer = null;
     localStorage.removeItem('nachiyar_customer');
+    localStorage.removeItem('store_customer');
     localStorage.removeItem('nachiyar_customer_orders');
+    localStorage.removeItem('store_customer_orders');
     localStorage.removeItem('nachiyar_token');
+    localStorage.removeItem('store_customer_token');
     sessionStorage.clear();
     updateNavbarUserState();
     if (reRender) {

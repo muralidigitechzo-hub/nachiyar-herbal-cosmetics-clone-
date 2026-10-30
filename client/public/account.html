@@ -1918,10 +1918,13 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       // Check customer session
-      const savedCust = localStorage.getItem('store_customer');
+      const savedCust = localStorage.getItem('store_customer') || localStorage.getItem('nachiyar_customer');
       if (savedCust) {
         try {
-          activeCustomer = JSON.parse(savedCust);
+          const parsed = JSON.parse(savedCust);
+          if (parsed && parsed.name && parsed.email) {
+            activeCustomer = parsed;
+          }
         } catch (e) {}
       }
 
