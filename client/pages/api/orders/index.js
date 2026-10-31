@@ -1,4 +1,4 @@
-import { getDb, saveDb } from '../../lib/db.js';
+import { getDb, saveDb } from '../../../lib/db.js';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -29,7 +29,7 @@ export default function handler(req, res) {
         total: Number(req.body.total || 0),
         paymentMethod: req.body.paymentMethod || 'Online',
         paymentStatus: req.body.paymentStatus || 'Completed',
-        status: req.body.status || 'Processing',
+        status: req.body.status || 'placed',
         createdAt: req.body.createdAt || new Date().toISOString()
       };
 
@@ -73,14 +73,17 @@ export default function handler(req, res) {
         }
       }
 
-      db.orders.unshift(order);
       saveDb(db);
       return res.status(201).json({ success: true, data: order, updatedProducts: db.products });
     }
 
     if (req.method === 'PUT' || req.method === 'PATCH') {
-      const { id, status, paymentStatus } = req.body || {};
-      const order = db.orders.find(o => o.id === id);
+      const { id, orderId, orderNumber, status, paymentStatus } = req.body || {};
+      const targetId = id || orderId || orderNumber;
+      const order = db.orders.find(o => o && (
+        String(o.id) === String(targetId) || 
+        String(o.orderNumber) === String(targetId)
+      ));
       if (order) {
         if (status) order.status = status;
         if (paymentStatus) order.paymentStatus = paymentStatus;

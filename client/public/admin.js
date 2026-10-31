@@ -380,7 +380,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const liveChannel = new BroadcastChannel('nachiyar_store_channel');
         liveChannel.onmessage = (event) => {
           if (!event.data) return;
-          if (event.data.type === 'NEW_ORDER' && event.data.order) {
+          if (event.data.type === 'ORDER_STATUS_UPDATED' && event.data.orderId) {
+            const { orderId, status } = event.data;
+            const target = orders.find(o => o && (String(o.id) === String(orderId) || String(o.orderNumber) === String(orderId)));
+            if (target) {
+              target.status = status;
+              const tag = document.querySelector(`.status-tag-${orderId}`);
+              if (tag) tag.textContent = status.toUpperCase();
+            }
+          } else if (event.data.type === 'NEW_ORDER' && event.data.order) {
             handleLiveIncomingOrder(event.data.order, event.data.products);
           } else if (event.data.type === 'NEW_REVIEW' && event.data.review) {
             adminReviews.unshift(event.data.review);
@@ -3858,6 +3866,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (numKey) knownKeys.add(numKey);
       });
 
+      // Apply authoritative status overrides from localStorage
+      const statusOverrides = (() => {
+        try { return JSON.parse(localStorage.getItem('nachiyar_order_status_overrides') || '{}'); } catch(e) { return {}; }
+      })();
+
+      merged.forEach(o => {
+        if (!o) return;
+        const oId = String(o.id || '');
+        const oNum = String(o.orderNumber || '');
+        if (statusOverrides[oId]) {
+          o.status = statusOverrides[oId];
+        } else if (statusOverrides[oNum]) {
+          o.status = statusOverrides[oNum];
+        }
+      });
+
       merged.sort((a, b) => {
         const da = new Date(a.createdAt || a.created_at || a.date || 0).getTime();
         const db = new Date(b.createdAt || b.created_at || b.date || 0).getTime();
@@ -4023,14 +4047,74 @@ document.addEventListener('DOMContentLoaded', () => {
       sel.onchange = async () => {
         const orderId = sel.dataset.id;
         const newStatus = sel.value;
-        await authFetch(`/api/orders/${orderId}/status`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status: newStatus })
+
+        // 1. Optimistic in-memory update
+        const targetOrd = orders.find(o => o && (String(o.id) === String(orderId) || String(o.orderNumber) === String(orderId)));
+        if (targetOrd) {
+          targetOrd.status = newStatus;
+        }
+
+        // 2. Authoritative local status override map
+        try {
+          const overrides = JSON.parse(localStorage.getItem('nachiyar_order_status_overrides') || '{}');
+          overrides[String(orderId)] = newStatus;
+          if (targetOrd && targetOrd.orderNumber) {
+            overrides[String(targetOrd.orderNumber)] = newStatus;
+          }
+          localStorage.setItem('nachiyar_order_status_overrides', JSON.stringify(overrides));
+        } catch(e) {}
+
+        // 3. Update all localStorage order lists
+        ['nachiyar_store_orders', 'store_customer_orders', 'nachiyar_customer_orders'].forEach(key => {
+          try {
+            const list = JSON.parse(localStorage.getItem(key) || '[]');
+            let modified = false;
+            list.forEach(o => {
+              if (o && (String(o.id) === String(orderId) || String(o.orderNumber) === String(orderId))) {
+                o.status = newStatus;
+                modified = true;
+              }
+            });
+            if (modified) {
+              localStorage.setItem(key, JSON.stringify(list));
+            }
+          } catch (e) {}
         });
-        showToast(`Order status updated to ${newStatus.toUpperCase()}`);
+
+        // 4. Update UI pill and toast
         const tag = document.querySelector(`.status-tag-${orderId}`);
         if (tag) tag.textContent = newStatus.toUpperCase();
+        showToast(`Order status updated to ${newStatus.toUpperCase()}`);
+
+        // 5. Broadcast to all open tabs
+        try {
+          const bc = new BroadcastChannel('nachiyar_store_channel');
+          bc.postMessage({
+            type: 'ORDER_STATUS_UPDATED',
+            orderId: orderId,
+            status: newStatus,
+            timestamp: Date.now()
+          });
+        } catch(e) {}
+
+        // 6. Network persistence to API
+        try {
+          await authFetch(`/api/orders/${orderId}/status`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+          });
+        } catch (err) {
+          try {
+            await authFetch('/api/orders', {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: orderId, status: newStatus })
+            });
+          } catch (err2) {
+            console.warn('Status saved to local overrides:', err2);
+          }
+        }
       };
     });
 
