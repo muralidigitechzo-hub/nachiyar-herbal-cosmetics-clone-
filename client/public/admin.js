@@ -5165,6 +5165,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadAdminMessages() {
     try {
+      // 1. Purge past duplicates from localStorage first
+      ['nachiyar_offline_inquiries', 'store_offline_inquiries', 'nachiyar_customer_messages', 'store_customer_messages'].forEach(key => {
+        try {
+          const list = JSON.parse(localStorage.getItem(key) || '[]');
+          if (Array.isArray(list) && list.length > 0) {
+            const cleaned = [];
+            const kSeen = new Set();
+            list.forEach(item => {
+              if (!item || !item.id) return;
+              const kSig = `${(item.email || '').toLowerCase().trim()}::${(item.message || '').trim().toLowerCase()}`;
+              if (kSeen.has(String(item.id)) || (kSig.length > 5 && kSeen.has(kSig))) return;
+              kSeen.add(String(item.id));
+              if (kSig.length > 5) kSeen.add(kSig);
+              cleaned.push(item);
+            });
+            localStorage.setItem(key, JSON.stringify(cleaned));
+          }
+        } catch(e) {}
+      });
+
+      // 2. Fetch server messages with fresh timestamp
       let serverMessages = [];
       try {
         const res = await authFetch('/api/messages?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
@@ -5173,42 +5194,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (e) {}
 
-      // Merge all offline and local storage inquiry keys
+      // 3. Build lookup sets from server messages
+      const serverIds = new Set(serverMessages.map(m => String(m.id)));
+      const serverSignatures = new Set(serverMessages.map(m => `${(m.email || '').toLowerCase().trim()}::${(m.message || '').trim().toLowerCase()}`));
+
+      // 4. Merge ONLY truly offline inquiries that do NOT exist on server
       const offlineInquiries = (() => {
         try {
           return [
             ...JSON.parse(localStorage.getItem('nachiyar_offline_inquiries') || '[]'),
-            ...JSON.parse(localStorage.getItem('store_offline_inquiries') || '[]'),
-            ...JSON.parse(localStorage.getItem('nachiyar_customer_messages') || '[]'),
-            ...JSON.parse(localStorage.getItem('store_customer_messages') || '[]')
+            ...JSON.parse(localStorage.getItem('store_offline_inquiries') || '[]')
           ];
         } catch(e) { return []; }
       })();
 
       const allMsgs = [...serverMessages];
       offlineInquiries.forEach(off => {
-        if (off && off.id) {
-          allMsgs.push({ ...off, is_offline: true });
-        }
+        if (!off || !off.id) return;
+        const offId = String(off.id);
+        const offSig = `${(off.email || '').toLowerCase().trim()}::${(off.message || '').trim().toLowerCase()}`;
+
+        // If message is already on server by ID or by content, SKIP offline duplicate!
+        if (serverIds.has(offId)) return;
+        if (offSig.length > 5 && serverSignatures.has(offSig)) return;
+
+        allMsgs.push({ ...off, is_offline: true });
+        serverIds.add(offId);
+        if (offSig.length > 5) serverSignatures.add(offSig);
       });
 
-      // Deduplicate by ID and content signature (email + message text)
+      // 5. Final strict deduplication across everything
       const uniqueMsgs = [];
       const seenIds = new Set();
-      const seenContent = new Set();
+      const seenSigs = new Set();
 
       allMsgs.forEach(m => {
         if (!m || !m.id) return;
         const idKey = String(m.id);
-        if (seenIds.has(idKey)) return;
+        const sig = `${(m.email || '').toLowerCase().trim()}::${(m.message || '').trim().toLowerCase()}`;
 
-        const contentSig = `${(m.email || '').toLowerCase().trim()}::${(m.message || '').trim().toLowerCase()}`;
-        if (contentSig.length > 5 && seenContent.has(contentSig)) {
-          return;
-        }
+        if (seenIds.has(idKey)) return;
+        if (sig.length > 5 && seenSigs.has(sig)) return;
 
         seenIds.add(idKey);
-        if (contentSig.length > 5) seenContent.add(contentSig);
+        if (sig.length > 5) seenSigs.add(sig);
         uniqueMsgs.push(m);
       });
 
@@ -5224,33 +5253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       console.error('Failed to load customer messages from API:', err);
     }
-
-    // Fallback: render from localStorage if API failed
-    try {
-      const offlineInquiries = (() => {
-        try {
-          return [
-            ...JSON.parse(localStorage.getItem('nachiyar_offline_inquiries') || '[]'),
-            ...JSON.parse(localStorage.getItem('store_offline_inquiries') || '[]'),
-            ...JSON.parse(localStorage.getItem('nachiyar_customer_messages') || '[]'),
-            ...JSON.parse(localStorage.getItem('store_customer_messages') || '[]')
-          ];
-        } catch(e) { return []; }
-      })();
-      if (Array.isArray(offlineInquiries) && offlineInquiries.length > 0) {
-        const uniqueOffline = [];
-        const seen = new Set();
-        offlineInquiries.forEach(m => {
-          if (m && m.id && !seen.has(String(m.id))) {
-            uniqueOffline.push({ ...m, is_offline: true });
-            seen.add(String(m.id));
-          }
-        });
-        customerMessages = uniqueOffline;
-        updateMessageKpiCounters();
-        renderAdminMessages();
-      }
-    } catch (e) {}
   }
   window.loadAdminMessages = loadAdminMessages;
 

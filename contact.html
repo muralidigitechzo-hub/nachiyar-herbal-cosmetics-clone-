@@ -1889,7 +1889,7 @@ img, svg, video {
 
         <!-- RIGHT: CLIENT INQUIRY FORM -->
         <div class="contact-form-card">
-          <form class="boutique-contact-form" id="boutiqueContactForm" onsubmit="handleContactSubmit(event)">
+          <form class="boutique-contact-form" id="boutiqueContactForm" onsubmit="return handleContactSubmit(event);">
             <h2 class="form-card-title">Send a Direct Message</h2>
             <p class="form-card-subtitle">Every message is answered individually within 4 business hours.</p>
 
@@ -2055,7 +2055,10 @@ img, svg, video {
     async function handleContactSubmit(event) {
       if (event) {
         event.preventDefault();
-        event.stopImmediatePropagation();
+        event.stopPropagation();
+        if (typeof event.stopImmediatePropagation === 'function') {
+          event.stopImmediatePropagation();
+        }
       }
       if (isSubmittingInquiry) {
         return false;
@@ -2087,15 +2090,18 @@ img, svg, video {
         return false;
       }
 
+      // Lock button immediately
       const originalText = submitBtn ? submitBtn.innerHTML : 'Transmit Message';
       if (submitBtn) {
         submitBtn.innerHTML = '<span>Transmitting Inquiry...</span>';
-        submitBtn.style.opacity = '0.7';
+        submitBtn.style.opacity = '0.6';
+        submitBtn.style.pointerEvents = 'none';
         submitBtn.disabled = true;
       }
 
+      const clientMsgId = 'msg_' + Date.now();
       const payload = {
-        id: 'msg_' + Date.now(),
+        id: clientMsgId,
         name,
         email,
         phone,
@@ -2115,8 +2121,15 @@ img, svg, video {
         const data = await res.json().catch(() => null);
         const finalMsg = (data && data.success && data.data) ? data.data : payload;
 
-        // Persist locally & broadcast live notification
-        saveLocalMessageBackup(finalMsg);
+        // Broadcast to open Admin tabs
+        try {
+          const bc = new BroadcastChannel('nachiyar_store_channel');
+          bc.postMessage({
+            type: 'NEW_INQUIRY',
+            message: finalMsg,
+            timestamp: Date.now()
+          });
+        } catch(bErr) {}
 
         if (form) form.reset();
         if (banner) banner.style.display = 'flex';
@@ -2126,19 +2139,20 @@ img, svg, video {
             title: 'Inquiry Transmitted Successfully!',
             body: 'Thank you for reaching out. Our concierge desk will review your message and reply promptly.',
             type: 'success',
-            duration: 6000
+            duration: 5000
           });
         }
         if (banner) banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch (err) {
-        console.warn('Network issue transmitting inquiry, saved to local buffer:', err);
+        console.warn('Network issue transmitting inquiry, saving to offline backup:', err);
+        // Only save offline if network failed!
         saveLocalMessageBackup(payload);
         if (form) form.reset();
         if (banner) banner.style.display = 'flex';
         if (typeof showSideToast === 'function') {
           showSideToast({
-            title: 'Inquiry Queued Successfully!',
-            body: 'Your message has been received and stored safely. Our concierge desk will attend to it shortly.',
+            title: 'Inquiry Queued Offline',
+            body: 'Your message has been stored and queued for transmission.',
             type: 'info',
             duration: 5000
           });
@@ -2149,9 +2163,10 @@ img, svg, video {
           if (submitBtn) {
             submitBtn.innerHTML = originalText;
             submitBtn.style.opacity = '1';
+            submitBtn.style.pointerEvents = 'auto';
             submitBtn.disabled = false;
           }
-        }, 1200);
+        }, 2500);
       }
       return false;
     }
@@ -2169,10 +2184,9 @@ img, svg, video {
           created_at: msg.created_at || new Date().toISOString()
         };
 
-        ['nachiyar_offline_inquiries', 'store_offline_inquiries', 'nachiyar_customer_messages', 'store_customer_messages'].forEach(key => {
+        ['nachiyar_offline_inquiries', 'store_offline_inquiries'].forEach(key => {
           try {
             const list = JSON.parse(localStorage.getItem(key) || '[]');
-            // Deduplicate by ID and content signature
             const isDup = list.some(m => 
               String(m.id) === String(item.id) ||
               (m.email && item.email && m.email.toLowerCase() === item.email.toLowerCase() && (m.message || '').trim() === (item.message || '').trim())
@@ -2183,20 +2197,10 @@ img, svg, video {
             }
           } catch (e) {}
         });
-
-        try {
-          const bc = new BroadcastChannel('nachiyar_store_channel');
-          bc.postMessage({
-            type: 'NEW_INQUIRY',
-            message: item,
-            timestamp: Date.now()
-          });
-        } catch(bErr) {}
       } catch (e) {}
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // NOTE: Form submission is handled strictly via onsubmit="handleContactSubmit(event)" on the form tag
       const phoneInput = document.getElementById('contactPhone');
       if (phoneInput) {
         phoneInput.addEventListener('input', function() {

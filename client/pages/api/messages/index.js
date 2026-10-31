@@ -8,7 +8,7 @@ export default function handler(req, res) {
     if (!Array.isArray(db.contact_messages)) db.contact_messages = [];
 
     if (req.method === 'GET') {
-      // Deduplicate on GET as well to clean up any past duplicates
+      // Return deduplicated messages
       const unique = [];
       const seen = new Set();
       db.contact_messages.forEach(m => {
@@ -34,16 +34,13 @@ export default function handler(req, res) {
         created_at: req.body.created_at || new Date().toISOString()
       };
 
-      // Strict duplicate detection (by ID OR by same email + same message within 60s)
+      // Strict duplicate detection (by ID OR by same email + same message text)
       const isDuplicate = db.contact_messages.some(m => {
         if (!m) return false;
         if (String(m.id) === String(msg.id)) return true;
-        const sameEmail = m.email && msg.email && m.email.toLowerCase() === msg.email.toLowerCase();
-        const sameText = (m.message || '').trim().toLowerCase() === msg.message.toLowerCase();
-        if (sameEmail && sameText) {
-          const timeDiff = Math.abs(new Date(m.created_at || 0).getTime() - new Date(msg.created_at || 0).getTime());
-          if (isNaN(timeDiff) || timeDiff < 60000) return true;
-        }
+        const sameEmail = m.email && msg.email && m.email.toLowerCase().trim() === msg.email.toLowerCase().trim();
+        const sameText = (m.message || '').trim().toLowerCase() === (msg.message || '').trim().toLowerCase();
+        if (sameEmail && sameText) return true;
         return false;
       });
 
