@@ -1020,7 +1020,7 @@ async function initStorefrontApp() {
     const storeChannel = new BroadcastChannel('nachiyar_store_channel');
     storeChannel.onmessage = (event) => {
       loadAndApplyFromLocalStorage();
-      if (event.data && (event.data.type === 'PRODUCTS_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'settings_updated' || event.data.type === 'THEME_UPDATED' || event.data.type === 'CONFIG_UPDATED' || event.data.type === 'NEW_ORDER' || event.data.type === 'STOCK_UPDATED')) {
+      if (event.data && (event.data.type === 'REVIEW_STATUS_UPDATED' || event.data.type === 'REVIEW_DELETED' || event.data.type === 'REVIEWS_UPDATED' || event.data.type === 'PRODUCTS_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'settings_updated' || event.data.type === 'THEME_UPDATED' || event.data.type === 'CONFIG_UPDATED' || event.data.type === 'NEW_ORDER' || event.data.type === 'STOCK_UPDATED')) {
         if (event.data.settings) updateStorefrontBusinessDetails(event.data.settings);
         if (event.data.config && event.data.config.products) applyLiveProductsToDOM(event.data.config.products);
         if (event.data.products) applyLiveProductsToDOM(event.data.products);
@@ -1939,44 +1939,69 @@ async function initStorefrontApp() {
 
   const DEFAULT_REVIEWS = [
   {
+    "id": "rev_1",
     "name": "Aditya Kapoor",
+    "author_name": "Aditya Kapoor",
+    "email": "aditya.k@gmail.com",
+    "author_email": "aditya.k@gmail.com",
     "product_name": "The Aurelia Collector's Duo (Set of 2)",
     "rating": 5,
     "title": "Two Watches, One Perfect Set",
     "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
-    "location": "Delhi, India"
+    "status": "approved",
+    "created_at": "2026-10-30T10:00:00.000Z"
   },
   {
+    "id": "rev_2",
     "name": "Rohan Mehta",
+    "author_name": "Rohan Mehta",
+    "email": "rohan.m@gmail.com",
+    "author_email": "rohan.m@gmail.com",
     "product_name": "Aurelia Sovereign Emerald 41",
     "rating": 5,
     "title": "The Emerald Dial Is Stunning",
     "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
-    "location": "Mumbai, India"
+    "status": "approved",
+    "created_at": "2026-10-29T14:30:00.000Z"
   },
   {
+    "id": "rev_3",
     "name": "Vikram Nair",
+    "author_name": "Vikram Nair",
+    "email": "vikram.nair@outlook.com",
+    "author_email": "vikram.nair@outlook.com",
     "product_name": "Aurelia DeepOcean Ceramic Diver",
     "rating": 5,
     "title": "Built Like A Tank",
     "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
-    "location": "Kochi, India"
+    "status": "approved",
+    "created_at": "2026-10-28T09:15:00.000Z"
   },
   {
+    "id": "rev_4",
     "name": "Ananya Krishnan",
+    "author_name": "Ananya Krishnan",
+    "email": "ananya.k@yahoo.com",
+    "author_email": "ananya.k@yahoo.com",
     "product_name": "Aurelia Heritage Moonphase",
     "rating": 5,
     "title": "Perfect Gift",
     "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
-    "location": "Chennai, India"
+    "status": "approved",
+    "created_at": "2026-10-27T16:45:00.000Z"
   },
   {
+    "id": "rev_5",
     "name": "Siddharth Rao",
+    "author_name": "Siddharth Rao",
+    "email": "siddharth.rao@gmail.com",
+    "author_email": "siddharth.rao@gmail.com",
     "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
     "rating": 4,
     "title": "Great Value Straps",
     "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
-    "location": "Bengaluru, India"
+    "status": "approved",
+    "created_at": "2026-10-26T11:20:00.000Z"
   }
 ];
 
@@ -1987,45 +2012,74 @@ async function initStorefrontApp() {
     let stats = { average: '5.0', total: 0 };
 
     try {
-      let data = null;
+      // 1. Set of deleted review IDs from localStorage
+      let deletedIds = new Set();
       try {
-        const res = await fetch('/api/reviews');
+        const dIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
+        if (Array.isArray(dIds)) dIds.forEach(id => deletedIds.add(String(id)));
+      } catch(e) {}
+
+      // 2. Fetch fresh approved reviews from server API
+      let serverReviews = [];
+      try {
+        const res = await fetch('/api/reviews?_t=' + Date.now(), { cache: 'no-store' });
         if (res.ok) {
-          data = await res.json();
+          const data = await res.json();
+          if (data && data.success && data.data) {
+            serverReviews = Array.isArray(data.data.reviews) ? data.data.reviews : (Array.isArray(data.data) ? data.data : []);
+          }
         }
       } catch (fetchErr) {
         console.warn('Backend reviews API fetch error:', fetchErr);
       }
 
-      let rawReviews = [];
-      if (data && data.success && data.data) {
-        if (Array.isArray(data.data.reviews) && data.data.reviews.length > 0) {
-          rawReviews = data.data.reviews;
-          stats = data.data.stats || {
-            average: (rawReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / rawReviews.length).toFixed(1),
-            total: rawReviews.length
-          };
-        } else if (Array.isArray(data.data) && data.data.length > 0) {
-          rawReviews = data.data;
-          stats = {
-            average: (rawReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / rawReviews.length).toFixed(1),
-            total: rawReviews.length
-          };
+      // 3. Merge locally approved reviews from localStorage
+      let localApproved = [];
+      try {
+        const l1 = JSON.parse(localStorage.getItem('nachiyar_approved_reviews') || '[]');
+        const l2 = JSON.parse(localStorage.getItem('nachiyar_store_reviews') || '[]');
+        [...l1, ...l2].forEach(r => {
+          if (r && String(r.status || '').toLowerCase() === 'approved') {
+            localApproved.push(r);
+          }
+        });
+      } catch(e) {}
+
+      // 4. Combine uniquely by id
+      const allApproved = [...serverReviews];
+      const seenIds = new Set(allApproved.map(r => String(r.id)));
+      localApproved.forEach(lr => {
+        if (!seenIds.has(String(lr.id))) {
+          allApproved.unshift(lr);
+          seenIds.add(String(lr.id));
         }
+      });
+
+      // 5. Exclude deleted IDs and any unrelated herbal/hair content
+      let validReviews = allApproved.filter(r => {
+        if (!r) return false;
+        if (deletedIds.has(String(r.id))) return false;
+        if (r.status && String(r.status).toLowerCase() !== 'approved') return false;
+        const txt = ((r.product_name || r.productName || '') + ' ' + (r.title || '') + ' ' + (r.comment || '')).toLowerCase();
+        if (txt.includes('oil') || txt.includes('shampoo') || txt.includes('hair') || txt.includes('herbal')) return false;
+        return true;
+      });
+
+      // If database has reviews, use them; if brand new and nothing deleted, fallback to DEFAULT_REVIEWS
+      if (validReviews.length === 0 && deletedIds.size === 0) {
+        validReviews = (typeof DEFAULT_REVIEWS !== 'undefined' && Array.isArray(DEFAULT_REVIEWS)) ? DEFAULT_REVIEWS : [];
       }
 
-      if (rawReviews.length > 0) {
-        reviews = rawReviews;
-      } else if (typeof DEFAULT_REVIEWS !== 'undefined' && Array.isArray(DEFAULT_REVIEWS) && DEFAULT_REVIEWS.length > 0) {
-        reviews = DEFAULT_REVIEWS;
-        stats = { average: '4.9', total: DEFAULT_REVIEWS.length };
-      }
+      reviews = validReviews;
+      const count = reviews.length;
+      const avg = count > 0 
+        ? (reviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / count).toFixed(1)
+        : '5.0';
+      stats = { average: avg, total: count };
     } catch (e) {
-      console.warn('Reviews processing exception, falling back to defaults:', e);
-      if (typeof DEFAULT_REVIEWS !== 'undefined' && Array.isArray(DEFAULT_REVIEWS) && DEFAULT_REVIEWS.length > 0) {
-        reviews = DEFAULT_REVIEWS;
-        stats = { average: '4.9', total: DEFAULT_REVIEWS.length };
-      }
+      console.warn('Reviews processing exception:', e);
+      reviews = (typeof DEFAULT_REVIEWS !== 'undefined' && Array.isArray(DEFAULT_REVIEWS)) ? DEFAULT_REVIEWS : [];
+      stats = { average: '5.0', total: reviews.length };
     }
 
     if (reviews && reviews.length > 0) {
@@ -2355,7 +2409,9 @@ async function initStorefrontApp() {
 
         let reviewObj = {
           id: 'rev_' + Date.now(),
+          name: authorName,
           author_name: authorName,
+          email: authorEmail,
           author_email: authorEmail,
           product_name: productName,
           rating: rating,
@@ -2369,7 +2425,7 @@ async function initStorefrontApp() {
           const data = await res.json();
           if (data && data.success && data.data) {
             reviewSaved = true;
-            reviewObj = data.data;
+            reviewObj = { ...reviewObj, ...data.data };
           }
         }
 
@@ -2433,6 +2489,7 @@ async function initStorefrontApp() {
 
       // Reload public reviews so newly submitted review shows up
       loadPublicReviews();
+  window.loadPublicReviews = loadPublicReviews;
     });
   }
 

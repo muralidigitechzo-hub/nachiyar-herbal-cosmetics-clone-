@@ -793,44 +793,69 @@
   ],
   "reviews": [
     {
+      "id": "rev_1",
       "name": "Aditya Kapoor",
+      "author_name": "Aditya Kapoor",
+      "email": "aditya.k@gmail.com",
+      "author_email": "aditya.k@gmail.com",
       "product_name": "The Aurelia Collector's Duo (Set of 2)",
       "rating": 5,
       "title": "Two Watches, One Perfect Set",
       "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
-      "location": "Delhi, India"
+      "status": "approved",
+      "created_at": "2026-10-30T10:00:00.000Z"
     },
     {
+      "id": "rev_2",
       "name": "Rohan Mehta",
+      "author_name": "Rohan Mehta",
+      "email": "rohan.m@gmail.com",
+      "author_email": "rohan.m@gmail.com",
       "product_name": "Aurelia Sovereign Emerald 41",
       "rating": 5,
       "title": "The Emerald Dial Is Stunning",
       "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
-      "location": "Mumbai, India"
+      "status": "approved",
+      "created_at": "2026-10-29T14:30:00.000Z"
     },
     {
+      "id": "rev_3",
       "name": "Vikram Nair",
+      "author_name": "Vikram Nair",
+      "email": "vikram.nair@outlook.com",
+      "author_email": "vikram.nair@outlook.com",
       "product_name": "Aurelia DeepOcean Ceramic Diver",
       "rating": 5,
       "title": "Built Like A Tank",
       "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
-      "location": "Kochi, India"
+      "status": "approved",
+      "created_at": "2026-10-28T09:15:00.000Z"
     },
     {
+      "id": "rev_4",
       "name": "Ananya Krishnan",
+      "author_name": "Ananya Krishnan",
+      "email": "ananya.k@yahoo.com",
+      "author_email": "ananya.k@yahoo.com",
       "product_name": "Aurelia Heritage Moonphase",
       "rating": 5,
       "title": "Perfect Gift",
       "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
-      "location": "Chennai, India"
+      "status": "approved",
+      "created_at": "2026-10-27T16:45:00.000Z"
     },
     {
+      "id": "rev_5",
       "name": "Siddharth Rao",
+      "author_name": "Siddharth Rao",
+      "email": "siddharth.rao@gmail.com",
+      "author_email": "siddharth.rao@gmail.com",
       "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
       "rating": 4,
       "title": "Great Value Straps",
       "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
-      "location": "Bengaluru, India"
+      "status": "approved",
+      "created_at": "2026-10-26T11:20:00.000Z"
     }
   ],
   "faqs": [

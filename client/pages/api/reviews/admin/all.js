@@ -8,9 +8,9 @@ export default function handler(req, res) {
     const reviews = Array.isArray(db.reviews) ? db.reviews : [];
 
     const total = reviews.length;
-    const pending = reviews.filter(r => r.status === 'pending').length;
-    const approved = reviews.filter(r => r.status === 'approved' || !r.status).length;
-    const rejected = reviews.filter(r => r.status === 'rejected').length;
+    const pending = reviews.filter(r => String(r.status || '').toLowerCase() === 'pending').length;
+    const approved = reviews.filter(r => String(r.status || '').toLowerCase() === 'approved').length;
+    const rejected = reviews.filter(r => String(r.status || '').toLowerCase() === 'rejected').length;
 
     return res.status(200).json({
       success: true,

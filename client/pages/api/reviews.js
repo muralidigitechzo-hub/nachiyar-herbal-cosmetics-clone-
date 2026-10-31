@@ -8,32 +8,44 @@ export default function handler(req, res) {
     if (!Array.isArray(db.reviews)) db.reviews = [];
 
     if (req.method === 'POST') {
+      const reviewName = (req.body.name || req.body.authorName || req.body.author_name || 'Customer').trim();
+      const reviewEmail = (req.body.email || req.body.authorEmail || req.body.author_email || '').trim();
+      const reviewProduct = (req.body.productName || req.body.product_name || 'Digitechzo Timepiece').trim();
+      const reviewTitle = (req.body.title || 'Verified Patron Experience').trim();
+      const reviewComment = (req.body.comment || '').trim();
+      const reviewRating = Math.max(1, Math.min(5, parseInt(req.body.rating, 10) || 5));
+
       const newReview = {
-        id: `rev_${Date.now()}`,
-        author_name: req.body.authorName || req.body.name || 'Customer',
-        author_email: req.body.authorEmail || req.body.email || '',
-        product_name: req.body.productName || 'Herbal Product',
-        rating: Number(req.body.rating || 5),
-        title: req.body.title || 'Exceptional Formulation',
-        comment: req.body.comment || '',
+        id: `rev_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+        name: reviewName,
+        author_name: reviewName,
+        email: reviewEmail,
+        author_email: reviewEmail,
+        product_name: reviewProduct,
+        rating: reviewRating,
+        title: reviewTitle,
+        comment: reviewComment,
         status: 'pending',
         created_at: new Date().toISOString()
       };
+
       db.reviews.unshift(newReview);
       saveDb(db);
-      return res.status(201).json({ success: true, data: newReview });
+      return res.status(201).json({ success: true, message: 'Review submitted for verification', data: newReview });
     }
 
+    // ONLY approved reviews! (Strict check: status must equal 'approved')
     const reviews = db.reviews;
-    const totalCount = reviews.length;
+    const approvedReviews = reviews.filter(r => String(r.status || '').toLowerCase() === 'approved');
+    const totalCount = approvedReviews.length;
     const avgRating = totalCount > 0 
-      ? (reviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / totalCount).toFixed(1) 
-      : '4.9';
+      ? (approvedReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / totalCount).toFixed(1) 
+      : '5.0';
 
     return res.status(200).json({
       success: true,
       data: {
-        reviews: reviews.filter(r => r.status === 'approved' || !r.status),
+        reviews: approvedReviews,
         all: reviews,
         stats: {
           total: totalCount,

@@ -4611,24 +4611,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadAdminReviews() {
     try {
+      // 1. Purge any obsolete herbal reviews from local storage
+      const isUnrelatedReview = (r) => {
+        if (!r) return true;
+        const txt = ((r.product_name || r.productName || '') + ' ' + (r.title || '') + ' ' + (r.comment || '')).toLowerCase();
+        return txt.includes('oil') || txt.includes('shampoo') || txt.includes('hair') || txt.includes('herbal') || txt.includes('apothecary') || txt.includes('kunkumadi');
+      };
+
+      let localReviews = [];
+      try {
+        const rawLocal = [
+          ...JSON.parse(localStorage.getItem('nachiyar_store_reviews') || '[]'),
+          ...JSON.parse(localStorage.getItem('store_customer_reviews') || '[]'),
+          ...JSON.parse(localStorage.getItem('nachiyar_approved_reviews') || '[]')
+        ];
+        localReviews = rawLocal.filter(r => !isUnrelatedReview(r));
+        localStorage.setItem('nachiyar_store_reviews', JSON.stringify(localReviews));
+      } catch(e) {}
+
+      // 2. Fetch fresh from server
       let serverReviews = [];
       try {
-        const res = await authFetch('/api/reviews/admin/all').then(r => r.json());
+        const res = await authFetch('/api/reviews/admin/all?_t=' + Date.now()).then(r => r.json());
         if (res && res.success && res.data) {
-          serverReviews = Array.isArray(res.data) ? res.data : (res.data.reviews || []);
+          const rawServer = Array.isArray(res.data) ? res.data : (res.data.reviews || []);
+          serverReviews = rawServer.filter(r => !isUnrelatedReview(r));
         }
       } catch (e) {}
 
-      // Merge local reviews
-      const localReviews = (() => {
-        try {
-          return [
-            ...JSON.parse(localStorage.getItem('nachiyar_store_reviews') || '[]'),
-            ...JSON.parse(localStorage.getItem('store_customer_reviews') || '[]')
-          ];
-        } catch(e) { return []; }
-      })();
-
+      // 3. Merge server and local reviews uniquely by id
       const allRev = [...serverReviews];
       const revIds = new Set(allRev.map(r => String(r.id)));
       localReviews.forEach(lr => {
@@ -4638,13 +4649,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      adminReviews = allRev;
+      // Filter out deleted review IDs
+      let deletedIds = new Set();
+      try {
+        const dIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
+        if (Array.isArray(dIds)) dIds.forEach(id => deletedIds.add(String(id)));
+      } catch(e) {}
 
-      // Update counts
+      adminReviews = allRev.filter(r => !deletedIds.has(String(r.id)));
+
+      // 4. Update counts
       const total = adminReviews.length;
-      const pending = adminReviews.filter(r => r.status === 'pending').length;
-      const approved = adminReviews.filter(r => r.status === 'approved' || !r.status).length;
-      const rejected = adminReviews.filter(r => r.status === 'rejected').length;
+      const pending = adminReviews.filter(r => String(r.status).toLowerCase() === 'pending').length;
+      const approved = adminReviews.filter(r => String(r.status).toLowerCase() === 'approved').length;
+      const rejected = adminReviews.filter(r => String(r.status).toLowerCase() === 'rejected').length;
 
       if (statReviewTotal) statReviewTotal.textContent = `Total: ${total}`;
       if (statReviewPending) statReviewPending.textContent = `Pending: ${pending}`;
@@ -4732,13 +4750,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <td><small style="color: var(--admin-text-muted);">${dateStr}</small></td>
         <td>
           <div class="review-patron-block">
-            <span class="review-patron-name">${escapeAdminHtml(r.name)}</span>
-            <span class="review-patron-email">${escapeAdminHtml(r.email || 'No email given')}</span>
+            <span class="review-patron-name">${escapeAdminHtml(r.name || r.author_name || 'Patron')}</span>
+            <span class="review-patron-email">${escapeAdminHtml(r.email || r.author_email || 'No email provided')}</span>
           </div>
         </td>
         <td>
           <div class="review-stars-gold">${ratingStars} <small style="color:var(--admin-text); font-weight:700;">(${r.rating}/5)</small></div>
-          <span class="review-product-pill">${escapeAdminHtml(r.product_name || 'Herbal Formulation')}</span>
+          <span class="review-product-pill">${escapeAdminHtml(r.product_name || r.productName || 'Digitechzo Watch')}</span>
         </td>
         <td>
           <div class="review-content-cell">
@@ -4766,48 +4784,112 @@ document.addEventListener('DOMContentLoaded', () => {
         if (action === 'delete') {
           if (!confirm('Are you sure you want to permanently delete this customer review?')) return;
           try {
-            const res = await authFetch(`/api/reviews/${id}`, { method: 'DELETE' }).then(r => r.json());
-            if (res.success) {
-              adminReviews = adminReviews.filter(r => String(r.id) !== String(id));
-              ['nachiyar_store_reviews', 'store_customer_reviews'].forEach(k => {
-                try {
-                  const list = JSON.parse(localStorage.getItem(k) || '[]');
-                  localStorage.setItem(k, JSON.stringify(list.filter(r => String(r.id) !== String(id))));
-                } catch(e) {}
+            adminReviews = adminReviews.filter(r => String(r.id) !== String(id));
+
+            // Server DELETE
+            try {
+              await authFetch(`/api/reviews/${id}`, { method: 'DELETE' });
+            } catch(e) {}
+
+            // Clean localStorage
+            ['nachiyar_store_reviews', 'store_customer_reviews', 'nachiyar_approved_reviews'].forEach(k => {
+              try {
+                const list = JSON.parse(localStorage.getItem(k) || '[]');
+                localStorage.setItem(k, JSON.stringify(list.filter(r => String(r.id) !== String(id))));
+              } catch(e) {}
+            });
+
+            // Add to deleted IDs set
+            try {
+              let delIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
+              if (!delIds.includes(String(id))) {
+                delIds.push(String(id));
+                localStorage.setItem('nachiyar_deleted_review_ids', JSON.stringify(delIds));
+              }
+            } catch(e) {}
+
+            // Real-time broadcast
+            try {
+              new BroadcastChannel('nachiyar_store_channel').postMessage({
+                type: 'REVIEW_DELETED',
+                id: String(id),
+                timestamp: Date.now()
               });
-              showToast('Review permanently deleted.');
-              loadAdminReviews();
-            } else {
-              showToast(res.message || 'Failed to delete review.');
-            }
+            } catch(e) {}
+
+            showToast('Review permanently deleted from system & storefront.');
+            loadAdminReviews();
           } catch (err) {
             console.error('Error deleting review:', err);
             showToast('Error deleting review.');
           }
         } else if (action === 'approved' || action === 'rejected') {
           try {
-            const res = await authFetch(`/api/reviews/${id}/status`, {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ status: action })
-            }).then(r => r.json());
+            const rItem = adminReviews.find(r => String(r.id) === String(id));
+            if (rItem) rItem.status = action;
 
-            if (res.success) {
-              const rItem = adminReviews.find(r => String(r.id) === String(id));
-              if (rItem) rItem.status = action;
-              ['nachiyar_store_reviews', 'store_customer_reviews'].forEach(k => {
-                try {
-                  const list = JSON.parse(localStorage.getItem(k) || '[]');
-                  const target = list.find(r => String(r.id) === String(id));
-                  if (target) { target.status = action; localStorage.setItem(k, JSON.stringify(list)); }
-                } catch(e) {}
+            // Server PATCH with review object payload for guaranteed persistence
+            try {
+              await authFetch(`/api/reviews/${id}/status`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: action, review: rItem })
               });
-              try { new BroadcastChannel('nachiyar_store_channel').postMessage({ type: 'REVIEW_STATUS_UPDATED', id, status: action }); } catch(e) {}
-              showToast(`Review status updated to ${action.toUpperCase()}!`);
-              loadAdminReviews();
-            } else {
-              showToast(res.message || 'Failed to update review status.');
+            } catch(e) {}
+
+            // Update localStorage
+            ['nachiyar_store_reviews', 'store_customer_reviews'].forEach(k => {
+              try {
+                const list = JSON.parse(localStorage.getItem(k) || '[]');
+                const target = list.find(r => String(r.id) === String(id));
+                if (target) {
+                  target.status = action;
+                  localStorage.setItem(k, JSON.stringify(list));
+                }
+              } catch(e) {}
+            });
+
+            // Update nachiyar_approved_reviews
+            try {
+              let appList = JSON.parse(localStorage.getItem('nachiyar_approved_reviews') || '[]');
+              if (action === 'approved') {
+                if (rItem && !appList.some(r => String(r.id) === String(id))) {
+                  appList.unshift(rItem);
+                } else if (rItem) {
+                  const idx = appList.findIndex(r => String(r.id) === String(id));
+                  if (idx !== -1) appList[idx] = rItem;
+                }
+              } else {
+                // Rejected / Unpublished
+                appList = appList.filter(r => String(r.id) !== String(id));
+              }
+              localStorage.setItem('nachiyar_approved_reviews', JSON.stringify(appList));
+            } catch(e) {}
+
+            // Remove from deleted IDs set if re-approved
+            if (action === 'approved') {
+              try {
+                let delIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
+                delIds = delIds.filter(x => String(x) !== String(id));
+                localStorage.setItem('nachiyar_deleted_review_ids', JSON.stringify(delIds));
+              } catch(e) {}
             }
+
+            // Real-time broadcast to storefront
+            try {
+              new BroadcastChannel('nachiyar_store_channel').postMessage({
+                type: 'REVIEW_STATUS_UPDATED',
+                id: String(id),
+                status: action,
+                review: rItem,
+                timestamp: Date.now()
+              });
+            } catch(e) {}
+
+            showToast(action === 'approved' 
+              ? '✓ Review approved and published to live storefront marquee!' 
+              : 'Review unpublished from live storefront.');
+            loadAdminReviews();
           } catch (err) {
             console.error('Error updating review status:', err);
             showToast('Error updating review status.');

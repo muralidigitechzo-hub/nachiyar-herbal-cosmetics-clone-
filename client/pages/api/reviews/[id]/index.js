@@ -9,9 +9,9 @@ export default function handler(req, res) {
     if (!Array.isArray(db.reviews)) db.reviews = [];
 
     if (req.method === 'DELETE') {
-      db.reviews = db.reviews.filter(r => r.id !== id);
+      db.reviews = db.reviews.filter(r => String(r.id) !== String(id));
       saveDb(db);
-      return res.status(200).json({ success: true, message: 'Review deleted' });
+      return res.status(200).json({ success: true, message: 'Review deleted', data: { id } });
     }
 
     return res.status(405).json({ success: false, message: 'Method not allowed' });
