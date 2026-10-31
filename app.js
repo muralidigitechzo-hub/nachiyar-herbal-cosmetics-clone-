@@ -138,7 +138,6 @@ async function initStorefrontApp() {
         el.style.display = 'none';
       }
     });
-    }
 
     // 3. Fixed Brand Logo & Favicon across the clone
     const rawLogo = settings.brand?.logo || settings.logoUrl || settings.branding?.logoUrl || '';
@@ -1029,140 +1028,143 @@ async function initStorefrontApp() {
     };
   } catch (e) {}
 
-  // Fetch live products & settings from REST API (cache-busting enabled)
-  try {
-    const [pRes, sRes] = await Promise.all([
-      fetch('/api/products').then(r => r.json()).catch(() => ({ success: false })),
-      fetch('/api/settings/public').then(r => r.json()).catch(() => ({ success: false }))
-    ]);
+  // Fetch live products & settings in background (non-blocking, instant interactive UI)
+  async function syncStorefrontData() {
+    try {
+      const [pRes, sRes] = await Promise.all([
+        fetch('/api/products').then(r => r.json()).catch(() => ({ success: false })),
+        fetch('/api/settings/public').then(r => r.json()).catch(() => ({ success: false }))
+      ]);
 
-    if (localStorage.getItem('nachiyar_has_local_customization') === 'true') {
-      loadAndApplyFromLocalStorage();
-    } else {
+      if (localStorage.getItem('nachiyar_has_local_customization') === 'true') {
+        loadAndApplyFromLocalStorage();
+      } else {
+        if (sRes.success && sRes.data) {
+          const data = sRes.data;
+          if (data.homeShowcase) {
+            try {
+              localStorage.setItem('nachiyar_home_showcase', JSON.stringify(data.homeShowcase));
+            } catch (e) {}
+            window.__NACHIYAR_SETTINGS = { ...(window.__NACHIYAR_SETTINGS || {}), homeShowcase: data.homeShowcase };
+          }
+        }
+
+        if (pRes.success && Array.isArray(pRes.data)) {
+          try {
+            localStorage.setItem('nachiyar_store_products', JSON.stringify(pRes.data));
+          } catch (e) {}
+
+          const activeShowcase = (sRes.success && sRes.data && sRes.data.homeShowcase) || null;
+          applyLiveProductsToDOM(pRes.data, activeShowcase);
+        }
+      }
+
       if (sRes.success && sRes.data) {
         const data = sRes.data;
-        if (data.homeShowcase) {
-          try {
-            localStorage.setItem('nachiyar_home_showcase', JSON.stringify(data.homeShowcase));
-          } catch (e) {}
-          window.__NACHIYAR_SETTINGS = { ...(window.__NACHIYAR_SETTINGS || {}), homeShowcase: data.homeShowcase };
-        }
-      }
+        FREE_SHIPPING_THRESHOLD = data.freeShippingThreshold || 599;
 
-      if (pRes.success && Array.isArray(pRes.data)) {
+        // 1. Dynamic Storefront Business & Contact Information Sync
+        updateStorefrontBusinessDetails(data);
+
+        // 2. Storefront Top Running Ticker & Banner Controls
+        const savedLocalCoupon = JSON.parse(localStorage.getItem('nachiyar_active_coupon') || '{}');
+        const activeCouponCode = (data.couponCode || savedLocalCoupon?.couponCode || 'FESTIVE15').toUpperCase();
+        const activeDiscountPct = Number(data.discountPercent || savedLocalCoupon?.discountPercent || 15);
+        const activeExpiry = data.couponExpiryDate || savedLocalCoupon?.couponExpiryDate || '';
+
+        // Check explicit toggle from server first
+        let isCouponActive = false;
+        if (typeof data.couponActive === 'boolean') {
+          isCouponActive = data.couponActive;
+        } else if (typeof savedLocalCoupon?.couponActive === 'boolean') {
+          isCouponActive = savedLocalCoupon.couponActive;
+        }
+
+        // Check expiration date
+        if (isCouponActive && activeExpiry) {
+          const expDate = new Date(activeExpiry);
+          expDate.setHours(23, 59, 59, 999);
+          if (Date.now() > expDate.getTime()) {
+            isCouponActive = false;
+          }
+        }
+
+        // Update cached active coupon in localStorage and global window object
         try {
-          localStorage.setItem('nachiyar_store_products', JSON.stringify(pRes.data));
-        } catch (e) {}
+          localStorage.setItem('nachiyar_active_coupon', JSON.stringify({
+            couponCode: activeCouponCode,
+            discountPercent: activeDiscountPct,
+            couponExpiryDate: activeExpiry,
+            couponActive: isCouponActive,
+            couponTagline: data.couponTagline || 'Surprise Royal Privilege Voucher'
+          }));
+        } catch (err) {}
 
-        const activeShowcase = (sRes.success && sRes.data && sRes.data.homeShowcase) || null;
-        applyLiveProductsToDOM(pRes.data, activeShowcase);
-      }
-    }
-
-    if (sRes.success && sRes.data) {
-      const data = sRes.data;
-      FREE_SHIPPING_THRESHOLD = data.freeShippingThreshold || 599;
-
-      // 1. Dynamic Storefront Business & Contact Information Sync
-      updateStorefrontBusinessDetails(data);
-
-      // 2. Storefront Top Running Ticker & Banner Controls
-      const savedLocalCoupon = JSON.parse(localStorage.getItem('nachiyar_active_coupon') || '{}');
-      const activeCouponCode = (data.couponCode || savedLocalCoupon?.couponCode || 'FESTIVE15').toUpperCase();
-      const activeDiscountPct = Number(data.discountPercent || savedLocalCoupon?.discountPercent || 15);
-      const activeExpiry = data.couponExpiryDate || savedLocalCoupon?.couponExpiryDate || '';
-
-      // Check explicit toggle from server first
-      let isCouponActive = false;
-      if (typeof data.couponActive === 'boolean') {
-        isCouponActive = data.couponActive;
-      } else if (typeof savedLocalCoupon?.couponActive === 'boolean') {
-        isCouponActive = savedLocalCoupon.couponActive;
-      }
-
-      // Check expiration date
-      if (isCouponActive && activeExpiry) {
-        const expDate = new Date(activeExpiry);
-        expDate.setHours(23, 59, 59, 999);
-        if (Date.now() > expDate.getTime()) {
-          isCouponActive = false;
-        }
-      }
-
-      // Update cached active coupon in localStorage and global window object
-      try {
-        localStorage.setItem('nachiyar_active_coupon', JSON.stringify({
+        window.currentActiveCoupon = {
           couponCode: activeCouponCode,
           discountPercent: activeDiscountPct,
           couponExpiryDate: activeExpiry,
           couponActive: isCouponActive,
           couponTagline: data.couponTagline || 'Surprise Royal Privilege Voucher'
-        }));
-      } catch (err) {}
+        };
 
-      window.currentActiveCoupon = {
-        couponCode: activeCouponCode,
-        discountPercent: activeDiscountPct,
-        couponExpiryDate: activeExpiry,
-        couponActive: isCouponActive,
-        couponTagline: data.couponTagline || 'Surprise Royal Privilege Voucher'
-      };
+        // Render Header Running Ticker
+        const track = document.getElementById('headerTickerTrack');
+        if (track) {
+          const ann = data.announcementText || 'ROYAL BOTANICAL CARE • FREE PAN-INDIA SHIPPING OVER ₹599';
+          const expText = activeExpiry ? ` (VALID TILL ${new Date(activeExpiry).toLocaleDateString('en-IN')})` : '';
+          const couponSnippet = isCouponActive ? `USE CODE: ${activeCouponCode} FOR ${activeDiscountPct}% OFF${expText}` : '';
+          const fullMessage = couponSnippet ? `${ann}  ✦  ${couponSnippet}` : ann;
 
-      // Render Header Running Ticker
-      const track = document.getElementById('headerTickerTrack');
-      if (track) {
-        const ann = data.announcementText || 'ROYAL BOTANICAL CARE • FREE PAN-INDIA SHIPPING OVER ₹599';
-        const expText = activeExpiry ? ` (VALID TILL ${new Date(activeExpiry).toLocaleDateString('en-IN')})` : '';
-        const couponSnippet = isCouponActive ? `USE CODE: ${activeCouponCode} FOR ${activeDiscountPct}% OFF${expText}` : '';
-        const fullMessage = couponSnippet ? `${ann}  ✦  ${couponSnippet}` : ann;
+          track.innerHTML = `
+            <span>${fullMessage}</span>
+            <span>•</span>
+            <span>${fullMessage}</span>
+          `;
+        }
 
-        track.innerHTML = `
-          <span>${fullMessage}</span>
-          <span>•</span>
-          <span>${fullMessage}</span>
-        `;
-      }
+        // 3. Flipkart / Amazon Style Promotional Hero Banner
+        const promoBanner = document.getElementById('promoHeroBanner');
+        if (promoBanner) {
+          if (!isCouponActive) {
+            promoBanner.style.display = 'none';
+          } else {
+            promoBanner.style.display = 'block';
+            const discEl = document.getElementById('promoBannerDiscount');
+            const codeEl = document.getElementById('promoBannerCode');
+            const pillEl = document.getElementById('promoBannerCodePill');
+            const expEl = document.getElementById('promoBannerExpiryText');
+            if (discEl) discEl.textContent = `${activeDiscountPct}%`;
+            if (codeEl) codeEl.textContent = activeCouponCode;
+            if (pillEl) pillEl.textContent = activeCouponCode;
+            if (expEl) expEl.textContent = activeExpiry ? `Valid till ${new Date(activeExpiry).toLocaleDateString('en-IN')}.` : 'Valid for a limited period.';
 
-      // 3. Flipkart / Amazon Style Promotional Hero Banner
-      const promoBanner = document.getElementById('promoHeroBanner');
-      if (promoBanner) {
-        if (!isCouponActive) {
-          promoBanner.style.display = 'none';
-        } else {
-          promoBanner.style.display = 'block';
-          const discEl = document.getElementById('promoBannerDiscount');
-          const codeEl = document.getElementById('promoBannerCode');
-          const pillEl = document.getElementById('promoBannerCodePill');
-          const expEl = document.getElementById('promoBannerExpiryText');
-          if (discEl) discEl.textContent = `${activeDiscountPct}%`;
-          if (codeEl) codeEl.textContent = activeCouponCode;
-          if (pillEl) pillEl.textContent = activeCouponCode;
-          if (expEl) expEl.textContent = activeExpiry ? `Valid till ${new Date(activeExpiry).toLocaleDateString('en-IN')}.` : 'Valid for a limited period.';
-
-          const btnCopy = document.getElementById('btnCopyPromoCoupon');
-          if (btnCopy) {
-            btnCopy.onclick = () => {
-              if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(activeCouponCode).then(() => {
-                  const btnTxt = document.getElementById('copyPromoBtnText');
-                  if (btnTxt) {
-                    btnTxt.textContent = '✓ Copied!';
-                    setTimeout(() => { btnTxt.textContent = '📋 Copy Code'; }, 2000);
-                  }
-                }).catch(() => {
+            const btnCopy = document.getElementById('btnCopyPromoCoupon');
+            if (btnCopy) {
+              btnCopy.onclick = () => {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                  navigator.clipboard.writeText(activeCouponCode).then(() => {
+                    const btnTxt = document.getElementById('copyPromoBtnText');
+                    if (btnTxt) {
+                      btnTxt.textContent = '✓ Copied!';
+                      setTimeout(() => { btnTxt.textContent = '📋 Copy Code'; }, 2000);
+                    }
+                  }).catch(() => {
+                    prompt('Copy your coupon code:', activeCouponCode);
+                  });
+                } else {
                   prompt('Copy your coupon code:', activeCouponCode);
-                });
-              } else {
-                prompt('Copy your coupon code:', activeCouponCode);
-              }
-            };
+                }
+              };
+            }
           }
         }
       }
+    } catch (err) {
+      console.log('Running with built-in catalog data:', err);
     }
-  } catch (err) {
-    console.log('Running with built-in catalog data:', err);
   }
+  syncStorefrontData();
 
   // Header Scroll
   window.addEventListener('scroll', () => {
