@@ -2083,10 +2083,6 @@ async function initStorefrontApp() {
         const effectiveStatus = statusOverrides[sId] || r.status || 'pending';
         if (String(effectiveStatus).toLowerCase() !== 'approved') return false;
 
-        // Purge any dummy herbal items
-        const txt = ((r.product_name || r.productName || '') + ' ' + (r.title || '') + ' ' + (r.comment || '')).toLowerCase();
-        if (txt.includes('oil') || txt.includes('shampoo') || txt.includes('hair') || txt.includes('herbal')) return false;
-
         return true;
       });
 

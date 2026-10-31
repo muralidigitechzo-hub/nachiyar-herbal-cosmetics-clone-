@@ -4611,11 +4611,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadAdminReviews() {
     try {
-      // 1. Purge any obsolete herbal reviews from local storage
-      const isUnrelatedReview = (r) => {
-        if (!r) return true;
-        const txt = ((r.product_name || r.productName || '') + ' ' + (r.title || '') + ' ' + (r.comment || '')).toLowerCase();
-        return txt.includes('oil') || txt.includes('shampoo') || txt.includes('hair') || txt.includes('herbal') || txt.includes('apothecary') || txt.includes('kunkumadi');
+      // 1. Validate reviews from local storage
+      const isValidReview = (r) => {
+        return r && (r.id || r.name || r.comment);
       };
 
       let localReviews = [];
@@ -4625,7 +4623,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ...JSON.parse(localStorage.getItem('store_customer_reviews') || '[]'),
           ...JSON.parse(localStorage.getItem('nachiyar_approved_reviews') || '[]')
         ];
-        localReviews = rawLocal.filter(r => !isUnrelatedReview(r));
+        localReviews = rawLocal.filter(r => isValidReview(r));
         localStorage.setItem('nachiyar_store_reviews', JSON.stringify(localReviews));
       } catch(e) {}
 
@@ -4635,7 +4633,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const res = await authFetch('/api/reviews/admin/all?_t=' + Date.now()).then(r => r.json());
         if (res && res.success && res.data) {
           const rawServer = Array.isArray(res.data) ? res.data : (res.data.reviews || []);
-          serverReviews = rawServer.filter(r => !isUnrelatedReview(r));
+          serverReviews = rawServer.filter(r => isValidReview(r));
         }
       } catch (e) {}
 
