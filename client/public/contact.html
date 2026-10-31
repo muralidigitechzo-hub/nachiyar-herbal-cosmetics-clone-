@@ -926,8 +926,18 @@
 
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
+    let isSubmittingInquiry = false;
+
     async function handleContactSubmit(event) {
-      if (event) event.preventDefault();
+      if (event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+      if (isSubmittingInquiry) {
+        return false;
+      }
+      isSubmittingInquiry = true;
+
       const form = document.getElementById('boutiqueContactForm') || document.getElementById('contactForm');
       const submitBtn = document.getElementById('contactSubmitBtn') || (form ? form.querySelector('button[type="submit"]') : null);
       const banner = document.getElementById('contactSuccessBanner');
@@ -944,12 +954,13 @@
       const message = messageInput ? messageInput.value.trim() : '';
 
       if (!name || !email || !message) {
+        isSubmittingInquiry = false;
         if (typeof showSideToast === 'function') {
           showSideToast('Please fill in all required fields.', 'error');
         } else {
           alert('Please fill in all required fields.');
         }
-        return;
+        return false;
       }
 
       const originalText = submitBtn ? submitBtn.innerHTML : 'Transmit Message';
@@ -1009,12 +1020,16 @@
           });
         }
       } finally {
-        if (submitBtn) {
-          submitBtn.innerHTML = originalText;
-          submitBtn.style.opacity = '1';
-          submitBtn.disabled = false;
-        }
+        setTimeout(() => {
+          isSubmittingInquiry = false;
+          if (submitBtn) {
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.opacity = '1';
+            submitBtn.disabled = false;
+          }
+        }, 1200);
       }
+      return false;
     }
 
     function saveLocalMessageBackup(msg) {
@@ -1033,7 +1048,12 @@
         ['nachiyar_offline_inquiries', 'store_offline_inquiries', 'nachiyar_customer_messages', 'store_customer_messages'].forEach(key => {
           try {
             const list = JSON.parse(localStorage.getItem(key) || '[]');
-            if (!list.some(m => String(m.id) === String(item.id))) {
+            // Deduplicate by ID and content signature
+            const isDup = list.some(m => 
+              String(m.id) === String(item.id) ||
+              (m.email && item.email && m.email.toLowerCase() === item.email.toLowerCase() && (m.message || '').trim() === (item.message || '').trim())
+            );
+            if (!isDup) {
               list.unshift(item);
               localStorage.setItem(key, JSON.stringify(list));
             }
@@ -1052,10 +1072,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('boutiqueContactForm') || document.getElementById('contactForm');
-      if (form) {
-        form.addEventListener('submit', handleContactSubmit);
-      }
+      // NOTE: Form submission is handled strictly via onsubmit="handleContactSubmit(event)" on the form tag
       const phoneInput = document.getElementById('contactPhone');
       if (phoneInput) {
         phoneInput.addEventListener('input', function() {

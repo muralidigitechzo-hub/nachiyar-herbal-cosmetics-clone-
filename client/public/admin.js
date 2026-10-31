@@ -5186,18 +5186,36 @@ document.addEventListener('DOMContentLoaded', () => {
       })();
 
       const allMsgs = [...serverMessages];
-      const msgIds = new Set(allMsgs.map(m => String(m.id)));
       offlineInquiries.forEach(off => {
-        if (off && off.id && !msgIds.has(String(off.id))) {
+        if (off && off.id) {
           allMsgs.push({ ...off, is_offline: true });
-          msgIds.add(String(off.id));
         }
       });
 
-      // Sort by created_at desc
-      allMsgs.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+      // Deduplicate by ID and content signature (email + message text)
+      const uniqueMsgs = [];
+      const seenIds = new Set();
+      const seenContent = new Set();
 
-      customerMessages = allMsgs;
+      allMsgs.forEach(m => {
+        if (!m || !m.id) return;
+        const idKey = String(m.id);
+        if (seenIds.has(idKey)) return;
+
+        const contentSig = `${(m.email || '').toLowerCase().trim()}::${(m.message || '').trim().toLowerCase()}`;
+        if (contentSig.length > 5 && seenContent.has(contentSig)) {
+          return;
+        }
+
+        seenIds.add(idKey);
+        if (contentSig.length > 5) seenContent.add(contentSig);
+        uniqueMsgs.push(m);
+      });
+
+      // Sort by created_at desc
+      uniqueMsgs.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+
+      customerMessages = uniqueMsgs;
       const unreadCount = customerMessages.filter(m => m.status === 'unread').length;
       updateMessageKpiCounters(unreadCount);
       renderAdminMessages();
