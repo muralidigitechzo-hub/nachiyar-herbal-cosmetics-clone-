@@ -74,9 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         await fetch('/api/auth/logout', { method: 'POST', headers: { 'Authorization': `Bearer ${adminToken}` } });
       } catch (e) {}
+      localStorage.removeItem('store_admin_token');
       localStorage.removeItem('nachiyar_admin_token');
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('store_admin_user');
       localStorage.removeItem('nachiyar_admin_user');
+      localStorage.removeItem('admin_user');
+      localStorage.removeItem('admin_active_tab');
+      document.cookie = 'store_admin_token=; path=/; max-age=0; SameSite=Lax';
       document.cookie = 'nachiyar_admin_token=; path=/; max-age=0; SameSite=Lax';
+      document.cookie = 'admin_token=; path=/; max-age=0; SameSite=Lax';
       window.location.replace('/nimda-login/');
     });
   }
@@ -6534,18 +6541,32 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   function getStoredAdminAccounts() {
-    const raw = localStorage.getItem('nachiyar_admin_accounts');
-    const deletedList = JSON.parse(localStorage.getItem('nachiyar_deleted_admins') || '[]');
+    const raw = localStorage.getItem('nachiyar_admin_accounts') || 
+                localStorage.getItem('store_admin_accounts') || 
+                localStorage.getItem('admin_accounts') ||
+                localStorage.getItem('TechNova Electronics_admin_accounts');
+    const deletedList = (() => {
+      try {
+        return [
+          ...JSON.parse(localStorage.getItem('nachiyar_deleted_admins') || '[]'),
+          ...JSON.parse(localStorage.getItem('store_deleted_admins') || '[]'),
+          ...JSON.parse(localStorage.getItem('admin_deleted_admins') || '[]'),
+          ...JSON.parse(localStorage.getItem('TechNova Electronics_deleted_admins') || '[]')
+        ].map(s => String(s).toLowerCase().trim());
+      } catch(e) { return []; }
+    })();
 
     if (!raw) {
       const initial = defaultAdminAccounts.filter(acc => !deletedList.includes(acc.username.toLowerCase()));
       localStorage.setItem('nachiyar_admin_accounts', JSON.stringify(initial));
+      localStorage.setItem('store_admin_accounts', JSON.stringify(initial));
+      localStorage.setItem('admin_accounts', JSON.stringify(initial));
+      localStorage.setItem('TechNova Electronics_admin_accounts', JSON.stringify(initial));
       return initial;
     }
 
     try {
       const parsed = JSON.parse(raw);
-      // Filter out deleted accounts and any legacy non-admin roles (inventory, billing)
       return parsed
         .filter(acc => !deletedList.includes(acc.username.toLowerCase()))
         .filter(acc => acc.username.toLowerCase() !== 'inventory' && acc.username.toLowerCase() !== 'billing')
@@ -6558,6 +6579,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function saveStoredAdminAccounts(list) {
     staffAccounts = list;
     localStorage.setItem('nachiyar_admin_accounts', JSON.stringify(list));
+    localStorage.setItem('store_admin_accounts', JSON.stringify(list));
+    localStorage.setItem('admin_accounts', JSON.stringify(list));
+    localStorage.setItem('TechNova Electronics_admin_accounts', JSON.stringify(list));
     renderStaffAccountsTable();
     updateStaffBadges();
   }
@@ -6799,6 +6823,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let deletedList = JSON.parse(localStorage.getItem('nachiyar_deleted_admins') || '[]');
     deletedList = deletedList.filter(u => u !== cleanUsername);
     localStorage.setItem('nachiyar_deleted_admins', JSON.stringify(deletedList));
+    localStorage.setItem('store_deleted_admins', JSON.stringify(deletedList));
+    localStorage.setItem('admin_deleted_admins', JSON.stringify(deletedList));
+    localStorage.setItem('TechNova Electronics_deleted_admins', JSON.stringify(deletedList));
 
     try {
       const res = await fetch('/api/auth/register', {
@@ -6873,6 +6900,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!deletedList.includes(cleanUser)) {
       deletedList.push(cleanUser);
       localStorage.setItem('nachiyar_deleted_admins', JSON.stringify(deletedList));
+    localStorage.setItem('store_deleted_admins', JSON.stringify(deletedList));
+    localStorage.setItem('admin_deleted_admins', JSON.stringify(deletedList));
+    localStorage.setItem('TechNova Electronics_deleted_admins', JSON.stringify(deletedList));
     }
 
     // Remove from active staff accounts list
@@ -6883,11 +6913,12 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await fetch('/api/auth/users/' + encodeURIComponent(id) + '?username=' + encodeURIComponent(cleanUser), {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-token': localStorage.getItem('nachiyar_admin_token') || ''
-        }
-      });
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': localStorage.getItem('nachiyar_admin_token') || '' }
+      }).catch(() => {});
+      await fetch('/api/auth/users?id=' + encodeURIComponent(id) + '&username=' + encodeURIComponent(cleanUser), {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': localStorage.getItem('nachiyar_admin_token') || '' }
+      }).catch(() => {});
     } catch (err) {
       console.warn('Backend delete sync note:', err.message);
     }

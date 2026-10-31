@@ -8,21 +8,23 @@ export default function handler(req, res) {
   }
 
   try {
-    const { username, email, password, name, role } = req.body || {};
+    const { username, email, password, name, role, phone } = req.body || {};
     if (!username || !password) {
       return res.status(400).json({ success: false, message: 'Username and password required' });
     }
 
+    const cleanUsername = String(username).trim();
     const db = getDb();
     if (!Array.isArray(db.users)) db.users = [];
 
-    const existingIdx = db.users.findIndex(u => u.username.toLowerCase() === username.toLowerCase());
+    const existingIdx = db.users.findIndex(u => u.username && u.username.toLowerCase() === cleanUsername.toLowerCase());
     const newUser = {
       id: `user_${Date.now()}`,
-      username: username.trim(),
-      email: email ? email.trim() : `${username}@store.com`,
+      username: cleanUsername,
+      email: email ? String(email).trim() : `${cleanUsername}@nachiyarherbals.com`,
+      phone: phone ? String(phone).trim() : '',
       password: String(password).trim(),
-      name: name ? name.trim() : username.trim(),
+      name: name ? String(name).trim() : cleanUsername,
       role: role || 'super_admin',
       updated_at: new Date().toISOString()
     };

@@ -1,4 +1,4 @@
-import { getDb } from '../../../lib/db.js';
+import { getDb, saveDb } from '../../../lib/db.js';
 
 export default function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -8,7 +8,7 @@ export default function handler(req, res) {
   }
 
   try {
-    const { username, password } = req.body || {};
+    const { username, password, localUsers } = req.body || {};
     if (!username || !password) {
       return res.status(400).json({ success: false, message: 'Username and password are required' });
     }
@@ -17,7 +17,8 @@ export default function handler(req, res) {
     const cleanPass = String(password).trim();
 
     const db = getDb();
-    const users = Array.isArray(db.users) ? db.users : [];
+    if (!Array.isArray(db.users)) db.users = [];
+    const users = db.users;
 
     // 1. Check in db.json users list
     let matched = users.find(u => 
@@ -25,7 +26,34 @@ export default function handler(req, res) {
       (u.email && u.email.toLowerCase() === cleanUser)
     );
 
-    // 2. Default hardcoded fallback credentials
+    // 2. If client provided localUsers list, check and auto-sync into db.users
+    if (Array.isArray(localUsers)) {
+      const foundInLocal = localUsers.find(u => 
+        (u.username && u.username.toLowerCase() === cleanUser) ||
+        (u.email && u.email.toLowerCase() === cleanUser)
+      );
+      if (foundInLocal && String(foundInLocal.password) === cleanPass) {
+        matched = foundInLocal;
+        const existingIdx = users.findIndex(u => u.username && u.username.toLowerCase() === cleanUser);
+        const userToSave = {
+          id: foundInLocal.id || `user_${Date.now()}`,
+          username: foundInLocal.username || cleanUser,
+          email: foundInLocal.email || `${cleanUser}@nachiyarherbals.com`,
+          password: cleanPass,
+          name: foundInLocal.name || foundInLocal.username || cleanUser,
+          role: foundInLocal.role || 'super_admin'
+        };
+        if (existingIdx >= 0) {
+          users[existingIdx] = { ...users[existingIdx], ...userToSave };
+        } else {
+          users.push(userToSave);
+        }
+        db.users = users;
+        try { saveDb(db); } catch (e) {}
+      }
+    }
+
+    // 3. Default hardcoded fallback credentials
     const DEFAULT_PASSWORDS = {
       nimda: ['admin', 'admin123', 'nimda123'],
       admin: ['admin', 'admin123', 'nimda123'],

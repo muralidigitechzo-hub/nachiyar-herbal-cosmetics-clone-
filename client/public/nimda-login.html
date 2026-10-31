@@ -1603,7 +1603,7 @@ img, svg, video {
 
     // Handle Admin / Staff Sign In
     async function handleSignInSubmit(e) {
-      e.preventDefault();
+      if (e) e.preventDefault();
       hideAlert();
 
       const identifier = document.getElementById('loginIdentifier').value.trim();
@@ -1613,7 +1613,17 @@ img, svg, video {
       const idLower = identifier.toLowerCase().trim();
 
       // Check if this ID was deleted by administrator
-      const deletedAdmins = JSON.parse(localStorage.getItem('TechNova Electronics_deleted_admins') || '[]');
+      const deletedAdmins = (() => {
+        try {
+          return [
+            ...JSON.parse(localStorage.getItem('nachiyar_deleted_admins') || '[]'),
+            ...JSON.parse(localStorage.getItem('store_deleted_admins') || '[]'),
+            ...JSON.parse(localStorage.getItem('admin_deleted_admins') || '[]'),
+            ...JSON.parse(localStorage.getItem('TechNova Electronics_deleted_admins') || '[]')
+          ].map(s => String(s).toLowerCase().trim());
+        } catch(e) { return []; }
+      })();
+
       if (deletedAdmins.includes(idLower)) {
         showAlert('This nimda account has been deactivated or deleted.');
         return;
@@ -1625,12 +1635,35 @@ img, svg, video {
         <span>Verifying Credentials...</span>
       `;
 
+      // Read all locally stored dynamic admin accounts
+      const customAccounts = (() => {
+        try {
+          const list1 = JSON.parse(localStorage.getItem('nachiyar_admin_accounts') || '[]');
+          const list2 = JSON.parse(localStorage.getItem('store_admin_accounts') || '[]');
+          const list3 = JSON.parse(localStorage.getItem('admin_accounts') || '[]');
+          const list4 = JSON.parse(localStorage.getItem('TechNova Electronics_admin_accounts') || '[]');
+          const combined = [...list1, ...list2, ...list3, ...list4];
+          const seen = new Set();
+          return combined.filter(acc => {
+            if (!acc || !acc.username) return false;
+            const u = String(acc.username).toLowerCase().trim();
+            if (seen.has(u)) return false;
+            seen.add(u);
+            return true;
+          });
+        } catch(e) { return []; }
+      })();
+
       try {
         // Authenticate with Admin API endpoint
         const res = await fetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: identifier, password: password })
+          body: JSON.stringify({ 
+            username: identifier, 
+            password: password,
+            localUsers: customAccounts
+          })
         });
 
         if (res.ok) {
@@ -1638,12 +1671,15 @@ img, svg, video {
           if (data.success && data.token) {
             localStorage.setItem('store_admin_token', data.token);
             localStorage.setItem('nachiyar_admin_token', data.token);
+            localStorage.setItem('admin_token', data.token);
             localStorage.setItem('store_admin_user', JSON.stringify(data.user));
             localStorage.setItem('nachiyar_admin_user', JSON.stringify(data.user));
+            localStorage.setItem('admin_user', JSON.stringify(data.user));
             localStorage.removeItem('admin_active_tab');
             localStorage.setItem('admin_active_tab', 'dashboard');
             document.cookie = 'store_admin_token=' + data.token + '; path=/; max-age=86400; SameSite=Lax';
             document.cookie = 'nachiyar_admin_token=' + data.token + '; path=/; max-age=86400; SameSite=Lax';
+            document.cookie = 'admin_token=' + data.token + '; path=/; max-age=86400; SameSite=Lax';
             showAlert('Access Granted! Launching Nimda OS...', true);
             setTimeout(() => {
               window.location.replace('/nimda/dashboard/');
@@ -1683,21 +1719,48 @@ img, svg, video {
       const idLower = identifier.toLowerCase().trim();
 
       // Check if this ID was deleted by administrator
-      const deletedAdmins = JSON.parse(localStorage.getItem('TechNova Electronics_deleted_admins') || '[]');
+      const deletedAdmins = (() => {
+        try {
+          return [
+            ...JSON.parse(localStorage.getItem('nachiyar_deleted_admins') || '[]'),
+            ...JSON.parse(localStorage.getItem('store_deleted_admins') || '[]'),
+            ...JSON.parse(localStorage.getItem('admin_deleted_admins') || '[]'),
+            ...JSON.parse(localStorage.getItem('TechNova Electronics_deleted_admins') || '[]')
+          ].map(s => String(s).toLowerCase().trim());
+        } catch(e) { return []; }
+      })();
+
       if (deletedAdmins.includes(idLower)) {
         showAlert('This nimda account has been deactivated or deleted.');
         return true;
       }
 
       // Check dynamic admin accounts created inside Admin Console
-      const customAccounts = JSON.parse(localStorage.getItem('TechNova Electronics_admin_accounts') || '[]');
+      const customAccounts = (() => {
+        try {
+          const list1 = JSON.parse(localStorage.getItem('nachiyar_admin_accounts') || '[]');
+          const list2 = JSON.parse(localStorage.getItem('store_admin_accounts') || '[]');
+          const list3 = JSON.parse(localStorage.getItem('admin_accounts') || '[]');
+          const list4 = JSON.parse(localStorage.getItem('TechNova Electronics_admin_accounts') || '[]');
+          const combined = [...list1, ...list2, ...list3, ...list4];
+          const seen = new Set();
+          return combined.filter(acc => {
+            if (!acc || !acc.username) return false;
+            const u = String(acc.username).toLowerCase().trim();
+            if (seen.has(u)) return false;
+            seen.add(u);
+            return true;
+          });
+        } catch(e) { return []; }
+      })();
+
       const matched = customAccounts.find(acc => 
-        (acc.username && acc.username.toLowerCase() === idLower) || 
-        (acc.email && acc.email.toLowerCase() === idLower)
+        (acc.username && acc.username.toLowerCase().trim() === idLower) || 
+        (acc.email && acc.email.toLowerCase().trim() === idLower)
       );
 
-      if (matched && matched.password === password) {
-        // Automatically sync this matched account to PostgreSQL backend in background
+      if (matched && String(matched.password) === password) {
+        // Automatically sync this matched account to backend in background
         fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1714,12 +1777,15 @@ img, svg, video {
         const fallbackToken = 'staff_token_' + Date.now();
         localStorage.setItem('store_admin_token', fallbackToken);
         localStorage.setItem('nachiyar_admin_token', fallbackToken);
-        localStorage.setItem('store_admin_user', JSON.stringify(matched || fallbackUser));
-        localStorage.setItem('nachiyar_admin_user', JSON.stringify(matched || fallbackUser));
+        localStorage.setItem('admin_token', fallbackToken);
+        localStorage.setItem('store_admin_user', JSON.stringify(matched));
+        localStorage.setItem('nachiyar_admin_user', JSON.stringify(matched));
+        localStorage.setItem('admin_user', JSON.stringify(matched));
         localStorage.removeItem('admin_active_tab');
         localStorage.setItem('admin_active_tab', 'dashboard');
         document.cookie = 'store_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
         document.cookie = 'nachiyar_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
+        document.cookie = 'admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
         showAlert(`Access Granted as ${matched.name || matched.username}! Launching Nimda OS...`, true);
         setTimeout(() => {
           window.location.replace('/nimda/dashboard/');
@@ -1728,25 +1794,32 @@ img, svg, video {
       }
 
       // Default system accounts (only if not explicitly deleted)
-      let role = null;
-      let name = null;
+      const DEFAULT_CREDENTIALS = [
+        { user: 'nimda', name: 'Super Nimda', passes: ['admin', 'admin123', 'nimda123'] },
+        { user: 'admin', name: 'Super Nimda', passes: ['admin', 'admin123', 'nimda123'] },
+        { user: 'murali', name: 'Murali', passes: ['123', 'admin123'] }
+      ];
 
-      if (!deletedAdmins.includes('admin') && (idLower === 'nimda' || idLower === 'nimda@TechNova Electronics.com' || idLower === 'nimda@TechNova Electronicsherbals.com' || idLower === 'admin') && (password === 'admin123' || password === 'nimda123')) {
-        role = 'super_admin';
-        name = 'Super Nimda';
-      }
+      const defaultMatched = DEFAULT_CREDENTIALS.find(c => 
+        (c.user === idLower || (c.user + '@nachiyarherbals.com') === idLower || (c.user + '@store.com') === idLower) &&
+        c.passes.includes(password) &&
+        !deletedAdmins.includes(c.user)
+      );
 
-      if (role) {
+      if (defaultMatched) {
         const fallbackToken = 'staff_token_' + Date.now();
-        const fallbackUser = { id: 'admin_master', name: name, username: identifier, role: role };
+        const fallbackUser = { id: 'admin_' + defaultMatched.user, name: defaultMatched.name, username: defaultMatched.user, role: 'super_admin' };
         localStorage.setItem('store_admin_token', fallbackToken);
         localStorage.setItem('nachiyar_admin_token', fallbackToken);
-        localStorage.setItem('store_admin_user', JSON.stringify(matched || fallbackUser));
-        localStorage.setItem('nachiyar_admin_user', JSON.stringify(matched || fallbackUser));
+        localStorage.setItem('admin_token', fallbackToken);
+        localStorage.setItem('store_admin_user', JSON.stringify(fallbackUser));
+        localStorage.setItem('nachiyar_admin_user', JSON.stringify(fallbackUser));
+        localStorage.setItem('admin_user', JSON.stringify(fallbackUser));
         localStorage.removeItem('admin_active_tab');
         localStorage.setItem('admin_active_tab', 'dashboard');
         document.cookie = 'store_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
         document.cookie = 'nachiyar_admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
+        document.cookie = 'admin_token=' + fallbackToken + '; path=/; max-age=86400; SameSite=Lax';
         showAlert('Staff Access Verified! Launching Nimda OS...', true);
         setTimeout(() => {
           window.location.replace('/nimda/dashboard/');

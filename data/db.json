@@ -5,19 +5,13 @@
       "name": "Aurelia Sovereign Emerald 41",
       "slug": "aurelia-sovereign-emerald-41",
       "category": "Automatic Chronometers",
+      "brand": "Aurelia",
       "price": 48500,
-      "mrp": 56000,
+      "compareAtPrice": 56000,
       "stock": 14,
-      "status": "active",
-      "images": [
-        "/assets/sovereign-watch.png"
-      ],
-      "subtitle": "Caliber 2824 • Sunburst Emerald",
-      "description": "Flagship 41mm automatic mechanical timepiece featuring sunburst emerald dial, double-domed sapphire crystal, 72-hour power reserve, and solid 316L stainless steel bracelet.",
-      "rating": 4.95,
-      "review_count": 84,
-      "featured": true,
       "sku": "AUR-CHRONO-001",
+      "featured": true,
+      "newArrival": true,
       "themeColor": "#064E3B",
       "tagline": "Caliber 2824 • Sunburst Emerald",
       "badge": {
@@ -25,6 +19,11 @@
         "unit": "SWISS",
         "title": "Officially Certified Chronometer"
       },
+      "description": "Flagship 41mm automatic mechanical timepiece featuring sunburst emerald dial, double-domed sapphire crystal, 72-hour power reserve, and solid 316L stainless steel bracelet.",
+      "shortDescription": "41mm Swiss automatic with sunburst emerald dial.",
+      "images": [
+        "/assets/sovereign-watch.png"
+      ],
       "specifications": {
         "caseDiameter": "41mm Surgical 316L Steel",
         "movement": "Swiss Caliber 2824 Automatic",
@@ -32,27 +31,24 @@
         "waterResistance": "100 Meters (10 ATM)",
         "warranty": "5-Year Global Atelier Guarantee"
       },
-      "benefits": [],
-      "howToUse": ""
+      "rating": 4.95,
+      "reviewCount": 84,
+      "transparentImage": "/assets/sovereign-watch.png",
+      "online_sold": 2,
+      "theme_color": "#064E3B"
     },
     {
       "id": "AUR-DIVER-002",
       "name": "Aurelia DeepOcean Ceramic Diver",
       "slug": "aurelia-deepocean-ceramic-diver",
       "category": "Diving Instruments",
+      "brand": "Aurelia",
       "price": 54000,
-      "mrp": 62500,
+      "compareAtPrice": 62500,
       "stock": 10,
-      "status": "active",
-      "images": [
-        "/assets/ceramic-diver.png"
-      ],
-      "subtitle": "300M Diver • Helium Escape Valve",
-      "description": "Professional diving instrument with 120-click ceramic bezel, automatic helium release valve, Super-LumiNova luminescence, and 300 meters water resistance.",
-      "rating": 4.9,
-      "review_count": 62,
-      "featured": true,
       "sku": "AUR-DIVER-002",
+      "featured": true,
+      "newArrival": true,
       "themeColor": "#1E293B",
       "tagline": "300M Diver • Helium Escape Valve",
       "badge": {
@@ -60,6 +56,11 @@
         "unit": "DIVE",
         "title": "Professional Oceanic Diver"
       },
+      "description": "Professional diving instrument with 120-click ceramic bezel, automatic helium release valve, Super-LumiNova luminescence, and 300 meters water resistance.",
+      "shortDescription": "300m oceanic diver with ceramic bezel.",
+      "images": [
+        "/assets/ceramic-diver.png"
+      ],
       "specifications": {
         "caseDiameter": "42.5mm Marine Grade Steel",
         "bezel": "120-Click High-Tech Ceramic",
@@ -67,27 +68,23 @@
         "waterResistance": "300 Meters (30 ATM)",
         "warranty": "5-Year Global Atelier Guarantee"
       },
-      "benefits": [],
-      "howToUse": ""
+      "rating": 4.9,
+      "reviewCount": 62,
+      "transparentImage": "/assets/ceramic-diver.png",
+      "theme_color": "#1E293B"
     },
     {
       "id": "AUR-DUO-003",
       "name": "The Aurelia Collector's Duo (Set of 2)",
       "slug": "aurelia-collectors-duo",
       "category": "Collector Sets",
+      "brand": "Aurelia",
       "price": 87125,
-      "mrp": 102500,
+      "compareAtPrice": 102500,
       "stock": 8,
-      "status": "active",
-      "images": [
-        "/assets/collectors-duo.png"
-      ],
-      "subtitle": "Sovereign Emerald 41 + DeepOcean Diver",
-      "description": "Experience the complete Aurelia horological range. The Sovereign Emerald 41 for refined everyday elegance, paired with the DeepOcean Ceramic Diver for 300 metres of oceanic adventure. Delivered in a bespoke collector's presentation box.",
-      "rating": 4.97,
-      "review_count": 41,
-      "featured": true,
       "sku": "AUR-DUO-003",
+      "featured": true,
+      "newArrival": true,
       "themeColor": "#14532D",
       "tagline": "Sovereign Emerald 41 + DeepOcean Diver",
       "badge": {
@@ -95,32 +92,37 @@
         "unit": "SET",
         "title": "Collector's Pairing"
       },
+      "description": "Experience the complete Aurelia horological range. The Sovereign Emerald 41 for refined everyday elegance, paired with the DeepOcean Ceramic Diver for 300 metres of oceanic adventure. Delivered in a bespoke collector's presentation box.",
+      "shortDescription": "Sovereign Emerald 41 + DeepOcean Ceramic Diver at a 15% collector's saving.",
+      "images": [
+        "/assets/collectors-duo.png"
+      ],
       "specifications": {
         "contents": "1x Sovereign Emerald 41 + 1x DeepOcean Ceramic Diver",
         "presentation": "Bespoke Collector's Presentation Box",
         "warranty": "5-Year Global Atelier Guarantee"
       },
-      "benefits": [],
-      "howToUse": ""
+      "bundleOf": [
+        "AUR-CHRONO-001",
+        "AUR-DIVER-002"
+      ],
+      "savings": 15375,
+      "rating": 4.97,
+      "reviewCount": 41,
+      "theme_color": "#14532D"
     },
     {
       "id": "AUR-HERITAGE-004",
       "name": "Aurelia Heritage Moonphase",
       "slug": "aurelia-heritage-moonphase",
       "category": "Dress Watches",
+      "brand": "Aurelia",
       "price": 38900,
-      "mrp": 46000,
+      "compareAtPrice": 46000,
       "stock": 18,
-      "status": "active",
-      "images": [
-        "/assets/heritage-moonphase.png"
-      ],
-      "subtitle": "Astronomical Moonphase • Rose Gold",
-      "description": "Exquisite dress timepiece showcasing hand-painted astronomical moonphase disk, Guilloché dial, blued steel hands, and genuine Italian alligator-embossed calfskin leather strap.",
-      "rating": 4.88,
-      "review_count": 49,
-      "featured": true,
       "sku": "AUR-HERITAGE-004",
+      "featured": true,
+      "newArrival": true,
       "themeColor": "#14532D",
       "tagline": "Astronomical Moonphase • Rose Gold",
       "badge": {
@@ -128,6 +130,11 @@
         "unit": "PHASE",
         "title": "Astronomical Complication"
       },
+      "description": "Exquisite dress timepiece showcasing hand-painted astronomical moonphase disk, Guilloché dial, blued steel hands, and genuine Italian alligator-embossed calfskin leather strap.",
+      "shortDescription": "Astronomical moonphase with Italian leather strap.",
+      "images": [
+        "/assets/heritage-moonphase.png"
+      ],
       "specifications": {
         "caseDiameter": "39.5mm Slim Profile (9.8mm)",
         "complication": "True Astronomical Moonphase & Date",
@@ -135,27 +142,22 @@
         "waterResistance": "50 Meters (5 ATM)",
         "warranty": "5-Year Global Atelier Guarantee"
       },
-      "benefits": [],
-      "howToUse": ""
+      "rating": 4.88,
+      "reviewCount": 49,
+      "theme_color": "#14532D"
     },
     {
       "id": "AUR-STRAP-005",
       "name": "Aurelia Collector's Strap Kit (3 Straps)",
       "slug": "aurelia-collectors-strap-kit",
       "category": "Horological Straps",
+      "brand": "Aurelia",
       "price": 6900,
-      "mrp": 8700,
+      "compareAtPrice": 8700,
       "stock": 30,
-      "status": "active",
-      "images": [
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
-      ],
-      "subtitle": "3 Italian Calfskin Straps • Quick-Release",
-      "description": "Three full-grain Italian calfskin straps in tan, black and emerald with tone-on-tone stitching, plus a spring bar tool for effortless quick-release changes.",
-      "rating": 4.85,
-      "review_count": 37,
-      "featured": true,
       "sku": "AUR-STRAP-005",
+      "featured": true,
+      "newArrival": true,
       "themeColor": "#14532D",
       "tagline": "3 Italian Calfskin Straps • Quick-Release",
       "badge": {
@@ -163,47 +165,28 @@
         "unit": "x3",
         "title": "Interchangeable Strap Collection"
       },
+      "description": "Three full-grain Italian calfskin straps in tan, black and emerald with tone-on-tone stitching, plus a spring bar tool for effortless quick-release changes.",
+      "shortDescription": "3 interchangeable Italian leather straps with tool.",
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+      ],
       "specifications": {
         "contents": "3 Straps + Spring Bar Tool",
         "material": "Full-Grain Italian Calfskin",
         "lugWidth": "20mm",
         "warranty": "1-Year Atelier Guarantee"
       },
-      "benefits": [],
-      "howToUse": ""
+      "rating": 4.85,
+      "reviewCount": 37,
+      "theme_color": "#14532D"
     }
   ],
   "categories": [
-    {
-      "id": "cat_1",
-      "name": "Automatic Chronometers",
-      "slug": "automatic-chronometers",
-      "product_count": 1
-    },
-    {
-      "id": "cat_2",
-      "name": "Diving Instruments",
-      "slug": "diving-instruments",
-      "product_count": 1
-    },
-    {
-      "id": "cat_3",
-      "name": "Collector Sets",
-      "slug": "collector-sets",
-      "product_count": 1
-    },
-    {
-      "id": "cat_4",
-      "name": "Dress Watches",
-      "slug": "dress-watches",
-      "product_count": 1
-    },
-    {
-      "id": "cat_5",
-      "name": "Horological Straps",
-      "slug": "horological-straps",
-      "product_count": 1
-    }
+    "Automatic Chronometers",
+    "Diving Instruments",
+    "Collector Sets",
+    "Dress Watches",
+    "Horological Straps"
   ],
   "orders": [],
   "invoices": [],
@@ -248,7 +231,6 @@
     {
       "id": "rev_1",
       "name": "Aditya Kapoor",
-      "product_name": "The Aurelia Collector's Duo (Set of 2)",
       "rating": 5,
       "title": "Two Watches, One Perfect Set",
       "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
@@ -258,7 +240,6 @@
     {
       "id": "rev_2",
       "name": "Rohan Mehta",
-      "product_name": "Aurelia Sovereign Emerald 41",
       "rating": 5,
       "title": "The Emerald Dial Is Stunning",
       "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
@@ -268,7 +249,6 @@
     {
       "id": "rev_3",
       "name": "Vikram Nair",
-      "product_name": "Aurelia DeepOcean Ceramic Diver",
       "rating": 5,
       "title": "Built Like A Tank",
       "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
@@ -278,7 +258,6 @@
     {
       "id": "rev_4",
       "name": "Ananya Krishnan",
-      "product_name": "Aurelia Heritage Moonphase",
       "rating": 5,
       "title": "Perfect Gift",
       "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
@@ -288,7 +267,6 @@
     {
       "id": "rev_5",
       "name": "Siddharth Rao",
-      "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
       "rating": 4,
       "title": "Great Value Straps",
       "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
@@ -300,7 +278,7 @@
   "contact_messages": [],
   "site_settings": {
     "brandName": "Digitechzo DigiWatches",
-    "tagline": "Excellence & Precision",
+    "tagline": "",
     "logoUrl": "/assets/logo.png",
     "faviconUrl": "/favicon.png",
     "supportPhone": "+91 94455 66778",
@@ -373,14 +351,7 @@
         "body": "Plus Jakarta Sans"
       }
     },
-    "modules": {
-      "reviews": true,
-      "marketplaces": true,
-      "billing": true,
-      "coupons": true,
-      "whatsapp_chat": true,
-      "announcements": true
-    },
+    "modules": {},
     "content": {
       "announcement": "✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨",
       "freeShippingThreshold": 999,
