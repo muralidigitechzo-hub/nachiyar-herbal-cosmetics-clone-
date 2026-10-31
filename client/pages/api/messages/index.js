@@ -13,17 +13,21 @@ export default function handler(req, res) {
 
     if (req.method === 'POST') {
       const msg = {
-        id: `msg_${Date.now()}`,
-        name: req.body.name || 'Visitor',
+        id: req.body.id || `msg_${Date.now()}`,
+        name: req.body.name || req.body.fullName || 'Visitor',
         email: req.body.email || '',
         phone: req.body.phone || '',
-        subject: req.body.subject || 'Inquiry',
+        subject: req.body.subject || 'General Inquiry',
         message: req.body.message || '',
-        status: 'unread',
-        created_at: new Date().toISOString()
+        status: req.body.status || 'unread',
+        created_at: req.body.created_at || new Date().toISOString()
       };
-      db.contact_messages.unshift(msg);
-      saveDb(db);
+
+      const exists = db.contact_messages.some(m => String(m.id) === String(msg.id));
+      if (!exists) {
+        db.contact_messages.unshift(msg);
+        saveDb(db);
+      }
       return res.status(201).json({ success: true, data: msg });
     }
 

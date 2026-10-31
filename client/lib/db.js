@@ -154,6 +154,21 @@ export function getDb() {
     if (numKey) orderKeys.add(numKey);
   });
 
+  // Robust unique merging of contact messages across site-config and db.json
+  const allMessages = [
+    ...(Array.isArray(config.contact_messages) ? config.contact_messages : []),
+    ...(Array.isArray(extraDb.contact_messages) ? extraDb.contact_messages : [])
+  ];
+  const mergedMessages = [];
+  const msgKeys = new Set();
+  allMessages.forEach(m => {
+    if (!m) return;
+    const idKey = m.id ? String(m.id) : null;
+    if (idKey && msgKeys.has(idKey)) return;
+    mergedMessages.push(m);
+    if (idKey) msgKeys.add(idKey);
+  });
+
   return {
     products: Array.isArray(config.products) && config.products.length > 0 ? config.products : (extraDb.products || []),
     categories: Array.isArray(config.categories) && config.categories.length > 0 ? config.categories : (extraDb.categories || []),
@@ -167,7 +182,7 @@ export function getDb() {
     ],
     reviews: Array.isArray(config.reviews) && config.reviews.length > 0 ? config.reviews : (extraDb.reviews || []),
     customers: config.customers || extraDb.customers || [],
-    contact_messages: config.contact_messages || extraDb.contact_messages || [],
+    contact_messages: mergedMessages,
     site_settings: {
       brandName: config.brand?.name || 'Aurelia Chronometry',
       tagline: config.brand?.tagline || 'Mastering The Art Of Timeless Precision',

@@ -1889,7 +1889,7 @@ img, svg, video {
 
         <!-- RIGHT: CLIENT INQUIRY FORM -->
         <div class="contact-form-card">
-          <form class="boutique-contact-form" id="boutiqueContactForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Inquiry Submitted', body: 'Thank you for reaching out to Digitechzo DigiWatches. Our concierge will respond promptly.', type: 'info' }); this.reset();">
+          <form class="boutique-contact-form" id="boutiqueContactForm" onsubmit="handleContactSubmit(event)">
             <h2 class="form-card-title">Send a Direct Message</h2>
             <p class="form-card-subtitle">Every message is answered individually within 4 business hours.</p>
 
@@ -1924,7 +1924,7 @@ img, svg, video {
               <textarea id="contactMessage" rows="5" required placeholder="Please describe your inquiry with Digitechzo DigiWatches..."></textarea>
             </div>
 
-            <button type="submit" class="contact-submit-btn">
+            <button type="submit" id="contactSubmitBtn" class="contact-submit-btn">
               <span>Transmit Message</span>
               <span class="btn-arrow">→</span>
             </button>
@@ -2051,36 +2051,48 @@ img, svg, video {
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
     async function handleContactSubmit(event) {
-      event.preventDefault();
-      const form = document.getElementById('contactForm');
-      const submitBtn = document.getElementById('contactSubmitBtn');
+      if (event) event.preventDefault();
+      const form = document.getElementById('boutiqueContactForm') || document.getElementById('contactForm');
+      const submitBtn = document.getElementById('contactSubmitBtn') || (form ? form.querySelector('button[type="submit"]') : null);
       const banner = document.getElementById('contactSuccessBanner');
 
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
+      const nameInput = document.getElementById('contactFullName') || document.getElementById('contactName');
+      const name = nameInput ? nameInput.value.trim() : '';
+      const emailInput = document.getElementById('contactEmail');
+      const email = emailInput ? emailInput.value.trim() : '';
       const phoneInput = document.getElementById('contactPhone');
       const phone = phoneInput ? phoneInput.value.replace(/[^0-9]/g, '').slice(0, 10) : '';
-      const subject = document.getElementById('contactSubject').value;
-      const message = document.getElementById('contactMessage').value.trim();
+      const subjectSelect = document.getElementById('contactSubject');
+      const subject = subjectSelect ? subjectSelect.value : 'General Inquiry';
+      const messageInput = document.getElementById('contactMessage');
+      const message = messageInput ? messageInput.value.trim() : '';
 
       if (!name || !email || !message) {
-        showSideToast('Please fill in all required fields.', 'error');
+        if (typeof showSideToast === 'function') {
+          showSideToast('Please fill in all required fields.', 'error');
+        } else {
+          alert('Please fill in all required fields.');
+        }
         return;
       }
 
-      if (!phone || phone.length !== 10) {
-        showSideToast('Please enter a valid 10-digit mobile number.', 'error');
-        if (phoneInput) phoneInput.focus();
-        return;
+      const originalText = submitBtn ? submitBtn.innerHTML : 'Transmit Message';
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span>Transmitting Inquiry...</span>';
+        submitBtn.style.opacity = '0.7';
+        submitBtn.disabled = true;
       }
 
-      // Subtle loading state
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span>Sending Message to Concierge...</span>';
-      submitBtn.style.opacity = '0.7';
-      submitBtn.disabled = true;
-
-      const payload = { name, email, phone, subject, message };
+      const payload = {
+        id: 'msg_' + Date.now(),
+        name,
+        email,
+        phone,
+        subject,
+        message,
+        status: 'unread',
+        created_at: new Date().toISOString()
+      };
 
       try {
         const res = await fetch('/api/messages', {
@@ -2089,35 +2101,43 @@ img, svg, video {
           body: JSON.stringify(payload)
         });
 
-        const data = await res.json();
+        const data = await res.json().catch(() => null);
+        const finalMsg = (data && data.success && data.data) ? data.data : payload;
 
-        if (res.ok && data.success) {
-          banner.style.display = 'flex';
-          form.reset();
+        // Persist locally & broadcast live notification
+        saveLocalMessageBackup(finalMsg);
+
+        if (form) form.reset();
+        if (banner) banner.style.display = 'flex';
+
+        if (typeof showSideToast === 'function') {
           showSideToast({
-            title: 'Concierge Message Sent! 🌿',
-            body: 'Thank you for reaching out to A-Z Tshirt Co.. Our concierge team will get back to you shortly.',
+            title: 'Inquiry Transmitted Successfully!',
+            body: 'Thank you for reaching out. Our concierge desk will review your message and reply promptly.',
             type: 'success',
             duration: 6000
           });
-          banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } else {
-          // Backup fallback to localStorage
-          saveLocalMessageBackup(payload);
-          banner.style.display = 'flex';
-          form.reset();
-          banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+        if (banner) banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch (err) {
-        console.warn('Network issue, storing local backup', err);
+        console.warn('Network issue transmitting inquiry, saved to local buffer:', err);
         saveLocalMessageBackup(payload);
-        banner.style.display = 'flex';
-        form.reset();
-        banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (form) form.reset();
+        if (banner) banner.style.display = 'flex';
+        if (typeof showSideToast === 'function') {
+          showSideToast({
+            title: 'Inquiry Queued Successfully!',
+            body: 'Your message has been received and stored safely. Our concierge desk will attend to it shortly.',
+            type: 'info',
+            duration: 5000
+          });
+        }
       } finally {
-        submitBtn.innerHTML = originalText;
-        submitBtn.style.opacity = '1';
-        submitBtn.disabled = false;
+        if (submitBtn) {
+          submitBtn.innerHTML = originalText;
+          submitBtn.style.opacity = '1';
+          submitBtn.disabled = false;
+        }
       }
     }
 
@@ -2125,19 +2145,23 @@ img, svg, video {
       try {
         const item = {
           id: msg.id || ('msg_' + Date.now()),
-          name: msg.name,
-          email: msg.email,
-          phone: msg.phone,
-          subject: msg.subject,
-          message: msg.message,
-          status: 'unread',
+          name: msg.name || 'Visitor',
+          email: msg.email || '',
+          phone: msg.phone || '',
+          subject: msg.subject || 'General Inquiry',
+          message: msg.message || '',
+          status: msg.status || 'unread',
           created_at: msg.created_at || new Date().toISOString()
         };
 
-        ['store_offline_inquiries', 'store_offline_inquiries'].forEach(key => {
-          const list = JSON.parse(localStorage.getItem(key) || '[]');
-          list.unshift(item);
-          localStorage.setItem(key, JSON.stringify(list));
+        ['nachiyar_offline_inquiries', 'store_offline_inquiries', 'nachiyar_customer_messages', 'store_customer_messages'].forEach(key => {
+          try {
+            const list = JSON.parse(localStorage.getItem(key) || '[]');
+            if (!list.some(m => String(m.id) === String(item.id))) {
+              list.unshift(item);
+              localStorage.setItem(key, JSON.stringify(list));
+            }
+          } catch (e) {}
         });
 
         try {
@@ -2150,7 +2174,12 @@ img, svg, video {
         } catch(bErr) {}
       } catch (e) {}
     }
+
     document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('boutiqueContactForm') || document.getElementById('contactForm');
+      if (form) {
+        form.addEventListener('submit', handleContactSubmit);
+      }
       const phoneInput = document.getElementById('contactPhone');
       if (phoneInput) {
         phoneInput.addEventListener('input', function() {

@@ -389,9 +389,13 @@ document.addEventListener('DOMContentLoaded', () => {
             updateNotificationBadges();
             if (typeof renderAdminReviews === 'function') renderAdminReviews();
           } else if (event.data.type === 'NEW_INQUIRY' && event.data.message) {
-            customerMessages.unshift(event.data.message);
+            const incoming = event.data.message;
+            if (!customerMessages.some(m => String(m.id) === String(incoming.id))) {
+              customerMessages.unshift(incoming);
+            }
             playOrderArrivalSound();
-            showToast(`📩 New Inquiry from ${event.data.message.name || 'Customer'}!`);
+            showToast(`📩 New Inquiry from ${incoming.name || 'Customer'}!`);
+            updateMessageKpiCounters();
             updateNotificationBadges();
             if (typeof renderAdminMessages === 'function') renderAdminMessages();
           } else if (event.data.type === 'INVOICE_CREATED' && event.data.invoice) {
@@ -5079,18 +5083,20 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       let serverMessages = [];
       try {
-        const res = await authFetch('/api/messages').then(r => r.json());
+        const res = await authFetch('/api/messages?_t=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
         if (res && res.success) {
           serverMessages = Array.isArray(res.data) ? res.data : (res.data?.messages || []);
         }
       } catch (e) {}
 
-      // Merge both offline keys
+      // Merge all offline and local storage inquiry keys
       const offlineInquiries = (() => {
         try {
           return [
             ...JSON.parse(localStorage.getItem('nachiyar_offline_inquiries') || '[]'),
-            ...JSON.parse(localStorage.getItem('store_offline_inquiries') || '[]')
+            ...JSON.parse(localStorage.getItem('store_offline_inquiries') || '[]'),
+            ...JSON.parse(localStorage.getItem('nachiyar_customer_messages') || '[]'),
+            ...JSON.parse(localStorage.getItem('store_customer_messages') || '[]')
           ];
         } catch(e) { return []; }
       })();
@@ -5098,11 +5104,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const allMsgs = [...serverMessages];
       const msgIds = new Set(allMsgs.map(m => String(m.id)));
       offlineInquiries.forEach(off => {
-        if (!msgIds.has(String(off.id))) {
-          allMsgs.unshift({ ...off, is_offline: true });
+        if (off && off.id && !msgIds.has(String(off.id))) {
+          allMsgs.push({ ...off, is_offline: true });
           msgIds.add(String(off.id));
         }
       });
+
+      // Sort by created_at desc
+      allMsgs.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
 
       customerMessages = allMsgs;
       const unreadCount = customerMessages.filter(m => m.status === 'unread').length;
@@ -5116,14 +5125,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fallback: render from localStorage if API failed
     try {
-      const offlineInquiries = JSON.parse(localStorage.getItem('nachiyar_offline_inquiries') || '[]');
+      const offlineInquiries = (() => {
+        try {
+          return [
+            ...JSON.parse(localStorage.getItem('nachiyar_offline_inquiries') || '[]'),
+            ...JSON.parse(localStorage.getItem('store_offline_inquiries') || '[]'),
+            ...JSON.parse(localStorage.getItem('nachiyar_customer_messages') || '[]'),
+            ...JSON.parse(localStorage.getItem('store_customer_messages') || '[]')
+          ];
+        } catch(e) { return []; }
+      })();
       if (Array.isArray(offlineInquiries) && offlineInquiries.length > 0) {
-        customerMessages = offlineInquiries.map(m => ({ ...m, is_offline: true }));
+        const uniqueOffline = [];
+        const seen = new Set();
+        offlineInquiries.forEach(m => {
+          if (m && m.id && !seen.has(String(m.id))) {
+            uniqueOffline.push({ ...m, is_offline: true });
+            seen.add(String(m.id));
+          }
+        });
+        customerMessages = uniqueOffline;
         updateMessageKpiCounters();
         renderAdminMessages();
       }
     } catch (e) {}
   }
+  window.loadAdminMessages = loadAdminMessages;
 
   function updateMessageKpiCounters(explicitUnreadCount) {
     const total = customerMessages.length;
@@ -5358,7 +5385,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (msg) {
       msg.status = newStatus;
       if (notes !== undefined) msg.admin_notes = notes;
-      ['nachiyar_offline_inquiries', 'store_offline_inquiries'].forEach(k => {
+      ['nachiyar_offline_inquiries', 'store_offline_inquiries', 'nachiyar_customer_messages', 'store_customer_messages'].forEach(k => {
         try {
           const list = JSON.parse(localStorage.getItem(k) || '[]');
           const target = list.find(m => String(m.id) === String(id));
@@ -7118,9 +7145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (revRes && revRes.success && revRes.data) {
         adminReviews = Array.isArray(revRes.data) ? revRes.data : (revRes.data.reviews || []);
       }
-      if (msgRes && msgRes.success && msgRes.data) {
-        customerMessages = Array.isArray(msgRes.data) ? msgRes.data : (msgRes.data.messages || []);
-      }
+      if (typeof loadAdminMessages === 'function') loadAdminMessages();
       if (typeof updateNotificationBadges === 'function') updateNotificationBadges();
     } catch (e) {}
   }, 25000);
