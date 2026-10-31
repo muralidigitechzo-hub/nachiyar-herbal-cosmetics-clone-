@@ -4639,6 +4639,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (e) {}
 
+      // Authoritative status overrides map (persists admin user actions)
+      let statusOverrides = {};
+      try {
+        statusOverrides = JSON.parse(localStorage.getItem('nachiyar_review_status_overrides') || '{}');
+      } catch(e) {}
+
+      // Filter out deleted review IDs
+      let deletedIds = new Set();
+      try {
+        const dIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
+        if (Array.isArray(dIds)) dIds.forEach(id => deletedIds.add(String(id)));
+      } catch(e) {}
+
       // 3. Merge server and local reviews uniquely by id
       const allRev = [...serverReviews];
       const revIds = new Set(allRev.map(r => String(r.id)));
@@ -4649,16 +4662,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Filter out deleted review IDs
-      let deletedIds = new Set();
-      try {
-        const dIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
-        if (Array.isArray(dIds)) dIds.forEach(id => deletedIds.add(String(id)));
-      } catch(e) {}
+      // 4. Apply authoritative status overrides and filter out deleted reviews
+      adminReviews = allRev.filter(r => {
+        if (!r || !r.id) return false;
+        const sId = String(r.id);
+        if (deletedIds.has(sId) || statusOverrides[sId] === 'deleted') return false;
+        return true;
+      }).map(r => {
+        const sId = String(r.id);
+        if (statusOverrides[sId]) {
+          r.status = statusOverrides[sId];
+        }
+        return r;
+      });
 
-      adminReviews = allRev.filter(r => !deletedIds.has(String(r.id)));
-
-      // 4. Update counts
+      // 5. Update counts accurately
       const total = adminReviews.length;
       const pending = adminReviews.filter(r => String(r.status).toLowerCase() === 'pending').length;
       const approved = adminReviews.filter(r => String(r.status).toLowerCase() === 'approved').length;
@@ -4799,13 +4817,16 @@ document.addEventListener('DOMContentLoaded', () => {
               } catch(e) {}
             });
 
-            // Add to deleted IDs set
+            // Add to deleted IDs set and status overrides
             try {
               let delIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
               if (!delIds.includes(String(id))) {
                 delIds.push(String(id));
                 localStorage.setItem('nachiyar_deleted_review_ids', JSON.stringify(delIds));
               }
+              let so = JSON.parse(localStorage.getItem('nachiyar_review_status_overrides') || '{}');
+              so[String(id)] = 'deleted';
+              localStorage.setItem('nachiyar_review_status_overrides', JSON.stringify(so));
             } catch(e) {}
 
             // Real-time broadcast
@@ -4835,6 +4856,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: action, review: rItem })
               });
+            } catch(e) {}
+
+            // Update authoritative status overrides
+            try {
+              let so = JSON.parse(localStorage.getItem('nachiyar_review_status_overrides') || '{}');
+              so[String(id)] = action;
+              localStorage.setItem('nachiyar_review_status_overrides', JSON.stringify(so));
             } catch(e) {}
 
             // Update localStorage

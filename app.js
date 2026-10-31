@@ -1013,6 +1013,9 @@ async function initStorefrontApp() {
         if (s) updateStorefrontBusinessDetails(s);
       } catch (err) {}
     }
+    if (e.key === 'nachiyar_review_status_overrides' || e.key === 'nachiyar_approved_reviews' || e.key === 'nachiyar_deleted_review_ids') {
+      if (typeof loadPublicReviews === 'function') loadPublicReviews();
+    }
   });
 
   // Cross-tab BroadcastChannel for zero-latency multi-window updates
@@ -1020,6 +1023,14 @@ async function initStorefrontApp() {
     const storeChannel = new BroadcastChannel('nachiyar_store_channel');
     storeChannel.onmessage = (event) => {
       loadAndApplyFromLocalStorage();
+      if (event.data && (
+        event.data.type === 'REVIEW_STATUS_UPDATED' || 
+        event.data.type === 'REVIEW_DELETED' || 
+        event.data.type === 'REVIEWS_UPDATED' || 
+        event.data.type === 'NEW_REVIEW'
+      )) {
+        if (typeof loadPublicReviews === 'function') loadPublicReviews();
+      }
       if (event.data && (event.data.type === 'REVIEW_STATUS_UPDATED' || event.data.type === 'REVIEW_DELETED' || event.data.type === 'REVIEWS_UPDATED' || event.data.type === 'PRODUCTS_UPDATED' || event.data.type === 'SETTINGS_UPDATED' || event.data.type === 'settings_updated' || event.data.type === 'THEME_UPDATED' || event.data.type === 'CONFIG_UPDATED' || event.data.type === 'NEW_ORDER' || event.data.type === 'STOCK_UPDATED')) {
         if (event.data.settings) updateStorefrontBusinessDetails(event.data.settings);
         if (event.data.config && event.data.config.products) applyLiveProductsToDOM(event.data.config.products);
@@ -2012,14 +2023,19 @@ async function initStorefrontApp() {
     let stats = { average: '5.0', total: 0 };
 
     try {
-      // 1. Set of deleted review IDs from localStorage
+      // 1. Authoritative status overrides and deleted review IDs from localStorage
+      let statusOverrides = {};
+      try {
+        statusOverrides = JSON.parse(localStorage.getItem('nachiyar_review_status_overrides') || '{}');
+      } catch(e) {}
+
       let deletedIds = new Set();
       try {
         const dIds = JSON.parse(localStorage.getItem('nachiyar_deleted_review_ids') || '[]');
         if (Array.isArray(dIds)) dIds.forEach(id => deletedIds.add(String(id)));
       } catch(e) {}
 
-      // 2. Fetch fresh approved reviews from server API
+      // 2. Fetch fresh reviews from server API
       let serverReviews = [];
       try {
         const res = await fetch('/api/reviews?_t=' + Date.now(), { cache: 'no-store' });
@@ -2033,40 +2049,50 @@ async function initStorefrontApp() {
         console.warn('Backend reviews API fetch error:', fetchErr);
       }
 
-      // 3. Merge locally approved reviews from localStorage
-      let localApproved = [];
+      // 3. Merge locally stored reviews from localStorage
+      let localReviews = [];
       try {
         const l1 = JSON.parse(localStorage.getItem('nachiyar_approved_reviews') || '[]');
         const l2 = JSON.parse(localStorage.getItem('nachiyar_store_reviews') || '[]');
         [...l1, ...l2].forEach(r => {
-          if (r && String(r.status || '').toLowerCase() === 'approved') {
-            localApproved.push(r);
+          if (r && r.id) {
+            localReviews.push(r);
           }
         });
       } catch(e) {}
 
       // 4. Combine uniquely by id
-      const allApproved = [...serverReviews];
-      const seenIds = new Set(allApproved.map(r => String(r.id)));
-      localApproved.forEach(lr => {
+      const allRev = [...serverReviews];
+      const seenIds = new Set(allRev.map(r => String(r.id)));
+      localReviews.forEach(lr => {
         if (!seenIds.has(String(lr.id))) {
-          allApproved.unshift(lr);
+          allRev.unshift(lr);
           seenIds.add(String(lr.id));
         }
       });
 
-      // 5. Exclude deleted IDs and any unrelated herbal/hair content
-      let validReviews = allApproved.filter(r => {
-        if (!r) return false;
-        if (deletedIds.has(String(r.id))) return false;
-        if (r.status && String(r.status).toLowerCase() !== 'approved') return false;
+      // 5. Exclude deleted IDs and only include strictly approved reviews
+      let validReviews = allRev.filter(r => {
+        if (!r || !r.id) return false;
+        const sId = String(r.id);
+
+        // Exclude permanently deleted
+        if (deletedIds.has(sId) || statusOverrides[sId] === 'deleted') return false;
+
+        // Apply authoritative status override if exists
+        const effectiveStatus = statusOverrides[sId] || r.status || 'pending';
+        if (String(effectiveStatus).toLowerCase() !== 'approved') return false;
+
+        // Purge any dummy herbal items
         const txt = ((r.product_name || r.productName || '') + ' ' + (r.title || '') + ' ' + (r.comment || '')).toLowerCase();
         if (txt.includes('oil') || txt.includes('shampoo') || txt.includes('hair') || txt.includes('herbal')) return false;
+
         return true;
       });
 
-      // If database has reviews, use them; if brand new and nothing deleted, fallback to DEFAULT_REVIEWS
-      if (validReviews.length === 0 && deletedIds.size === 0) {
+      // If user has explicit overrides (e.g. unpublished all), do NOT fallback to DEFAULT_REVIEWS!
+      const hasExplicitOverrides = Object.keys(statusOverrides).length > 0 || deletedIds.size > 0;
+      if (validReviews.length === 0 && !hasExplicitOverrides) {
         validReviews = (typeof DEFAULT_REVIEWS !== 'undefined' && Array.isArray(DEFAULT_REVIEWS)) ? DEFAULT_REVIEWS : [];
       }
 
