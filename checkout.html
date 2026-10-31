@@ -2101,8 +2101,8 @@ img, svg, video {
           netbanking: `Net Banking (${selectedBank})`
         };
 
-        const orderId = 'ord_' + Date.now();
-        const orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+        let orderId = 'ord_' + Date.now();
+        let orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
 
         const payload = {
           id: orderId,
