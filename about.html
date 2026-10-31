@@ -4,7 +4,7 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digitechzo DigiWatches | Our Story & Heritage</title>
+  <title>Digitechzo DigiWatches | About Us</title>
   <!-- Dynamic Brand Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="shortcut icon" type="image/png" href="/favicon.png">
@@ -1139,6 +1139,69 @@ img, svg, video {
   }
 }
 
+
+/* High Contrast Bundle Banner (DigiTechzo Brand Contrast) */
+.bundle-banner {
+  background: linear-gradient(135deg, #0d381c 0%, #14532D 60%, #0a2d17 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(87, 183, 27, 0.4) !important;
+}
+.bundle-eyebrow {
+  color: #00f5a0 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 10px rgba(0, 245, 160, 0.4) !important;
+}
+.bundle-title {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+.bundle-description {
+  color: #F1F5F9 !important;
+  opacity: 0.96 !important;
+}
+.bundle-features {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+}
+.bundle-features span {
+  color: #FFFFFF !important;
+}
+.discount-pill {
+  background-color: rgba(0, 245, 160, 0.2) !important;
+  color: #00f5a0 !important;
+  border: 1px solid rgba(0, 245, 160, 0.45) !important;
+  font-weight: 800 !important;
+}
+.bundle-badge {
+  background-color: #00f5a0 !important;
+  color: #0B1910 !important;
+  font-weight: 800 !important;
+}
+
+/* Storefront & Subpage Action Buttons (About, Contact, Header) */
+.contact-submit-btn,
+.btn-contact-submit {
+  background: #57B71B !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 18px rgba(87, 183, 27, 0.35) !important;
+}
+.contact-submit-btn:hover,
+.btn-contact-submit:hover {
+  background: #469815 !important;
+  box-shadow: 0 10px 24px rgba(87, 183, 27, 0.45) !important;
+}
+.btn-bundle-add,
+.btn-quick-add {
+  background: #57B71B !important;
+  color: #FFFFFF !important;
+}
+.btn-bundle-add:hover,
+.btn-quick-add:hover {
+  background: #469815 !important;
+}
+
   </style>
 </head>
 <body class="page-body">
@@ -1223,7 +1286,7 @@ img, svg, video {
         <li><a href="/account/" class="mobile-link">My Account & Orders</a></li>
       </ul>
       <div class="mobile-drawer-footer">
-        <p class="drawer-support">Customer Concierge: concierge@aureliatime.com</p>
+        <p class="drawer-support">Customer Concierge: concierge@digitechzo.com</p>
       </div>
     </div>
   </div>
@@ -1301,12 +1364,12 @@ img, svg, video {
       <!-- Newsletter Row -->
       <div class="footer-newsletter-row">
         <div class="newsletter-text-col">
-          <span class="footer-sub-eyebrow">THE AURELIA CIRCLE</span>
+          <span class="footer-sub-eyebrow">THE DIGITECHZO CIRCLE</span>
           <h2 class="footer-newsletter-heading">RECEIVE 15% OFF YOUR FIRST TIMEPIECE</h2>
           <p class="footer-newsletter-sub">Subscribe for private previews, limited editions and horological insights.</p>
         </div>
         <div class="newsletter-form-col">
-          <form class="footer-form" id="newsletterForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Welcome to DIGITECHZO DIGIWATCHES Insider! ✨', body: 'Privilege Code AURELIA15 has been applied for your order.', type: 'info' }); this.reset();">
+          <form class="footer-form" id="newsletterForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Welcome to DIGITECHZO DIGIWATCHES Insider! ✨', body: 'Privilege Code DIGI15 has been applied for your order.', type: 'info' }); this.reset();">
             <div class="form-input-group">
               <input type="email" placeholder="Enter your email address" required aria-label="Email Address" autocomplete="email" spellcheck="false">
               <button type="submit" class="newsletter-submit-btn" aria-label="Submit email">
@@ -1362,18 +1425,18 @@ img, svg, video {
             </li>
             <li>
               <span class="footer-contact-icon">&#9993;&#65039;</span>
-              <a href="mailto:concierge@aureliatime.com" id="footerContactEmail">concierge@aureliatime.com</a>
+              <a href="mailto:concierge@digitechzo.com" id="footerContactEmail">concierge@digitechzo.com</a>
             </li>
             <li class="footer-address-item">
               <span class="footer-contact-icon">&#128205;</span>
-              <address id="footerContactAddress">Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001</address>
+              <address id="footerContactAddress">Digitechzo Watch Atelier, Tech Arcade, MG Road, Bengaluru, Karnataka - 560001</address>
             </li>
           </ul>
 
           <div class="footer-social-block">
             <h4 class="footer-col-title footer-col-title--sm">CONNECT WITH US</h4>
             <div class="footer-social-icons">
-              <a href="https://instagram.com/aureliatime" target="_blank" rel="noopener noreferrer" class="footer-social-link footer-social-link--instagram" aria-label="Follow Digitechzo DigiWatches on Instagram">
+              <a href="https://instagram.com/digitechzo" target="_blank" rel="noopener noreferrer" class="footer-social-link footer-social-link--instagram" aria-label="Follow Digitechzo DigiWatches on Instagram">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 <span>Instagram</span>
               </a>
@@ -1387,7 +1450,7 @@ img, svg, video {
             <img src="/assets/logo.png" alt="Digitechzo DigiWatches Logo" class="footer-crest-img">
           </div>
           <p class="footer-brand-bio">
-            Aurelia Chronometry crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide.
+            Digitechzo DigiWatches crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide.
           </p>
         </div>
       </div>
@@ -1397,8 +1460,8 @@ img, svg, video {
       </div>
 
       <div class="footer-legal-bar">
-        <p>© 2026 AURELIA CHRONOMETRY. ALL RIGHTS RESERVED.</p>
-        <p class="footer-developer-credit">Powered by Aurelia Atelier Platform</p>
+        <p>© 2026 DIGITECHZO DIGIWATCHES. ALL RIGHTS RESERVED.</p>
+        <p class="footer-developer-credit">Powered by Digitechzo Technology Platform</p>
         <p class="legal-links">
           <a href="/">Home</a> • <a href="/shop/">Shop</a> • <a href="/about/">About Us</a> • <a href="/contact/">Contact</a> • <a href="/privacy/">Privacy Policy</a> • <a href="/terms/">Terms of Service</a> • <a href="/shipping-policy/">Shipping & Returns</a> • <a href="/sitemap/">Sitemap</a>
         </p>

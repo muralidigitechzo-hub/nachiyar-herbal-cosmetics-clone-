@@ -1299,46 +1299,58 @@ button {
   position: absolute;
   top: 16px;
   left: 16px;
-  background-color: var(--color-gold);
-  color: #1A1121;
+  background-color: #00f5a0 !important;
+  color: #0B1910 !important;
   font-size: 0.75rem;
   font-weight: 800;
   padding: 6px 14px;
   border-radius: var(--border-radius-pill);
+  box-shadow: 0 4px 12px rgba(0, 245, 160, 0.35);
 }
 
 .bundle-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: #00f5a0 !important;
   margin-bottom: 8px;
   display: block;
+  text-shadow: 0 1px 10px rgba(0, 245, 160, 0.4);
 }
 
 .bundle-title {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
   margin-bottom: 16px;
+  color: #FFFFFF !important;
 }
 
 .bundle-description {
   font-size: 1rem;
-  line-height: 1.6;
-  opacity: 0.88;
+  line-height: 1.65;
+  color: #F1F5F9 !important;
+  opacity: 0.96 !important;
   margin-bottom: 20px;
 }
 
 .bundle-features {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 0.875rem;
+  gap: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
   margin-bottom: 28px;
-  color: var(--color-gold-light);
+  color: #FFFFFF !important;
+}
+
+.bundle-features span {
+  color: #FFFFFF !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .bundle-cta-row {
@@ -1358,21 +1370,23 @@ button {
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .bundle-price-was {
   font-size: 1.125rem;
   text-decoration: line-through;
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.65) !important;
+  opacity: 1;
 }
 
 .discount-pill {
-  background-color: rgba(212, 175, 55, 0.2);
-  color: var(--color-gold);
+  background-color: rgba(0, 245, 160, 0.2) !important;
+  color: #00f5a0 !important;
+  border: 1px solid rgba(0, 245, 160, 0.45) !important;
   font-size: 0.75rem;
   font-weight: 800;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--border-radius-pill);
 }
 

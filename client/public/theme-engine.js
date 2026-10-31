@@ -118,10 +118,9 @@
       customStyleEl.textContent = settings.customCSS;
     }
 
-    const bName = settings.brandName || settings.brand?.name;
-    const tag = settings.tagline || settings.brand?.tagline || 'Official Store';
+    const resolvedTag = tag || settings.brand?.tagline || 'Official Store';
     if (bName && !document.title.includes('Admin') && !document.title.includes('Nimda')) {
-      document.title = `${bName} | ${tag}`;
+      document.title = `${bName} | ${resolvedTag}`;
     }
   }
 

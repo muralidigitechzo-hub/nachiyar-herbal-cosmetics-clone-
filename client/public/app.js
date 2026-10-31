@@ -1514,24 +1514,64 @@ async function initStorefrontApp() {
     };
   }
 
-  // Add to cart with parabolic fly animation
+  // Luxury Toast Helper (forward declared)
+  function showToast(msg, type = 'success', duration = 4800) {
+    if (typeof showSideToast === 'function') {
+      return showSideToast(msg, type, duration);
+    }
+  }
+  window.showToast = showToast;
+
+  // Add to cart with bulletproof updates & physics fly animation
   function addToCart(item, clickEvent = null) {
-    const existing = cart.find(i => i.id === item.id);
+    if (!item) return;
+    const pId = item.id || ('prod_' + Date.now());
+    const existing = cart.find(i => i.id === pId);
     if (existing) {
-      existing.qty += item.qty;
+      existing.qty += (item.qty || 1);
     } else {
-      cart.push({ ...item });
+      cart.push({
+        id: pId,
+        name: item.name || 'Digitechzo Watch',
+        price: Number(item.price) || 0,
+        img: item.img || '/assets/aurelia-emerald-watch.png',
+        size: item.size || 'Standard Edition',
+        qty: item.qty || 1
+      });
     }
 
-    updateCartUI();
-    showToast(`Added ${item.name} to your Royal Bag! ✨`);
+    try {
+      saveCart();
+    } catch (e) {}
 
-    flyProductToCart(clickEvent, item.img, () => {
-      setTimeout(() => {
+    try {
+      updateCartUI();
+    } catch (e) {
+      console.warn('updateCartUI warning:', e);
+    }
+
+    try {
+      if (typeof showSideToast === 'function') {
+        showSideToast(`Added ${item.name || 'timepiece'} to your Royal Bag! ✨`, 'success');
+      }
+    } catch (e) {}
+
+    // Guarantee cart drawer opens smoothly
+    setTimeout(() => {
+      openCartDrawer();
+    }, 150);
+
+    // Physics fly animation with fallback
+    try {
+      flyProductToCart(clickEvent, item.img, () => {
         openCartDrawer();
-      }, 100);
-    });
+      });
+    } catch (e) {
+      openCartDrawer();
+    }
   }
+
+  window.addToCart = addToCart;
 
 
   // ==========================================
@@ -1649,22 +1689,26 @@ async function initStorefrontApp() {
 
 
   function openCartDrawer() {
-    if (cartOverlay) {
-      cartOverlay.classList.add('is-active');
+    const overlay = document.getElementById('cartOverlay') || cartOverlay;
+    if (overlay) {
+      overlay.classList.add('is-active');
       document.body.classList.add('cart-open');
       document.body.style.overflow = 'hidden';
       const scrollBody = document.getElementById('cartDrawerScrollBody');
       if (scrollBody) scrollBody.scrollTop = 0;
     }
   }
+  window.openCartDrawer = openCartDrawer;
 
   function closeCartDrawer() {
-    if (cartOverlay) {
-      cartOverlay.classList.remove('is-active');
+    const overlay = document.getElementById('cartOverlay') || cartOverlay;
+    if (overlay) {
+      overlay.classList.remove('is-active');
       document.body.classList.remove('cart-open');
       document.body.style.overflow = '';
     }
   }
+  window.closeCartDrawer = closeCartDrawer;
 
   
   document.addEventListener('keydown', (e) => {
@@ -1680,46 +1724,56 @@ async function initStorefrontApp() {
     };
   }
 
-  // Quick Add buttons (Hero flank cards & Collection cards)
-  document.querySelectorAll('.btn-quick-add').forEach(btn => {
+  // Global Universal Delegated Click Listener for all Add to Bag triggers
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-quick-add, .btn-bundle-add, .btn-card-add, .btn-flank-add, .m-btn-buy');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const id = btn.dataset.id || 'AUR-DUO-003';
+    const live = (typeof PRODUCTS === 'object' && PRODUCTS !== null)
+      ? Object.values(PRODUCTS).find(p => p && (p.id === id || p.slug === id))
+      : null;
+    const price = live ? Number(live.price) : (parseInt(btn.dataset.price, 10) || 48500);
+    const name = live ? (live.title || live.name) : (btn.dataset.name || 'Digitechzo Watch');
+    const img = live ? (live.image || (live.images && live.images[0])) : (btn.dataset.img || '/assets/sovereign-watch.png');
+    const size = btn.dataset.size || 'Standard Edition';
+
+    addToCart({
+      id: id,
+      name: name,
+      price: price,
+      img: img,
+      size: size,
+      qty: 1
+    }, e);
+  });
+
+  // Direct element binding fallback
+  document.querySelectorAll('.btn-quick-add, .btn-bundle-add').forEach(btn => {
     btn.onclick = (e) => {
       e.stopPropagation();
       e.preventDefault();
-      const id = btn.dataset.id;
-      const live = Object.values(PRODUCTS).find(p => p.id === id || p.slug === id);
-      const price = live ? Number(live.price) : parseInt(btn.dataset.price, 10);
-      const name = live ? (live.title || live.name) : btn.dataset.name;
-      const img = live ? (live.image || (live.images && live.images[0])) : btn.dataset.img;
+      const id = btn.dataset.id || 'AUR-DUO-003';
+      const live = (typeof PRODUCTS === 'object' && PRODUCTS !== null)
+        ? Object.values(PRODUCTS).find(p => p && (p.id === id || p.slug === id))
+        : null;
+      const price = live ? Number(live.price) : (parseInt(btn.dataset.price, 10) || 48500);
+      const name = live ? (live.title || live.name) : (btn.dataset.name || 'Digitechzo Watch');
+      const img = live ? (live.image || (live.images && live.images[0])) : (btn.dataset.img || '/assets/sovereign-watch.png');
+      const size = btn.dataset.size || 'Standard Edition';
+
       addToCart({
         id: id,
         name: name,
         price: price,
         img: img,
-        size: btn.dataset.size || 'Standard Size',
+        size: size,
         qty: 1
       }, e);
     };
   });
-
-  // Bundle Add button
-  const bundleAddBtn = document.querySelector('.btn-bundle-add');
-  if (bundleAddBtn) {
-    bundleAddBtn.onclick = (e) => {
-      const id = bundleAddBtn.dataset.id;
-      const live = Object.values(PRODUCTS).find(p => p.id === id || p.slug === id);
-      const price = live ? Number(live.price) : parseInt(bundleAddBtn.dataset.price, 10);
-      const name = live ? (live.title || live.name) : bundleAddBtn.dataset.name;
-      const img = live ? (live.image || (live.images && live.images[0])) : bundleAddBtn.dataset.img;
-      addToCart({
-        id: id,
-        name: name,
-        price: price,
-        img: img,
-        size: bundleAddBtn.dataset.size,
-        qty: 1
-      }, e);
-    };
-  }
 
   // Mystery Tab
   if (mysteryTab) {
