@@ -137,10 +137,29 @@ export function getDb() {
     }
   }
 
+  // Robust unique merging of orders across site-config and db.json
+  const configOrders = Array.isArray(config.orders) ? config.orders : [];
+  const extraDbOrders = Array.isArray(extraDb.orders) ? extraDb.orders : [];
+  const mergedOrders = [...configOrders];
+  const orderKeys = new Set();
+  mergedOrders.forEach(o => {
+    if (o && o.id) orderKeys.add(String(o.id));
+    if (o && o.orderNumber) orderKeys.add(String(o.orderNumber));
+  });
+  extraDbOrders.forEach(o => {
+    if (!o) return;
+    const idKey = o.id ? String(o.id) : null;
+    const numKey = o.orderNumber ? String(o.orderNumber) : null;
+    if ((idKey && orderKeys.has(idKey)) || (numKey && orderKeys.has(numKey))) return;
+    mergedOrders.push(o);
+    if (idKey) orderKeys.add(idKey);
+    if (numKey) orderKeys.add(numKey);
+  });
+
   return {
     products: Array.isArray(config.products) && config.products.length > 0 ? config.products : (extraDb.products || []),
     categories: Array.isArray(config.categories) && config.categories.length > 0 ? config.categories : (extraDb.categories || []),
-    orders: config.orders || extraDb.orders || [],
+    orders: mergedOrders,
     invoices: config.invoices || extraDb.invoices || [],
     inventory_logs: config.inventory_logs || extraDb.inventory_logs || [],
     users: config.users || extraDb.users || [

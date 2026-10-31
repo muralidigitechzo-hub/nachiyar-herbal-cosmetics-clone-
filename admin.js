@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const [prodRes, invRes, ordRes, invcRes, setRes, anaRes] = await Promise.all([
         safeFetchJson('/api/products', { success: true, data: [] }),
         safeFetchJson('/api/inventory', { success: true, data: { matrix: [], logs: [] } }),
-        safeFetchJson('/api/orders', { success: true, data: [] }),
+        safeFetchJson('/api/orders?_t=' + Date.now(), { success: true, data: [] }),
         safeFetchJson('/api/invoices', { success: true, data: [] }),
         safeFetchJson('/api/settings', { success: true, data: {} }),
         safeFetchJson('/api/analytics', { success: true, data: {} })
@@ -259,24 +259,43 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) {}
       }
 
-      // 3. ORDERS: merge server and dual local stores
+      // 3. ORDERS: merge server and dual local stores uniquely by id & orderNumber
       if (ordRes && ordRes.success && Array.isArray(ordRes.data)) {
         orders = ordRes.data;
       }
       try {
+        const localOrders = [];
         ['nachiyar_store_orders', 'store_customer_orders', 'nachiyar_customer_orders'].forEach(key => {
-          const list = JSON.parse(localStorage.getItem(key) || '[]');
-          if (Array.isArray(list) && list.length > 0) {
-            const known = new Set((orders || []).map(o => String(o.id || o.orderNumber)));
-            list.forEach(item => {
-              const k = String(item.id || item.orderNumber);
-              if (!known.has(k)) {
-                orders.unshift(item);
-                known.add(k);
-              }
-            });
-          }
+          try {
+            const list = JSON.parse(localStorage.getItem(key) || '[]');
+            if (Array.isArray(list)) localOrders.push(...list);
+          } catch(e) {}
         });
+
+        const knownKeys = new Set();
+        (orders || []).forEach(o => {
+          if (o && o.id) knownKeys.add(String(o.id));
+          if (o && o.orderNumber) knownKeys.add(String(o.orderNumber));
+        });
+
+        localOrders.forEach(item => {
+          if (!item) return;
+          const idKey = item.id ? String(item.id) : null;
+          const numKey = item.orderNumber ? String(item.orderNumber) : null;
+          if ((idKey && knownKeys.has(idKey)) || (numKey && knownKeys.has(numKey))) {
+            return;
+          }
+          orders.unshift(item);
+          if (idKey) knownKeys.add(idKey);
+          if (numKey) knownKeys.add(numKey);
+        });
+
+        orders.sort((a, b) => {
+          const da = new Date(a.createdAt || a.created_at || a.date || 0).getTime();
+          const db = new Date(b.createdAt || b.created_at || b.date || 0).getTime();
+          return db - da;
+        });
+
         localStorage.setItem('nachiyar_store_orders', JSON.stringify(orders));
       } catch (e) {}
 
@@ -400,31 +419,27 @@ document.addEventListener('DOMContentLoaded', () => {
       // Cross-tab storage detection for orders
       window.addEventListener('storage', (e) => {
         if (e.key === 'store_customer_orders' || e.key === 'nachiyar_customer_orders' || e.key === 'nachiyar_store_orders') {
-          try {
-            const parsed = JSON.parse(e.newValue || '[]');
-            if (Array.isArray(parsed) && parsed.length > 0) {
-              const latest = parsed[0];
-              handleLiveIncomingOrder(latest);
-            }
-          } catch(err) {}
+          if (typeof loadAdminOrders === 'function') {
+            loadAdminOrders();
+          } else {
+            try {
+              const parsed = JSON.parse(e.newValue || '[]');
+              if (Array.isArray(parsed) && parsed.length > 0) {
+                handleLiveIncomingOrder(parsed[0]);
+              }
+            } catch(err) {}
+          }
         }
       });
 
-      // Background order polling every 8s to catch mobile/remote orders
+      // Background order polling every 5s to catch mobile/remote orders
       setInterval(async () => {
         try {
-          const res = await fetch('/api/orders').then(r => r.json());
-          if (res && res.success && Array.isArray(res.data)) {
-            const knownKeys = new Set((orders || []).map(o => String(o.id || o.orderNumber)));
-            const newArrivals = res.data.filter(o => !knownKeys.has(String(o.id || o.orderNumber)));
-            if (newArrivals.length > 0) {
-              newArrivals.slice().reverse().forEach(ord => {
-                handleLiveIncomingOrder(ord);
-              });
-            }
+          if (typeof loadAdminOrders === 'function') {
+            loadAdminOrders();
           }
         } catch(e) {}
-      }, 8000);
+      }, 5000);
 
     } catch (e) {
       console.error('Failed to load admin data', e);
@@ -3730,8 +3745,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const alreadyExists = (orders || []).some(o => String(o.id) === ordKey || String(o.orderNumber) === ordKey);
     if (alreadyExists) return;
 
-    // 1. Add order to in-memory array
+    // 1. Add order to in-memory array and save to localStorage
     orders.unshift(order);
+    try {
+      localStorage.setItem('nachiyar_store_orders', JSON.stringify(orders));
+      localStorage.setItem('store_customer_orders', JSON.stringify(orders));
+    } catch(e) {}
 
     // 2. Play audible sound chime
     playOrderArrivalSound();
@@ -3790,6 +3809,69 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.handleLiveIncomingOrder = handleLiveIncomingOrder;
+
+  // Real-time authoritative order loader for Admin console
+  async function loadAdminOrders() {
+    try {
+      let serverOrders = [];
+      try {
+        const ordRes = await fetch('/api/orders?_t=' + Date.now(), { 
+          cache: 'no-store',
+          headers: {
+            'Authorization': `Bearer ${adminToken}`,
+            'x-admin-token': adminToken
+          }
+        }).then(r => r.json());
+        if (ordRes && ordRes.success && Array.isArray(ordRes.data)) {
+          serverOrders = ordRes.data;
+        }
+      } catch (e) {}
+
+      let localOrders = [];
+      ['nachiyar_store_orders', 'store_customer_orders', 'nachiyar_customer_orders'].forEach(key => {
+        try {
+          const list = JSON.parse(localStorage.getItem(key) || '[]');
+          if (Array.isArray(list)) localOrders.push(...list);
+        } catch(e) {}
+      });
+
+      const merged = [...serverOrders];
+      const knownKeys = new Set();
+      merged.forEach(o => {
+        if (o && o.id) knownKeys.add(String(o.id));
+        if (o && o.orderNumber) knownKeys.add(String(o.orderNumber));
+      });
+
+      localOrders.forEach(item => {
+        if (!item) return;
+        const idKey = item.id ? String(item.id) : null;
+        const numKey = item.orderNumber ? String(item.orderNumber) : null;
+        if ((idKey && knownKeys.has(idKey)) || (numKey && knownKeys.has(numKey))) {
+          return;
+        }
+        merged.unshift(item);
+        if (idKey) knownKeys.add(idKey);
+        if (numKey) knownKeys.add(numKey);
+      });
+
+      merged.sort((a, b) => {
+        const da = new Date(a.createdAt || a.created_at || a.date || 0).getTime();
+        const db = new Date(b.createdAt || b.created_at || b.date || 0).getTime();
+        return db - da;
+      });
+
+      orders = merged;
+      try {
+        localStorage.setItem('nachiyar_store_orders', JSON.stringify(orders));
+      } catch(e) {}
+
+      renderOrdersTable();
+    } catch (err) {
+      console.error('Failed to load admin orders:', err);
+      renderOrdersTable();
+    }
+  }
+  window.loadAdminOrders = loadAdminOrders;
 
   function renderOrdersTable() {
     allOrdersTableBody.innerHTML = '';
@@ -6215,7 +6297,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (tabId === 'inventory') {
       if (typeof renderInventoryMatrix === 'function') renderInventoryMatrix();
     } else if (tabId === 'orders') {
-      if (typeof renderOrdersTable === 'function') renderOrdersTable();
+      if (typeof loadAdminOrders === 'function') loadAdminOrders();
+      else if (typeof renderOrdersTable === 'function') renderOrdersTable();
     } else if (tabId === 'invoices') {
       if (typeof renderInvoicesTable === 'function') renderInvoicesTable();
     } else if (tabId === 'dashboard') {

@@ -1,7 +1,7 @@
 import { getDb, saveDb } from '../../lib/db.js';
 
 export default function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
 
   try {
     const db = getDb();
@@ -14,9 +14,12 @@ export default function handler(req, res) {
     }
 
     if (req.method === 'POST') {
+      const ordId = req.body.id || `ord_${Date.now()}`;
+      const ordNum = req.body.orderNumber || `ORD-${Math.floor(100000 + Math.random() * 900000)}`;
+
       const order = {
-        id: `ord_${Date.now()}`,
-        orderNumber: req.body.orderNumber || `ORD-${Math.floor(100000 + Math.random() * 900000)}`,
+        id: ordId,
+        orderNumber: ordNum,
         channel: req.body.channel || 'online',
         customer: req.body.customer || {},
         items: req.body.items || [],
@@ -27,8 +30,16 @@ export default function handler(req, res) {
         paymentMethod: req.body.paymentMethod || 'Online',
         paymentStatus: req.body.paymentStatus || 'Completed',
         status: req.body.status || 'Processing',
-        createdAt: new Date().toISOString()
+        createdAt: req.body.createdAt || new Date().toISOString()
       };
+
+      // Check for duplicate
+      const existsIdx = db.orders.findIndex(o => o && (String(o.id) === String(ordId) || String(o.orderNumber) === String(ordNum)));
+      if (existsIdx !== -1) {
+        db.orders[existsIdx] = { ...db.orders[existsIdx], ...order };
+      } else {
+        db.orders.unshift(order);
+      }
 
       // Real-time Stock Deduction & Inventory Logging
       for (const item of (order.items || [])) {

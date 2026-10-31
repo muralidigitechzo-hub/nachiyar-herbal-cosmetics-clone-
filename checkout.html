@@ -2101,7 +2101,12 @@ img, svg, video {
           netbanking: `Net Banking (${selectedBank})`
         };
 
+        const orderId = 'ord_' + Date.now();
+        const orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+
         const payload = {
+          id: orderId,
+          orderNumber: orderNumber,
           customer: {
             name: `${document.getElementById('chkFirstName').value.trim()} ${document.getElementById('chkLastName').value.trim()}`,
             email: document.getElementById('chkEmail').value.trim(),
@@ -2131,8 +2136,6 @@ img, svg, video {
         btnPlaceOrder.disabled = true;
         btnPlaceOrder.innerHTML = '<span>Processing Order...</span>';
 
-        let orderId = 'ord_' + Date.now();
-        let orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
         let apiData = null;
 
         try {
