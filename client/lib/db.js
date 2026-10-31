@@ -138,15 +138,13 @@ export function getDb() {
   }
 
   // Robust unique merging of orders across site-config and db.json
-  const configOrders = Array.isArray(config.orders) ? config.orders : [];
-  const extraDbOrders = Array.isArray(extraDb.orders) ? extraDb.orders : [];
-  const mergedOrders = [...configOrders];
+  const allOrders = [
+    ...(Array.isArray(config.orders) ? config.orders : []),
+    ...(Array.isArray(extraDb.orders) ? extraDb.orders : [])
+  ];
+  const mergedOrders = [];
   const orderKeys = new Set();
-  mergedOrders.forEach(o => {
-    if (o && o.id) orderKeys.add(String(o.id));
-    if (o && o.orderNumber) orderKeys.add(String(o.orderNumber));
-  });
-  extraDbOrders.forEach(o => {
+  allOrders.forEach(o => {
     if (!o) return;
     const idKey = o.id ? String(o.id) : null;
     const numKey = o.orderNumber ? String(o.orderNumber) : null;
