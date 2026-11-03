@@ -1,192 +1,207 @@
 {
   "products": [
     {
-      "id": "AUR-CHRONO-001",
-      "name": "Aurelia Sovereign Emerald 41",
-      "slug": "aurelia-sovereign-emerald-41",
-      "category": "Automatic Chronometers",
-      "brand": "Aurelia",
-      "price": 48500,
-      "compareAtPrice": 56000,
-      "stock": 14,
-      "sku": "AUR-CHRONO-001",
-      "featured": true,
-      "newArrival": true,
-      "themeColor": "#064E3B",
-      "tagline": "Caliber 2824 • Sunburst Emerald",
-      "badge": {
-        "number": "COSC",
-        "unit": "SWISS",
-        "title": "Officially Certified Chronometer"
-      },
-      "description": "Flagship 41mm automatic mechanical timepiece featuring sunburst emerald dial, double-domed sapphire crystal, 72-hour power reserve, and solid 316L stainless steel bracelet.",
-      "shortDescription": "41mm Swiss automatic with sunburst emerald dial.",
-      "images": [
-        "/assets/sovereign-watch.png"
-      ],
-      "specifications": {
-        "caseDiameter": "41mm Surgical 316L Steel",
-        "movement": "Swiss Caliber 2824 Automatic",
-        "crystal": "Double-Domed Anti-Reflective Sapphire",
-        "waterResistance": "100 Meters (10 ATM)",
-        "warranty": "5-Year Global Atelier Guarantee"
-      },
-      "rating": 4.95,
-      "reviewCount": 84,
-      "transparentImage": "/assets/sovereign-watch.png",
+      "id": "prod_oil_01",
+      "slug": "herbal-hair-oil",
+      "name": "Herbal Hair Oil",
+      "subtitle": "Lavender Glass Dropper Bottle • 100% Cold-Pressed",
+      "category": "Hair Care",
+      "category_id": "cat_hair_care",
+      "price": 299,
+      "mrp": 699,
+      "stock": 98,
+      "initial_stock": 100,
       "online_sold": 2,
-      "theme_color": "#064E3B"
+      "offline_sold": 0,
+      "sku": "NH-OIL-200ML",
+      "images": [
+        "assets/new-oil-bottle-card.jpg"
+      ],
+      "transparentImage": "assets/hero-bottle-oil-transparent.png",
+      "theme_color": "#6b4e9b",
+      "themeColor": "#6b4e9b",
+      "tagline": "Cold-Pressed • 18 Rare Herbs • Root Activating",
+      "metric_badge": "100% PURE",
+      "metricBadge": "100% PURE",
+      "badge": "Bestseller",
+      "short_description": "Traditional 21-day solar-infused oil in pure lavender essence to stimulate roots and banish hair fall.",
+      "description": "Crafted in small batches according to classical Ayurvedic texts. Nachiyar Herbal Hair Oil features deep-steeped cold-pressed oils enriched with Bhringraj, Amla, Brahmi, and delicate lavender blossom essence. Calms scalp inflammation, repairs dry split ends, and delivers noticeable root strength within two weeks of regular application.",
+      "benefits": [
+        "Clinically proven hair fall reduction in 14 days",
+        "Soothes irritated, dry scalp with calming lavender aromatherapy",
+        "Deeply bioavailable: absorbs without heavy mineral grease",
+        "Encourages dense follicle growth and strand thickness"
+      ],
+      "ingredients": "Cold-Pressed Black Sesame Oil, Virgin Coconut Oil, Pure French Lavender Oil (Lavandula Angustifolia), Bhringraj, Amla, Brahmi, Hibiscus Blossom, Fenugreek, Rosemary, Indian Nardostachys (Jatamansi).",
+      "how_to_use": "Dispense 1-2 droppers directly across scalp partings. Gently massage using circular fingertip motions for 5-10 minutes. Leave on for a minimum of 1 hour or overnight before cleansing.",
+      "variants": [
+        {
+          "id": "v_oil_100",
+          "name": "100ml Travel Edition",
+          "price": 349,
+          "mrp": 399,
+          "sku": "NH-OIL-100",
+          "stock": 45
+        },
+        {
+          "id": "v_oil_200",
+          "name": "200ml Glass Dropper Bottle",
+          "price": 299,
+          "mrp": 699,
+          "sku": "NH-OIL-200",
+          "stock": 85
+        },
+        {
+          "id": "v_oil_500",
+          "name": "500ml Luxury Value Refill",
+          "price": 1199,
+          "mrp": 1399,
+          "sku": "NH-OIL-500",
+          "stock": 25
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "hair-vitalizer",
+        "18-botanicals",
+        "cold-pressed"
+      ]
     },
     {
-      "id": "AUR-DIVER-002",
-      "name": "Aurelia DeepOcean Ceramic Diver",
-      "slug": "aurelia-deepocean-ceramic-diver",
-      "category": "Diving Instruments",
-      "brand": "Aurelia",
-      "price": 54000,
-      "compareAtPrice": 62500,
-      "stock": 10,
-      "sku": "AUR-DIVER-002",
-      "featured": true,
-      "newArrival": true,
-      "themeColor": "#1E293B",
-      "tagline": "300M Diver • Helium Escape Valve",
-      "badge": {
-        "number": "300M",
-        "unit": "DIVE",
-        "title": "Professional Oceanic Diver"
-      },
-      "description": "Professional diving instrument with 120-click ceramic bezel, automatic helium release valve, Super-LumiNova luminescence, and 300 meters water resistance.",
-      "shortDescription": "300m oceanic diver with ceramic bezel.",
+      "id": "prod_shampoo_02",
+      "slug": "hibiscus-flower-shampoo",
+      "name": "Hibiscus Flower Shampoo",
+      "subtitle": "Crimson Botanical Pump Bottle • Sulfate-Free pH 5.5",
+      "category": "Scalp & Cleansing",
+      "category_id": "cat_scalp",
+      "price": 249,
+      "mrp": 649,
+      "stock": 90,
+      "initial_stock": 100,
+      "online_sold": 0,
+      "offline_sold": 0,
+      "sku": "NH-SHMP-250ML",
       "images": [
-        "/assets/ceramic-diver.png"
+        "assets/new-shampoo-bottle-card.jpg"
       ],
-      "specifications": {
-        "caseDiameter": "42.5mm Marine Grade Steel",
-        "bezel": "120-Click High-Tech Ceramic",
-        "lume": "Swiss Super-LumiNova BGW9",
-        "waterResistance": "300 Meters (30 ATM)",
-        "warranty": "5-Year Global Atelier Guarantee"
-      },
-      "rating": 4.9,
-      "reviewCount": 62,
-      "transparentImage": "/assets/ceramic-diver.png",
-      "theme_color": "#1E293B"
+      "transparentImage": "assets/hero-bottle-shampoo-transparent.png",
+      "theme_color": "#822234",
+      "themeColor": "#822234",
+      "tagline": "Fresh Hibiscus Petals • Coconut Surfactants",
+      "metric_badge": "pH 5.5 BALANCED",
+      "metricBadge": "pH 5.5 BALANCED",
+      "badge": "Customer Favorite",
+      "short_description": "Gentle scalp cleanser infused with fresh red hibiscus flowers and natural coconut surfactants.",
+      "description": "Formulated with handpicked South Indian hibiscus blossoms and gentle plant-derived saponins. Gently cleanses without stripping natural oils, enhancing softness, promoting follicle vitality, and restoring hair's natural radiant shine.",
+      "benefits": [
+        "0% Sulfates, Silicones, Parabens, or Synthetic Dyes",
+        "pH 5.5 balanced to protect the delicate scalp acid mantle",
+        "Natural hibiscus mucilage locks in moisture and mirrors conditioning shine",
+        "Safe for color-treated, chemically straightened, or sensitive hair"
+      ],
+      "ingredients": "Aqua, Fresh Hibiscus Rosa-Sinensis Flower Extract, Decyl Glucoside (Coconut derived), Shikakai Extract, Reetha (Soapnut), Aloe Vera Leaf Juice, Vegetable Glycerin, Vitamin E, Sweet Orange Peel Oil.",
+      "how_to_use": "Pump 2-3 pumps into wet palms and work into a rich lather. Massage into wet scalp and hair for 2-3 minutes. Rinse thoroughly.",
+      "variants": [
+        {
+          "id": "v_shmp_250",
+          "name": "250ml Botanical Pump Bottle",
+          "price": 249,
+          "mrp": 649,
+          "sku": "NH-SHMP-250",
+          "stock": 90
+        },
+        {
+          "id": "v_shmp_500",
+          "name": "500ml Family Pump Bottle",
+          "price": 449,
+          "mrp": 1099,
+          "sku": "NH-SHMP-500",
+          "stock": 40
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "scalp-cleanser",
+        "hibiscus",
+        "sulphate-free"
+      ]
     },
     {
-      "id": "AUR-DUO-003",
-      "name": "The Aurelia Collector's Duo (Set of 2)",
-      "slug": "aurelia-collectors-duo",
-      "category": "Collector Sets",
-      "brand": "Aurelia",
-      "price": 87125,
-      "compareAtPrice": 102500,
-      "stock": 8,
-      "sku": "AUR-DUO-003",
-      "featured": true,
-      "newArrival": true,
-      "themeColor": "#14532D",
-      "tagline": "Sovereign Emerald 41 + DeepOcean Diver",
-      "badge": {
-        "number": "DUO",
-        "unit": "SET",
-        "title": "Collector's Pairing"
-      },
-      "description": "Experience the complete Aurelia horological range. The Sovereign Emerald 41 for refined everyday elegance, paired with the DeepOcean Ceramic Diver for 300 metres of oceanic adventure. Delivered in a bespoke collector's presentation box.",
-      "shortDescription": "Sovereign Emerald 41 + DeepOcean Ceramic Diver at a 15% collector's saving.",
+      "id": "prod_duo_03",
+      "slug": "royal-hair-ritual-duo",
+      "name": "The Royal Hair Ritual (Duo Set)",
+      "subtitle": "Complete 2-Step Restorative Ayurvedic System",
+      "category": "Ritual Sets & Combos",
+      "category_id": "cat_sets",
+      "price": 499,
+      "mrp": 1148,
+      "stock": 85,
+      "initial_stock": 100,
+      "online_sold": 1,
+      "offline_sold": 0,
+      "sku": "NH-DUO-SET",
       "images": [
-        "/assets/collectors-duo.png"
+        "assets/duo-ritual-new.jpg"
       ],
-      "specifications": {
-        "contents": "1x Sovereign Emerald 41 + 1x DeepOcean Ceramic Diver",
-        "presentation": "Bespoke Collector's Presentation Box",
-        "warranty": "5-Year Global Atelier Guarantee"
-      },
-      "bundleOf": [
-        "AUR-CHRONO-001",
-        "AUR-DIVER-002"
+      "transparentImage": "assets/duo-ritual-new.jpg",
+      "theme_color": "#4a2870",
+      "themeColor": "#4a2870",
+      "tagline": "Complete Restorative Duo • Save ₹149",
+      "metric_badge": "BEST VALUE",
+      "metricBadge": "BEST VALUE",
+      "badge": "Luxury Set",
+      "short_description": "The complete 2-step royal restorative haircare routine featuring our Herbal Hair Oil and Hibiscus Shampoo.",
+      "description": "The ultimate royal regimen. Includes 200ml Herbal Hair Oil and 250ml Hibiscus Flower Shampoo packed in an exquisite luxury box. Delivers holistic scalp nourishment and gentle purification.",
+      "benefits": [
+        "Complete synergistic root-to-tip care routine",
+        "Maximum cost savings: Save ₹149 instantly",
+        "Comes packaged in signature gold-embossed gift packaging"
       ],
-      "savings": 15375,
-      "rating": 4.97,
-      "reviewCount": 41,
-      "theme_color": "#14532D"
-    },
-    {
-      "id": "AUR-HERITAGE-004",
-      "name": "Aurelia Heritage Moonphase",
-      "slug": "aurelia-heritage-moonphase",
-      "category": "Dress Watches",
-      "brand": "Aurelia",
-      "price": 38900,
-      "compareAtPrice": 46000,
-      "stock": 18,
-      "sku": "AUR-HERITAGE-004",
-      "featured": true,
-      "newArrival": true,
-      "themeColor": "#14532D",
-      "tagline": "Astronomical Moonphase • Rose Gold",
-      "badge": {
-        "number": "MOON",
-        "unit": "PHASE",
-        "title": "Astronomical Complication"
-      },
-      "description": "Exquisite dress timepiece showcasing hand-painted astronomical moonphase disk, Guilloché dial, blued steel hands, and genuine Italian alligator-embossed calfskin leather strap.",
-      "shortDescription": "Astronomical moonphase with Italian leather strap.",
-      "images": [
-        "/assets/heritage-moonphase.png"
+      "ingredients": "Herbal Hair Oil (200ml) + Hibiscus Flower Shampoo (250ml).",
+      "how_to_use": "Apply Herbal Hair Oil 2-3 hours before bath. Cleanse gently using Hibiscus Flower Shampoo. Repeat ritual 2-3 times weekly.",
+      "variants": [
+        {
+          "id": "v_duo_standard",
+          "name": "Full Ritual Duo (200ml Oil + 250ml Shampoo)",
+          "price": 499,
+          "mrp": 1148,
+          "sku": "NH-DUO-STD",
+          "stock": 42
+        }
       ],
-      "specifications": {
-        "caseDiameter": "39.5mm Slim Profile (9.8mm)",
-        "complication": "True Astronomical Moonphase & Date",
-        "strap": "Full-Grain Italian Calfskin",
-        "waterResistance": "50 Meters (5 ATM)",
-        "warranty": "5-Year Global Atelier Guarantee"
-      },
-      "rating": 4.88,
-      "reviewCount": 49,
-      "theme_color": "#14532D"
-    },
-    {
-      "id": "AUR-STRAP-005",
-      "name": "Aurelia Collector's Strap Kit (3 Straps)",
-      "slug": "aurelia-collectors-strap-kit",
-      "category": "Horological Straps",
-      "brand": "Aurelia",
-      "price": 6900,
-      "compareAtPrice": 8700,
-      "stock": 30,
-      "sku": "AUR-STRAP-005",
-      "featured": true,
-      "newArrival": true,
-      "themeColor": "#14532D",
-      "tagline": "3 Italian Calfskin Straps • Quick-Release",
-      "badge": {
-        "number": "KIT",
-        "unit": "x3",
-        "title": "Interchangeable Strap Collection"
-      },
-      "description": "Three full-grain Italian calfskin straps in tan, black and emerald with tone-on-tone stitching, plus a spring bar tool for effortless quick-release changes.",
-      "shortDescription": "3 interchangeable Italian leather straps with tool.",
-      "images": [
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
-      ],
-      "specifications": {
-        "contents": "3 Straps + Spring Bar Tool",
-        "material": "Full-Grain Italian Calfskin",
-        "lugWidth": "20mm",
-        "warranty": "1-Year Atelier Guarantee"
-      },
-      "rating": 4.85,
-      "reviewCount": 37,
-      "theme_color": "#14532D"
+      "status": "active",
+      "tags": [
+        "complete-ritual",
+        "bestseller",
+        "ayurvedic-duo"
+      ]
     }
   ],
   "categories": [
-    "Automatic Chronometers",
-    "Diving Instruments",
-    "Collector Sets",
-    "Dress Watches",
-    "Horological Straps"
+    {
+      "id": "cat_hair_care",
+      "name": "Hair Care",
+      "slug": "hair-care",
+      "count": 2
+    },
+    {
+      "id": "cat_scalp",
+      "name": "Scalp & Cleansing",
+      "slug": "scalp-cleansing",
+      "count": 1
+    },
+    {
+      "id": "cat_sets",
+      "name": "Ritual Sets & Combos",
+      "slug": "ritual-sets",
+      "count": 1
+    },
+    {
+      "id": "cat_gifting",
+      "name": "Royal Gifting",
+      "slug": "royal-gifting",
+      "count": 0
+    }
   ],
   "orders": [],
   "invoices": [],
@@ -202,7 +217,7 @@
       "permissions": [
         "all"
       ],
-      "updated_at": "2026-10-30T11:52:24.724Z"
+      "updated_at": "2026-10-31T10:44:58.241Z"
     },
     {
       "id": "user_admin",
@@ -229,722 +244,319 @@
   ],
   "reviews": [
     {
-      "id": "rev_1",
-      "name": "Aditya Kapoor",
+      "id": "rev_01",
+      "name": "Dr. Ananya Sundaram",
       "rating": 5,
-      "title": "Two Watches, One Perfect Set",
-      "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
+      "title": "Dramatic reduction in hair fall within 10 days",
+      "comment": "The lavender aroma is divine and not overpowering. My hair texture feels noticeably denser and softer. Exceptional small-batch quality!",
       "status": "approved",
-      "created_at": "2026-10-30T10:00:00.000Z"
+      "created_at": "2026-10-15T10:00:00Z"
     },
     {
-      "id": "rev_2",
-      "name": "Rohan Mehta",
+      "id": "rev_02",
+      "name": "Kavitha Rangarajan",
       "rating": 5,
-      "title": "The Emerald Dial Is Stunning",
-      "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
+      "title": "Best sulphate-free shampoo I have ever used",
+      "comment": "The Hibiscus Shampoo lathers gently and does not dry out my curly hair. Paired with the oil, it is truly a royal ritual.",
       "status": "approved",
-      "created_at": "2026-10-29T14:30:00.000Z"
+      "created_at": "2026-10-18T14:30:00Z"
     },
     {
-      "id": "rev_3",
-      "name": "Vikram Nair",
+      "id": "rev_03",
+      "name": "Siddharth Menon",
       "rating": 5,
-      "title": "Built Like A Tank",
-      "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
+      "title": "Authentic cold-pressed oil, zero mineral additives",
+      "comment": "You can immediately feel the herbal absorption. Non-sticky and deeply nourishing. Highly recommended!",
       "status": "approved",
-      "created_at": "2026-10-28T09:15:00.000Z"
-    },
-    {
-      "id": "rev_4",
-      "name": "Ananya Krishnan",
-      "rating": 5,
-      "title": "Perfect Gift",
-      "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
-      "status": "approved",
-      "created_at": "2026-10-27T16:45:00.000Z"
-    },
-    {
-      "id": "rev_5",
-      "name": "Siddharth Rao",
-      "rating": 4,
-      "title": "Great Value Straps",
-      "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
-      "status": "approved",
-      "created_at": "2026-10-26T11:20:00.000Z"
+      "created_at": "2026-10-21T09:15:00Z"
     }
   ],
-  "customers": [],
+  "customers": [
+    {
+      "id": "cust_1793443458268_343",
+      "name": "vijay",
+      "email": "kumar@gmail.com",
+      "phone": "0987654321",
+      "password": "1234567890",
+      "address": "Madurai , Tamil Nadu",
+      "city": "Madurai",
+      "state": "Tamil Nadu",
+      "pincode": "625005",
+      "created_at": "2026-10-31T10:44:18.271Z"
+    }
+  ],
   "contact_messages": [],
   "site_settings": {
-    "brandName": "Digitechzo DigiWatches",
-    "tagline": "",
-    "logoUrl": "/assets/logo.png",
-    "faviconUrl": "/favicon.png",
-    "supportPhone": "+91 94455 66778",
-    "supportEmail": "concierge@aureliatime.com",
-    "storeAddress": "Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001",
-    "gstin": "29AAACA1234E1Z8",
-    "storeTimings": "Mon - Sat: 10:00 AM - 7:30 PM",
-    "announcementText": "✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨",
-    "homeShowcase": {
-      "slot1": {
-        "productId": "AUR-CHRONO-001",
-        "title": "Aurelia Sovereign Emerald 41",
-        "subtitle": "Caliber 2824 • Sunburst Emerald",
-        "price": 48500,
-        "mrp": 56000,
-        "customImage": "/assets/sovereign-watch.png"
-      },
-      "slot2": {
-        "productId": "AUR-DIVER-002",
-        "title": "Aurelia DeepOcean Ceramic Diver",
-        "subtitle": "300M Diver • Helium Escape Valve",
-        "price": 54000,
-        "mrp": 62500,
-        "customImage": "/assets/ceramic-diver.png"
-      },
-      "combo": {
-        "productId": "AUR-DUO-003",
-        "title": "The Aurelia Collector's Duo (Set of 2)",
-        "subtitle": "Sovereign Emerald 41 + DeepOcean Diver",
-        "price": 87125,
-        "mrp": 102500,
-        "customImage": "/assets/collectors-duo.png",
-        "tag": "BEST VALUE"
-      }
-    },
-    "themeColors": {
-      "primary": "#57B71B",
-      "secondary": "#469815",
-      "accent": "#00f5a0",
-      "background": "#FFFFFF",
-      "backgroundAlt": "#F8FAFC",
-      "surface": "#FFFFFF",
-      "text": "#1E242B",
-      "muted": "#556070",
-      "cardBg1": "#0F172A",
-      "cardBg2": "#1E293B",
-      "bundleBg": "#111827"
-    },
+    "brandName": "Nachiyar Herbals & Cosmetics",
+    "supportEmail": "care@nachiyarherbals.com",
+    "supportPhone": "+91 94440 88990",
+    "announcementText": "ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES",
+    "freeShippingThreshold": 599,
+    "mysteryCouponCode": "ROYAL15",
+    "mysteryDiscountPct": 15,
+    "gstin": "33AAACH9876K1Z2",
+    "storeAddress": "Nachiyar Botanical Heritage, No. 18 Temple Ring Road, Madurai, Tamil Nadu - 625001",
+    "logoUrl": "/assets/digitechzo-logo.png",
+    "faviconUrl": "/assets/digitechzo-logo.png",
     "branding": {
-      "name": "Digitechzo DigiWatches",
-      "shortName": "DIGITECHZO DIGIWATCHES",
-      "tagline": "",
-      "logo": "/assets/logo.png",
-      "favicon": "/favicon.png",
+      "name": "Nachiyar Herbals & Cosmetics",
+      "shortName": "NACHIYAR",
+      "tagline": "Pure Botanical Elegance & Ayurvedic Care",
+      "logo": "/assets/digitechzo-logo.png",
+      "favicon": "/assets/digitechzo-logo.png",
       "colors": {
-        "primary": "#57B71B",
-        "secondary": "#469815",
-        "accent": "#00f5a0",
-        "background": "#FFFFFF",
-        "backgroundAlt": "#F8FAFC",
+        "primary": "#7C5AAB",
+        "secondary": "#D4AF37",
+        "accent": "#583B82",
+        "background": "#F9F8F5",
+        "backgroundAlt": "#FFFFFF",
         "surface": "#FFFFFF",
-        "text": "#1E242B",
-        "muted": "#556070",
-        "cardBg1": "#0F172A",
-        "cardBg2": "#1E293B",
-        "bundleBg": "#111827"
+        "text": "#191319",
+        "muted": "#64748B",
+        "cardBg1": "#6B4E9B",
+        "cardBg2": "#822234",
+        "bundleBg": "#4A2870"
       },
       "fonts": {
         "heading": "Cinzel",
         "body": "Plus Jakarta Sans"
       }
     },
-    "modules": {},
+    "themeColors": {
+      "primary": "#7C5AAB",
+      "secondary": "#D4AF37",
+      "accent": "#583B82",
+      "background": "#F9F8F5",
+      "backgroundAlt": "#FFFFFF",
+      "surface": "#FFFFFF",
+      "text": "#191319",
+      "muted": "#64748B",
+      "cardBg1": "#6B4E9B",
+      "cardBg2": "#822234",
+      "bundleBg": "#4A2870"
+    },
+    "modules": {
+      "reviews": true,
+      "whatsapp_chat": true,
+      "coupons": true,
+      "announcements": true,
+      "marketplaces": true,
+      "billing": true
+    },
     "content": {
-      "announcement": "✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨",
-      "freeShippingThreshold": 999,
+      "announcement": "ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES",
+      "freeShippingThreshold": 599,
       "coupon": {
-        "code": "AURELIA15",
+        "code": "ROYAL15",
         "discountPercent": 15,
+        "tagline": "Surprise Royal Privilege Voucher",
         "active": true,
-        "tagline": "15% Welcome Privilege On First Timepiece Acquisition"
+        "expiryDate": ""
       },
       "hero": {
-        "eyebrow": "HAUTE HORLOGERIE • SWISS HERITAGE",
-        "title": "Mastering The Art Of Timeless Precision.",
-        "subtitle": "Hand-assembled automatic chronometers engineered with sapphire crystal, 72-hour power reserve, and surgical-grade 316L stainless steel.",
-        "ctaPrimaryText": "Explore Timepieces",
-        "ctaPrimaryLink": "/shop/",
-        "ctaSecondaryText": "Shop The Collector's Duo (Save 15%)",
-        "ctaSecondaryLink": "/product/?slug=aurelia-collectors-duo"
+        "eyebrow": "ROYAL BOTANICAL CARE",
+        "title": "Ancient Ayurvedic Botanicals For Royal Hair Radiance",
+        "subtitle": "Small-batch restorative formulations deeply steeped with 18 rare cold-pressed botanicals according to traditional texts.",
+        "badge": "100% PURE ACTIVE BOTANICALS",
+        "primaryCta": "Shop All Formulations",
+        "primaryCtaLink": "#collection-grid",
+        "secondaryCta": "Our Heritage",
+        "secondaryCtaLink": "#story"
       },
       "features": [
         {
-          "icon": "🏅",
-          "title": "Swiss Certified Chronometer",
-          "subtitle": "Tested across 5 positions & 3 temperatures"
+          "icon": "🌿",
+          "title": "18 Rare Botanicals",
+          "desc": "Cold-steeped with Amla, Bhringraj, Brahmi and lavender extracts."
         },
         {
-          "icon": "🛡️",
-          "title": "5-Year Atelier Warranty",
-          "subtitle": "Complimentary global service coverage"
-        },
-        {
-          "icon": "📦",
-          "title": "Insured Air Courier",
-          "subtitle": "Doorstep white-glove security delivery"
-        }
-      ],
-      "marquee": [
-        "AURELIA CHRONOMETRY",
-        "SWISS CALIBER 2824",
-        "316L SURGICAL STEEL",
-        "DOUBLE-DOMED SAPPHIRE",
-        "COSC CERTIFIED",
-        "HAND-FINISHED MOVEMENTS",
-        "5-YEAR GLOBAL WARRANTY",
-        "GENEVA & BENGALURU ATELIER"
-      ],
-      "showcase": {
-        "eyebrow": "THE LIVING HOROLOGICAL RITUAL",
-        "title": "Real Wrists. Authentic Craftsmanship.",
-        "subtitle": "A mechanical watch is not an accessory, it is a daily ritual of winding, wearing and appreciating a living machine.",
-        "cards": [
-          {
-            "badge": "THE WINDING RITUAL",
-            "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&crop=focalpoint&fp-x=.3&fp-y=.6&fp-z=1.6&w=800&q=80",
-            "title": "Crown By Crown Morning Awakening",
-            "desc": "A few gentle turns of the screw-down crown wake the Swiss caliber from its rest. The rotor tops up the mainspring with every movement of your wrist, so the watch is ready before your coffee is.",
-            "quote": "The soft tick of the rotor is the first sound of my morning."
-          },
-          {
-            "badge": "THE INSPECTION RITUAL",
-            "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.4&fp-z=1.2",
-            "title": "Sapphire-Clear Dial Appreciation",
-            "desc": "Under a double-domed anti-reflective crystal, the hand-lacquered sunburst dial shifts from deep emerald to gold as the light moves. Applied indices and blued hands reward every second glance.",
-            "quote": "Every time I check the time, I notice something new on the dial."
-          },
-          {
-            "badge": "THE HERITAGE RESULT",
-            "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
-            "title": "Worn Today, Inherited Tomorrow",
-            "desc": "Marine-grade steel, synthetic ruby bearings and a five-year atelier guarantee mean your Aurelia is built to keep perfect time for decades, and to be passed down with its story intact.",
-            "quote": "My father wore a mechanical watch. Now I understand why."
-          }
-        ],
-        "spotlight": {
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1000&q=80&crop=focalpoint&fp-x=0.6&fp-y=0.5&fp-z=1.0",
-          "imageEyebrow": "THE TIMEKEEPING",
-          "imageTitle": "Calibrated Sunburst Emerald Dial",
-          "imageCaption": "Regulated in five positions and three temperatures before it ever leaves the atelier.",
-          "eyebrow": "CHRONOMETER TEST OBSERVATION",
-          "heading": "Certified Precision In 15 Days",
-          "stats": [
-            {
-              "value": "-4/+6s",
-              "label": "Daily deviation, COSC certified"
-            },
-            {
-              "value": "72h",
-              "label": "Power reserve off the wrist"
-            },
-            {
-              "value": "9 Mohs",
-              "label": "Sapphire crystal scratch hardness"
-            }
-          ]
-        }
-      },
-      "orbitStage": {
-        "eyebrow": "HOROLOGICAL ARCHITECTURE",
-        "heading": "18 Precision Mechanical Engineering Modules",
-        "subtext": "Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.",
-        "centerImage": "assets/aurelia-emerald-watch.png",
-        "centerBadge": "Swiss Caliber 2824 • Certified Chronometer",
-        "idleIcon": "⌚",
-        "idleText": "Hover over any chronometer component to inspect its horological specifications"
-      },
-      "orbitCenterImage": "assets/aurelia-emerald-watch.png",
-      "orbitBadge": "Swiss Caliber 2824 • Certified Chronometer",
-      "orbitEyebrow": "HOROLOGICAL ARCHITECTURE",
-      "orbitHeading": "18 Precision Mechanical Engineering Modules",
-      "orbitSubtext": "Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.",
-      "orbitIdleIcon": "⏱️",
-      "orbitIdleText": "Hover over any chronometer component to inspect its horological specifications",
-      "orbit": [
-        {
-          "name": "Sapphire Crystal",
-          "icon": "💎",
-          "tag": "Scratch Armor",
-          "desc": "Double-domed anti-reflective synthetic sapphire crystal with 9 Mohs hardness rating.",
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.45&fp-z=2"
-        },
-        {
-          "name": "Automatic Caliber",
-          "icon": "⚙️",
-          "tag": "Swiss Movement",
-          "desc": "Self-winding mechanical heart beating at 28,800 vibrations per hour for seamless sweep.",
-          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
-        },
-        {
-          "name": "72h Power Reserve",
-          "icon": "⏳",
-          "tag": "Twin Barrels",
-          "desc": "Twin-barrel spring mechanism maintaining uninterrupted precision for 3 full days off the wrist.",
-          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
-        },
-        {
-          "name": "316L Stainless Steel",
-          "icon": "🛡️",
-          "tag": "Marine Grade",
-          "desc": "Corrosion-resistant surgical alloy hand-polished with alternating brushed satin bevels.",
-          "image": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.5&fp-z=2"
-        },
-        {
-          "name": "Ceramic Bezel",
-          "icon": "🔘",
-          "tag": "Unidirectional",
-          "desc": "120-click laser-engraved scratch-proof ceramic diving bezel with platinum numerals.",
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.15&fp-z=2"
-        },
-        {
-          "name": "Super-LumiNova",
-          "icon": "✨",
-          "tag": "Swiss Lume",
-          "desc": "Grade A Swiss photoluminescent pigment ensuring vivid low-light dial legibility.",
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.5&fp-y=0.5&fp-z=2.5"
-        },
-        {
-          "name": "200M Water Proof",
-          "icon": "🌊",
-          "tag": "Screw-Down Crown",
-          "desc": "Triple-sealed gasket assembly pressure-tested to withstand deep oceanic expeditions.",
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80"
-        },
-        {
-          "name": "Exhibition Caseback",
-          "icon": "🔍",
-          "tag": "Côtes de Genève",
-          "desc": "Transparent sapphire rear display showcasing gold rotor and Geneva stripes decoration.",
-          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
-        },
-        {
-          "name": "Incabloc Shock",
-          "icon": "⚡",
-          "tag": "Impact Shield",
-          "desc": "Spring-loaded jewel bearing absorbing severe sudden mechanical shocks and drops.",
-          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
-        },
-        {
-          "name": "Glucydur Balance",
-          "icon": "⚖️",
-          "tag": "Thermal Stable",
-          "desc": "Beryllium-bronze alloy balance wheel resisting extreme temperature fluctuations.",
-          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
-        },
-        {
-          "name": "Nivaflex Mainspring",
-          "icon": "🌀",
-          "tag": "Anti-Magnetic",
-          "desc": "Space-age alloy providing consistent kinetic energy torque with zero magnetic distortion.",
-          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
-        },
-        {
-          "name": "Sunburst Dial",
           "icon": "☀️",
-          "tag": "Guilloché",
-          "desc": "Hand-lacquered emerald dial with radial sunburst brushing and applied gold hour indices.",
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80"
+          "title": "21-Day Solar Infusion",
+          "desc": "Naturally potentiated under golden solar warmth for maximum bioactive potency."
         },
         {
-          "name": "25 Jeweled Bearings",
-          "icon": "💍",
-          "tag": "Synthetic Rubies",
-          "desc": "High-purity ruby bearings virtually eliminating mechanical friction on internal pivot points.",
-          "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=900"
+          "icon": "✨",
+          "title": "Zero Harsh Synthetics",
+          "desc": "Free from mineral oil, silicones, sulfates, parabens, and synthetic colorants."
         },
         {
-          "name": "Italian Calfskin",
-          "icon": "🧵",
-          "tag": "Handcrafted Strap",
-          "desc": "Full-grain Tuscan leather strap with artisanal tone-on-tone edge stitching.",
-          "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&h=420&q=80"
-        },
-        {
-          "name": "Butterfly Clasp",
-          "icon": "🔒",
-          "tag": "Dual Deployment",
-          "desc": "Spring-actuated double folding security buckle with laser-etched brand insignia.",
-          "image": "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.8&fp-y=0.8&fp-z=2"
-        },
-        {
-          "name": "COSC Certified",
-          "icon": "📜",
-          "tag": "Official Chronometer",
-          "desc": "Independently certified by the Official Swiss Chronometer Testing Institute within -4/+6s.",
-          "image": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&h=420&q=80"
-        },
-        {
-          "name": "Helium Escape Valve",
-          "icon": "💨",
-          "tag": "Deep Saturation",
-          "desc": "Automatic pressure release valve preventing crystal dislodgement during decompression.",
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&h=420&q=80&crop=focalpoint&fp-x=0.9&fp-y=0.5&fp-z=2.5"
-        },
-        {
-          "name": "5-Year Guarantee",
-          "icon": "🏅",
-          "tag": "Global Atelier Service",
-          "desc": "Comprehensive worldwide manufacturer warranty with complimentary 3rd-year maintenance.",
-          "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&crop=focalpoint&fp-x=.7&fp-y=.3&fp-z=1.5&w=700&h=420&q=80"
+          "icon": "🚚",
+          "title": "Pan-India Express Shipping",
+          "desc": "Direct from our Madurai botanical facility safely to your doorstep."
         }
       ],
-      "collection": {
-        "eyebrow": "THE FLAGSHIP DUO",
-        "title": "Signature Masterpieces. Pure Distinction.",
-        "subtitle": "Individually calibrated mechanical timepieces designed for connoisseurs of timeless horological craft."
-      },
-      "bundle": {
-        "productId": "AUR-DUO-003",
-        "eyebrow": "THE SIGNATURE 2-WATCH COLLECTION",
-        "badge": "★ BEST VALUE: SAVE ₹15,375",
-        "features": [
-          "✔ 1x Sovereign Emerald 41 (Steel Bracelet)",
-          "✔ 1x DeepOcean Ceramic Diver",
-          "✔ Free Insured Express Delivery & Collector's Box"
-        ],
-        "ctaText": "Add The Collection to Bag"
-      },
-      "reviewsSection": {
-        "eyebrow": "VERIFIED CUSTOMER EXPERIENCES",
-        "title": "Loved by Aurelia Chronometry Customers",
-        "ratingScore": "4.8 / 5.0",
-        "ratingText": "Based on 5 Verified Patron Reviews",
-        "ctaText": "✍️ Comment Your Review"
-      },
       "story": {
-        "title": "The Aurelia Atelier Heritage",
-        "subtitle": "Where Swiss Precision Meets Indian Craftsmanship",
-        "badge": "SWISS CALIBER ARCHITECTURE",
-        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=1000",
-        "quote": "In an era of fleeting digital seconds, Aurelia celebrates the timeless poetry of mechanical movements calibrated by master horologists.",
-        "author": "Henri V. Aurelia",
-        "authorTitle": "Master Horologist, Founder & Atelier Director",
-        "description": "Every Aurelia timepiece begins as a symphony of raw marine-grade steel, synthetic ruby jewels, and hand-beveled balance springs. We bridge centuries of Swiss watchmaking heritage with contemporary industrial ergonomics."
+        "eyebrow": "BOTANICAL TRADITION",
+        "title": "Crafted with 21-Day Solar Steeping",
+        "subtitle": "Honoring the ancient heritage of Ayurvedic formulation in Madurai",
+        "description": "Every formulation at Nachiyar Herbals begins with handpicked sacred botanicals, cold-pressed seed oils, and gentle botanical extracts. We reject chemical shortcuts, giving each botanical blend the full 21 days of natural solar maturation.",
+        "quote": "Pure botanicals work in harmony with your scalp biology, nurturing dense root vitality and lasting hair strength.",
+        "image": "assets/heritage-ritual.jpg"
       },
-      "aboutPage": {
-        "heroEyebrow": "OUR ATELIER PHILOSOPHY",
-        "heroTitle": "True Luxury Ticks With Silent Perfection",
-        "heroDesc": "True luxury does not shout; it ticks with resolute, silent perfection upon your wrist."
-      },
-      "contactPage": {
-        "eyebrow": "ATELIER VISITS & CONCIERGE",
-        "title": "Connect With Our Horologists",
-        "subtitle": "Questions about movements, sizing, servicing or private appointments? Our concierge team is ready to assist.",
-        "boutiqueTitle": "Aurelia Atelier & Boutique",
-        "phoneTitle": "Concierge Hotline & WhatsApp",
-        "emailTitle": "Direct Correspondence",
-        "hoursTitle": "Boutique Hours",
-        "registrationLabel": "OFFICIAL REGISTRATION",
-        "form": {
-          "title": "Send a Direct Message",
-          "subtitle": "Every message is answered individually within 4 business hours.",
-          "nameLabel": "Your Full Name",
-          "namePlaceholder": "e.g. Rohan Mehta",
-          "emailLabel": "Email Address",
-          "emailPlaceholder": "name@domain.com",
-          "phoneLabel": "Phone / WhatsApp",
-          "phonePlaceholder": "+91 98765 43210",
-          "subjectLabel": "Subject of Inquiry",
-          "subjects": [
-            "Product Specifications & Inquiries",
-            "Order & Shipping Support",
-            "Warranty & Servicing",
-            "Private Atelier Appointment",
-            "Corporate & Bulk Gifting"
-          ],
-          "messageLabel": "Your Message",
-          "messagePlaceholder": "Please describe your inquiry with Aurelia Chronometry...",
-          "submitText": "Transmit Message →",
-          "successMessage": "Thank you. Our concierge will reply within 4 business hours."
-        }
-      },
-      "policies": {
-        "privacySummary": "Your personal and payment details are never shared with any third party.",
-        "shippingSummary": "Every timepiece ships fully insured via express air courier. Complimentary on orders above ₹999.",
-        "returnsSummary": "7-day inspection period. Unworn timepieces with original packaging may be returned.",
-        "warrantySummary": "5-year global atelier warranty with complimentary 3rd-year maintenance service."
+      "newsletter": {
+        "eyebrow": "ROYAL HERBAL CIRCLE",
+        "heading": "RECEIVE 10% OFF YOUR FIRST RITUAL",
+        "subtitle": "Subscribe for limited small-batch release notifications, scalp wellness guides, and exclusive private discounts."
       },
       "footer": {
-        "newsletterEyebrow": "THE AURELIA CIRCLE",
-        "newsletterTitle": "RECEIVE 15% OFF YOUR FIRST TIMEPIECE",
-        "newsletterSub": "Subscribe for private previews, limited editions and horological insights.",
-        "bio": "Aurelia Chronometry crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide.",
-        "copyright": "© 2026 AURELIA CHRONOMETRY. ALL RIGHTS RESERVED.",
-        "developerCredit": "Powered by Aurelia Atelier Platform",
-        "columns": [
-          {
-            "title": "SHOP TIMEPIECES",
-            "links": [
-              {
-                "label": "Sovereign Emerald 41",
-                "href": "/product/?slug=aurelia-sovereign-emerald-41"
-              },
-              {
-                "label": "DeepOcean Ceramic Diver",
-                "href": "/product/?slug=aurelia-deepocean-ceramic-diver"
-              },
-              {
-                "label": "The Collector's Duo",
-                "href": "/product/?slug=aurelia-collectors-duo"
-              },
-              {
-                "label": "Browse All Timepieces",
-                "href": "/shop/"
-              }
-            ]
-          },
-          {
-            "title": "COMPANY & CRAFT",
-            "links": [
-              {
-                "label": "About Aurelia",
-                "href": "/about/"
-              },
-              {
-                "label": "72-Hour Calibration",
-                "href": "/about/#heritage"
-              },
-              {
-                "label": "Swiss Movement Sourcing",
-                "href": "/about/#sourcing"
-              },
-              {
-                "label": "Boutique & Atelier Visits",
-                "href": "/contact/"
-              }
-            ]
-          },
-          {
-            "title": "CUSTOMER CARE",
-            "links": [
-              {
-                "label": "Track Your Order",
-                "href": "/order-status/"
-              },
-              {
-                "label": "Contact Customer Care",
-                "href": "/contact/"
-              },
-              {
-                "label": "Secure Web Checkout",
-                "href": "/checkout/"
-              },
-              {
-                "label": "Complete Catalog",
-                "href": "/shop/"
-              }
-            ]
-          }
-        ],
-        "legalLinks": [
-          {
-            "label": "Privacy Policy",
-            "href": "/privacy/"
-          },
-          {
-            "label": "Terms of Service",
-            "href": "/terms/"
-          },
-          {
-            "label": "Shipping & Returns",
-            "href": "/shipping-policy/"
-          },
-          {
-            "label": "Sitemap",
-            "href": "/sitemap/"
-          }
-        ]
+        "bio": "Nachiyar Herbals & Cosmetics celebrates the timeless grace of royal personal care. Formulated without synthetic shortcuts. Handcrafted in India.",
+        "watermark": "NACHIYAR",
+        "copyright": "© 2026 NACHIYAR HERBALS & COSMETICS. ALL RIGHTS RESERVED."
       },
-      "reviewForm": {
-        "eyebrow": "COMMUNITY COLLECTOR REVIEWS",
-        "title": "Share Your Experience",
-        "subtitle": "Your feedback is reviewed by our atelier team and published to the live community ticker.",
-        "submitText": "Submit Review for Verification ✦"
-      },
-      "craftsmanship": {
-        "eyebrow": "OUR HOROLOGICAL CRAFTSMANSHIP",
-        "title": "Assembled with Reverence",
-        "subtitle": "Every movement respects the balance between centuries of Swiss tradition and modern precision engineering.",
-        "items": [
-          {
-            "title": "72-Hour Calibration Ritual",
-            "desc": "Each caliber is regulated in five positions and three temperatures over three full days, so every second ticks true before it ever reaches your wrist."
-          },
-          {
-            "title": "Hand-Finished Côtes de Genève",
-            "desc": "Bridges and rotors are striped and bevelled by hand under magnification, a finishing detail visible only through the sapphire caseback, yet never skipped."
-          },
-          {
-            "title": "Anti-Magnetic, Shock-Safe Precision",
-            "desc": "Nivaflex mainspring, Glucydur balance and Incabloc shock protection keep timing stable through daily knocks, magnets and temperature swings."
-          }
-        ],
-        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=1000",
-        "expert": {
-          "label": "TRADITIONAL HOROLOGY",
-          "quote": "Most modern watches trade finishing for volume. Aurelia's hand-regulated calibers keep the old discipline alive: slower to make, far longer to last.",
-          "author": "Henri V. Aurelia",
-          "role": "Master Horologist & Atelier Director"
+      "orbitEyebrow": "SACRED BOTANICAL CRAFTSMANSHIP",
+      "orbitHeading": "18 Sacred Earth-Born Botanicals",
+      "orbitSubtext": "Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.",
+      "orbitCenterImage": "assets/hero-bottle-oil-transparent.png",
+      "orbitBadge": "18 Rare Herbs • Cold-Pressed",
+      "orbitIdleIcon": "🌿",
+      "orbitIdleText": "Hover over any botanical herb to discover its sacred hair-care benefits",
+      "orbit": [
+        {
+          "name": "Coconut Oil",
+          "icon": "assets/ingredients/coconut-oil.jpg",
+          "tag": "Pure Base",
+          "desc": "Pure cold-pressed virgin oil that penetrates deep into hair shafts, sealing in moisture and halting protein loss."
         },
-        "cta": {
-          "text": "Explore The Atelier →",
-          "link": "/shop/"
-        }
-      },
-      "gallery": {
-        "eyebrow": "OUR HOROLOGICAL CIRCLE",
-        "handle": "@aureliatime",
-        "ctaText": "Follow On Instagram ↗",
-        "ctaLink": "https://instagram.com/aureliatime",
-        "items": [
-          {
-            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=1000",
-            "label": "View Movement"
-          },
-          {
-            "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=80&h=700&crop=focalpoint&fp-x=0.3&fp-y=0.5&fp-z=1.5",
-            "label": "View Collection"
-          },
-          {
-            "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=80&h=700&crop=focalpoint&fp-x=0.7&fp-y=0.7&fp-z=2",
-            "label": "View Detail"
-          },
-          {
-            "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=80&h=700&crop=focalpoint&fp-x=0.5&fp-y=0.2&fp-z=1.3",
-            "label": "Pure Precision"
-          }
-        ]
-      },
-      "offerPopup": {
-        "badge": "✨ LIMITED TIME SPECIAL PRIVILEGE",
-        "title": "Flat 15% OFF On Swiss Timepieces",
-        "text": "Use code AURELIA15 at checkout. Valid for a limited period.",
-        "code": "AURELIA15",
-        "copyText": "📋 Copy Code",
-        "ctaText": "Claim Privilege Now →",
-        "ctaLink": "/shop/"
-      },
-      "mysteryDiscount": {
-        "label": "🎁 MYSTERY DISCOUNT"
-      },
-      "nav": {
-        "links": [
-          {
-            "label": "Home",
-            "href": "/"
-          },
-          {
-            "label": "Shop Collections",
-            "href": "/shop/",
-            "dropdownProductIds": [
-              "AUR-CHRONO-001",
-              "AUR-DIVER-002",
-              "AUR-DUO-003"
-            ],
-            "dropdownFooter": "Explore Complete Atelier & All Timepieces"
-          },
-          {
-            "label": "About Us",
-            "href": "/about/"
-          },
-          {
-            "label": "Contact",
-            "href": "/contact/"
-          }
-        ],
-        "signInText": "Sign In",
-        "bagText": "Bag",
-        "bottomNav": {
-          "enabled": true,
-          "theme": {
-            "bubbleGradient": "linear-gradient(135deg, #064E3B 0%, #047857 50%, #064E3B 100%)",
-            "bubbleBorder": "rgba(226, 183, 85, 0.6)",
-            "activeTextColor": "#064E3B",
-            "inactiveTextColor": "#52796F",
-            "waveStroke": "rgba(6, 78, 59, 0.22)"
-          },
-          "items": [
-            {
-              "name": "Home",
-              "url": "/"
-            },
-            {
-              "name": "Shop",
-              "url": "/shop/"
-            },
-            {
-              "name": "About Us",
-              "url": "/about/"
-            },
-            {
-              "name": "Contact",
-              "url": "/contact/"
-            }
-          ]
-        }
-      },
-      "cart": {
-        "title": "Your Atelier Bag",
-        "emptyTitle": "Your bag is currently empty",
-        "emptyText": "Treat your wrist to Swiss precision.",
-        "emptyCta": "Explore Timepieces",
-        "upsellLabel": "✦ PERFECT PAIRING",
-        "upsellProductId": "AUR-STRAP-005",
-        "checkoutText": "Proceed To Secure Checkout →",
-        "footnote": "Inclusive of all taxes. 100% Satisfaction Guarantee."
-      },
-      "homeShowcase": {
-        "slot1": {
-          "productId": "AUR-CHRONO-001",
-          "title": "Aurelia Sovereign Emerald 41",
-          "subtitle": "Caliber 2824 • Sunburst Emerald",
-          "price": 48500,
-          "mrp": 56000,
-          "customImage": "/assets/sovereign-watch.png"
+        {
+          "name": "Hibiscus Flower",
+          "icon": "assets/ingredients/hibiscus-flower.jpg",
+          "tag": "Follicle Revival",
+          "desc": "Rich in natural amino acids and vitamin C that stimulate dormant hair follicles and promote thick regrowth."
         },
-        "slot2": {
-          "productId": "AUR-DIVER-002",
-          "title": "Aurelia DeepOcean Ceramic Diver",
-          "subtitle": "300M Diver • Helium Escape Valve",
-          "price": 54000,
-          "mrp": 62500,
-          "customImage": "/assets/ceramic-diver.png"
+        {
+          "name": "Fenugreek",
+          "icon": "assets/ingredients/fenugreek.jpg",
+          "tag": "Scalp Moisture",
+          "desc": "Packed with natural lecithin and proteins that deeply hydrate strands, repair damage, and impart silky shine."
         },
-        "combo": {
-          "productId": "AUR-DUO-003",
-          "title": "The Aurelia Collector's Duo (Set of 2)",
-          "subtitle": "Sovereign Emerald 41 + DeepOcean Diver",
-          "price": 87125,
-          "mrp": 102500,
-          "customImage": "/assets/collectors-duo.png",
-          "tag": "BEST VALUE"
+        {
+          "name": "Aloe Vera",
+          "icon": "assets/ingredients/aloe-vera.jpg",
+          "tag": "Soothing Repair",
+          "desc": "Succulent botanical gel with proteolytic enzymes that soothe scalp inflammation and balance healthy pH levels."
+        },
+        {
+          "name": "Neem Leaves",
+          "icon": "assets/ingredients/neem-leaves.jpg",
+          "tag": "Scalp Purifier",
+          "desc": "Potent antiseptic green leaves that clear dandruff flakes, purify scalp pores, and prevent persistent itching."
+        },
+        {
+          "name": "Curry Leaves",
+          "icon": "assets/ingredients/curry-leaves.jpg",
+          "tag": "Melanin Boost",
+          "desc": "Abundant in beta-carotene and essential amino acids that preserve natural dark pigmentation and prevent greying."
+        },
+        {
+          "name": "Amla (Gooseberry)",
+          "icon": "assets/ingredients/moringa-leaf.jpg",
+          "tag": "Vitamin C Shield",
+          "desc": "Sacred Ayurvedic rasayana packed with ascorbic acid that strengthens keratin bonds and stops premature thinning."
+        },
+        {
+          "name": "Brahmi",
+          "icon": "assets/ingredients/marikozhundhu.jpg",
+          "tag": "Cranial Calmer",
+          "desc": "Traditional brain tonic herb that cools excess cranial heat, alleviates mental tension, and reinforces root fibers."
+        },
+        {
+          "name": "Bhringraj",
+          "icon": "assets/ingredients/bhringraj.jpg",
+          "tag": "King of Hair",
+          "desc": "The revered classical sovereign of Ayurvedic hair science. Activates micro-circulation across scalp beds."
+        },
+        {
+          "name": "Tulsi (Holy Basil)",
+          "icon": "assets/ingredients/tulsi-seed.jpg",
+          "tag": "Adaptogenic Tonic",
+          "desc": "Sacred adaptogenic foliage with antimicrobial eugenol that defends follicles against environmental toxins."
+        },
+        {
+          "name": "Rose Petals",
+          "icon": "assets/ingredients/rose-flower.jpg",
+          "tag": "Velvet Softener",
+          "desc": "Handpicked crimson petals that impart a soothing floral aromatherapy while toning sensitive scalp dermal layers."
+        },
+        {
+          "name": "Vetiver Root",
+          "icon": "assets/ingredients/vetiver.jpg",
+          "tag": "Root Grounding",
+          "desc": "Earthy golden grass roots with profound cooling properties that eliminate scalp irritation and excessive oiliness."
+        },
+        {
+          "name": "Shikakai",
+          "icon": "assets/ingredients/banana-stem.jpg",
+          "tag": "Natural Cleanser",
+          "desc": "Mild botanical pods with natural saponins that wash away sebum without disrupting delicate cuticle integrity."
+        },
+        {
+          "name": "Reetha (Soapnut)",
+          "icon": "assets/ingredients/datura-leaf.jpg",
+          "tag": "Silken Saponin",
+          "desc": "Gentle fruit pods that yield a luxuriously cushiony cloud foam, leaving hair buoyant, detangled, and radiant."
+        },
+        {
+          "name": "Indigo Leaves",
+          "icon": "assets/ingredients/hibiscus-leaf.jpg",
+          "tag": "Lustre Enhancer",
+          "desc": "Ancient indigo leaves that enrich natural hair gloss, intensify strand depth, and shield against UV sun-bleaching."
+        },
+        {
+          "name": "Black Sesame Oil",
+          "icon": "assets/ingredients/coconut.jpg",
+          "tag": "Solar Carrier",
+          "desc": "Deep-penetrating dark seed oil that acts as the bioavailable carrier for 21 days of natural solar maturation."
+        },
+        {
+          "name": "Castor Oil",
+          "icon": "assets/ingredients/aavarai-leaf.jpg",
+          "tag": "Strand Thickener",
+          "desc": "Viscous ricinoleic acid-rich oil that coats each shaft, dramatically minimizing breakage and sealing split ends."
+        },
+        {
+          "name": "Lavender Flower",
+          "icon": "assets/ingredients/rose-root.jpg",
+          "tag": "Aromatherapy",
+          "desc": "Pure calming lavender blossom essential oil that relaxes the nervous system and delivers our signature fragrance."
         }
-      }
+      ]
     },
     "business": {
-      "phone": "+91 94455 66778",
-      "email": "concierge@aureliatime.com",
-      "address": "Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001",
-      "gstin": "29AAACA1234E1Z8",
-      "timings": "Mon - Sat: 10:00 AM - 7:30 PM",
+      "phone": "+91 94440 88990",
+      "email": "care@nachiyarherbals.com",
+      "address": "Nachiyar Botanical Heritage, No. 18 Temple Ring Road, Madurai, Tamil Nadu - 625001",
+      "gstin": "33AAACH9876K1Z2",
+      "timings": "Mon - Sat: 9:30 AM - 8:30 PM",
       "socialLinks": {
-        "whatsapp": "+91 94455 66778",
-        "instagram": "https://instagram.com/aureliatime",
-        "youtube": "https://youtube.com/@aureliatime"
+        "whatsapp": "+91 94440 88990",
+        "instagram": "https://instagram.com/nachiyarherbals",
+        "facebook": "https://facebook.com/nachiyarherbals",
+        "youtube": ""
       }
     },
-    "freeShippingThreshold": 999,
-    "couponCode": "AURELIA15",
-    "discountPercent": 15,
-    "couponActive": true,
-    "socialLinks": {
-      "whatsapp": "+91 94455 66778",
-      "instagram": "https://instagram.com/aureliatime",
-      "facebook": "",
-      "youtube": "https://youtube.com/@aureliatime"
+    "homeShowcase": {
+      "slot1": {
+        "productId": "prod_oil_01",
+        "title": "Herbal Hair Oil",
+        "subtitle": "Cold-Pressed • 18 Rare Herbs • Root Activating",
+        "price": 299,
+        "customImage": "assets/new-oil-bottle-card.jpg"
+      },
+      "slot2": {
+        "productId": "prod_shampoo_02",
+        "title": "Hibiscus Flower Shampoo",
+        "subtitle": "Fresh Hibiscus Petals • Coconut Surfactants",
+        "price": 249,
+        "customImage": "assets/new-shampoo-bottle-card.jpg"
+      },
+      "combo": {
+        "productId": "prod_duo_03",
+        "title": "The Royal Hair Ritual (Duo Set)",
+        "subtitle": "Complete Restorative Duo • Save ₹149",
+        "price": 499,
+        "customImage": "assets/duo-ritual-new.jpg",
+        "tag": "BEST VALUE"
+      }
     },
     "paymentMethods": {
       "cod": {
@@ -956,8 +568,8 @@
         "enabled": true,
         "label": "UPI (Google Pay, PhonePe, Paytm, BHIM)",
         "description": "Instant UPI payment with dynamic QR & VPA",
-        "upiId": "digitechzo digiwatches@okhdfcbank",
-        "merchantName": "Digitechzo DigiWatches"
+        "upiId": "nachiyar@okhdfcbank",
+        "merchantName": "Nachiyar Herbals & Cosmetics"
       },
       "card": {
         "enabled": true,
@@ -969,9 +581,82 @@
         "label": "Net Banking",
         "description": "All major Indian banks supported"
       }
+    },
+    "tagline": "Pure Botanical Elegance & Ayurvedic Care",
+    "storeTimings": "Mon - Sat: 9:30 AM - 8:30 PM",
+    "couponCode": "ROYAL15",
+    "discountPercent": 15,
+    "couponActive": true,
+    "socialLinks": {
+      "whatsapp": "+91 94440 88990",
+      "instagram": "https://instagram.com/nachiyarherbals",
+      "facebook": "https://facebook.com/nachiyarherbals",
+      "youtube": ""
     }
   },
-  "marketplace_channels": [],
-  "marketplace_skus": [],
+  "marketplace_channels": [
+    {
+      "id": "flipkart",
+      "name": "Flipkart Marketplace",
+      "sellerId": "FK_VERIFIED_99",
+      "feePercent": 15,
+      "themeColor": "#2874F0",
+      "mode": "SANDBOX",
+      "isActive": true,
+      "lastSyncAt": "2026-11-03T05:29:22.169Z"
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon India",
+      "sellerId": "AZ_VERIFIED_101",
+      "feePercent": 17,
+      "themeColor": "#FF9900",
+      "mode": "SANDBOX",
+      "isActive": true,
+      "lastSyncAt": "2026-11-03T05:29:22.170Z"
+    },
+    {
+      "id": "meesho",
+      "name": "Meesho Supplier Hub",
+      "sellerId": "MSH_777",
+      "feePercent": 10,
+      "themeColor": "#F43397",
+      "mode": "SANDBOX",
+      "isActive": true,
+      "lastSyncAt": "2026-11-03T05:29:22.170Z"
+    }
+  ],
+  "marketplace_skus": [
+    {
+      "id": "msku_oil_fk",
+      "productId": "prod_oil_01",
+      "channel": "flipkart",
+      "channelSku": "FK-NACH-OIL200",
+      "externalId": "FSN98239012",
+      "listingPrice": 299,
+      "syncStatus": "SYNCED",
+      "lastSyncedAt": "2026-11-03T05:29:22.170Z"
+    },
+    {
+      "id": "msku_oil_amz",
+      "productId": "prod_oil_01",
+      "channel": "amazon",
+      "channelSku": "AZ-NACH-OIL200",
+      "externalId": "B09NACH01",
+      "listingPrice": 299,
+      "syncStatus": "SYNCED",
+      "lastSyncedAt": "2026-11-03T05:29:22.170Z"
+    },
+    {
+      "id": "msku_oil_msh",
+      "productId": "prod_oil_01",
+      "channel": "meesho",
+      "channelSku": "MSH-NACH-OIL200",
+      "externalId": "MSH902812",
+      "listingPrice": 299,
+      "syncStatus": "SYNCED",
+      "lastSyncedAt": "2026-11-03T05:29:22.170Z"
+    }
+  ],
   "marketplace_orders": []
 }

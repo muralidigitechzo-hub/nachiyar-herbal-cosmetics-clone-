@@ -46,7 +46,7 @@ export default function handler(req, res) {
 
     if (req.method === 'POST') {
       const newProd = {
-        id: req.body.id || `AUR-PROD-${Date.now().toString().slice(-4)}`,
+        id: req.body.id || `NH-PROD-${Date.now().toString().slice(-4)}`,
         name: req.body.name || 'New Creation',
         slug: req.body.slug || (req.body.name || 'new-product').toLowerCase().replace(/[^a-z0-9]+/g, '-'),
         price: Number(req.body.price || 0),

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digitechzo DigiWatches | Excellence & Precision</title>
+  <title>Nachiyar Herbals & Cosmetics | Pure Botanical Elegance & Ayurvedic Care</title>
   <!-- Official Brand Favicon -->
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="shortcut icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/favicon.png">
-  <meta name="description" content="Hand-assembled automatic chronometers engineered with sapphire crystal, 72-hour power reserve, and surgical-grade 316L stainless steel.">
+  <link rel="icon" type="image/png" href="/assets/digitechzo-logo.png">
+  <link rel="shortcut icon" type="image/png" href="/assets/digitechzo-logo.png">
+  <link rel="apple-touch-icon" type="image/png" href="/assets/digitechzo-logo.png">
+  <meta name="description" content="Small-batch restorative formulations deeply steeped with 18 rare cold-pressed botanicals according to traditional texts.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,1154 +18,31 @@
   <script src="theme-engine.js"></script>
   <style id="dynamicBrandTheme">
     :root {
-      --color-canvas: #FFFFFF;
-      --color-canvas-alt: #F8FAFC;
+      --color-canvas: #F9F8F5;
+      --color-canvas-alt: #FFFFFF;
       --color-surface: #FFFFFF;
-      --color-text-main: #1E242B;
-      --color-text-muted: #556070;
-      --color-lavender-primary: #57B71B;
-      --color-lavender-dark: #00f5a0;
-      --color-lavender-light: rgba(87, 183, 27, 0.12);
-      --color-gold: #469815;
-      --color-gold-light: rgba(70, 152, 21, 0.18);
-      --color-gold-dark: #00f5a0;
-      --gold-gradient: linear-gradient(135deg, #469815 0%, #00f5a0 100%);
-      --gold-glow: 0 4px 20px rgba(70, 152, 21, 0.35);
-      --color-hibiscus-primary: #1E293B;
-      --color-hibiscus-dark: #1E293B;
-      --color-bundle-dark: #14532D;
-      --color-bundle-accent: #469815;
-      --card-bg-1: #064E3B;
-      --card-bg-2: #1E293B;
-      --card-bg-bundle: #14532D;
-      --promo-banner-bg: linear-gradient(135deg, #57B71B 0%, #14532D 100%);
+      --color-text-main: #191319;
+      --color-text-muted: #64748B;
+      --color-lavender-primary: #7C5AAB;
+      --color-lavender-dark: #583B82;
+      --color-lavender-light: rgba(124, 90, 171, 0.12);
+      --color-gold: #D4AF37;
+      --color-gold-light: rgba(212, 175, 55, 0.18);
+      --color-gold-dark: #583B82;
+      --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #583B82 100%);
+      --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.35);
+      --color-hibiscus-primary: #822234;
+      --color-hibiscus-dark: #822234;
+      --color-bundle-dark: #4a2870;
+      --color-bundle-accent: #D4AF37;
+      --card-bg-1: #6b4e9b;
+      --card-bg-2: #822234;
+      --card-bg-bundle: #4a2870;
+      --promo-banner-bg: linear-gradient(135deg, #7C5AAB 0%, #4a2870 100%);
       --font-heading: 'Cinzel', serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
     
-/* ==========================================================================
-   DIGITECHZO THEME OVERRIDES (DRIVEN VIA site-config.json)
-   ========================================================================== */
-:root {
-  --color-lavender-primary: #57B71B !important;
-  --theme-color-primary: #57B71B !important;
-  --color-lavender-dark: #469815 !important;
-  --color-gold: #57B71B !important;
-  --color-gold-dark: #469815 !important;
-  --gold-gradient: linear-gradient(135deg, #57B71B 0%, #469815 100%) !important;
-  --gold-glow: 0 4px 20px rgba(87, 183, 27, 0.35) !important;
-  --admin-primary: #57B71B !important;
-  --admin-primary-dark: #469815 !important;
-}
-
-/* Storefront Action Buttons & Accents */
-.btn-primary,
-.btn-explore,
-.btn-cta,
-.btn-submit,
-.btn-checkout,
-.mystery-discount-banner,
-.announcement-bar,
-.hero-cta-group .btn-primary {
-  background: #57B71B !important;
-  border-color: #57B71B !important;
-  color: #FFFFFF !important;
-}
-
-.btn-primary:hover,
-.btn-explore:hover,
-.hero-cta-group .btn-primary:hover {
-  background: #469815 !important;
-  border-color: #469815 !important;
-}
-
-/* Admin Console Top Action, Sidebar Active Tab, and POS Buttons */
-.admin-sidebar-nav .nav-item.is-active,
-.admin-sidebar-nav .nav-item.active,
-#nav-dashboard.is-active {
-  background: #57B71B !important;
-  color: #FFFFFF !important;
-}
-
-.admin-sidebar-nav .nav-item.is-active .nav-icon svg,
-.admin-sidebar-nav .nav-item.active .nav-icon svg {
-  stroke: #FFFFFF !important;
-}
-
-#btnHeaderNewSale,
-#btnOpenPosModal,
-.btn-pos-primary,
-#btnGenerateInvoice,
-#btnReceiptOkClose {
-  background: #57B71B !important;
-  border-color: #57B71B !important;
-  color: #FFFFFF !important;
-}
-
-#btnHeaderNewSale:hover,
-#btnGenerateInvoice:hover {
-  background: #469815 !important;
-  border-color: #469815 !important;
-}
-
-/* Badges & Metrics in DigiTechzo Green */
-.badge-primary,
-.badge-success {
-  background: rgba(87, 183, 27, 0.12) !important;
-  color: #57B71B !important;
-  border-color: rgba(87, 183, 27, 0.25) !important;
-}
-
-/* ==========================================================================
-   AURELIA CHRONOMETRY — COMPREHENSIVE MOBILE RESPONSIVE ENGINE
-   Configured in & driven exclusively from site-config.json
-   ========================================================================== */
-
-/* 1. Global Viewport & Container Containment */
-html, body {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-  width: 100% !important;
-  position: relative !important;
-  box-sizing: border-box !important;
-  -webkit-text-size-adjust: 100% !important;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box !important;
-}
-
-img, svg, video {
-  max-width: 100% !important;
-  height: auto;
-}
-
-/* 2. Announcement Bar & Ticker */
-.announcement-bar {
-  max-width: 100vw !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-  padding: 8px 12px !important;
-  font-size: 0.72rem !important;
-}
-
-.announcement-ticker {
-  max-width: 100% !important;
-  overflow: hidden !important;
-}
-
-/* 3. Site Header & Brand Lockup on Mobile */
-@media (max-width: 768px) {
-  .site-header {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding-inline: 0 !important;
-  }
-  
-  .header-container {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 10px 14px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    box-sizing: border-box !important;
-    gap: 8px !important;
-  }
-
-  .mobile-nav-toggle {
-    display: flex !important;
-    flex-shrink: 0 !important;
-    z-index: 10 !important;
-  }
-
-  .brand-link {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    min-width: 0 !important;
-    flex: 1 1 auto !important;
-    justify-content: flex-start !important;
-  }
-
-  .brand-crest {
-    width: 32px !important;
-    height: 32px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .brand-logo-img {
-    max-width: 32px !important;
-    max-height: 32px !important;
-  }
-
-  .brand-text-lockup {
-    min-width: 0 !important;
-  }
-
-  .brand-name {
-    font-size: 1.05rem !important;
-    letter-spacing: 0.08em !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  .brand-sub {
-    display: none !important;
-  }
-
-  .header-actions {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .btn-header-auth {
-    padding: 6px 10px !important;
-    font-size: 0.78rem !important;
-    white-space: nowrap !important;
-  }
-
-  .btn-cart-trigger {
-    padding: 6px 10px !important;
-  }
-}
-
-/* 4. Mystery Discount / Coupon Modal & Promo Banner */
-.coupon-modal-card,
-.promo-banner,
-.mystery-discount-banner,
-.floating-coupon-card {
-  max-width: calc(100vw - 24px) !important;
-  box-sizing: border-box !important;
-  margin-inline: auto !important;
-  overflow: hidden !important;
-  word-break: break-word !important;
-}
-
-@media (max-width: 768px) {
-  .promo-banner {
-    padding: 20px 16px !important;
-    margin: 16px 12px !important;
-    border-radius: 16px !important;
-  }
-  .promo-banner h2, .promo-banner h3 {
-    font-size: 1.25rem !important;
-    line-height: 1.3 !important;
-  }
-  .promo-banner-code-box {
-    flex-direction: column !important;
-    gap: 8px !important;
-    width: 100% !important;
-  }
-  .promo-banner-code-box .btn {
-    width: 100% !important;
-  }
-}
-
-/* 5. Hero Section: Mobile vs Desktop Split (Eliminates Dual Hero Overlap) */
-@media (max-width: 767px) {
-  /* Strictly hide the desktop 3-card flanking hero on mobile */
-  .hero-section--flanking .hero-flanking-wrapper {
-    display: none !important;
-  }
-
-  /* Show mobile hero showcase exclusively */
-  .mobile-hero-showcase {
-    display: block !important;
-    position: relative !important;
-    width: 100% !important;
-    background-color: rgba(255, 255, 255, 0.04) !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 20px !important;
-  }
-
-  .m-hero-scroll-track {
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  .m-hero-sticky-frame {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    padding: 10px 14px 16px !important;
-    box-sizing: border-box !important;
-  }
-
-  .m-hero-stage--heading {
-    text-align: center !important;
-    margin-bottom: 12px !important;
-    width: 100% !important;
-    max-width: 420px !important;
-  }
-
-  .m-hero-title {
-    font-size: clamp(1.4rem, 6vw, 1.85rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-    color: #0F291E !important;
-    margin: 0 !important;
-  }
-
-  .m-title-accent,
-  .title-italic-accent {
-    color: #57B71B !important;
-    font-style: italic !important;
-  }
-
-  .m-hero-products-row {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 12px !important;
-    width: 100% !important;
-    max-width: 360px !important;
-    margin: 0 auto 12px auto !important;
-  }
-
-  .m-hero-product-col {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .m-bottle-pill {
-    font-size: 0.625rem !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.06em !important;
-    padding: 2px 8px !important;
-    border-radius: 999px !important;
-    background: rgba(87, 183, 27, 0.08) !important;
-    border: 1px solid #57B71B !important;
-    color: #57B71B !important;
-    margin-bottom: 4px !important;
-  }
-
-  .m-bottle-pill--shampoo {
-    border-color: #E2B755 !important;
-    color: #B45309 !important;
-    background: rgba(226, 183, 85, 0.12) !important;
-  }
-
-  .m-bottle-box {
-    width: 100% !important;
-    height: 135px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin-bottom: 4px !important;
-  }
-
-  .m-bottle-img {
-    max-height: 125px !important;
-    width: auto !important;
-    max-width: 100% !important;
-    object-fit: contain !important;
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15)) !important;
-  }
-
-  .m-bottle-meta {
-    margin-bottom: 6px !important;
-  }
-
-  .m-bottle-name {
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    color: #0F291E !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    max-width: 150px !important;
-  }
-
-  .m-bottle-sub {
-    font-size: 0.75rem !important;
-    font-weight: 700 !important;
-    color: #57B71B !important;
-    margin-top: 2px !important;
-  }
-
-  .m-hero-product-col--shampoo .m-bottle-sub {
-    color: #B45309 !important;
-  }
-
-  .m-hero-stage--buy-oil .m-btn-buy,
-  .m-btn-buy {
-    width: 100% !important;
-    max-width: 130px !important;
-    padding: 8px 14px !important;
-    border-radius: 999px !important;
-    background-color: #57B71B !important;
-    color: #FFFFFF !important;
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.03em !important;
-    border: none !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 12px rgba(87, 183, 27, 0.28) !important;
-  }
-
-  .m-hero-stage--buy-shampoo .m-btn-buy,
-  .m-btn-buy--shampoo {
-    background-color: #1E293B !important;
-    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.28) !important;
-  }
-
-  .m-hero-stage--desc {
-    max-width: 340px !important;
-    margin: 0 auto 12px auto !important;
-    text-align: center !important;
-  }
-
-  .m-hero-desc {
-    font-size: 0.82rem !important;
-    color: #52796F !important;
-    line-height: 1.45 !important;
-  }
-
-  .m-hero-stage--cta {
-    width: 100% !important;
-    max-width: 320px !important;
-    margin: 0 auto !important;
-  }
-
-  .m-cta-group {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    width: 100% !important;
-  }
-
-  .m-cta-btn {
-    width: 100% !important;
-    padding: 10px 18px !important;
-    font-size: 0.82rem !important;
-    border-radius: 999px !important;
-    text-align: center !important;
-    justify-content: center !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    text-decoration: none !important;
-  }
-
-  .m-cta-btn--primary {
-    background: #57B71B !important;
-    color: #FFFFFF !important;
-    border: none !important;
-    box-shadow: 0 4px 14px rgba(87, 183, 27, 0.3) !important;
-  }
-
-  .m-cta-btn--secondary {
-    background: transparent !important;
-    border: 1.5px solid #57B71B !important;
-    color: #57B71B !important;
-  }
-}
-
-/* Tablet view only (768px to 992px) */
-@media (min-width: 768px) and (max-width: 992px) {
-  .mobile-hero-showcase {
-    display: none !important;
-  }
-
-  .hero-flanking-wrapper {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding-inline: 14px !important;
-    box-sizing: border-box !important;
-    gap: 20px !important;
-    overflow: hidden !important;
-  }
-
-  .hero-center-content {
-    order: -1 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 10px 0 !important;
-  }
-
-  .hero-title {
-    font-size: clamp(1.65rem, 6vw, 2.3rem) !important;
-    line-height: 1.25 !important;
-  }
-
-  .hero-description {
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-    padding-inline: 4px !important;
-  }
-
-  .hero-cta-group {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 10px !important;
-  }
-
-  .hero-cta-group .btn {
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-    padding: 14px 20px !important;
-  }
-
-  .hero-product-flank {
-    width: 100% !important;
-    max-width: 380px !important;
-    margin: 0 auto !important;
-  }
-
-  .hero-flank-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    margin: 0 auto !important;
-  }
-
-  .hero-pillars {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    gap: 12px !important;
-    padding: 16px !important;
-  }
-}
-
-/* Desktop view (>= 993px) */
-@media (min-width: 993px) {
-  .mobile-hero-showcase {
-    display: none !important;
-  }
-}
-
-/* 6. Marquee Ticker */
-.marquee-section {
-  width: 100% !important;
-  max-width: 100vw !important;
-  overflow: hidden !important;
-}
-
-.marquee-track {
-  width: max-content !important;
-}
-
-/* 7. 18-Module Circular Orbit Section (Clean Mobile View, No Node Collisions) */
-@media (max-width: 768px) {
-  .herbal-ingredients-section {
-    padding-block: 40px 30px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .ingredients-section-header {
-    padding-inline: 16px !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
-  }
-
-  .ingredients-section-header .section-heading {
-    font-size: clamp(1.35rem, 5vw, 1.85rem) !important;
-  }
-
-  .ingredients-section-header .section-subtext {
-    font-size: 0.88rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .orbit-stage-wrapper {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 10px 4px !important;
-    overflow: hidden !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
-  .orbit-stage {
-    --orbit-radius: 125px !important;
-    width: 320px !important;
-    height: 320px !important;
-    max-width: 95vw !important;
-    margin: 0 auto !important;
-    position: relative !important;
-  }
-
-  .orbit-ring--outer {
-    width: 250px !important;
-    height: 250px !important;
-  }
-
-  .orbit-ring--middle {
-    width: 200px !important;
-    height: 200px !important;
-  }
-
-  .orbit-ring--inner {
-    width: 160px !important;
-    height: 160px !important;
-  }
-
-  .orbit-center-bottle-wrap {
-    width: 110px !important;
-    height: 110px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    z-index: 5 !important;
-  }
-
-  .orbit-center-bottle {
-    max-width: 75px !important;
-    max-height: 75px !important;
-    object-fit: contain !important;
-  }
-
-  .bottle-caption-badge {
-    position: static !important;
-    bottom: auto !important;
-    left: auto !important;
-    transform: none !important;
-    margin-top: 4px !important;
-    font-size: 0.52rem !important;
-    padding: 2px 6px !important;
-    white-space: nowrap !important;
-    max-width: 110px !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    box-sizing: border-box !important;
-    background: rgba(87, 183, 27, 0.95) !important;
-    color: #E2B755 !important;
-    border: 1px solid rgba(226, 183, 85, 0.6) !important;
-    border-radius: 999px !important;
-  }
-
-  .orbit-node {
-    width: 28px !important;
-    height: 28px !important;
-  }
-
-  .orbit-node .node-avatar-wrap {
-    width: 28px !important;
-    height: 28px !important;
-  }
-
-  .orbit-node .node-avatar-icon {
-    font-size: 0.88rem !important;
-  }
-
-  .orbit-node .node-label {
-    display: none !important;
-  }
-
-  .orbit-idle-card,
-  .spotlight-card {
-    width: calc(100vw - 32px) !important;
-    max-width: 360px !important;
-    margin: 16px auto !important;
-    padding: 12px 14px !important;
-    box-sizing: border-box !important;
-  }
-}
-
-@media (max-width: 380px) {
-  .orbit-stage {
-    --orbit-radius: 110px !important;
-    width: 285px !important;
-    height: 285px !important;
-  }
-
-  .orbit-center-bottle {
-    max-width: 65px !important;
-    max-height: 65px !important;
-  }
-
-  .bottle-caption-badge {
-    font-size: 0.48rem !important;
-    max-width: 95px !important;
-  }
-}
-
-/* 8. Products & Collection Grid on Mobile */
-@media (max-width: 768px) {
-  .collection-grid,
-  .products-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    padding-inline: 12px !important;
-    gap: 22px !important;
-    box-sizing: border-box !important;
-  }
-
-  .product-card {
-    width: 100% !important;
-    max-width: 380px !important;
-    box-sizing: border-box !important;
-    margin: 0 auto !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-  }
-
-  .card-inner {
-    padding: 22px 18px !important;
-    box-sizing: border-box !important;
-  }
-
-  .card-top-bar {
-    margin-bottom: 12px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-  }
-
-  .card-top-bar .pill-tag {
-    font-size: 0.72rem !important;
-    padding: 4px 10px !important;
-    max-width: 200px !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  .circle-badge {
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    min-height: 44px !important;
-    padding: 2px !important;
-  }
-
-  .circle-badge .badge-number {
-    font-size: 0.65rem !important;
-  }
-
-  .circle-badge .badge-unit {
-    font-size: 0.52rem !important;
-  }
-
-  .card-image-wrap {
-    height: 190px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin-bottom: 10px !important;
-  }
-
-  .card-image-wrap img {
-    max-height: 180px !important;
-    object-fit: contain !important;
-  }
-
-  .product-card-title {
-    font-size: 1.35rem !important;
-    line-height: 1.25 !important;
-    margin-bottom: 6px !important;
-  }
-
-  .product-card-subtitle {
-    font-size: 0.82rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 10px !important;
-  }
-
-  .product-card-desc {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
-    margin-bottom: 16px !important;
-  }
-
-  .card-action-bar,
-  .product-card-pricing {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-    gap: 8px !important;
-  }
-
-  .card-pricing,
-  .price-group {
-    display: flex !important;
-    align-items: baseline !important;
-    gap: 6px !important;
-  }
-
-  .btn-quick-add,
-  .btn-add-to-bag,
-  .btn-card-add {
-    white-space: nowrap !important;
-    padding: 10px 16px !important;
-    min-width: 110px !important;
-    font-size: 0.85rem !important;
-    flex-shrink: 0 !important;
-    line-height: 1.2 !important;
-    border-radius: 999px !important;
-  }
-}
-
-/* 9. Bundle Banner (Collector's Duo) */
-@media (max-width: 768px) {
-  .bundle-banner {
-    padding: 22px 16px !important;
-    margin: 20px 12px !important;
-    width: auto !important;
-    max-width: calc(100vw - 24px) !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-    border-radius: 20px !important;
-  }
-
-  .bundle-banner-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    width: 100% !important;
-  }
-
-  .bundle-banner-title {
-    font-size: 1.35rem !important;
-    word-break: break-word !important;
-    line-height: 1.25 !important;
-  }
-
-  .bundle-banner-desc {
-    font-size: 0.88rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .bundle-pricing {
-    display: flex !important;
-    align-items: baseline !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-
-  .bundle-banner-cta .btn {
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-  }
-}
-
-/* 10. Reviews Section & Carousel on Mobile */
-@media (max-width: 768px) {
-  .reviews-section {
-    padding-block: 40px 30px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .reviews-header {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 14px !important;
-    padding-inline: 14px !important;
-    width: 100% !important;
-  }
-
-  .reviews-header-info {
-    width: 100% !important;
-  }
-
-  .reviews-header-action {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
-  .btn-comment-review {
-    width: 100% !important;
-    max-width: 280px !important;
-    justify-content: center !important;
-    padding: 12px 20px !important;
-  }
-
-  .reviews-scroller-viewport {
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 10px 12px 20px !important;
-    box-sizing: border-box !important;
-  }
-
-  .reviews-scroller-track {
-    display: flex !important;
-    gap: 14px !important;
-    width: max-content !important;
-  }
-
-  .review-card {
-    width: 290px !important;
-    min-width: 290px !important;
-    max-width: 85vw !important;
-    box-sizing: border-box !important;
-    padding: 20px 16px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .reviews-edge-nav {
-    display: none !important;
-  }
-}
-
-/* 11. Science / Triad Grid */
-@media (max-width: 768px) {
-  .science-section {
-    padding-block: 40px 30px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .triad-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    width: 100% !important;
-    padding-inline: 14px !important;
-    box-sizing: border-box !important;
-  }
-
-  .triad-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 24px 18px !important;
-  }
-}
-
-/* 12. Quote Section */
-@media (max-width: 768px) {
-  .quote-section {
-    padding-block: 40px 30px !important;
-    padding-inline: 16px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .quote-container,
-  .quote-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    width: 100% !important;
-  }
-
-  .quote-image-wrap {
-    width: 170px !important;
-    height: 170px !important;
-    margin: 0 auto 16px !important;
-  }
-
-  .quote-text {
-    font-size: 1.1rem !important;
-    line-height: 1.55 !important;
-  }
-}
-
-/* 13. Newsletter Form */
-@media (max-width: 768px) {
-  .newsletter-section {
-    padding-block: 40px 30px !important;
-    padding-inline: 14px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .newsletter-form,
-  .form-input-group {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    gap: 10px !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  .newsletter-form input[type="email"] {
-    width: 100% !important;
-    border-radius: 999px !important;
-    padding: 14px 20px !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-sizing: border-box !important;
-    color: #FFFFFF !important;
-  }
-
-  .newsletter-form button[type="submit"] {
-    width: 100% !important;
-    border-radius: 999px !important;
-    padding: 14px !important;
-    margin: 0 !important;
-    justify-content: center !important;
-  }
-}
-
-/* 14. Footer & Mobile Bottom Navigation Bar (Brand Themed) */
-@media (max-width: 991px) {
-  .site-footer {
-    padding-block: 40px 80px !important;
-    padding-inline: 16px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .footer-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 28px !important;
-  }
-
-  .mobile-curved-bottom-nav {
-    display: block !important;
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 70px !important;
-    background: #FFFFFF !important;
-    border-radius: 20px 20px 0 0 !important;
-    border-top: 1px solid rgba(87, 183, 27, 0.12) !important;
-    box-shadow: 0 -8px 24px rgba(87, 183, 27, 0.08) !important;
-    z-index: 9999 !important;
-    user-select: none !important;
-    -webkit-tap-highlight-color: transparent !important;
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), 6px) !important;
-  }
-
-  /* Active elevated circular bubble with Aurelia emerald & gold theme */
-  .nav-bubble-circle,
-  #navBubbleCircle {
-    background: linear-gradient(135deg, #57B71B 0%, #469815 50%, #57B71B 100%) !important;
-    box-shadow: 0 6px 18px rgba(87, 183, 27, 0.42) !important;
-    border: 1.5px solid rgba(226, 183, 85, 0.6) !important;
-  }
-
-  .bubble-icon-slot svg {
-    stroke: #FFFFFF !important;
-    stroke-width: 2.2 !important;
-  }
-
-  /* Wave arch border stroke */
-  .nav-wave-shape svg path:last-child {
-    stroke: rgba(87, 183, 27, 0.22) !important;
-  }
-
-  /* Active tab text in Emerald brand color */
-  .mobile-nav-tab.is-active .tab-label {
-    color: #57B71B !important;
-    font-weight: 800 !important;
-  }
-
-  /* Inactive tab icons and labels */
-  .mobile-nav-tab .tab-icon-wrap {
-    color: #52796F !important;
-  }
-
-  .mobile-nav-tab .tab-icon-wrap svg {
-    stroke: #52796F !important;
-  }
-
-  .mobile-nav-tab .tab-label {
-    color: #52796F !important;
-  }
-}
-
-
-/* High Contrast Bundle Banner (DigiTechzo Brand Contrast) */
-.bundle-banner {
-  background: linear-gradient(135deg, #0d381c 0%, #14532D 60%, #0a2d17 100%) !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(87, 183, 27, 0.4) !important;
-}
-.bundle-eyebrow {
-  color: #00f5a0 !important;
-  font-weight: 800 !important;
-  text-shadow: 0 1px 10px rgba(0, 245, 160, 0.4) !important;
-}
-.bundle-title {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-.bundle-description {
-  color: #F1F5F9 !important;
-  opacity: 0.96 !important;
-}
-.bundle-features {
-  color: #FFFFFF !important;
-  font-weight: 600 !important;
-}
-.bundle-features span {
-  color: #FFFFFF !important;
-}
-.discount-pill {
-  background-color: rgba(0, 245, 160, 0.2) !important;
-  color: #00f5a0 !important;
-  border: 1px solid rgba(0, 245, 160, 0.45) !important;
-  font-weight: 800 !important;
-}
-.bundle-badge {
-  background-color: #00f5a0 !important;
-  color: #0B1910 !important;
-  font-weight: 800 !important;
-}
-
-/* Storefront & Subpage Action Buttons (About, Contact, Header) */
-.contact-submit-btn,
-.btn-contact-submit {
-  background: #57B71B !important;
-  color: #FFFFFF !important;
-  border: none !important;
-  font-weight: 700 !important;
-  box-shadow: 0 6px 18px rgba(87, 183, 27, 0.35) !important;
-}
-.contact-submit-btn:hover,
-.btn-contact-submit:hover {
-  background: #469815 !important;
-  box-shadow: 0 10px 24px rgba(87, 183, 27, 0.45) !important;
-}
-.btn-bundle-add,
-.btn-quick-add {
-  background: #57B71B !important;
-  color: #FFFFFF !important;
-}
-.btn-bundle-add:hover,
-.btn-quick-add:hover {
-  background: #469815 !important;
-}
-
   </style>
 </head>
 <body class="page-body">
@@ -1174,11 +51,11 @@ img, svg, video {
   <aside class="announcement-bar" role="complementary" aria-label="Store Announcement">
     <div class="announcement-ticker">
       <div class="ticker-track">
-        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span>ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES</span>
         <span aria-hidden="true">•</span>
-        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span>ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES</span>
         <span aria-hidden="true">•</span>
-        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span>ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES</span>
       </div>
     </div>
   </aside>
@@ -1196,11 +73,11 @@ img, svg, video {
       <!-- Brand Logo & Name -->
       <a href="/" class="brand-link" id="brandHomeLink">
         <div class="brand-crest">
-          <img src="/assets/logo.png" alt="Digitechzo DigiWatches Logo" class="brand-logo-img">
+          <img src="/assets/digitechzo-logo.png" alt="Nachiyar Herbals & Cosmetics Logo" class="brand-logo-img">
         </div>
         <div class="brand-text-lockup">
-          <span class="brand-name">DIGITECHZO DIGIWATCHES</span>
-          <span class="brand-sub">EXCELLENCE & PRECISION</span>
+          <span class="brand-name">NACHIYAR</span>
+          <span class="brand-sub">PURE BOTANICAL ELEGANCE & AYURVEDIC CARE</span>
         </div>
       </a>
 
@@ -1215,43 +92,43 @@ img, svg, video {
             <!-- Mega-menu Preview -->
             <div class="nav-dropdown-mega">
               <div class="mega-grid">
-                <a href="/product/?slug=aurelia-sovereign-emerald-41" class="mega-card">
+                <a href="/product/?slug=herbal-hair-oil" class="mega-card">
                   <div class="mega-card-thumb" style="display:flex;align-items:center;justify-content:center;background:var(--color-canvas-alt, #F1F5F9);padding:10px;border-radius:10px;">
-                    <img src="/assets/sovereign-watch.png" alt="Aurelia Sovereign Emerald 41" style="max-height:90px;object-fit:contain;">
+                    <img src="assets/new-oil-bottle-card.jpg" alt="Herbal Hair Oil" style="max-height:90px;object-fit:contain;">
                   </div>
                   <div class="mega-card-info">
-                    <span class="mega-tag">SWISS</span>
-                    <h4 style="font-size:0.95rem;margin:4px 0;">Aurelia Sovereign Emerald 41</h4>
-                    <p class="mega-price" style="font-weight:700;color:var(--color-gold, #2563EB);">₹48,500</p>
+                    <span class="mega-tag">Hair Care</span>
+                    <h4 style="font-size:0.95rem;margin:4px 0;">Herbal Hair Oil</h4>
+                    <p class="mega-price" style="font-weight:700;color:var(--color-gold, #2563EB);">₹299</p>
                     <span class="mega-cta">View Details →</span>
                   </div>
                 </a>
-                <a href="/product/?slug=aurelia-deepocean-ceramic-diver" class="mega-card">
+                <a href="/product/?slug=hibiscus-flower-shampoo" class="mega-card">
                   <div class="mega-card-thumb" style="display:flex;align-items:center;justify-content:center;background:var(--color-canvas-alt, #F1F5F9);padding:10px;border-radius:10px;">
-                    <img src="/assets/ceramic-diver.png" alt="Aurelia DeepOcean Ceramic Diver" style="max-height:90px;object-fit:contain;">
+                    <img src="assets/new-shampoo-bottle-card.jpg" alt="Hibiscus Flower Shampoo" style="max-height:90px;object-fit:contain;">
                   </div>
                   <div class="mega-card-info">
-                    <span class="mega-tag">DIVE</span>
-                    <h4 style="font-size:0.95rem;margin:4px 0;">Aurelia DeepOcean Ceramic Diver</h4>
-                    <p class="mega-price" style="font-weight:700;color:var(--color-gold, #2563EB);">₹54,000</p>
+                    <span class="mega-tag">Scalp & Cleansing</span>
+                    <h4 style="font-size:0.95rem;margin:4px 0;">Hibiscus Flower Shampoo</h4>
+                    <p class="mega-price" style="font-weight:700;color:var(--color-gold, #2563EB);">₹249</p>
                     <span class="mega-cta">View Details →</span>
                   </div>
                 </a>
-                <a href="/product/?slug=aurelia-collectors-duo" class="mega-card">
+                <a href="/product/?slug=royal-hair-ritual-duo" class="mega-card">
                   <div class="mega-card-thumb" style="display:flex;align-items:center;justify-content:center;background:var(--color-canvas-alt, #F1F5F9);padding:10px;border-radius:10px;">
-                    <img src="/assets/collectors-duo.png" alt="The Aurelia Collector's Duo (Set of 2)" style="max-height:90px;object-fit:contain;">
+                    <img src="assets/duo-ritual-new.jpg" alt="The Royal Hair Ritual (Duo Set)" style="max-height:90px;object-fit:contain;">
                   </div>
                   <div class="mega-card-info">
-                    <span class="mega-tag">SET</span>
-                    <h4 style="font-size:0.95rem;margin:4px 0;">The Aurelia Collector's Duo (Set of 2)</h4>
-                    <p class="mega-price" style="font-weight:700;color:var(--color-gold, #2563EB);">₹87,125</p>
+                    <span class="mega-tag">Ritual Sets & Combos</span>
+                    <h4 style="font-size:0.95rem;margin:4px 0;">The Royal Hair Ritual (Duo Set)</h4>
+                    <p class="mega-price" style="font-weight:700;color:var(--color-gold, #2563EB);">₹499</p>
                     <span class="mega-cta">View Details →</span>
                   </div>
                 </a>
               </div>
               <div class="mega-footer-bar">
                 <a href="/shop/" class="mega-view-all-link">
-                  <span>Explore Complete Digitechzo DigiWatches Collection</span>
+                  <span>Explore Complete Nachiyar Herbals & Cosmetics Collection</span>
                   <span class="view-all-arrow">Browse All →</span>
                 </a>
               </div>
@@ -1306,7 +183,7 @@ img, svg, video {
         <li><a href="/account/" class="mobile-link">My Account & Orders</a></li>
       </ul>
       <div class="mobile-drawer-footer">
-        <p class="drawer-support">Customer Concierge: concierge@aureliatime.com</p>
+        <p class="drawer-support">Customer Concierge: care@nachiyarherbals.com</p>
       </div>
     </div>
   </div>
@@ -1323,15 +200,15 @@ img, svg, video {
               <span id="promoBannerBadge">LIMITED TIME SPECIAL PRIVILEGE</span>
             </div>
             <h2 class="promo-banner-title" id="promoBannerTitle">
-              Flat <span class="promo-highlight-pct" id="promoBannerDiscount">15%</span> OFF On All Digitechzo DigiWatches Orders
+              Flat <span class="promo-highlight-pct" id="promoBannerDiscount">15%</span> OFF On All Nachiyar Herbals & Cosmetics Orders
             </h2>
             <p class="promo-banner-sub" id="promoBannerSub">
-              Use code <strong class="promo-code-box" id="promoBannerCode">AURELIA15</strong> at checkout. <span id="promoBannerExpiryText">Valid for a limited period.</span>
+              Use code <strong class="promo-code-box" id="promoBannerCode">ROYAL15</strong> at checkout. <span id="promoBannerExpiryText">Valid for a limited period.</span>
             </p>
           </div>
           <div class="promo-banner-right">
             <div class="promo-coupon-action-box">
-              <span class="promo-code-display" id="promoBannerCodePill">AURELIA15</span>
+              <span class="promo-code-display" id="promoBannerCodePill">ROYAL15</span>
               <button type="button" class="btn-promo-copy" id="btnCopyPromoCoupon" title="Click to copy coupon code">
                 <span id="copyPromoBtnText">📋 Copy Code</span>
               </button>
@@ -1348,22 +225,22 @@ img, svg, video {
     <section class="hero-section hero-section--flanking" id="home">
       <div class="hero-flanking-wrapper">
 
-        <!-- LEFT PRODUCT: Aurelia Sovereign Emerald 41 -->
+        <!-- LEFT PRODUCT: Herbal Hair Oil -->
         <div class="hero-product-flank hero-product-flank--left">
-          <div class="hero-flank-card" style="--flank-theme: #064E3B;">
+          <div class="hero-flank-card" style="--flank-theme: #6b4e9b;">
             <div class="flank-badge-top">
-              <span class="flank-tag">SWISS</span>
-              <span class="flank-stat">COSC</span>
+              <span class="flank-tag">PRESTIGE</span>
+              <span class="flank-stat">ORIGINAL</span>
             </div>
             <div class="flank-img-box">
-              <img src="/assets/sovereign-watch.png" alt="Aurelia Sovereign Emerald 41" class="flank-img">
+              <img src="assets/new-oil-bottle-card.jpg" alt="Herbal Hair Oil" class="flank-img">
             </div>
             <div class="flank-details">
-              <h3 class="flank-name">Aurelia Sovereign Emerald 41</h3>
-              <p class="flank-sub">41mm Swiss automatic with sunburst emerald dial.</p>
+              <h3 class="flank-name">Herbal Hair Oil</h3>
+              <p class="flank-sub">Cold-Pressed • 18 Rare Herbs • Root Activating</p>
               <div class="flank-price-row">
-                <span class="flank-price">₹48,500</span>
-                <button class="btn-flank-add btn-quick-add" data-id="AUR-CHRONO-001" data-name="Aurelia Sovereign Emerald 41" data-price="48500" data-img="/assets/sovereign-watch.png" data-size="Caliber 2824 • Sunburst Emerald">
+                <span class="flank-price">₹299</span>
+                <button class="btn-flank-add btn-quick-add" data-id="prod_oil_01" data-name="Herbal Hair Oil" data-price="299" data-img="assets/new-oil-bottle-card.jpg" data-size="Cold-Pressed • 18 Rare Herbs • Root Activating">
                   + Add to Bag
                 </button>
               </div>
@@ -1374,62 +251,62 @@ img, svg, video {
         <!-- CENTER EDITORIAL MESSAGE & BRAND CORE -->
         <div class="hero-container hero-center-content">
           <div class="hero-badge-pill">
-            <span class="gold-sparkle">✦</span> HAUTE HORLOGERIE • SWISS HERITAGE
+            <span class="gold-sparkle">✦</span> ROYAL BOTANICAL CARE
           </div>
           
           <h1 class="hero-title">
-            Mastering The Art Of Timeless <span class="title-italic-accent">Precision.</span>
+            Ancient Ayurvedic Botanicals For Royal Hair <span class="title-italic-accent">Radiance</span>
           </h1>
 
           <p class="hero-description">
-            Hand-assembled automatic chronometers engineered with sapphire crystal, 72-hour power reserve, and surgical-grade 316L stainless steel.
+            Small-batch restorative formulations deeply steeped with 18 rare cold-pressed botanicals according to traditional texts.
           </p>
 
           <div class="hero-cta-group">
             <a href="/shop/" class="btn btn--primary">
-              <span>Explore Timepieces</span>
+              <span>Explore Collection</span>
               <span class="btn-arrow">→</span>
             </a>
             <a href="/about/" class="btn btn--secondary">
-              <span>Shop The Collector's Duo (Save 15%)</span>
+              <span>Our Atelier</span>
             </a>
           </div>
 
           <!-- Hero Feature Pillars -->
           <div class="hero-pillars">
             <div class="pillar-item">
-              <span class="pillar-icon">🏅</span>
-              <span class="pillar-text"><strong>Swiss Certified Chronometer</strong><br>Tested across 5 positions & 3 temperatures</span>
+              <span class="pillar-icon">🌿</span>
+              <span class="pillar-text"><strong>18 Rare Botanicals</strong><br>Precision Architecture</span>
             </div>
             <div class="pillar-divider"></div>
             <div class="pillar-item">
-              <span class="pillar-icon">🛡️</span>
-              <span class="pillar-text"><strong>5-Year Atelier Warranty</strong><br>Complimentary global service coverage</span>
+              <span class="pillar-icon">☀️</span>
+              <span class="pillar-text"><strong>21-Day Solar Infusion</strong><br>Comprehensive Coverage</span>
             </div>
             <div class="pillar-divider"></div>
             <div class="pillar-item">
-              <span class="pillar-icon">📦</span>
-              <span class="pillar-text"><strong>Insured Air Courier</strong><br>Doorstep white-glove security delivery</span>
+              <span class="pillar-icon">✨</span>
+              <span class="pillar-text"><strong>Zero Harsh Synthetics</strong><br>Insured Doorstep Delivery</span>
             </div>
           </div>
         </div>
 
-        <!-- RIGHT PRODUCT: Aurelia DeepOcean Ceramic Diver -->
+        <!-- RIGHT PRODUCT: Hibiscus Flower Shampoo -->
         <div class="hero-product-flank hero-product-flank--right">
-          <div class="hero-flank-card" style="--flank-theme: #1E293B;">
+          <div class="hero-flank-card" style="--flank-theme: #822234;">
             <div class="flank-badge-top">
-              <span class="flank-tag">DIVE</span>
-              <span class="flank-stat">300M</span>
+              <span class="flank-tag">DISTINCTION</span>
+              <span class="flank-stat">CLASSIC</span>
             </div>
             <div class="flank-img-box">
-              <img src="/assets/ceramic-diver.png" alt="Aurelia DeepOcean Ceramic Diver" class="flank-img">
+              <img src="assets/new-shampoo-bottle-card.jpg" alt="Hibiscus Flower Shampoo" class="flank-img">
             </div>
             <div class="flank-details">
-              <h3 class="flank-name">Aurelia DeepOcean Ceramic Diver</h3>
-              <p class="flank-sub">300m oceanic diver with ceramic bezel.</p>
+              <h3 class="flank-name">Hibiscus Flower Shampoo</h3>
+              <p class="flank-sub">Fresh Hibiscus Petals • Coconut Surfactants</p>
               <div class="flank-price-row">
-                <span class="flank-price">₹54,000</span>
-                <button class="btn-flank-add btn-quick-add" data-id="AUR-DIVER-002" data-name="Aurelia DeepOcean Ceramic Diver" data-price="54000" data-img="/assets/ceramic-diver.png" data-size="300M Diver • Helium Escape Valve">
+                <span class="flank-price">₹249</span>
+                <button class="btn-flank-add btn-quick-add" data-id="prod_shampoo_02" data-name="Hibiscus Flower Shampoo" data-price="249" data-img="assets/new-shampoo-bottle-card.jpg" data-size="Fresh Hibiscus Petals • Coconut Surfactants">
                   + Add to Bag
                 </button>
               </div>
@@ -1445,25 +322,25 @@ img, svg, video {
           <div class="m-hero-sticky-frame" id="mHeroStickyFrame">
             
             <div class="m-hero-stage m-hero-stage--heading" data-stage="1">
-              <h1 class="m-hero-title">Mastering The Art Of Timeless <span class="title-italic-accent">Precision.</span></h1>
+              <h1 class="m-hero-title">Ancient Ayurvedic Botanicals For Royal Hair <span class="title-italic-accent">Radiance</span></h1>
             </div>
 
             <div class="m-hero-products-row">
               <div class="m-hero-product-col m-hero-product-col--oil">
                 <div class="m-hero-stage m-hero-stage--oil" data-stage="2">
-                  <span class="m-bottle-pill">SWISS</span>
-                  <a href="/product/?slug=aurelia-sovereign-emerald-41" class="m-bottle-link" aria-label="Aurelia Sovereign Emerald 41">
+                  <span class="m-bottle-pill">PRESTIGE</span>
+                  <a href="/product/?slug=herbal-hair-oil" class="m-bottle-link" aria-label="Herbal Hair Oil">
                     <div class="m-bottle-box">
-                      <img src="/assets/sovereign-watch.png" alt="Aurelia Sovereign Emerald 41" class="m-bottle-img">
+                      <img src="assets/new-oil-bottle-card.jpg" alt="Herbal Hair Oil" class="m-bottle-img">
                     </div>
                   </a>
                   <div class="m-bottle-meta">
-                    <span class="m-bottle-name">Aurelia Sovereign Emerald 41</span>
-                    <span class="m-bottle-sub">₹48,500</span>
+                    <span class="m-bottle-name">Herbal Hair Oil</span>
+                    <span class="m-bottle-sub">₹299</span>
                   </div>
                 </div>
                 <div class="m-hero-stage m-hero-stage--buy-oil" data-stage="4">
-                  <button class="m-btn-buy btn-quick-add" data-id="AUR-CHRONO-001" data-name="Aurelia Sovereign Emerald 41" data-price="48500" data-img="/assets/sovereign-watch.png" data-size="Caliber 2824 • Sunburst Emerald">
+                  <button class="m-btn-buy btn-quick-add" data-id="prod_oil_01" data-name="Herbal Hair Oil" data-price="299" data-img="assets/new-oil-bottle-card.jpg" data-size="Cold-Pressed • 18 Rare Herbs • Root Activating">
                     Buy Now
                   </button>
                 </div>
@@ -1471,19 +348,19 @@ img, svg, video {
 
               <div class="m-hero-product-col m-hero-product-col--shampoo">
                 <div class="m-hero-stage m-hero-stage--shampoo" data-stage="3">
-                  <span class="m-bottle-pill m-bottle-pill--shampoo">DIVE</span>
-                  <a href="/product/?slug=aurelia-deepocean-ceramic-diver" class="m-bottle-link" aria-label="Aurelia DeepOcean Ceramic Diver">
+                  <span class="m-bottle-pill m-bottle-pill--shampoo">CLASSIC</span>
+                  <a href="/product/?slug=hibiscus-flower-shampoo" class="m-bottle-link" aria-label="Hibiscus Flower Shampoo">
                     <div class="m-bottle-box">
-                      <img src="/assets/ceramic-diver.png" alt="Aurelia DeepOcean Ceramic Diver" class="m-bottle-img">
+                      <img src="assets/new-shampoo-bottle-card.jpg" alt="Hibiscus Flower Shampoo" class="m-bottle-img">
                     </div>
                   </a>
                   <div class="m-bottle-meta">
-                    <span class="m-bottle-name">Aurelia DeepOcean Ceramic Diver</span>
-                    <span class="m-bottle-sub">₹54,000</span>
+                    <span class="m-bottle-name">Hibiscus Flower Shampoo</span>
+                    <span class="m-bottle-sub">₹249</span>
                   </div>
                 </div>
                 <div class="m-hero-stage m-hero-stage--buy-shampoo" data-stage="4">
-                  <button class="m-btn-buy m-btn-buy--shampoo btn-quick-add" data-id="AUR-DIVER-002" data-name="Aurelia DeepOcean Ceramic Diver" data-price="54000" data-img="/assets/ceramic-diver.png" data-size="300M Diver • Helium Escape Valve">
+                  <button class="m-btn-buy m-btn-buy--shampoo btn-quick-add" data-id="prod_shampoo_02" data-name="Hibiscus Flower Shampoo" data-price="249" data-img="assets/new-shampoo-bottle-card.jpg" data-size="Fresh Hibiscus Petals • Coconut Surfactants">
                     Buy Now
                   </button>
                 </div>
@@ -1491,17 +368,17 @@ img, svg, video {
             </div>
 
             <div class="m-hero-stage m-hero-stage--desc" data-stage="5">
-              <p class="m-hero-desc">Hand-assembled automatic chronometers engineered with sapphire crystal, 72-hour power reserve, and surgical-grade 316L stainless steel.</p>
+              <p class="m-hero-desc">Small-batch restorative formulations deeply steeped with 18 rare cold-pressed botanicals according to traditional texts.</p>
             </div>
 
             <div class="m-hero-stage m-hero-stage--cta" data-stage="6">
               <div class="m-cta-group">
                 <a href="/shop/" class="btn btn--primary m-cta-btn">
-                  <span>Explore Timepieces</span>
+                  <span>Explore Collection</span>
                   <span class="btn-arrow">→</span>
                 </a>
                 <a href="/about/" class="btn btn--secondary m-cta-btn">
-                  <span>Shop The Collector's Duo (Save 15%)</span>
+                  <span>Our Atelier</span>
                 </a>
               </div>
             </div>
@@ -1514,8 +391,8 @@ img, svg, video {
     <!-- ==================== 4. INFINITE MARQUEE TICKER (Years Beer Style) ==================== -->
     <section class="marquee-section" aria-hidden="true">
       <div class="marquee-track">
-        <div class="marquee-content"><span class="marquee-item">AURELIA CHRONOMETRY</span><span class="marquee-star">✦</span><span class="marquee-item">SWISS CALIBER 2824</span><span class="marquee-star">✦</span><span class="marquee-item">316L SURGICAL STEEL</span><span class="marquee-star">✦</span><span class="marquee-item">DOUBLE-DOMED SAPPHIRE</span><span class="marquee-star">✦</span><span class="marquee-item">COSC CERTIFIED</span><span class="marquee-star">✦</span><span class="marquee-item">HAND-FINISHED MOVEMENTS</span><span class="marquee-star">✦</span><span class="marquee-item">5-YEAR GLOBAL WARRANTY</span><span class="marquee-star">✦</span><span class="marquee-item">GENEVA & BENGALURU ATELIER</span><span class="marquee-star">✦</span></div>
-        <div class="marquee-content"><span class="marquee-item">AURELIA CHRONOMETRY</span><span class="marquee-star">✦</span><span class="marquee-item">SWISS CALIBER 2824</span><span class="marquee-star">✦</span><span class="marquee-item">316L SURGICAL STEEL</span><span class="marquee-star">✦</span><span class="marquee-item">DOUBLE-DOMED SAPPHIRE</span><span class="marquee-star">✦</span><span class="marquee-item">COSC CERTIFIED</span><span class="marquee-star">✦</span><span class="marquee-item">HAND-FINISHED MOVEMENTS</span><span class="marquee-star">✦</span><span class="marquee-item">5-YEAR GLOBAL WARRANTY</span><span class="marquee-star">✦</span><span class="marquee-item">GENEVA & BENGALURU ATELIER</span><span class="marquee-star">✦</span></div>
+        <div class="marquee-content"><span class="marquee-item">COCONUT OIL</span><span class="marquee-star">✦</span><span class="marquee-item">HIBISCUS FLOWER</span><span class="marquee-star">✦</span><span class="marquee-item">FENUGREEK</span><span class="marquee-star">✦</span><span class="marquee-item">ALOE VERA</span><span class="marquee-star">✦</span><span class="marquee-item">NEEM LEAVES</span><span class="marquee-star">✦</span><span class="marquee-item">CURRY LEAVES</span><span class="marquee-star">✦</span><span class="marquee-item">AMLA (GOOSEBERRY)</span><span class="marquee-star">✦</span><span class="marquee-item">BRAHMI</span><span class="marquee-star">✦</span></div>
+        <div class="marquee-content"><span class="marquee-item">COCONUT OIL</span><span class="marquee-star">✦</span><span class="marquee-item">HIBISCUS FLOWER</span><span class="marquee-star">✦</span><span class="marquee-item">FENUGREEK</span><span class="marquee-star">✦</span><span class="marquee-item">ALOE VERA</span><span class="marquee-star">✦</span><span class="marquee-item">NEEM LEAVES</span><span class="marquee-star">✦</span><span class="marquee-item">CURRY LEAVES</span><span class="marquee-star">✦</span><span class="marquee-item">AMLA (GOOSEBERRY)</span><span class="marquee-star">✦</span><span class="marquee-item">BRAHMI</span><span class="marquee-star">✦</span></div>
       </div>
     </section>
 
@@ -1526,10 +403,10 @@ img, svg, video {
     <section class="herbal-ingredients-section" id="botanical-ingredients">
       <div class="section-container text-center">
         <div class="ingredients-section-header">
-          <span class="section-eyebrow">HOROLOGICAL ARCHITECTURE</span>
-          <h2 class="section-heading">18 Precision Mechanical Engineering Modules</h2>
+          <span class="section-eyebrow">SACRED BOTANICAL CRAFTSMANSHIP</span>
+          <h2 class="section-heading">18 Sacred Earth-Born Botanicals</h2>
           <p class="section-subtext">
-            Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.
+            Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.
           </p>
         </div>
       </div>
@@ -1545,301 +422,301 @@ img, svg, video {
           <div class="orbit-glow-disc"></div>
 
           <!-- Centered Bottle / Masterpiece -->
-          <div class="orbit-center-bottle-wrap" title="Digitechzo DigiWatches Signature Architecture">
+          <div class="orbit-center-bottle-wrap" title="Nachiyar Herbals & Cosmetics Signature Architecture">
             <div class="bottle-pedestal-glow"></div>
-            <img src="assets/aurelia-emerald-watch.png" alt="Digitechzo DigiWatches Masterpiece" class="orbit-center-bottle" id="orbitCenterBottle">
+            <img src="assets/hero-bottle-oil-transparent.png" alt="Nachiyar Herbals & Cosmetics Masterpiece" class="orbit-center-bottle" id="orbitCenterBottle">
             <div class="bottle-caption-badge">
               <span class="badge-dot"></span>
-              <span>Swiss Caliber 2824 • Certified Chronometer</span>
+              <span>18 Rare Herbs • Cold-Pressed</span>
             </div>
           </div>
 
           <!-- Rotating Circular Orbit Track -->
           <div class="orbit-track" id="orbitTrack">
-            <!-- 1. Sapphire Crystal (0deg) -->
-            <div class="orbit-node" style="--angle: 0deg;" data-index="0" data-name="Sapphire Crystal" data-tag="Scratch Armor" data-desc="Double-domed anti-reflective synthetic sapphire crystal with 9 Mohs hardness rating." data-icon="💎">
+            <!-- 1. Coconut Oil (0deg) -->
+            <div class="orbit-node" style="--angle: 0deg;" data-index="0" data-name="Coconut Oil" data-tag="Pure Base" data-desc="Pure cold-pressed virgin oil that penetrates deep into hair shafts, sealing in moisture and halting protein loss." data-icon="assets/ingredients/coconut-oil.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">💎</span>
+                  <img src="assets/ingredients/coconut-oil.jpg" alt="Coconut Oil" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Sapphire Crystal</span>
+                <span class="node-label">Coconut Oil</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Scratch Armor</span>
-                  <h5 class="tooltip-title">Sapphire Crystal</h5>
-                  <p class="tooltip-desc">Double-domed anti-reflective synthetic sapphire crystal with 9 Mohs hardness rating.</p>
+                  <span class="tooltip-tag">Pure Base</span>
+                  <h5 class="tooltip-title">Coconut Oil</h5>
+                  <p class="tooltip-desc">Pure cold-pressed virgin oil that penetrates deep into hair shafts, sealing in moisture and halting protein loss.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 2. Automatic Caliber (20deg) -->
-            <div class="orbit-node" style="--angle: 20deg;" data-index="1" data-name="Automatic Caliber" data-tag="Swiss Movement" data-desc="Self-winding mechanical heart beating at 28,800 vibrations per hour for seamless sweep." data-icon="⚙️">
+            <!-- 2. Hibiscus Flower (20deg) -->
+            <div class="orbit-node" style="--angle: 20deg;" data-index="1" data-name="Hibiscus Flower" data-tag="Follicle Revival" data-desc="Rich in natural amino acids and vitamin C that stimulate dormant hair follicles and promote thick regrowth." data-icon="assets/ingredients/hibiscus-flower.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">⚙️</span>
+                  <img src="assets/ingredients/hibiscus-flower.jpg" alt="Hibiscus Flower" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Automatic Caliber</span>
+                <span class="node-label">Hibiscus Flower</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Swiss Movement</span>
-                  <h5 class="tooltip-title">Automatic Caliber</h5>
-                  <p class="tooltip-desc">Self-winding mechanical heart beating at 28,800 vibrations per hour for seamless sweep.</p>
+                  <span class="tooltip-tag">Follicle Revival</span>
+                  <h5 class="tooltip-title">Hibiscus Flower</h5>
+                  <p class="tooltip-desc">Rich in natural amino acids and vitamin C that stimulate dormant hair follicles and promote thick regrowth.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 3. 72h Power Reserve (40deg) -->
-            <div class="orbit-node" style="--angle: 40deg;" data-index="2" data-name="72h Power Reserve" data-tag="Twin Barrels" data-desc="Twin-barrel spring mechanism maintaining uninterrupted precision for 3 full days off the wrist." data-icon="⏳">
+            <!-- 3. Fenugreek (40deg) -->
+            <div class="orbit-node" style="--angle: 40deg;" data-index="2" data-name="Fenugreek" data-tag="Scalp Moisture" data-desc="Packed with natural lecithin and proteins that deeply hydrate strands, repair damage, and impart silky shine." data-icon="assets/ingredients/fenugreek.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">⏳</span>
+                  <img src="assets/ingredients/fenugreek.jpg" alt="Fenugreek" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">72h Power Reserve</span>
+                <span class="node-label">Fenugreek</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Twin Barrels</span>
-                  <h5 class="tooltip-title">72h Power Reserve</h5>
-                  <p class="tooltip-desc">Twin-barrel spring mechanism maintaining uninterrupted precision for 3 full days off the wrist.</p>
+                  <span class="tooltip-tag">Scalp Moisture</span>
+                  <h5 class="tooltip-title">Fenugreek</h5>
+                  <p class="tooltip-desc">Packed with natural lecithin and proteins that deeply hydrate strands, repair damage, and impart silky shine.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 4. 316L Stainless Steel (60deg) -->
-            <div class="orbit-node" style="--angle: 60deg;" data-index="3" data-name="316L Stainless Steel" data-tag="Marine Grade" data-desc="Corrosion-resistant surgical alloy hand-polished with alternating brushed satin bevels." data-icon="🛡️">
+            <!-- 4. Aloe Vera (60deg) -->
+            <div class="orbit-node" style="--angle: 60deg;" data-index="3" data-name="Aloe Vera" data-tag="Soothing Repair" data-desc="Succulent botanical gel with proteolytic enzymes that soothe scalp inflammation and balance healthy pH levels." data-icon="assets/ingredients/aloe-vera.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🛡️</span>
+                  <img src="assets/ingredients/aloe-vera.jpg" alt="Aloe Vera" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">316L Stainless Steel</span>
+                <span class="node-label">Aloe Vera</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Marine Grade</span>
-                  <h5 class="tooltip-title">316L Stainless Steel</h5>
-                  <p class="tooltip-desc">Corrosion-resistant surgical alloy hand-polished with alternating brushed satin bevels.</p>
+                  <span class="tooltip-tag">Soothing Repair</span>
+                  <h5 class="tooltip-title">Aloe Vera</h5>
+                  <p class="tooltip-desc">Succulent botanical gel with proteolytic enzymes that soothe scalp inflammation and balance healthy pH levels.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 5. Ceramic Bezel (80deg) -->
-            <div class="orbit-node" style="--angle: 80deg;" data-index="4" data-name="Ceramic Bezel" data-tag="Unidirectional" data-desc="120-click laser-engraved scratch-proof ceramic diving bezel with platinum numerals." data-icon="🔘">
+            <!-- 5. Neem Leaves (80deg) -->
+            <div class="orbit-node" style="--angle: 80deg;" data-index="4" data-name="Neem Leaves" data-tag="Scalp Purifier" data-desc="Potent antiseptic green leaves that clear dandruff flakes, purify scalp pores, and prevent persistent itching." data-icon="assets/ingredients/neem-leaves.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🔘</span>
+                  <img src="assets/ingredients/neem-leaves.jpg" alt="Neem Leaves" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Ceramic Bezel</span>
+                <span class="node-label">Neem Leaves</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Unidirectional</span>
-                  <h5 class="tooltip-title">Ceramic Bezel</h5>
-                  <p class="tooltip-desc">120-click laser-engraved scratch-proof ceramic diving bezel with platinum numerals.</p>
+                  <span class="tooltip-tag">Scalp Purifier</span>
+                  <h5 class="tooltip-title">Neem Leaves</h5>
+                  <p class="tooltip-desc">Potent antiseptic green leaves that clear dandruff flakes, purify scalp pores, and prevent persistent itching.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 6. Super-LumiNova (100deg) -->
-            <div class="orbit-node" style="--angle: 100deg;" data-index="5" data-name="Super-LumiNova" data-tag="Swiss Lume" data-desc="Grade A Swiss photoluminescent pigment ensuring vivid low-light dial legibility." data-icon="✨">
+            <!-- 6. Curry Leaves (100deg) -->
+            <div class="orbit-node" style="--angle: 100deg;" data-index="5" data-name="Curry Leaves" data-tag="Melanin Boost" data-desc="Abundant in beta-carotene and essential amino acids that preserve natural dark pigmentation and prevent greying." data-icon="assets/ingredients/curry-leaves.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">✨</span>
+                  <img src="assets/ingredients/curry-leaves.jpg" alt="Curry Leaves" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Super-LumiNova</span>
+                <span class="node-label">Curry Leaves</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Swiss Lume</span>
-                  <h5 class="tooltip-title">Super-LumiNova</h5>
-                  <p class="tooltip-desc">Grade A Swiss photoluminescent pigment ensuring vivid low-light dial legibility.</p>
+                  <span class="tooltip-tag">Melanin Boost</span>
+                  <h5 class="tooltip-title">Curry Leaves</h5>
+                  <p class="tooltip-desc">Abundant in beta-carotene and essential amino acids that preserve natural dark pigmentation and prevent greying.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 7. 200M Water Proof (120deg) -->
-            <div class="orbit-node" style="--angle: 120deg;" data-index="6" data-name="200M Water Proof" data-tag="Screw-Down Crown" data-desc="Triple-sealed gasket assembly pressure-tested to withstand deep oceanic expeditions." data-icon="🌊">
+            <!-- 7. Amla (Gooseberry) (120deg) -->
+            <div class="orbit-node" style="--angle: 120deg;" data-index="6" data-name="Amla (Gooseberry)" data-tag="Vitamin C Shield" data-desc="Sacred Ayurvedic rasayana packed with ascorbic acid that strengthens keratin bonds and stops premature thinning." data-icon="assets/ingredients/moringa-leaf.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🌊</span>
+                  <img src="assets/ingredients/moringa-leaf.jpg" alt="Amla (Gooseberry)" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">200M Water Proof</span>
+                <span class="node-label">Amla (Gooseberry)</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Screw-Down Crown</span>
-                  <h5 class="tooltip-title">200M Water Proof</h5>
-                  <p class="tooltip-desc">Triple-sealed gasket assembly pressure-tested to withstand deep oceanic expeditions.</p>
+                  <span class="tooltip-tag">Vitamin C Shield</span>
+                  <h5 class="tooltip-title">Amla (Gooseberry)</h5>
+                  <p class="tooltip-desc">Sacred Ayurvedic rasayana packed with ascorbic acid that strengthens keratin bonds and stops premature thinning.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 8. Exhibition Caseback (140deg) -->
-            <div class="orbit-node" style="--angle: 140deg;" data-index="7" data-name="Exhibition Caseback" data-tag="Côtes de Genève" data-desc="Transparent sapphire rear display showcasing gold rotor and Geneva stripes decoration." data-icon="🔍">
+            <!-- 8. Brahmi (140deg) -->
+            <div class="orbit-node" style="--angle: 140deg;" data-index="7" data-name="Brahmi" data-tag="Cranial Calmer" data-desc="Traditional brain tonic herb that cools excess cranial heat, alleviates mental tension, and reinforces root fibers." data-icon="assets/ingredients/marikozhundhu.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🔍</span>
+                  <img src="assets/ingredients/marikozhundhu.jpg" alt="Brahmi" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Exhibition Caseback</span>
+                <span class="node-label">Brahmi</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Côtes de Genève</span>
-                  <h5 class="tooltip-title">Exhibition Caseback</h5>
-                  <p class="tooltip-desc">Transparent sapphire rear display showcasing gold rotor and Geneva stripes decoration.</p>
+                  <span class="tooltip-tag">Cranial Calmer</span>
+                  <h5 class="tooltip-title">Brahmi</h5>
+                  <p class="tooltip-desc">Traditional brain tonic herb that cools excess cranial heat, alleviates mental tension, and reinforces root fibers.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 9. Incabloc Shock (160deg) -->
-            <div class="orbit-node" style="--angle: 160deg;" data-index="8" data-name="Incabloc Shock" data-tag="Impact Shield" data-desc="Spring-loaded jewel bearing absorbing severe sudden mechanical shocks and drops." data-icon="⚡">
+            <!-- 9. Bhringraj (160deg) -->
+            <div class="orbit-node" style="--angle: 160deg;" data-index="8" data-name="Bhringraj" data-tag="King of Hair" data-desc="The revered classical sovereign of Ayurvedic hair science. Activates micro-circulation across scalp beds." data-icon="assets/ingredients/bhringraj.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">⚡</span>
+                  <img src="assets/ingredients/bhringraj.jpg" alt="Bhringraj" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Incabloc Shock</span>
+                <span class="node-label">Bhringraj</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Impact Shield</span>
-                  <h5 class="tooltip-title">Incabloc Shock</h5>
-                  <p class="tooltip-desc">Spring-loaded jewel bearing absorbing severe sudden mechanical shocks and drops.</p>
+                  <span class="tooltip-tag">King of Hair</span>
+                  <h5 class="tooltip-title">Bhringraj</h5>
+                  <p class="tooltip-desc">The revered classical sovereign of Ayurvedic hair science. Activates micro-circulation across scalp beds.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 10. Glucydur Balance (180deg) -->
-            <div class="orbit-node" style="--angle: 180deg;" data-index="9" data-name="Glucydur Balance" data-tag="Thermal Stable" data-desc="Beryllium-bronze alloy balance wheel resisting extreme temperature fluctuations." data-icon="⚖️">
+            <!-- 10. Tulsi (Holy Basil) (180deg) -->
+            <div class="orbit-node" style="--angle: 180deg;" data-index="9" data-name="Tulsi (Holy Basil)" data-tag="Adaptogenic Tonic" data-desc="Sacred adaptogenic foliage with antimicrobial eugenol that defends follicles against environmental toxins." data-icon="assets/ingredients/tulsi-seed.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">⚖️</span>
+                  <img src="assets/ingredients/tulsi-seed.jpg" alt="Tulsi (Holy Basil)" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Glucydur Balance</span>
+                <span class="node-label">Tulsi (Holy Basil)</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Thermal Stable</span>
-                  <h5 class="tooltip-title">Glucydur Balance</h5>
-                  <p class="tooltip-desc">Beryllium-bronze alloy balance wheel resisting extreme temperature fluctuations.</p>
+                  <span class="tooltip-tag">Adaptogenic Tonic</span>
+                  <h5 class="tooltip-title">Tulsi (Holy Basil)</h5>
+                  <p class="tooltip-desc">Sacred adaptogenic foliage with antimicrobial eugenol that defends follicles against environmental toxins.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 11. Nivaflex Mainspring (200deg) -->
-            <div class="orbit-node" style="--angle: 200deg;" data-index="10" data-name="Nivaflex Mainspring" data-tag="Anti-Magnetic" data-desc="Space-age alloy providing consistent kinetic energy torque with zero magnetic distortion." data-icon="🌀">
+            <!-- 11. Rose Petals (200deg) -->
+            <div class="orbit-node" style="--angle: 200deg;" data-index="10" data-name="Rose Petals" data-tag="Velvet Softener" data-desc="Handpicked crimson petals that impart a soothing floral aromatherapy while toning sensitive scalp dermal layers." data-icon="assets/ingredients/rose-flower.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🌀</span>
+                  <img src="assets/ingredients/rose-flower.jpg" alt="Rose Petals" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Nivaflex Mainspring</span>
+                <span class="node-label">Rose Petals</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Anti-Magnetic</span>
-                  <h5 class="tooltip-title">Nivaflex Mainspring</h5>
-                  <p class="tooltip-desc">Space-age alloy providing consistent kinetic energy torque with zero magnetic distortion.</p>
+                  <span class="tooltip-tag">Velvet Softener</span>
+                  <h5 class="tooltip-title">Rose Petals</h5>
+                  <p class="tooltip-desc">Handpicked crimson petals that impart a soothing floral aromatherapy while toning sensitive scalp dermal layers.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 12. Sunburst Dial (220deg) -->
-            <div class="orbit-node" style="--angle: 220deg;" data-index="11" data-name="Sunburst Dial" data-tag="Guilloché" data-desc="Hand-lacquered emerald dial with radial sunburst brushing and applied gold hour indices." data-icon="☀️">
+            <!-- 12. Vetiver Root (220deg) -->
+            <div class="orbit-node" style="--angle: 220deg;" data-index="11" data-name="Vetiver Root" data-tag="Root Grounding" data-desc="Earthy golden grass roots with profound cooling properties that eliminate scalp irritation and excessive oiliness." data-icon="assets/ingredients/vetiver.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">☀️</span>
+                  <img src="assets/ingredients/vetiver.jpg" alt="Vetiver Root" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Sunburst Dial</span>
+                <span class="node-label">Vetiver Root</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Guilloché</span>
-                  <h5 class="tooltip-title">Sunburst Dial</h5>
-                  <p class="tooltip-desc">Hand-lacquered emerald dial with radial sunburst brushing and applied gold hour indices.</p>
+                  <span class="tooltip-tag">Root Grounding</span>
+                  <h5 class="tooltip-title">Vetiver Root</h5>
+                  <p class="tooltip-desc">Earthy golden grass roots with profound cooling properties that eliminate scalp irritation and excessive oiliness.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 13. 25 Jeweled Bearings (240deg) -->
-            <div class="orbit-node" style="--angle: 240deg;" data-index="12" data-name="25 Jeweled Bearings" data-tag="Synthetic Rubies" data-desc="High-purity ruby bearings virtually eliminating mechanical friction on internal pivot points." data-icon="💍">
+            <!-- 13. Shikakai (240deg) -->
+            <div class="orbit-node" style="--angle: 240deg;" data-index="12" data-name="Shikakai" data-tag="Natural Cleanser" data-desc="Mild botanical pods with natural saponins that wash away sebum without disrupting delicate cuticle integrity." data-icon="assets/ingredients/banana-stem.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">💍</span>
+                  <img src="assets/ingredients/banana-stem.jpg" alt="Shikakai" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">25 Jeweled Bearings</span>
+                <span class="node-label">Shikakai</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Synthetic Rubies</span>
-                  <h5 class="tooltip-title">25 Jeweled Bearings</h5>
-                  <p class="tooltip-desc">High-purity ruby bearings virtually eliminating mechanical friction on internal pivot points.</p>
+                  <span class="tooltip-tag">Natural Cleanser</span>
+                  <h5 class="tooltip-title">Shikakai</h5>
+                  <p class="tooltip-desc">Mild botanical pods with natural saponins that wash away sebum without disrupting delicate cuticle integrity.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 14. Italian Calfskin (260deg) -->
-            <div class="orbit-node" style="--angle: 260deg;" data-index="13" data-name="Italian Calfskin" data-tag="Handcrafted Strap" data-desc="Full-grain Tuscan leather strap with artisanal tone-on-tone edge stitching." data-icon="🧵">
+            <!-- 14. Reetha (Soapnut) (260deg) -->
+            <div class="orbit-node" style="--angle: 260deg;" data-index="13" data-name="Reetha (Soapnut)" data-tag="Silken Saponin" data-desc="Gentle fruit pods that yield a luxuriously cushiony cloud foam, leaving hair buoyant, detangled, and radiant." data-icon="assets/ingredients/datura-leaf.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🧵</span>
+                  <img src="assets/ingredients/datura-leaf.jpg" alt="Reetha (Soapnut)" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Italian Calfskin</span>
+                <span class="node-label">Reetha (Soapnut)</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Handcrafted Strap</span>
-                  <h5 class="tooltip-title">Italian Calfskin</h5>
-                  <p class="tooltip-desc">Full-grain Tuscan leather strap with artisanal tone-on-tone edge stitching.</p>
+                  <span class="tooltip-tag">Silken Saponin</span>
+                  <h5 class="tooltip-title">Reetha (Soapnut)</h5>
+                  <p class="tooltip-desc">Gentle fruit pods that yield a luxuriously cushiony cloud foam, leaving hair buoyant, detangled, and radiant.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 15. Butterfly Clasp (280deg) -->
-            <div class="orbit-node" style="--angle: 280deg;" data-index="14" data-name="Butterfly Clasp" data-tag="Dual Deployment" data-desc="Spring-actuated double folding security buckle with laser-etched brand insignia." data-icon="🔒">
+            <!-- 15. Indigo Leaves (280deg) -->
+            <div class="orbit-node" style="--angle: 280deg;" data-index="14" data-name="Indigo Leaves" data-tag="Lustre Enhancer" data-desc="Ancient indigo leaves that enrich natural hair gloss, intensify strand depth, and shield against UV sun-bleaching." data-icon="assets/ingredients/hibiscus-leaf.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🔒</span>
+                  <img src="assets/ingredients/hibiscus-leaf.jpg" alt="Indigo Leaves" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Butterfly Clasp</span>
+                <span class="node-label">Indigo Leaves</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Dual Deployment</span>
-                  <h5 class="tooltip-title">Butterfly Clasp</h5>
-                  <p class="tooltip-desc">Spring-actuated double folding security buckle with laser-etched brand insignia.</p>
+                  <span class="tooltip-tag">Lustre Enhancer</span>
+                  <h5 class="tooltip-title">Indigo Leaves</h5>
+                  <p class="tooltip-desc">Ancient indigo leaves that enrich natural hair gloss, intensify strand depth, and shield against UV sun-bleaching.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 16. COSC Certified (300deg) -->
-            <div class="orbit-node" style="--angle: 300deg;" data-index="15" data-name="COSC Certified" data-tag="Official Chronometer" data-desc="Independently certified by the Official Swiss Chronometer Testing Institute within -4/+6s." data-icon="📜">
+            <!-- 16. Black Sesame Oil (300deg) -->
+            <div class="orbit-node" style="--angle: 300deg;" data-index="15" data-name="Black Sesame Oil" data-tag="Solar Carrier" data-desc="Deep-penetrating dark seed oil that acts as the bioavailable carrier for 21 days of natural solar maturation." data-icon="assets/ingredients/coconut.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">📜</span>
+                  <img src="assets/ingredients/coconut.jpg" alt="Black Sesame Oil" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">COSC Certified</span>
+                <span class="node-label">Black Sesame Oil</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Official Chronometer</span>
-                  <h5 class="tooltip-title">COSC Certified</h5>
-                  <p class="tooltip-desc">Independently certified by the Official Swiss Chronometer Testing Institute within -4/+6s.</p>
+                  <span class="tooltip-tag">Solar Carrier</span>
+                  <h5 class="tooltip-title">Black Sesame Oil</h5>
+                  <p class="tooltip-desc">Deep-penetrating dark seed oil that acts as the bioavailable carrier for 21 days of natural solar maturation.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 17. Helium Escape Valve (320deg) -->
-            <div class="orbit-node" style="--angle: 320deg;" data-index="16" data-name="Helium Escape Valve" data-tag="Deep Saturation" data-desc="Automatic pressure release valve preventing crystal dislodgement during decompression." data-icon="💨">
+            <!-- 17. Castor Oil (320deg) -->
+            <div class="orbit-node" style="--angle: 320deg;" data-index="16" data-name="Castor Oil" data-tag="Strand Thickener" data-desc="Viscous ricinoleic acid-rich oil that coats each shaft, dramatically minimizing breakage and sealing split ends." data-icon="assets/ingredients/aavarai-leaf.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">💨</span>
+                  <img src="assets/ingredients/aavarai-leaf.jpg" alt="Castor Oil" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">Helium Escape Valve</span>
+                <span class="node-label">Castor Oil</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Deep Saturation</span>
-                  <h5 class="tooltip-title">Helium Escape Valve</h5>
-                  <p class="tooltip-desc">Automatic pressure release valve preventing crystal dislodgement during decompression.</p>
+                  <span class="tooltip-tag">Strand Thickener</span>
+                  <h5 class="tooltip-title">Castor Oil</h5>
+                  <p class="tooltip-desc">Viscous ricinoleic acid-rich oil that coats each shaft, dramatically minimizing breakage and sealing split ends.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 18. 5-Year Guarantee (340deg) -->
-            <div class="orbit-node" style="--angle: 340deg;" data-index="17" data-name="5-Year Guarantee" data-tag="Global Atelier Service" data-desc="Comprehensive worldwide manufacturer warranty with complimentary 3rd-year maintenance." data-icon="🏅">
+            <!-- 18. Lavender Flower (340deg) -->
+            <div class="orbit-node" style="--angle: 340deg;" data-index="17" data-name="Lavender Flower" data-tag="Aromatherapy" data-desc="Pure calming lavender blossom essential oil that relaxes the nervous system and delivers our signature fragrance." data-icon="assets/ingredients/rose-root.jpg">
               <div class="orbit-node-inner">
                 <div class="node-avatar-wrap">
-                  <span class="node-avatar-icon" style="font-size: 1.4rem; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--card-bg-1, #1E293B); border-radius: 50%; border: 1.5px solid var(--color-gold, #2563EB); box-shadow: 0 4px 10px rgba(0,0,0,0.3); color: #FFF;">🏅</span>
+                  <img src="assets/ingredients/rose-root.jpg" alt="Lavender Flower" class="node-avatar" loading="lazy">
                 </div>
-                <span class="node-label">5-Year Guarantee</span>
+                <span class="node-label">Lavender Flower</span>
                 
                 <div class="node-tooltip">
-                  <span class="tooltip-tag">Global Atelier Service</span>
-                  <h5 class="tooltip-title">5-Year Guarantee</h5>
-                  <p class="tooltip-desc">Comprehensive worldwide manufacturer warranty with complimentary 3rd-year maintenance.</p>
+                  <span class="tooltip-tag">Aromatherapy</span>
+                  <h5 class="tooltip-title">Lavender Flower</h5>
+                  <p class="tooltip-desc">Pure calming lavender blossom essential oil that relaxes the nervous system and delivers our signature fragrance.</p>
                 </div>
               </div>
             </div>
@@ -1849,8 +726,8 @@ img, svg, video {
         <!-- Bottom Interactive Spotlight Bar (Desktop & Mobile Friendly) -->
         <div class="orbit-spotlight-bar" id="orbitSpotlightBar">
           <div class="spotlight-idle-wrap" id="spotlightIdleWrap">
-            <span class="spotlight-idle-icon">⌚</span>
-            <span class="spotlight-idle-text">Hover over any chronometer component to inspect its horological specifications</span>
+            <span class="spotlight-idle-icon">🌿</span>
+            <span class="spotlight-idle-text">Hover over any botanical herb to discover its sacred hair-care benefits</span>
           </div>
 
           <div class="spotlight-active-wrap" id="spotlightActiveWrap" style="display: none;">
@@ -1880,49 +757,49 @@ img, svg, video {
     <section class="collection-section" id="collection">
       <div class="section-container">
         <div class="section-header">
-          <span class="section-eyebrow">THE FLAGSHIP DUO</span>
-          <h2 class="section-heading">Signature Masterpieces. Pure Distinction.</h2>
-          <p class="section-subtext">Individually calibrated mechanical timepieces designed for connoisseurs of timeless horological craft.</p>
+          <span class="section-eyebrow">THE SIGNATURE SELECTION</span>
+          <h2 class="section-heading">Featured Masterpieces. Pure Distinction.</h2>
+          <p class="section-subtext">Handpicked premier creations designed for distinction, durability, and daily elegance.</p>
         </div>
 
         <div class="products-grid" id="dynamicProductsGrid">
 
-          <!-- PRODUCT CARD 1: Aurelia Sovereign Emerald 41 -->
-          <article class="product-card product-card--oil" id="card-oil" style="--card-bg: #064E3B; --card-color: #FFFFFF; --accent-hover: #00f5a0;">
+          <!-- PRODUCT CARD 1: Herbal Hair Oil -->
+          <article class="product-card product-card--oil" id="card-oil" style="--card-bg: #6b4e9b; --card-color: #FFFFFF; --accent-hover: #583B82;">
             <div class="card-inner">
               <div class="card-top-bar">
-                <span class="pill-tag">Caliber 2824 • Sunburst Emerald</span>
-                <div class="circle-badge" title="Officially Certified Chronometer">
-                  <span class="badge-number">COSC</span>
-                  <span class="badge-unit">SWISS</span>
+                <span class="pill-tag">Cold-Pressed • 18 Rare Herbs • Root Activating</span>
+                <div class="circle-badge" title="Signature Masterpiece">
+                  <span class="badge-number">01</span>
+                  <span class="badge-unit">PRESTIGE</span>
                 </div>
               </div>
 
               <div class="card-image-wrap">
-                <img src="/assets/sovereign-watch.png" alt="Aurelia Sovereign Emerald 41" class="card-product-img" loading="lazy">
-                <a href="/product/?slug=aurelia-sovereign-emerald-41" class="quick-view-badge">View Specifications ↗</a>
+                <img src="assets/new-oil-bottle-card.jpg" alt="Herbal Hair Oil" class="card-product-img" loading="lazy">
+                <a href="/product/?slug=herbal-hair-oil" class="quick-view-badge">View Specifications ↗</a>
               </div>
 
               <div class="card-details">
                 <div class="card-meta-row">
-                  <span class="product-category">Automatic Chronometers</span>
-                  <div class="rating-stars">★★★★★ <span class="rating-score">4.95</span></div>
+                  <span class="product-category">Hair Care</span>
+                  <div class="rating-stars">★★★★★ <span class="rating-score">4.9</span></div>
                 </div>
 
-                <h3 class="product-card-title">Aurelia Sovereign Emerald 41</h3>
-                <p class="product-card-subtitle">41mm Swiss automatic with sunburst emerald dial.</p>
+                <h3 class="product-card-title">Herbal Hair Oil</h3>
+                <p class="product-card-subtitle">Cold-Pressed • 18 Rare Herbs • Root Activating</p>
 
                 <p class="product-card-desc">
-                  Flagship 41mm automatic mechanical timepiece featuring sunburst emerald dial, double-domed sapphire crystal, 72-hour power reserve, and solid 316L stainless steel bracelet.
+                  Crafted in small batches according to classical Ayurvedic texts. Nachiyar Herbal Hair Oil features deep-steeped cold-pressed oils enriched with Bhringraj, Amla, Brahmi, and delicate lavender blossom essence. Calms scalp inflammation, repairs dry split ends, and delivers noticeable root strength within two weeks of regular application.
                 </p>
 
                 <div class="card-action-bar">
                   <div class="card-pricing">
-                    <span class="price-current">₹48,500</span>
-                    <span class="price-mrp">₹56,000</span>
+                    <span class="price-current">₹299</span>
+                    <span class="price-mrp">₹undefined</span>
                   </div>
 
-                  <button class="btn-quick-add" data-id="AUR-CHRONO-001" data-name="Aurelia Sovereign Emerald 41" data-price="48500" data-img="/assets/sovereign-watch.png" data-size="Caliber 2824 • Sunburst Emerald">
+                  <button class="btn-quick-add" data-id="prod_oil_01" data-name="Herbal Hair Oil" data-price="299" data-img="assets/new-oil-bottle-card.jpg" data-size="Cold-Pressed • 18 Rare Herbs • Root Activating">
                     <span class="btn-text">Add To Bag</span>
                     <span class="btn-icon">+</span>
                   </button>
@@ -1931,42 +808,42 @@ img, svg, video {
             </div>
           </article>
 
-          <!-- PRODUCT CARD 2: Aurelia DeepOcean Ceramic Diver -->
-          <article class="product-card product-card--shampoo" id="card-shampoo" style="--card-bg: #1E293B; --card-color: #FFFFFF; --accent-hover: #469815;">
+          <!-- PRODUCT CARD 2: Hibiscus Flower Shampoo -->
+          <article class="product-card product-card--shampoo" id="card-shampoo" style="--card-bg: #822234; --card-color: #FFFFFF; --accent-hover: #D4AF37;">
             <div class="card-inner">
               <div class="card-top-bar">
-                <span class="pill-tag">300M Diver • Helium Escape Valve</span>
-                <div class="circle-badge" title="Professional Oceanic Diver">
-                  <span class="badge-number">300M</span>
-                  <span class="badge-unit">DIVE</span>
+                <span class="pill-tag">Fresh Hibiscus Petals • Coconut Surfactants</span>
+                <div class="circle-badge" title="Precision Masterpiece">
+                  <span class="badge-number">02</span>
+                  <span class="badge-unit">CLASSIC</span>
                 </div>
               </div>
 
               <div class="card-image-wrap">
-                <img src="/assets/ceramic-diver.png" alt="Aurelia DeepOcean Ceramic Diver" class="card-product-img" loading="lazy">
-                <a href="/product/?slug=aurelia-deepocean-ceramic-diver" class="quick-view-badge">View Specifications ↗</a>
+                <img src="assets/new-shampoo-bottle-card.jpg" alt="Hibiscus Flower Shampoo" class="card-product-img" loading="lazy">
+                <a href="/product/?slug=hibiscus-flower-shampoo" class="quick-view-badge">View Specifications ↗</a>
               </div>
 
               <div class="card-details">
                 <div class="card-meta-row">
-                  <span class="product-category">Diving Instruments</span>
-                  <div class="rating-stars">★★★★★ <span class="rating-score">4.9</span></div>
+                  <span class="product-category">Scalp & Cleansing</span>
+                  <div class="rating-stars">★★★★★ <span class="rating-score">4.8</span></div>
                 </div>
 
-                <h3 class="product-card-title">Aurelia DeepOcean Ceramic Diver</h3>
-                <p class="product-card-subtitle">300m oceanic diver with ceramic bezel.</p>
+                <h3 class="product-card-title">Hibiscus Flower Shampoo</h3>
+                <p class="product-card-subtitle">Fresh Hibiscus Petals • Coconut Surfactants</p>
 
                 <p class="product-card-desc">
-                  Professional diving instrument with 120-click ceramic bezel, automatic helium release valve, Super-LumiNova luminescence, and 300 meters water resistance.
+                  Formulated with handpicked South Indian hibiscus blossoms and gentle plant-derived saponins. Gently cleanses without stripping natural oils, enhancing softness, promoting follicle vitality, and restoring hair's natural radiant shine.
                 </p>
 
                 <div class="card-action-bar">
                   <div class="card-pricing">
-                    <span class="price-current">₹54,000</span>
-                    <span class="price-mrp">₹62,500</span>
+                    <span class="price-current">₹249</span>
+                    <span class="price-mrp">₹undefined</span>
                   </div>
 
-                  <button class="btn-quick-add" data-id="AUR-DIVER-002" data-name="Aurelia DeepOcean Ceramic Diver" data-price="54000" data-img="/assets/ceramic-diver.png" data-size="300M Diver • Helium Escape Valve">
+                  <button class="btn-quick-add" data-id="prod_shampoo_02" data-name="Hibiscus Flower Shampoo" data-price="249" data-img="assets/new-shampoo-bottle-card.jpg" data-size="Fresh Hibiscus Petals • Coconut Surfactants">
                     <span class="btn-text">Add To Bag</span>
                     <span class="btn-icon">+</span>
                   </button>
@@ -1978,30 +855,30 @@ img, svg, video {
         </div>
 
         <!-- FEATURED INNOVATION / BUNDLE -->
-        <div class="bundle-banner" style="--card-bg: #14532D; --card-color: #FFFFFF;">
+        <div class="bundle-banner" style="--card-bg: #4a2870; --card-color: #FFFFFF;">
           <div class="bundle-grid">
             <div class="bundle-visual">
-              <img src="/assets/collectors-duo.png" alt="The Aurelia Collector's Duo (Set of 2)" class="bundle-img">
-              <span class="bundle-badge">★ BEST VALUE: SAVE ₹15,375</span>
+              <img src="assets/duo-ritual-new.jpg" alt="The Royal Hair Ritual (Duo Set)" class="bundle-img">
+              <span class="bundle-badge">★ BEST VALUE: SAVE ₹100</span>
             </div>
             <div class="bundle-content">
-              <span class="bundle-eyebrow">THE SIGNATURE 2-WATCH COLLECTION</span>
-              <h3 class="bundle-title">The Aurelia Collector's Duo (Set of 2)</h3>
+              <span class="bundle-eyebrow">FEATURED MASTERPIECE</span>
+              <h3 class="bundle-title">The Royal Hair Ritual (Duo Set)</h3>
               <p class="bundle-description">
-                Experience the complete Aurelia horological range. The Sovereign Emerald 41 for refined everyday elegance, paired with the DeepOcean Ceramic Diver for 300 metres of oceanic adventure. Delivered in a bespoke collector's presentation box.
+                The ultimate royal regimen. Includes 200ml Herbal Hair Oil and 250ml Hibiscus Flower Shampoo packed in an exquisite luxury box. Delivers holistic scalp nourishment and gentle purification.
               </p>
               <div class="bundle-features">
-                <span>✔ 1x Sovereign Emerald 41 (Steel Bracelet)</span>
-                <span>✔ 1x DeepOcean Ceramic Diver</span>
-                <span>✔ Free Insured Express Delivery & Collector's Box</span>
+                <span>✔ 100% Certified Authentic Craft</span>
+                <span>✔ Official Manufacturer Guarantee</span>
+                <span>✔ Complimentary Insured Air Delivery</span>
               </div>
               <div class="bundle-cta-row">
                 <div class="bundle-pricing">
-                  <span class="bundle-price-now">₹87,125</span>
-                  <span class="bundle-price-was">₹1,02,500</span>
+                  <span class="bundle-price-now">₹499</span>
+                  <span class="bundle-price-was">₹undefined</span>
                   <span class="discount-pill">SPECIAL OFFER</span>
                 </div>
-                <button class="btn-bundle-add btn-quick-add" data-id="AUR-DUO-003" data-name="The Aurelia Collector's Duo (Set of 2)" data-price="87125" data-img="/assets/collectors-duo.png" data-size="Sovereign Emerald 41 + DeepOcean Diver">
+                <button class="btn-bundle-add btn-quick-add" data-id="prod_duo_03" data-name="The Royal Hair Ritual (Duo Set)" data-price="499" data-img="assets/duo-ritual-new.jpg" data-size="Complete Restorative Duo • Save ₹149">
                   Add To Bag
                 </button>
               </div>
@@ -2017,13 +894,13 @@ img, svg, video {
       <div class="section-container">
         <div class="reviews-section-header">
           <div class="reviews-header-info">
-            <span class="section-eyebrow">VERIFIED CUSTOMER EXPERIENCES</span>
-            <h2 class="section-heading">Loved by Aurelia Chronometry Customers</h2>
+            <span class="section-eyebrow">VERIFIED CLIENT EXPERIENCES</span>
+            <h2 class="section-heading">Loved by Over 50,000+ Nachiyar Herbals & Cosmetics Clients</h2>
             <div class="reviews-aggregate-summary">
               <div class="stars-gold">★★★★★</div>
-              <span class="aggregate-score" id="reviewsAvgScore">4.8 / 5.0</span>
+              <span class="aggregate-score" id="reviewsAvgScore">4.9 / 5.0</span>
               <span class="aggregate-divider">•</span>
-              <span class="aggregate-count" id="reviewsCountText">Based on 5 Verified Patron Reviews</span>
+              <span class="aggregate-count" id="reviewsCountText">Based on Verified Client Reviews</span>
             </div>
           </div>
           <div class="reviews-header-action">
@@ -2056,40 +933,40 @@ img, svg, video {
     <section class="science-section" id="the-science">
       <div class="section-container">
         <div class="section-header text-center">
-          <span class="section-eyebrow">HOROLOGICAL EXCELLENCE</span>
+          <span class="section-eyebrow">ENGINEERED EXCELLENCE</span>
           <h2 class="section-heading">Engineered with Precision</h2>
-          <p class="section-subtext">Every timepiece adheres to the highest Swiss standards of accuracy, endurance, and refined craftsmanship.</p>
+          <p class="section-subtext">Every product adheres to the highest standards of accuracy, endurance, and refined craftsmanship.</p>
         </div>
 
         <div class="triad-grid">
           
           <div class="triad-card">
             <div class="triad-icon-wrap">
-              <span style="font-size: 2rem;">🏅</span>
+              <span style="font-size: 2rem;">🌿</span>
             </div>
-            <h3 class="triad-title">Swiss Certified Chronometer</h3>
+            <h3 class="triad-title">18 Rare Botanicals</h3>
             <p class="triad-text">
-              Tested across 5 positions & 3 temperatures
+              undefined
             </p>
           </div>
 
           <div class="triad-card">
             <div class="triad-icon-wrap">
-              <span style="font-size: 2rem;">🛡️</span>
+              <span style="font-size: 2rem;">☀️</span>
             </div>
-            <h3 class="triad-title">5-Year Atelier Warranty</h3>
+            <h3 class="triad-title">21-Day Solar Infusion</h3>
             <p class="triad-text">
-              Complimentary global service coverage
+              undefined
             </p>
           </div>
 
           <div class="triad-card">
             <div class="triad-icon-wrap">
-              <span style="font-size: 2rem;">📦</span>
+              <span style="font-size: 2rem;">✨</span>
             </div>
-            <h3 class="triad-title">Insured Air Courier</h3>
+            <h3 class="triad-title">Zero Harsh Synthetics</h3>
             <p class="triad-text">
-              Doorstep white-glove security delivery
+              undefined
             </p>
           </div>
 
@@ -2101,10 +978,10 @@ img, svg, video {
     <section class="quote-split-section" id="story">
       <div class="quote-split-grid">
         <div class="quote-image-col">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Self-winding_wristwatch_%28transparent_backside%29.jpg?width=1000" alt="Digitechzo DigiWatches Showcase" class="quote-bg-img">
+          <img src="assets/heritage-ritual.jpg" alt="Nachiyar Herbals & Cosmetics Showcase" class="quote-bg-img">
           <div class="quote-img-overlay">
             <div class="quote-badge">
-              <span>SWISS CALIBER ARCHITECTURE</span>
+              <span>PRECISION ARCHITECTURE</span>
             </div>
           </div>
         </div>
@@ -2112,11 +989,11 @@ img, svg, video {
           <div class="quote-inner">
             <span class="quote-mark">“</span>
             <blockquote class="quote-text">
-              In an era of fleeting digital seconds, Aurelia celebrates the timeless poetry of mechanical movements calibrated by master horologists.
+              Pure botanicals work in harmony with your scalp biology, nurturing dense root vitality and lasting hair strength.
             </blockquote>
             <div class="quote-author">
-              <strong class="author-name">Henri V. Aurelia</strong>
-              <span class="author-title">Master Horologist, Founder & Atelier Director</span>
+              <strong class="author-name">Nachiyar Herbals & Cosmetics Atelier</strong>
+              <span class="author-title">Atelier & Studios</span>
             </div>
             <a href="/shop/" class="btn btn--primary quote-cta">
               Explore The Collection →
@@ -2138,12 +1015,12 @@ img, svg, video {
       <!-- Newsletter Row -->
       <div class="footer-newsletter-row">
         <div class="newsletter-text-col">
-          <span class="footer-sub-eyebrow">THE AURELIA CIRCLE</span>
-          <h2 class="footer-newsletter-heading">RECEIVE 15% OFF YOUR FIRST TIMEPIECE</h2>
-          <p class="footer-newsletter-sub">Subscribe for private previews, limited editions and horological insights.</p>
+          <span class="footer-sub-eyebrow">NACHIYAR VIP INSIDER</span>
+          <h2 class="footer-newsletter-heading">RECEIVE 15% OFF YOUR FIRST ORDER</h2>
+          <p class="footer-newsletter-sub">Subscribe for flagship creations, architecture releases, and exclusive private discounts.</p>
         </div>
         <div class="newsletter-form-col">
-          <form class="footer-form" id="newsletterForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Welcome to DIGITECHZO DIGIWATCHES Insider! ✨', body: 'Privilege Code AURELIA15 has been applied for your order.', type: 'info' }); this.reset();">
+          <form class="footer-form" id="newsletterForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Welcome to NACHIYAR Insider! ✨', body: 'Privilege Code ROYAL15 has been applied for your order.', type: 'info' }); this.reset();">
             <div class="form-input-group">
               <input type="email" placeholder="Enter your email address" required aria-label="Email Address" autocomplete="email" spellcheck="false">
               <button type="submit" class="newsletter-submit-btn" aria-label="Submit email">
@@ -2161,10 +1038,10 @@ img, svg, video {
         <div class="footer-col">
           <h4 class="footer-col-title">SHOP COLLECTIONS</h4>
           <ul class="footer-col-links">
-            <li><a href="/shop/?category=Automatic%20Chronometers">Automatic Chronometers</a></li>
-            <li><a href="/shop/?category=Diving%20Instruments">Diving Instruments</a></li>
-            <li><a href="/shop/?category=Collector%20Sets">Collector Sets</a></li>
-            <li><a href="/shop/?category=Dress%20Watches">Dress Watches</a></li>
+            <li><a href="/shop/?category=Hair%20Care">Hair Care</a></li>
+            <li><a href="/shop/?category=Scalp%20%26%20Cleansing">Scalp & Cleansing</a></li>
+            <li><a href="/shop/?category=Ritual%20Sets%20%26%20Combos">Ritual Sets & Combos</a></li>
+            <li><a href="/shop/?category=Royal%20Gifting">Royal Gifting</a></li>
             <li><a href="/shop/">Browse All Collections</a></li>
           </ul>
         </div>
@@ -2172,7 +1049,7 @@ img, svg, video {
         <div class="footer-col">
           <h4 class="footer-col-title">COMPANY &amp; ATELIER</h4>
           <ul class="footer-col-links">
-            <li><a href="/about/">About Digitechzo DigiWatches</a></li>
+            <li><a href="/about/">About Nachiyar Herbals & Cosmetics</a></li>
             <li><a href="/about/#architecture">Architecture &amp; Quality</a></li>
             <li><a href="/about/#warranty">Official Guarantee</a></li>
             <li><a href="/contact/">Store Concierge &amp; Inquiries</a></li>
@@ -2195,22 +1072,22 @@ img, svg, video {
           <ul class="footer-contact-list">
             <li>
               <span class="footer-contact-icon">&#128222;</span>
-              <a href="tel:+919445566778" id="footerContactPhone">+91 94455 66778</a>
+              <a href="tel:+919444088990" id="footerContactPhone">+91 94440 88990</a>
             </li>
             <li>
               <span class="footer-contact-icon">&#9993;&#65039;</span>
-              <a href="mailto:concierge@aureliatime.com" id="footerContactEmail">concierge@aureliatime.com</a>
+              <a href="mailto:care@nachiyarherbals.com" id="footerContactEmail">care@nachiyarherbals.com</a>
             </li>
             <li class="footer-address-item">
               <span class="footer-contact-icon">&#128205;</span>
-              <address id="footerContactAddress">Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001</address>
+              <address id="footerContactAddress">Nachiyar Botanical Heritage, No. 18 Temple Ring Road, Madurai, Tamil Nadu - 625001</address>
             </li>
           </ul>
 
           <div class="footer-social-block">
             <h4 class="footer-col-title footer-col-title--sm">CONNECT WITH US</h4>
             <div class="footer-social-icons">
-              <a href="https://instagram.com/aureliatime" target="_blank" rel="noopener noreferrer" class="footer-social-link footer-social-link--instagram" aria-label="Follow Digitechzo DigiWatches on Instagram">
+              <a href="https://instagram.com/nachiyarherbals" target="_blank" rel="noopener noreferrer" class="footer-social-link footer-social-link--instagram" aria-label="Follow Nachiyar Herbals & Cosmetics on Instagram">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 <span>Instagram</span>
               </a>
@@ -2221,21 +1098,21 @@ img, svg, video {
         <!-- Brand Information Column -->
         <div class="footer-col brand-col">
           <div class="footer-crest-wrap">
-            <img src="/assets/logo.png" alt="Digitechzo DigiWatches Logo" class="footer-crest-img">
+            <img src="/assets/digitechzo-logo.png" alt="Nachiyar Herbals & Cosmetics Logo" class="footer-crest-img">
           </div>
           <p class="footer-brand-bio">
-            Aurelia Chronometry crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide.
+            Nachiyar Herbals & Cosmetics celebrates the timeless grace of royal personal care. Formulated without synthetic shortcuts. Handcrafted in India.
           </p>
         </div>
       </div>
 
       <div class="footer-watermark-row">
-        <span class="footer-watermark-text">DIGITECHZO DIGIWATCHES</span>
+        <span class="footer-watermark-text">NACHIYAR</span>
       </div>
 
       <div class="footer-legal-bar">
-        <p>© 2026 AURELIA CHRONOMETRY. ALL RIGHTS RESERVED.</p>
-        <p class="footer-developer-credit">Powered by Aurelia Atelier Platform</p>
+        <p>© 2026 NACHIYAR HERBALS & COSMETICS. ALL RIGHTS RESERVED.</p>
+        <p class="footer-developer-credit">Powered by Nachiyar Herbals & Cosmetics Platform</p>
         <p class="legal-links">
           <a href="/">Home</a> • <a href="/shop/">Shop</a> • <a href="/about/">About Us</a> • <a href="/contact/">Contact</a> • <a href="/privacy/">Privacy Policy</a> • <a href="/terms/">Terms of Service</a> • <a href="/shipping-policy/">Shipping & Returns</a> • <a href="/sitemap/">Sitemap</a>
         </p>
@@ -2258,7 +1135,7 @@ img, svg, video {
 
       <div class="free-shipping-tier">
         <div class="tier-message-row">
-          <span id="shippingTierMessage">Add ₹999 more for Free Pan-India Delivery!</span>
+          <span id="shippingTierMessage">Add ₹599 more for Free Pan-India Delivery!</span>
           <span class="tier-icon">🚚</span>
         </div>
         <div class="tier-progress-track">
@@ -2271,7 +1148,7 @@ img, svg, video {
           <div class="cart-empty-state" id="cartEmptyState">
             <div class="empty-icon">✨</div>
             <h4>Your bag is currently empty</h4>
-            <p>Discover the official Digitechzo DigiWatches signature collection.</p>
+            <p>Discover the official Nachiyar Herbals & Cosmetics signature collection.</p>
             <a href="/shop/" class="btn btn--primary empty-shop-btn">Explore Collection</a>
           </div>
         </div>
@@ -2279,10 +1156,10 @@ img, svg, video {
         <div class="cart-upsell-module" id="cartUpsellModule" style="display: none;">
           <span class="upsell-badge">✦ PERFECT PAIRING</span>
           <div class="upsell-content">
-            <img src="/assets/ceramic-diver.png" alt="Aurelia DeepOcean Ceramic Diver" class="upsell-img" id="upsellImg">
+            <img src="assets/new-shampoo-bottle-card.jpg" alt="Hibiscus Flower Shampoo" class="upsell-img" id="upsellImg">
             <div class="upsell-details">
-              <h5 id="upsellTitle">Aurelia DeepOcean Ceramic Diver</h5>
-              <p class="upsell-price">₹54,000</p>
+              <h5 id="upsellTitle">Hibiscus Flower Shampoo</h5>
+              <p class="upsell-price">₹249</p>
               <button class="btn-upsell-add" id="btnUpsellAdd">+ Add to Bag</button>
             </div>
           </div>
@@ -2339,11 +1216,9 @@ img, svg, video {
           <div class="form-group">
             <label for="reviewProductSelect">Formulation Experience <span style="color:#DC2626;">*</span></label>
             <select id="reviewProductSelect" class="form-input">
-              <option value="Aurelia Sovereign Emerald 41">Aurelia Sovereign Emerald 41</option>
-              <option value="Aurelia DeepOcean Ceramic Diver">Aurelia DeepOcean Ceramic Diver</option>
-              <option value="The Aurelia Collector's Duo (Set of 2)">The Aurelia Collector's Duo (Set of 2)</option>
-              <option value="Aurelia Heritage Moonphase">Aurelia Heritage Moonphase</option>
-              <option value="Aurelia Collector's Strap Kit (3 Straps)">Aurelia Collector's Strap Kit (3 Straps)</option>
+              <option value="Herbal Hair Oil">Herbal Hair Oil</option>
+              <option value="Hibiscus Flower Shampoo">Hibiscus Flower Shampoo</option>
+              <option value="The Royal Hair Ritual (Duo Set)">The Royal Hair Ritual (Duo Set)</option>
             </select>
           </div>
 

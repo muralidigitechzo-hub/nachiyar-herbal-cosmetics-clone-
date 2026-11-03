@@ -4,11 +4,11 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digitechzo DigiWatches | Secure Web Checkout</title>
+  <title>Nachiyar Herbals & Cosmetics | Secure Web Checkout</title>
   <!-- Dynamic Brand Favicon -->
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="shortcut icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/png" href="/assets/digitechzo-logo.png">
+  <link rel="shortcut icon" type="image/png" href="/assets/digitechzo-logo.png">
+  <link rel="apple-touch-icon" type="image/png" href="/assets/digitechzo-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -291,30 +291,31 @@
   <script src="/theme-engine.js"></script>
   <style id="dynamicBrandTheme">
     :root {
-      --color-canvas: #FDFBF7;
-      --color-canvas-alt: #F1EEE6;
+      --color-canvas: #F9F8F5;
+      --color-canvas-alt: #FFFFFF;
       --color-surface: #FFFFFF;
-      --color-text-main: #0F291E;
-      --color-text-muted: #52796F;
-      --color-lavender-primary: #064E3B;
-      --color-lavender-dark: #047857;
-      --color-lavender-light: rgba(6, 78, 59, 0.12);
-      --color-gold: #E2B755;
-      --color-gold-light: rgba(226, 183, 85, 0.18);
-      --color-gold-dark: #047857;
-      --gold-gradient: linear-gradient(135deg, #E2B755 0%, #047857 100%);
-      --gold-glow: 0 4px 20px rgba(226, 183, 85, 0.35);
-      --color-hibiscus-primary: #1E293B;
-      --color-hibiscus-dark: #1E293B;
-      --color-bundle-dark: #14532D;
-      --color-bundle-accent: #E2B755;
-      --card-bg-1: #064E3B;
-      --card-bg-2: #1E293B;
-      --card-bg-bundle: #14532D;
-      --promo-banner-bg: linear-gradient(135deg, #064E3B 0%, #14532D 100%);
+      --color-text-main: #191319;
+      --color-text-muted: #64748B;
+      --color-lavender-primary: #7C5AAB;
+      --color-lavender-dark: #583B82;
+      --color-lavender-light: rgba(124, 90, 171, 0.12);
+      --color-gold: #D4AF37;
+      --color-gold-light: rgba(212, 175, 55, 0.18);
+      --color-gold-dark: #583B82;
+      --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #583B82 100%);
+      --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.35);
+      --color-hibiscus-primary: #822234;
+      --color-hibiscus-dark: #822234;
+      --color-bundle-dark: #4a2870;
+      --color-bundle-accent: #D4AF37;
+      --card-bg-1: #6b4e9b;
+      --card-bg-2: #822234;
+      --card-bg-bundle: #4a2870;
+      --promo-banner-bg: linear-gradient(135deg, #7C5AAB 0%, #4a2870 100%);
       --font-heading: 'Cinzel', serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
+    
   </style>
 </head>
 <body class="page-body">
@@ -323,11 +324,11 @@
     <div class="header-container">
       <a href="/" class="brand-link">
         <div class="brand-crest">
-          <img src="/assets/logo.png" alt="Aurelia Chronometry Logo" class="brand-logo-img">
+          <img src="/assets/digitechzo-logo.png" alt="Nachiyar Herbals & Cosmetics Logo" class="brand-logo-img">
         </div>
         <div class="brand-text-lockup">
-          <span class="brand-name">DIGITECHZO DIGIWATCHES</span>
-          <span class="brand-sub" style="display:none;"></span>
+          <span class="brand-name">NACHIYAR</span>
+          <span class="brand-sub">PURE BOTANICAL ELEGANCE & AYURVEDIC CARE</span>
         </div>
       </a>
       <span style="font-size:0.8125rem; font-weight:700; color:var(--color-gold-dark);">🔒 100% Encrypted Checkout</span>
@@ -452,7 +453,7 @@
       // Unified Multi-Storage Cart Getter
       function getActiveCart() {
         try {
-          const keys = ['nachiyar_cart', 'store_cart', 'cart'];
+          const keys = ['store_cart', 'store_cart', 'cart'];
           for (const k of keys) {
             const raw = localStorage.getItem(k);
             if (raw) {
@@ -486,7 +487,7 @@
       // Robust Instant Default Payment Configuration (Zero Waiting / Zero Blank Loading State)
       let paymentMethodsConfig = {
         cod: { enabled: true, label: 'Cash on Delivery (COD)', description: 'Pay cash to courier executive upon delivery' },
-        upi: { enabled: true, label: 'UPI / QR (GPay, PhonePe, Paytm, BHIM)', upiId: 'nachiyarherbals18@okaxis', merchantName: 'Aurelia Chronometry' },
+        upi: { enabled: true, label: 'UPI / QR (GPay, PhonePe, Paytm, BHIM)', upiId: 'nachiyarherbals18@okaxis', merchantName: 'Nachiyar Herbals & Cosmetics' },
         card: { enabled: true, label: 'Credit or Debit Card' },
         netbanking: { enabled: true, label: 'Net Banking' }
       };
@@ -500,6 +501,10 @@
             storePublicSettings = settingsRes.data;
             if (settingsRes.data.paymentMethods && Object.keys(settingsRes.data.paymentMethods).length > 0) {
               paymentMethodsConfig = { ...paymentMethodsConfig, ...settingsRes.data.paymentMethods };
+            }
+            if (storePublicSettings.brand?.name || storePublicSettings.brandName) {
+              const bName = storePublicSettings.brand?.name || storePublicSettings.brandName;
+              document.querySelectorAll('.brand-name').forEach(el => el.textContent = bName);
             }
             renderCheckout();
           }
@@ -559,7 +564,7 @@
           // 1. UPI Subform
           if (m.key === 'upi') {
             const upiId = (paymentMethodsConfig.upi && paymentMethodsConfig.upi.upiId) || 'payments@okaxis';
-            const merchantName = (paymentMethodsConfig.upi && paymentMethodsConfig.upi.merchantName) || 'Aurelia Chronometry';
+            const merchantName = (paymentMethodsConfig.upi && paymentMethodsConfig.upi.merchantName) || 'Nachiyar Herbals & Cosmetics';
             const upiQrUri = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(merchantName)}&am=${total}&cu=INR`;
             const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiQrUri)}`;
 
@@ -733,6 +738,43 @@
         }
       }
 
+      async function validateAndSanitizeCart() {
+        try {
+          const res = await fetch('/api/products?_t=' + Date.now()).then(r => r.json()).catch(() => null);
+          let validProds = (res && res.success && Array.isArray(res.data)) ? res.data : [];
+          if (!validProds || validProds.length === 0) {
+            const dbRes = await fetch('/data/db.json?_t=' + Date.now()).then(r => r.json()).catch(() => null);
+            if (dbRes && Array.isArray(dbRes.products)) validProds = dbRes.products;
+          }
+
+          if (validProds && validProds.length > 0 && Array.isArray(cart) && cart.length > 0) {
+            const validIds = new Set(validProds.map(p => p.id).concat(validProds.map(p => p.slug)));
+            const cleaned = cart.filter(item => {
+              if (!item) return false;
+              if (validIds.has(item.id) || validIds.has(item.slug)) return true;
+              const match = validProds.find(p => p.name === item.name);
+              if (match) {
+                item.id = match.id;
+                return true;
+              }
+              return false;
+            });
+
+            if (cleaned.length !== cart.length) {
+              cart = cleaned;
+              try {
+                localStorage.setItem('store_cart', JSON.stringify(cart));
+                localStorage.setItem('store_cart', JSON.stringify(cart));
+                localStorage.setItem('cart', JSON.stringify(cart));
+              } catch(e) {}
+            }
+          }
+        } catch (e) {
+          console.warn('Cart sanitization note:', e);
+        }
+        renderCheckout();
+      }
+
       function renderCheckout() {
         // Always render payment methods immediately so it NEVER gets stuck on loading
         renderPaymentMethods();
@@ -742,7 +784,7 @@
             <div style="padding:28px 16px; text-align:center; color:var(--color-text-muted);">
               <span style="font-size:2.2rem; display:block; margin-bottom:10px;">🛍️</span>
               <p style="margin:0 0 8px; font-weight:700; color:var(--color-text-main); font-size:1.05rem;">Your shopping bag is empty</p>
-              <p style="margin:0 0 16px; font-size:0.8125rem;">Select your desired timepiece or accessories to complete your order.</p>
+              <p style="margin:0 0 16px; font-size:0.8125rem;">Select products to complete your order.</p>
               <a href="/shop/" class="btn-checkout" style="display:inline-block; padding:10px 24px; font-size:0.84rem; text-decoration:none; border-radius:999px;">Explore Collection →</a>
             </div>
           `;
@@ -757,7 +799,7 @@
         itemsList.innerHTML = '';
         let subtotal = 0;
 
-        cart.forEach(item => {
+        cart.forEach((item, idx) => {
           const itemPrice = Number(item.price || 0);
           const itemQty = Number(item.qty || 1);
           subtotal += (itemPrice * itemQty);
@@ -765,13 +807,31 @@
           div.className = 'checkout-item-row';
           div.innerHTML = `
             <img src="${item.img || '/assets/logo.png'}" alt="${item.name || 'Product'}" class="chk-img">
-            <div class="chk-info">
-              <h5>${item.name || 'Aurelia Timepiece'}</h5>
+            <div class="chk-info" style="flex:1;">
+              <h5>${item.name || 'Product'}</h5>
               <p>${item.size || 'Standard Edition'} • Qty: ${itemQty}</p>
             </div>
-            <span class="chk-price">₹${itemPrice * itemQty}</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="chk-price">₹${itemPrice * itemQty}</span>
+              <button type="button" class="chk-remove-item" data-idx="${idx}" style="background:none; border:none; color:#ef4444; font-size:14px; cursor:pointer; padding:4px 8px; border-radius:4px;" title="Remove item">✕</button>
+            </div>
           `;
           itemsList.appendChild(div);
+        });
+
+        itemsList.querySelectorAll('.chk-remove-item').forEach(btn => {
+          btn.onclick = (e) => {
+            const idx = parseInt(btn.dataset.idx, 10);
+            if (!isNaN(idx) && idx >= 0 && idx < cart.length) {
+              cart.splice(idx, 1);
+              try {
+                localStorage.setItem('store_cart', JSON.stringify(cart));
+                localStorage.setItem('store_cart', JSON.stringify(cart));
+                localStorage.setItem('cart', JSON.stringify(cart));
+              } catch(e) {}
+              renderCheckout();
+            }
+          };
         });
 
         const freeShipMin = Number(storePublicSettings?.freeShippingThreshold) || 599;
@@ -895,7 +955,7 @@
       function isCustomerAuthenticated() {
         let cust = null;
         try {
-          const saved = localStorage.getItem('store_customer') || localStorage.getItem('nachiyar_customer');
+          const saved = localStorage.getItem('store_customer') || localStorage.getItem('store_customer');
           if (saved) cust = JSON.parse(saved);
         } catch (e) {}
         return Boolean(cust && (cust.email || cust.phone) && cust.name);
@@ -1057,7 +1117,7 @@
 
           // 1. Sync active customer profile
           localStorage.setItem('store_customer', JSON.stringify(custObj));
-          localStorage.setItem('nachiyar_customer', JSON.stringify(custObj));
+          localStorage.setItem('store_customer', JSON.stringify(custObj));
 
           // 2. Track placed order numbers
           const placedNumbers = JSON.parse(localStorage.getItem('store_placed_orders') || '[]');
@@ -1082,7 +1142,7 @@
           const storedOrders = JSON.parse(localStorage.getItem('store_customer_orders') || '[]');
           storedOrders.unshift(orderRecord);
           localStorage.setItem('store_customer_orders', JSON.stringify(storedOrders));
-          localStorage.setItem('nachiyar_customer_orders', JSON.stringify(storedOrders));
+          localStorage.setItem('store_customer_orders', JSON.stringify(storedOrders));
           localStorage.setItem('nachiyar_store_orders', JSON.stringify(storedOrders));
 
           // Real-time Stock Deduction & Multi-tab Broadcast to Admin & Storefront
@@ -1113,12 +1173,12 @@
         }
 
         localStorage.removeItem('store_cart');
-        localStorage.removeItem('nachiyar_cart');
+        localStorage.removeItem('store_cart');
         localStorage.removeItem('cart');
         window.location.href = `order-status.html?orderId=${orderId}&orderNumber=${orderNumber}`;
       });
 
-      renderCheckout();
+      validateAndSanitizeCart();
     });
   
     window.openSignInRequiredModal = function() {

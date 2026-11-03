@@ -91,7 +91,7 @@
     document.querySelectorAll('link[rel*="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]').forEach(el => el.href = fav);
     
     /* DIGITECHZO_BRAND_SYNC */
-    const bName = settings.brand?.name || settings.brandName || 'Digitechzo DigiWatches';
+    const bName = settings.brand?.name || settings.brandName || 'Nachiyar Herbals & Cosmetics';
     const shortBName = settings.brand?.shortName || bName;
     document.querySelectorAll('.brand-name, #footerBrandName, .dynamic-store-brand').forEach(el => {
       el.textContent = shortBName;

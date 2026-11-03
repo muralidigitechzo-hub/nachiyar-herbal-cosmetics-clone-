@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 6. BRANDING SYNC
       if (storeSettings) {
-        const bName = storeSettings.brand?.name || storeSettings.brandName || storeSettings.branding?.brandName || 'Digitechzo DigiWatches';
+        const bName = storeSettings.brand?.name || storeSettings.brandName || storeSettings.branding?.brandName || 'Nachiyar Herbals & Cosmetics';
         const bInitials = (bName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'NH';
         let bLogo = storeSettings.logoUrl || storeSettings.branding?.logoUrl || '/assets/logo.png';
         if (bLogo.includes('unsplash.com') || bLogo.includes('nachiyar-logo') || bLogo.includes('technova-logo') || !bLogo) bLogo = '/assets/logo.png';

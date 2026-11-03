@@ -44,9 +44,9 @@ export function getSiteConfig() {
   }
 
   return {
-    brand: { name: 'Aurelia Chronometry', tagline: 'Mastering The Art Of Timeless Precision', colors: { primary: '#064E3B' } },
-    business: { phone: '+91 94455 66778', email: 'concierge@aureliatime.com' },
-    content: { announcement: 'SPECIAL PRIVILEGE OFFER • FREE EXPRESS SHIPPING ON ALL ORDERS' },
+    brand: { name: 'Nachiyar Herbals & Cosmetics', shortName: 'NACHIYAR', tagline: 'Pure Botanical Elegance & Ayurvedic Care', colors: { primary: '#7C5AAB', secondary: '#D4AF37' }, logo: '/assets/digitechzo-logo.png', favicon: '/assets/digitechzo-logo.png' },
+    business: { phone: '+91 94440 88990', email: 'care@nachiyarherbals.com' },
+    content: { announcement: 'ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES' },
     categories: [],
     products: [],
     reviews: [],

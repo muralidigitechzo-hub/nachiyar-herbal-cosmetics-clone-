@@ -20,7 +20,7 @@ async function initStorefrontApp() {
       statNumber: '100%',
       statUnit: 'PURE',
       themeBg: '#6B4E9B',
-      image: 'assets/aurelia-emerald-watch.png',
+      image: '/assets/logo.png',
       price: 599,
       subPrice: 539,
       stars: '★★★★★',
@@ -112,9 +112,9 @@ async function initStorefrontApp() {
       localStorage.setItem('nachiyar_store_settings', JSON.stringify(settings));
     } catch (e) {}
 
-    const brandName = settings.brandName || settings.brand?.name || 'TechNova Electronics';
+    const brandName = settings.brandName || settings.brand?.name || 'Nachiyar Herbals & Cosmetics';
     const isHerbal = brandName.toLowerCase().includes('nachiyar') || brandName.toLowerCase().includes('herbal') || brandName.toLowerCase().includes('botanical');
-    const shortWord = settings.brand?.shortName || brandName || 'DIGITECHZO DIGIWATCHES';
+    const shortWord = settings.brand?.shortName || 'NACHIYAR';
     const initials = (brandName.trim().split(' ').map(w => w[0]).join('').substring(0, 2)).toUpperCase() || 'TN';
 
     // 1. Document Title
@@ -281,18 +281,18 @@ async function initStorefrontApp() {
       const idleText = orbitSection.querySelector('.spotlight-idle-text');
 
       const orbitData = settings.content?.orbit || settings.orbit;
-      const centerImg = settings.content?.orbitCenterImage || (settings.products && settings.products[0]?.images?.[0]) || 'assets/aurelia-emerald-watch.png';
+      const centerImg = settings.content?.orbitCenterImage || (settings.products && settings.products[0]?.images?.[0]) || '/assets/logo.png';
 
-      if (orbitEyebrow) orbitEyebrow.textContent = settings.content?.orbitEyebrow || (isHerbal ? 'SACRED BOTANICAL CRAFTSMANSHIP' : 'HOROLOGICAL ARCHITECTURE');
+      if (orbitEyebrow) orbitEyebrow.textContent = settings.content?.orbitEyebrow || (isHerbal ? 'SACRED BOTANICAL CRAFTSMANSHIP' : 'ENGINEERING & CRAFTSMANSHIP');
       if (orbitHeading) orbitHeading.textContent = settings.content?.orbitHeading || (isHerbal ? '18 Sacred Earth-Born Botanicals' : '18 Precision Mechanical Engineering Modules');
-      if (orbitSubtext) orbitSubtext.textContent = settings.content?.orbitSubtext || (isHerbal ? 'Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.' : 'Constructed with 18 precision hand-finished watchmaking components and complications. Hover over any node to explore.');
+      if (orbitSubtext) orbitSubtext.textContent = settings.content?.orbitSubtext || (isHerbal ? 'Solar-steeped over 21 days with 18 pure active herbs, roots, seeds, and petals. Hover over any ingredient to explore its restorative hair-care benefits.' : 'Constructed with precision engineered components and meticulous acoustic tuning. Hover over any node to explore.');
       if (orbitImg) {
         orbitImg.src = centerImg;
         orbitImg.alt = `${brandName} Flagship Architecture`;
       }
-      if (orbitBadge) orbitBadge.textContent = settings.content?.orbitBadge || (isHerbal ? '18 Rare Herbs • Cold-Pressed' : 'Swiss Caliber 2824 • Certified Chronometer');
+      if (orbitBadge) orbitBadge.textContent = settings.content?.orbitBadge || (isHerbal ? '18 Rare Herbs • Cold-Pressed' : 'Studio Quality • High-Fidelity Audio');
       if (idleIcon) idleIcon.textContent = settings.content?.orbitIdleIcon || (isHerbal ? '🌿' : '⏱️');
-      if (idleText) idleText.textContent = settings.content?.orbitIdleText || (isHerbal ? 'Hover over any botanical herb to discover its sacred hair-care benefits' : 'Hover over any chronometer component to inspect its horological specifications');
+      if (idleText) idleText.textContent = settings.content?.orbitIdleText || (isHerbal ? 'Hover over any botanical herb to discover its sacred hair-care benefits' : 'Hover over any component to inspect its specifications');
 
       // Populate orbit nodes directly from JSON data
       if (Array.isArray(orbitData) && orbitData.length > 0) {
@@ -426,6 +426,17 @@ async function initStorefrontApp() {
       productsList = [];
     }
 
+    // Auto-sanitize cart against active products catalog (purges stale/hardcoded items from old test catalogs)
+    if (Array.isArray(productsList) && productsList.length > 0 && Array.isArray(cart) && cart.length > 0) {
+      const validIds = new Set(productsList.map(p => p.id).concat(productsList.map(p => p.slug)));
+      const filtered = cart.filter(i => i && (validIds.has(i.id) || validIds.has(i.slug) || productsList.some(p => p.name === i.name)));
+      if (filtered.length !== cart.length) {
+        cart = filtered;
+        saveCart();
+        updateCartUI();
+      }
+    }
+
     // Load showcase configuration from argument, window, or localStorage cache
     let showcase = customShowcase;
     if (!showcase && window.__NACHIYAR_SETTINGS && window.__NACHIYAR_SETTINGS.homeShowcase) {
@@ -522,7 +533,7 @@ async function initStorefrontApp() {
       let badgeTitle = '100% Pure Active Plant Infusion';
       if (prodObj.badge && typeof prodObj.badge === 'object') {
         badgeNum = prodObj.badge.number || 'COSC';
-        badgeUnit = prodObj.badge.unit || 'SWISS';
+        badgeUnit = prodObj.badge?.unit || (typeof prodObj.badge === 'string' ? prodObj.badge : 'PRO');
         badgeTitle = prodObj.badge.title || 'Certified Chronometer';
       }
 
@@ -888,7 +899,7 @@ async function initStorefrontApp() {
       megaGrid.innerHTML = availableProds.slice(0, 3).map((prod, idx) => {
         const pSlug = prod.slug || prod.id;
         const tag = prod.subtitle || prod.category || 'Ayurvedic Care';
-        const img = (prod.images && prod.images[0]) || prod.imageUrl || 'assets/aurelia-emerald-watch.png';
+        const img = (prod.images && prod.images[0]) || prod.imageUrl || '/assets/logo.png';
         const price = Number(prod.price) || 299;
         const mrp = Number(prod.mrp) || Number(prod.comparePrice) || Math.round(price * 1.2);
         const saveTxt = mrp > price ? `<s class="old-price" style="text-decoration: line-through; opacity: 0.6; font-size: 0.8em; margin-left: 4px;">₹${mrp}</s>` : '';
@@ -1230,6 +1241,8 @@ async function initStorefrontApp() {
   function saveCart() {
     try {
       localStorage.setItem('nachiyar_cart', JSON.stringify(cart));
+      localStorage.setItem('store_cart', JSON.stringify(cart));
+      localStorage.setItem('cart', JSON.stringify(cart));
     } catch (e) {}
   }
 
@@ -1294,42 +1307,34 @@ async function initStorefrontApp() {
 
   function renderUpsellRecommendation() {
     if (!cartUpsellModule) return;
-    const hasOil = cart.some(i => i.name.includes('Oil'));
-    const hasShampoo = cart.some(i => i.name.includes('Shampoo'));
-    const upsellPriceEl = cartUpsellModule.querySelector('.upsell-price');
+    const cartIds = new Set(cart.map(i => i.id));
+    const prods = (typeof PRODUCTS === 'object' && PRODUCTS !== null)
+      ? Object.values(PRODUCTS).filter(p => p && p.id && !cartIds.has(p.id))
+      : [];
 
-    if (hasOil && !hasShampoo) {
-      cartUpsellModule.style.display = 'block';
-      upsellImg.src = PRODUCTS.shampoo.image;
-      upsellTitle.textContent = PRODUCTS.shampoo.title;
-      if (upsellPriceEl) upsellPriceEl.innerHTML = `₹${PRODUCTS.shampoo.price} <small> • 250ml</small>`;
-      btnUpsellAdd.onclick = (e) => {
-        addToCart({
-          id: PRODUCTS.shampoo.id,
-          name: PRODUCTS.shampoo.title,
-          price: PRODUCTS.shampoo.price,
-          img: PRODUCTS.shampoo.image,
-          size: '250ml Pump Bottle',
-          qty: 1
-        }, e);
-      };
-    } else if (hasShampoo && !hasOil) {
-      cartUpsellModule.style.display = 'block';
-      upsellImg.src = PRODUCTS.oil.image;
-      upsellTitle.textContent = PRODUCTS.oil.title;
-      if (upsellPriceEl) upsellPriceEl.innerHTML = `₹${PRODUCTS.oil.price} <small> • 200ml</small>`;
-      btnUpsellAdd.onclick = (e) => {
-        addToCart({
-          id: PRODUCTS.oil.id,
-          name: PRODUCTS.oil.title,
-          price: PRODUCTS.oil.price,
-          img: PRODUCTS.oil.image,
-          size: '200ml Glass Bottle',
-          qty: 1
-        }, e);
-      };
-    } else {
+    if (prods.length === 0) {
       cartUpsellModule.style.display = 'none';
+      return;
+    }
+
+    const rec = prods[0];
+    cartUpsellModule.style.display = 'block';
+    if (upsellImg) upsellImg.src = rec.image || (rec.images && rec.images[0]) || '/assets/logo.png';
+    if (upsellTitle) upsellTitle.textContent = rec.title || rec.name || 'Recommended Pairing';
+    const upsellPriceEl = cartUpsellModule.querySelector('.upsell-price');
+    if (upsellPriceEl) upsellPriceEl.innerHTML = `₹${rec.price || 0}`;
+
+    if (btnUpsellAdd) {
+      btnUpsellAdd.onclick = (e) => {
+        addToCart({
+          id: rec.id,
+          name: rec.title || rec.name || 'Product',
+          price: Number(rec.price || 0),
+          img: rec.image || (rec.images && rec.images[0]) || '/assets/logo.png',
+          size: rec.size || 'Standard Edition',
+          qty: 1
+        }, e);
+      };
     }
   }
 
@@ -1396,7 +1401,7 @@ async function initStorefrontApp() {
       }
     }
 
-    const safeImg = imgSrc || 'assets/aurelia-emerald-watch.png';
+    const safeImg = imgSrc || '/assets/logo.png';
     const isMobile = window.innerWidth <= 600;
     const pSize = isMobile ? 52 : 66;
     const pRadius = pSize / 2;
@@ -1543,11 +1548,14 @@ async function initStorefrontApp() {
     if (existing) {
       existing.qty += (item.qty || 1);
     } else {
+      const activeList = (typeof PRODUCTS === 'object' && PRODUCTS !== null) ? Object.values(PRODUCTS).filter(Boolean) : [];
+      const firstProd = activeList.length > 0 ? activeList[0] : null;
+
       cart.push({
         id: pId,
-        name: item.name || 'Digitechzo Watch',
-        price: Number(item.price) || 0,
-        img: item.img || '/assets/aurelia-emerald-watch.png',
+        name: item.name || (firstProd ? (firstProd.title || firstProd.name) : 'Product'),
+        price: Number(item.price) || (firstProd ? Number(firstProd.price) : 0),
+        img: item.img || (firstProd ? (firstProd.image || (firstProd.images && firstProd.images[0])) : '/assets/logo.png'),
         size: item.size || 'Standard Edition',
         qty: item.qty || 1
       });
@@ -1565,7 +1573,7 @@ async function initStorefrontApp() {
 
     try {
       if (typeof showSideToast === 'function') {
-        showSideToast(`Added ${item.name || 'timepiece'} to your Royal Bag! ✨`, 'success');
+        showSideToast(`Added ${item.name || 'item'} to your Bag! ✨`, 'success');
       }
     } catch (e) {}
 
@@ -1744,13 +1752,14 @@ async function initStorefrontApp() {
     e.preventDefault();
     e.stopPropagation();
 
-    const id = btn.dataset.id || 'AUR-DUO-003';
-    const live = (typeof PRODUCTS === 'object' && PRODUCTS !== null)
-      ? Object.values(PRODUCTS).find(p => p && (p.id === id || p.slug === id))
-      : null;
-    const price = live ? Number(live.price) : (parseInt(btn.dataset.price, 10) || 48500);
-    const name = live ? (live.title || live.name) : (btn.dataset.name || 'Digitechzo Watch');
-    const img = live ? (live.image || (live.images && live.images[0])) : (btn.dataset.img || '/assets/sovereign-watch.png');
+    const activeList = (typeof PRODUCTS === 'object' && PRODUCTS !== null) ? Object.values(PRODUCTS).filter(Boolean) : [];
+    const firstProd = activeList.length > 0 ? activeList[0] : null;
+
+    const id = btn.dataset.id || (firstProd ? firstProd.id : 'prod_01');
+    const live = activeList.find(p => p && (p.id === id || p.slug === id)) || firstProd;
+    const price = btn.dataset.price ? Number(btn.dataset.price) : (live ? Number(live.price) : 0);
+    const name = btn.dataset.name || (live ? (live.title || live.name) : 'Product');
+    const img = btn.dataset.img || (live ? (live.image || (live.images && live.images[0])) : '/assets/logo.png');
     const size = btn.dataset.size || 'Standard Edition';
 
     addToCart({
@@ -1768,13 +1777,14 @@ async function initStorefrontApp() {
     btn.onclick = (e) => {
       e.stopPropagation();
       e.preventDefault();
-      const id = btn.dataset.id || 'AUR-DUO-003';
-      const live = (typeof PRODUCTS === 'object' && PRODUCTS !== null)
-        ? Object.values(PRODUCTS).find(p => p && (p.id === id || p.slug === id))
-        : null;
-      const price = live ? Number(live.price) : (parseInt(btn.dataset.price, 10) || 48500);
-      const name = live ? (live.title || live.name) : (btn.dataset.name || 'Digitechzo Watch');
-      const img = live ? (live.image || (live.images && live.images[0])) : (btn.dataset.img || '/assets/sovereign-watch.png');
+      const activeList = (typeof PRODUCTS === 'object' && PRODUCTS !== null) ? Object.values(PRODUCTS).filter(Boolean) : [];
+      const firstProd = activeList.length > 0 ? activeList[0] : null;
+
+      const id = btn.dataset.id || (firstProd ? firstProd.id : 'prod_01');
+      const live = activeList.find(p => p && (p.id === id || p.slug === id)) || firstProd;
+      const price = btn.dataset.price ? Number(btn.dataset.price) : (live ? Number(live.price) : 0);
+      const name = btn.dataset.name || (live ? (live.title || live.name) : 'Product');
+      const img = btn.dataset.img || (live ? (live.image || (live.images && live.images[0])) : '/assets/logo.png');
       const size = btn.dataset.size || 'Standard Edition';
 
       addToCart({
@@ -1950,69 +1960,34 @@ async function initStorefrontApp() {
 
   const DEFAULT_REVIEWS = [
   {
-    "id": "rev_1",
-    "name": "Aditya Kapoor",
-    "author_name": "Aditya Kapoor",
-    "email": "aditya.k@gmail.com",
-    "author_email": "aditya.k@gmail.com",
-    "product_name": "The Aurelia Collector's Duo (Set of 2)",
+    "id": "rev_01",
+    "name": "Dr. Ananya Sundaram",
+    "product_name": "Herbal Hair Oil",
     "rating": 5,
-    "title": "Two Watches, One Perfect Set",
-    "comment": "The Sovereign for the office and the Diver for weekends. The presentation box alone is worth it, and the 15% saving made the decision easy.",
+    "title": "Dramatic reduction in hair fall within 10 days",
+    "comment": "The lavender aroma is divine and not overpowering. My hair texture feels noticeably denser and softer. Exceptional small-batch quality!",
     "status": "approved",
-    "created_at": "2026-10-30T10:00:00.000Z"
+    "created_at": "2026-10-15T10:00:00Z"
   },
   {
-    "id": "rev_2",
-    "name": "Rohan Mehta",
-    "author_name": "Rohan Mehta",
-    "email": "rohan.m@gmail.com",
-    "author_email": "rohan.m@gmail.com",
-    "product_name": "Aurelia Sovereign Emerald 41",
+    "id": "rev_02",
+    "name": "Kavitha Rangarajan",
+    "product_name": "Hibiscus Flower Shampoo",
     "rating": 5,
-    "title": "The Emerald Dial Is Stunning",
-    "comment": "The sunburst dial changes colour with every angle of light. Keeps time within a few seconds a day. Easily my best purchase this year.",
+    "title": "Best sulphate-free shampoo I have ever used",
+    "comment": "The Hibiscus Shampoo lathers gently and does not dry out my curly hair. Paired with the oil, it is truly a royal ritual.",
     "status": "approved",
-    "created_at": "2026-10-29T14:30:00.000Z"
+    "created_at": "2026-10-18T14:30:00Z"
   },
   {
-    "id": "rev_3",
-    "name": "Vikram Nair",
-    "author_name": "Vikram Nair",
-    "email": "vikram.nair@outlook.com",
-    "author_email": "vikram.nair@outlook.com",
-    "product_name": "Aurelia DeepOcean Ceramic Diver",
+    "id": "rev_03",
+    "name": "Siddharth Menon",
+    "product_name": "The Royal Hair Ritual (Duo Set)",
     "rating": 5,
-    "title": "Built Like A Tank",
-    "comment": "The ceramic bezel clicks crisply and the lume glows all night. Wore it snorkelling in Goa with zero issues.",
+    "title": "Authentic cold-pressed oil, zero mineral additives",
+    "comment": "You can immediately feel the herbal absorption. Non-sticky and deeply nourishing. Highly recommended!",
     "status": "approved",
-    "created_at": "2026-10-28T09:15:00.000Z"
-  },
-  {
-    "id": "rev_4",
-    "name": "Ananya Krishnan",
-    "author_name": "Ananya Krishnan",
-    "email": "ananya.k@yahoo.com",
-    "author_email": "ananya.k@yahoo.com",
-    "product_name": "Aurelia Heritage Moonphase",
-    "rating": 5,
-    "title": "Perfect Gift",
-    "comment": "Bought the moonphase for my husband's anniversary. The packaging and the dial work are exquisite.",
-    "status": "approved",
-    "created_at": "2026-10-27T16:45:00.000Z"
-  },
-  {
-    "id": "rev_5",
-    "name": "Siddharth Rao",
-    "author_name": "Siddharth Rao",
-    "email": "siddharth.rao@gmail.com",
-    "author_email": "siddharth.rao@gmail.com",
-    "product_name": "Aurelia Collector's Strap Kit (3 Straps)",
-    "rating": 4,
-    "title": "Great Value Straps",
-    "comment": "Leather quality is excellent and quick-release makes swapping easy. Wish there were more colour options.",
-    "status": "approved",
-    "created_at": "2026-10-26T11:20:00.000Z"
+    "created_at": "2026-10-21T09:15:00Z"
   }
 ];
 
@@ -2702,7 +2677,7 @@ async function initStorefrontApp() {
           id: PRODUCTS.oil.id || 'prod_oil_01',
           name: PRODUCTS.oil.title || 'Herbal Hair Oil',
           price: Number(PRODUCTS.oil.price) || 599,
-          img: PRODUCTS.oil.image || 'assets/aurelia-emerald-watch.png',
+          img: PRODUCTS.oil.image || '/assets/logo.png',
           size: '200ml Glass Bottle',
           qty: 1
         }, e);

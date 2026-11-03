@@ -4,11 +4,11 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digitechzo DigiWatches | Product Specifications</title>
+  <title>Nachiyar Herbals & Cosmetics | Product Specifications</title>
   <!-- Nachiyar Royal Brand Favicon -->
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="shortcut icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/png" href="/assets/digitechzo-logo.png">
+  <link rel="shortcut icon" type="image/png" href="/assets/digitechzo-logo.png">
+  <link rel="apple-touch-icon" type="image/png" href="/assets/digitechzo-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
@@ -72,1154 +72,31 @@
   </style>
   <style id="dynamicBrandTheme">
     :root {
-      --color-canvas: #FFFFFF;
-      --color-canvas-alt: #F8FAFC;
+      --color-canvas: #F9F8F5;
+      --color-canvas-alt: #FFFFFF;
       --color-surface: #FFFFFF;
-      --color-text-main: #1E242B;
-      --color-text-muted: #556070;
-      --color-lavender-primary: #57B71B;
-      --color-lavender-dark: #00f5a0;
-      --color-lavender-light: rgba(87, 183, 27, 0.12);
-      --color-gold: #469815;
-      --color-gold-light: rgba(70, 152, 21, 0.18);
-      --color-gold-dark: #00f5a0;
-      --gold-gradient: linear-gradient(135deg, #469815 0%, #00f5a0 100%);
-      --gold-glow: 0 4px 20px rgba(70, 152, 21, 0.35);
-      --color-hibiscus-primary: #1E293B;
-      --color-hibiscus-dark: #1E293B;
-      --color-bundle-dark: #14532D;
-      --color-bundle-accent: #469815;
-      --card-bg-1: #064E3B;
-      --card-bg-2: #1E293B;
-      --card-bg-bundle: #14532D;
-      --promo-banner-bg: linear-gradient(135deg, #57B71B 0%, #14532D 100%);
+      --color-text-main: #191319;
+      --color-text-muted: #64748B;
+      --color-lavender-primary: #7C5AAB;
+      --color-lavender-dark: #583B82;
+      --color-lavender-light: rgba(124, 90, 171, 0.12);
+      --color-gold: #D4AF37;
+      --color-gold-light: rgba(212, 175, 55, 0.18);
+      --color-gold-dark: #583B82;
+      --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #583B82 100%);
+      --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.35);
+      --color-hibiscus-primary: #822234;
+      --color-hibiscus-dark: #822234;
+      --color-bundle-dark: #4a2870;
+      --color-bundle-accent: #D4AF37;
+      --card-bg-1: #6b4e9b;
+      --card-bg-2: #822234;
+      --card-bg-bundle: #4a2870;
+      --promo-banner-bg: linear-gradient(135deg, #7C5AAB 0%, #4a2870 100%);
       --font-heading: 'Cinzel', serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
     
-/* ==========================================================================
-   DIGITECHZO THEME OVERRIDES (DRIVEN VIA site-config.json)
-   ========================================================================== */
-:root {
-  --color-lavender-primary: #57B71B !important;
-  --theme-color-primary: #57B71B !important;
-  --color-lavender-dark: #469815 !important;
-  --color-gold: #57B71B !important;
-  --color-gold-dark: #469815 !important;
-  --gold-gradient: linear-gradient(135deg, #57B71B 0%, #469815 100%) !important;
-  --gold-glow: 0 4px 20px rgba(87, 183, 27, 0.35) !important;
-  --admin-primary: #57B71B !important;
-  --admin-primary-dark: #469815 !important;
-}
-
-/* Storefront Action Buttons & Accents */
-.btn-primary,
-.btn-explore,
-.btn-cta,
-.btn-submit,
-.btn-checkout,
-.mystery-discount-banner,
-.announcement-bar,
-.hero-cta-group .btn-primary {
-  background: #57B71B !important;
-  border-color: #57B71B !important;
-  color: #FFFFFF !important;
-}
-
-.btn-primary:hover,
-.btn-explore:hover,
-.hero-cta-group .btn-primary:hover {
-  background: #469815 !important;
-  border-color: #469815 !important;
-}
-
-/* Admin Console Top Action, Sidebar Active Tab, and POS Buttons */
-.admin-sidebar-nav .nav-item.is-active,
-.admin-sidebar-nav .nav-item.active,
-#nav-dashboard.is-active {
-  background: #57B71B !important;
-  color: #FFFFFF !important;
-}
-
-.admin-sidebar-nav .nav-item.is-active .nav-icon svg,
-.admin-sidebar-nav .nav-item.active .nav-icon svg {
-  stroke: #FFFFFF !important;
-}
-
-#btnHeaderNewSale,
-#btnOpenPosModal,
-.btn-pos-primary,
-#btnGenerateInvoice,
-#btnReceiptOkClose {
-  background: #57B71B !important;
-  border-color: #57B71B !important;
-  color: #FFFFFF !important;
-}
-
-#btnHeaderNewSale:hover,
-#btnGenerateInvoice:hover {
-  background: #469815 !important;
-  border-color: #469815 !important;
-}
-
-/* Badges & Metrics in DigiTechzo Green */
-.badge-primary,
-.badge-success {
-  background: rgba(87, 183, 27, 0.12) !important;
-  color: #57B71B !important;
-  border-color: rgba(87, 183, 27, 0.25) !important;
-}
-
-/* ==========================================================================
-   AURELIA CHRONOMETRY — COMPREHENSIVE MOBILE RESPONSIVE ENGINE
-   Configured in & driven exclusively from site-config.json
-   ========================================================================== */
-
-/* 1. Global Viewport & Container Containment */
-html, body {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-  width: 100% !important;
-  position: relative !important;
-  box-sizing: border-box !important;
-  -webkit-text-size-adjust: 100% !important;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box !important;
-}
-
-img, svg, video {
-  max-width: 100% !important;
-  height: auto;
-}
-
-/* 2. Announcement Bar & Ticker */
-.announcement-bar {
-  max-width: 100vw !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-  padding: 8px 12px !important;
-  font-size: 0.72rem !important;
-}
-
-.announcement-ticker {
-  max-width: 100% !important;
-  overflow: hidden !important;
-}
-
-/* 3. Site Header & Brand Lockup on Mobile */
-@media (max-width: 768px) {
-  .site-header {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding-inline: 0 !important;
-  }
-  
-  .header-container {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 10px 14px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    box-sizing: border-box !important;
-    gap: 8px !important;
-  }
-
-  .mobile-nav-toggle {
-    display: flex !important;
-    flex-shrink: 0 !important;
-    z-index: 10 !important;
-  }
-
-  .brand-link {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    min-width: 0 !important;
-    flex: 1 1 auto !important;
-    justify-content: flex-start !important;
-  }
-
-  .brand-crest {
-    width: 32px !important;
-    height: 32px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .brand-logo-img {
-    max-width: 32px !important;
-    max-height: 32px !important;
-  }
-
-  .brand-text-lockup {
-    min-width: 0 !important;
-  }
-
-  .brand-name {
-    font-size: 1.05rem !important;
-    letter-spacing: 0.08em !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  .brand-sub {
-    display: none !important;
-  }
-
-  .header-actions {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .btn-header-auth {
-    padding: 6px 10px !important;
-    font-size: 0.78rem !important;
-    white-space: nowrap !important;
-  }
-
-  .btn-cart-trigger {
-    padding: 6px 10px !important;
-  }
-}
-
-/* 4. Mystery Discount / Coupon Modal & Promo Banner */
-.coupon-modal-card,
-.promo-banner,
-.mystery-discount-banner,
-.floating-coupon-card {
-  max-width: calc(100vw - 24px) !important;
-  box-sizing: border-box !important;
-  margin-inline: auto !important;
-  overflow: hidden !important;
-  word-break: break-word !important;
-}
-
-@media (max-width: 768px) {
-  .promo-banner {
-    padding: 20px 16px !important;
-    margin: 16px 12px !important;
-    border-radius: 16px !important;
-  }
-  .promo-banner h2, .promo-banner h3 {
-    font-size: 1.25rem !important;
-    line-height: 1.3 !important;
-  }
-  .promo-banner-code-box {
-    flex-direction: column !important;
-    gap: 8px !important;
-    width: 100% !important;
-  }
-  .promo-banner-code-box .btn {
-    width: 100% !important;
-  }
-}
-
-/* 5. Hero Section: Mobile vs Desktop Split (Eliminates Dual Hero Overlap) */
-@media (max-width: 767px) {
-  /* Strictly hide the desktop 3-card flanking hero on mobile */
-  .hero-section--flanking .hero-flanking-wrapper {
-    display: none !important;
-  }
-
-  /* Show mobile hero showcase exclusively */
-  .mobile-hero-showcase {
-    display: block !important;
-    position: relative !important;
-    width: 100% !important;
-    background-color: rgba(255, 255, 255, 0.04) !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 20px !important;
-  }
-
-  .m-hero-scroll-track {
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  .m-hero-sticky-frame {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    padding: 10px 14px 16px !important;
-    box-sizing: border-box !important;
-  }
-
-  .m-hero-stage--heading {
-    text-align: center !important;
-    margin-bottom: 12px !important;
-    width: 100% !important;
-    max-width: 420px !important;
-  }
-
-  .m-hero-title {
-    font-size: clamp(1.4rem, 6vw, 1.85rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-    color: #0F291E !important;
-    margin: 0 !important;
-  }
-
-  .m-title-accent,
-  .title-italic-accent {
-    color: #57B71B !important;
-    font-style: italic !important;
-  }
-
-  .m-hero-products-row {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 12px !important;
-    width: 100% !important;
-    max-width: 360px !important;
-    margin: 0 auto 12px auto !important;
-  }
-
-  .m-hero-product-col {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .m-bottle-pill {
-    font-size: 0.625rem !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.06em !important;
-    padding: 2px 8px !important;
-    border-radius: 999px !important;
-    background: rgba(87, 183, 27, 0.08) !important;
-    border: 1px solid #57B71B !important;
-    color: #57B71B !important;
-    margin-bottom: 4px !important;
-  }
-
-  .m-bottle-pill--shampoo {
-    border-color: #E2B755 !important;
-    color: #B45309 !important;
-    background: rgba(226, 183, 85, 0.12) !important;
-  }
-
-  .m-bottle-box {
-    width: 100% !important;
-    height: 135px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin-bottom: 4px !important;
-  }
-
-  .m-bottle-img {
-    max-height: 125px !important;
-    width: auto !important;
-    max-width: 100% !important;
-    object-fit: contain !important;
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15)) !important;
-  }
-
-  .m-bottle-meta {
-    margin-bottom: 6px !important;
-  }
-
-  .m-bottle-name {
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    color: #0F291E !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    max-width: 150px !important;
-  }
-
-  .m-bottle-sub {
-    font-size: 0.75rem !important;
-    font-weight: 700 !important;
-    color: #57B71B !important;
-    margin-top: 2px !important;
-  }
-
-  .m-hero-product-col--shampoo .m-bottle-sub {
-    color: #B45309 !important;
-  }
-
-  .m-hero-stage--buy-oil .m-btn-buy,
-  .m-btn-buy {
-    width: 100% !important;
-    max-width: 130px !important;
-    padding: 8px 14px !important;
-    border-radius: 999px !important;
-    background-color: #57B71B !important;
-    color: #FFFFFF !important;
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.03em !important;
-    border: none !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 12px rgba(87, 183, 27, 0.28) !important;
-  }
-
-  .m-hero-stage--buy-shampoo .m-btn-buy,
-  .m-btn-buy--shampoo {
-    background-color: #1E293B !important;
-    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.28) !important;
-  }
-
-  .m-hero-stage--desc {
-    max-width: 340px !important;
-    margin: 0 auto 12px auto !important;
-    text-align: center !important;
-  }
-
-  .m-hero-desc {
-    font-size: 0.82rem !important;
-    color: #52796F !important;
-    line-height: 1.45 !important;
-  }
-
-  .m-hero-stage--cta {
-    width: 100% !important;
-    max-width: 320px !important;
-    margin: 0 auto !important;
-  }
-
-  .m-cta-group {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    width: 100% !important;
-  }
-
-  .m-cta-btn {
-    width: 100% !important;
-    padding: 10px 18px !important;
-    font-size: 0.82rem !important;
-    border-radius: 999px !important;
-    text-align: center !important;
-    justify-content: center !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    text-decoration: none !important;
-  }
-
-  .m-cta-btn--primary {
-    background: #57B71B !important;
-    color: #FFFFFF !important;
-    border: none !important;
-    box-shadow: 0 4px 14px rgba(87, 183, 27, 0.3) !important;
-  }
-
-  .m-cta-btn--secondary {
-    background: transparent !important;
-    border: 1.5px solid #57B71B !important;
-    color: #57B71B !important;
-  }
-}
-
-/* Tablet view only (768px to 992px) */
-@media (min-width: 768px) and (max-width: 992px) {
-  .mobile-hero-showcase {
-    display: none !important;
-  }
-
-  .hero-flanking-wrapper {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding-inline: 14px !important;
-    box-sizing: border-box !important;
-    gap: 20px !important;
-    overflow: hidden !important;
-  }
-
-  .hero-center-content {
-    order: -1 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 10px 0 !important;
-  }
-
-  .hero-title {
-    font-size: clamp(1.65rem, 6vw, 2.3rem) !important;
-    line-height: 1.25 !important;
-  }
-
-  .hero-description {
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-    padding-inline: 4px !important;
-  }
-
-  .hero-cta-group {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 10px !important;
-  }
-
-  .hero-cta-group .btn {
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-    padding: 14px 20px !important;
-  }
-
-  .hero-product-flank {
-    width: 100% !important;
-    max-width: 380px !important;
-    margin: 0 auto !important;
-  }
-
-  .hero-flank-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    margin: 0 auto !important;
-  }
-
-  .hero-pillars {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    gap: 12px !important;
-    padding: 16px !important;
-  }
-}
-
-/* Desktop view (>= 993px) */
-@media (min-width: 993px) {
-  .mobile-hero-showcase {
-    display: none !important;
-  }
-}
-
-/* 6. Marquee Ticker */
-.marquee-section {
-  width: 100% !important;
-  max-width: 100vw !important;
-  overflow: hidden !important;
-}
-
-.marquee-track {
-  width: max-content !important;
-}
-
-/* 7. 18-Module Circular Orbit Section (Clean Mobile View, No Node Collisions) */
-@media (max-width: 768px) {
-  .herbal-ingredients-section {
-    padding-block: 40px 30px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .ingredients-section-header {
-    padding-inline: 16px !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
-  }
-
-  .ingredients-section-header .section-heading {
-    font-size: clamp(1.35rem, 5vw, 1.85rem) !important;
-  }
-
-  .ingredients-section-header .section-subtext {
-    font-size: 0.88rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .orbit-stage-wrapper {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 10px 4px !important;
-    overflow: hidden !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
-  .orbit-stage {
-    --orbit-radius: 125px !important;
-    width: 320px !important;
-    height: 320px !important;
-    max-width: 95vw !important;
-    margin: 0 auto !important;
-    position: relative !important;
-  }
-
-  .orbit-ring--outer {
-    width: 250px !important;
-    height: 250px !important;
-  }
-
-  .orbit-ring--middle {
-    width: 200px !important;
-    height: 200px !important;
-  }
-
-  .orbit-ring--inner {
-    width: 160px !important;
-    height: 160px !important;
-  }
-
-  .orbit-center-bottle-wrap {
-    width: 110px !important;
-    height: 110px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    z-index: 5 !important;
-  }
-
-  .orbit-center-bottle {
-    max-width: 75px !important;
-    max-height: 75px !important;
-    object-fit: contain !important;
-  }
-
-  .bottle-caption-badge {
-    position: static !important;
-    bottom: auto !important;
-    left: auto !important;
-    transform: none !important;
-    margin-top: 4px !important;
-    font-size: 0.52rem !important;
-    padding: 2px 6px !important;
-    white-space: nowrap !important;
-    max-width: 110px !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    box-sizing: border-box !important;
-    background: rgba(87, 183, 27, 0.95) !important;
-    color: #E2B755 !important;
-    border: 1px solid rgba(226, 183, 85, 0.6) !important;
-    border-radius: 999px !important;
-  }
-
-  .orbit-node {
-    width: 28px !important;
-    height: 28px !important;
-  }
-
-  .orbit-node .node-avatar-wrap {
-    width: 28px !important;
-    height: 28px !important;
-  }
-
-  .orbit-node .node-avatar-icon {
-    font-size: 0.88rem !important;
-  }
-
-  .orbit-node .node-label {
-    display: none !important;
-  }
-
-  .orbit-idle-card,
-  .spotlight-card {
-    width: calc(100vw - 32px) !important;
-    max-width: 360px !important;
-    margin: 16px auto !important;
-    padding: 12px 14px !important;
-    box-sizing: border-box !important;
-  }
-}
-
-@media (max-width: 380px) {
-  .orbit-stage {
-    --orbit-radius: 110px !important;
-    width: 285px !important;
-    height: 285px !important;
-  }
-
-  .orbit-center-bottle {
-    max-width: 65px !important;
-    max-height: 65px !important;
-  }
-
-  .bottle-caption-badge {
-    font-size: 0.48rem !important;
-    max-width: 95px !important;
-  }
-}
-
-/* 8. Products & Collection Grid on Mobile */
-@media (max-width: 768px) {
-  .collection-grid,
-  .products-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    padding-inline: 12px !important;
-    gap: 22px !important;
-    box-sizing: border-box !important;
-  }
-
-  .product-card {
-    width: 100% !important;
-    max-width: 380px !important;
-    box-sizing: border-box !important;
-    margin: 0 auto !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-  }
-
-  .card-inner {
-    padding: 22px 18px !important;
-    box-sizing: border-box !important;
-  }
-
-  .card-top-bar {
-    margin-bottom: 12px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-  }
-
-  .card-top-bar .pill-tag {
-    font-size: 0.72rem !important;
-    padding: 4px 10px !important;
-    max-width: 200px !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  .circle-badge {
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    min-height: 44px !important;
-    padding: 2px !important;
-  }
-
-  .circle-badge .badge-number {
-    font-size: 0.65rem !important;
-  }
-
-  .circle-badge .badge-unit {
-    font-size: 0.52rem !important;
-  }
-
-  .card-image-wrap {
-    height: 190px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin-bottom: 10px !important;
-  }
-
-  .card-image-wrap img {
-    max-height: 180px !important;
-    object-fit: contain !important;
-  }
-
-  .product-card-title {
-    font-size: 1.35rem !important;
-    line-height: 1.25 !important;
-    margin-bottom: 6px !important;
-  }
-
-  .product-card-subtitle {
-    font-size: 0.82rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 10px !important;
-  }
-
-  .product-card-desc {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
-    margin-bottom: 16px !important;
-  }
-
-  .card-action-bar,
-  .product-card-pricing {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-    gap: 8px !important;
-  }
-
-  .card-pricing,
-  .price-group {
-    display: flex !important;
-    align-items: baseline !important;
-    gap: 6px !important;
-  }
-
-  .btn-quick-add,
-  .btn-add-to-bag,
-  .btn-card-add {
-    white-space: nowrap !important;
-    padding: 10px 16px !important;
-    min-width: 110px !important;
-    font-size: 0.85rem !important;
-    flex-shrink: 0 !important;
-    line-height: 1.2 !important;
-    border-radius: 999px !important;
-  }
-}
-
-/* 9. Bundle Banner (Collector's Duo) */
-@media (max-width: 768px) {
-  .bundle-banner {
-    padding: 22px 16px !important;
-    margin: 20px 12px !important;
-    width: auto !important;
-    max-width: calc(100vw - 24px) !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-    border-radius: 20px !important;
-  }
-
-  .bundle-banner-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    width: 100% !important;
-  }
-
-  .bundle-banner-title {
-    font-size: 1.35rem !important;
-    word-break: break-word !important;
-    line-height: 1.25 !important;
-  }
-
-  .bundle-banner-desc {
-    font-size: 0.88rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .bundle-pricing {
-    display: flex !important;
-    align-items: baseline !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-
-  .bundle-banner-cta .btn {
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-  }
-}
-
-/* 10. Reviews Section & Carousel on Mobile */
-@media (max-width: 768px) {
-  .reviews-section {
-    padding-block: 40px 30px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .reviews-header {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 14px !important;
-    padding-inline: 14px !important;
-    width: 100% !important;
-  }
-
-  .reviews-header-info {
-    width: 100% !important;
-  }
-
-  .reviews-header-action {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
-  .btn-comment-review {
-    width: 100% !important;
-    max-width: 280px !important;
-    justify-content: center !important;
-    padding: 12px 20px !important;
-  }
-
-  .reviews-scroller-viewport {
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 10px 12px 20px !important;
-    box-sizing: border-box !important;
-  }
-
-  .reviews-scroller-track {
-    display: flex !important;
-    gap: 14px !important;
-    width: max-content !important;
-  }
-
-  .review-card {
-    width: 290px !important;
-    min-width: 290px !important;
-    max-width: 85vw !important;
-    box-sizing: border-box !important;
-    padding: 20px 16px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .reviews-edge-nav {
-    display: none !important;
-  }
-}
-
-/* 11. Science / Triad Grid */
-@media (max-width: 768px) {
-  .science-section {
-    padding-block: 40px 30px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .triad-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    width: 100% !important;
-    padding-inline: 14px !important;
-    box-sizing: border-box !important;
-  }
-
-  .triad-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 24px 18px !important;
-  }
-}
-
-/* 12. Quote Section */
-@media (max-width: 768px) {
-  .quote-section {
-    padding-block: 40px 30px !important;
-    padding-inline: 16px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .quote-container,
-  .quote-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    width: 100% !important;
-  }
-
-  .quote-image-wrap {
-    width: 170px !important;
-    height: 170px !important;
-    margin: 0 auto 16px !important;
-  }
-
-  .quote-text {
-    font-size: 1.1rem !important;
-    line-height: 1.55 !important;
-  }
-}
-
-/* 13. Newsletter Form */
-@media (max-width: 768px) {
-  .newsletter-section {
-    padding-block: 40px 30px !important;
-    padding-inline: 14px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .newsletter-form,
-  .form-input-group {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    gap: 10px !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  .newsletter-form input[type="email"] {
-    width: 100% !important;
-    border-radius: 999px !important;
-    padding: 14px 20px !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-sizing: border-box !important;
-    color: #FFFFFF !important;
-  }
-
-  .newsletter-form button[type="submit"] {
-    width: 100% !important;
-    border-radius: 999px !important;
-    padding: 14px !important;
-    margin: 0 !important;
-    justify-content: center !important;
-  }
-}
-
-/* 14. Footer & Mobile Bottom Navigation Bar (Brand Themed) */
-@media (max-width: 991px) {
-  .site-footer {
-    padding-block: 40px 80px !important;
-    padding-inline: 16px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .footer-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 28px !important;
-  }
-
-  .mobile-curved-bottom-nav {
-    display: block !important;
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 70px !important;
-    background: #FFFFFF !important;
-    border-radius: 20px 20px 0 0 !important;
-    border-top: 1px solid rgba(87, 183, 27, 0.12) !important;
-    box-shadow: 0 -8px 24px rgba(87, 183, 27, 0.08) !important;
-    z-index: 9999 !important;
-    user-select: none !important;
-    -webkit-tap-highlight-color: transparent !important;
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), 6px) !important;
-  }
-
-  /* Active elevated circular bubble with Aurelia emerald & gold theme */
-  .nav-bubble-circle,
-  #navBubbleCircle {
-    background: linear-gradient(135deg, #57B71B 0%, #469815 50%, #57B71B 100%) !important;
-    box-shadow: 0 6px 18px rgba(87, 183, 27, 0.42) !important;
-    border: 1.5px solid rgba(226, 183, 85, 0.6) !important;
-  }
-
-  .bubble-icon-slot svg {
-    stroke: #FFFFFF !important;
-    stroke-width: 2.2 !important;
-  }
-
-  /* Wave arch border stroke */
-  .nav-wave-shape svg path:last-child {
-    stroke: rgba(87, 183, 27, 0.22) !important;
-  }
-
-  /* Active tab text in Emerald brand color */
-  .mobile-nav-tab.is-active .tab-label {
-    color: #57B71B !important;
-    font-weight: 800 !important;
-  }
-
-  /* Inactive tab icons and labels */
-  .mobile-nav-tab .tab-icon-wrap {
-    color: #52796F !important;
-  }
-
-  .mobile-nav-tab .tab-icon-wrap svg {
-    stroke: #52796F !important;
-  }
-
-  .mobile-nav-tab .tab-label {
-    color: #52796F !important;
-  }
-}
-
-
-/* High Contrast Bundle Banner (DigiTechzo Brand Contrast) */
-.bundle-banner {
-  background: linear-gradient(135deg, #0d381c 0%, #14532D 60%, #0a2d17 100%) !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(87, 183, 27, 0.4) !important;
-}
-.bundle-eyebrow {
-  color: #00f5a0 !important;
-  font-weight: 800 !important;
-  text-shadow: 0 1px 10px rgba(0, 245, 160, 0.4) !important;
-}
-.bundle-title {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-.bundle-description {
-  color: #F1F5F9 !important;
-  opacity: 0.96 !important;
-}
-.bundle-features {
-  color: #FFFFFF !important;
-  font-weight: 600 !important;
-}
-.bundle-features span {
-  color: #FFFFFF !important;
-}
-.discount-pill {
-  background-color: rgba(0, 245, 160, 0.2) !important;
-  color: #00f5a0 !important;
-  border: 1px solid rgba(0, 245, 160, 0.45) !important;
-  font-weight: 800 !important;
-}
-.bundle-badge {
-  background-color: #00f5a0 !important;
-  color: #0B1910 !important;
-  font-weight: 800 !important;
-}
-
-/* Storefront & Subpage Action Buttons (About, Contact, Header) */
-.contact-submit-btn,
-.btn-contact-submit {
-  background: #57B71B !important;
-  color: #FFFFFF !important;
-  border: none !important;
-  font-weight: 700 !important;
-  box-shadow: 0 6px 18px rgba(87, 183, 27, 0.35) !important;
-}
-.contact-submit-btn:hover,
-.btn-contact-submit:hover {
-  background: #469815 !important;
-  box-shadow: 0 10px 24px rgba(87, 183, 27, 0.45) !important;
-}
-.btn-bundle-add,
-.btn-quick-add {
-  background: #57B71B !important;
-  color: #FFFFFF !important;
-}
-.btn-bundle-add:hover,
-.btn-quick-add:hover {
-  background: #469815 !important;
-}
-
   </style>
   <script src="/theme-engine.js"></script>
 </head>
@@ -1228,11 +105,11 @@ img, svg, video {
   <aside class="announcement-bar">
     <div class="announcement-ticker">
       <div class="ticker-track">
-        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span>ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES</span>
         <span aria-hidden="true">•</span>
-        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span>ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES</span>
         <span aria-hidden="true">•</span>
-        <span>✨ COMPLIMENTARY INSURED EXPRESS AIR COURIER ON ALL LUXURY TIMEPIECES ✨</span>
+        <span>ROYAL BOTANICAL CARE ✦ FREE PAN-INDIA SHIPPING OVER ₹599 ✦ COLD-PRESSED IN SMALL BATCHES</span>
       </div>
     </div>
   </aside>
@@ -1248,11 +125,11 @@ img, svg, video {
 
       <a href="/" class="brand-link">
         <div class="brand-crest">
-          <img src="/assets/logo.png" alt="Digitechzo DigiWatches Logo" class="brand-logo-img">
+          <img src="/assets/digitechzo-logo.png" alt="Nachiyar Herbals & Cosmetics Logo" class="brand-logo-img">
         </div>
         <div class="brand-text-lockup">
-          <span class="brand-name">DIGITECHZO DIGIWATCHES</span>
-          <span class="brand-sub">EXCELLENCE & PRECISION</span>
+          <span class="brand-name">NACHIYAR</span>
+          <span class="brand-sub">PURE BOTANICAL ELEGANCE & AYURVEDIC CARE</span>
         </div>
       </a>
 
@@ -1303,7 +180,7 @@ img, svg, video {
         <li><a href="/account/" class="mobile-link">My Account & Orders</a></li>
       </ul>
       <div class="mobile-drawer-footer">
-        <p class="drawer-support">Customer Concierge: concierge@aureliatime.com</p>
+        <p class="drawer-support">Customer Concierge: care@nachiyarherbals.com</p>
       </div>
     </div>
   </div>
@@ -1680,12 +557,12 @@ img, svg, video {
       <!-- Newsletter Row -->
       <div class="footer-newsletter-row">
         <div class="newsletter-text-col">
-          <span class="footer-sub-eyebrow">THE AURELIA CIRCLE</span>
-          <h2 class="footer-newsletter-heading">RECEIVE 15% OFF YOUR FIRST TIMEPIECE</h2>
-          <p class="footer-newsletter-sub">Subscribe for private previews, limited editions and horological insights.</p>
+          <span class="footer-sub-eyebrow">NACHIYAR VIP INSIDER</span>
+          <h2 class="footer-newsletter-heading">RECEIVE 15% OFF YOUR FIRST ORDER</h2>
+          <p class="footer-newsletter-sub">Subscribe for flagship creations, architecture releases, and exclusive private discounts.</p>
         </div>
         <div class="newsletter-form-col">
-          <form class="footer-form" id="newsletterForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Welcome to DIGITECHZO DIGIWATCHES Insider! ✨', body: 'Privilege Code AURELIA15 has been applied for your order.', type: 'info' }); this.reset();">
+          <form class="footer-form" id="newsletterForm" onsubmit="event.preventDefault(); showSideToast({ title: 'Welcome to NACHIYAR Insider! ✨', body: 'Privilege Code ROYAL15 has been applied for your order.', type: 'info' }); this.reset();">
             <div class="form-input-group">
               <input type="email" placeholder="Enter your email address" required aria-label="Email Address" autocomplete="email" spellcheck="false">
               <button type="submit" class="newsletter-submit-btn" aria-label="Submit email">
@@ -1703,10 +580,10 @@ img, svg, video {
         <div class="footer-col">
           <h4 class="footer-col-title">SHOP COLLECTIONS</h4>
           <ul class="footer-col-links">
-            <li><a href="/shop/?category=Automatic%20Chronometers">Automatic Chronometers</a></li>
-            <li><a href="/shop/?category=Diving%20Instruments">Diving Instruments</a></li>
-            <li><a href="/shop/?category=Collector%20Sets">Collector Sets</a></li>
-            <li><a href="/shop/?category=Dress%20Watches">Dress Watches</a></li>
+            <li><a href="/shop/?category=Hair%20Care">Hair Care</a></li>
+            <li><a href="/shop/?category=Scalp%20%26%20Cleansing">Scalp & Cleansing</a></li>
+            <li><a href="/shop/?category=Ritual%20Sets%20%26%20Combos">Ritual Sets & Combos</a></li>
+            <li><a href="/shop/?category=Royal%20Gifting">Royal Gifting</a></li>
             <li><a href="/shop/">Browse All Collections</a></li>
           </ul>
         </div>
@@ -1714,7 +591,7 @@ img, svg, video {
         <div class="footer-col">
           <h4 class="footer-col-title">COMPANY &amp; ATELIER</h4>
           <ul class="footer-col-links">
-            <li><a href="/about/">About Digitechzo DigiWatches</a></li>
+            <li><a href="/about/">About Nachiyar Herbals & Cosmetics</a></li>
             <li><a href="/about/#architecture">Architecture &amp; Quality</a></li>
             <li><a href="/about/#warranty">Official Guarantee</a></li>
             <li><a href="/contact/">Store Concierge &amp; Inquiries</a></li>
@@ -1737,22 +614,22 @@ img, svg, video {
           <ul class="footer-contact-list">
             <li>
               <span class="footer-contact-icon">&#128222;</span>
-              <a href="tel:+919445566778" id="footerContactPhone">+91 94455 66778</a>
+              <a href="tel:+919444088990" id="footerContactPhone">+91 94440 88990</a>
             </li>
             <li>
               <span class="footer-contact-icon">&#9993;&#65039;</span>
-              <a href="mailto:concierge@aureliatime.com" id="footerContactEmail">concierge@aureliatime.com</a>
+              <a href="mailto:care@nachiyarherbals.com" id="footerContactEmail">care@nachiyarherbals.com</a>
             </li>
             <li class="footer-address-item">
               <span class="footer-contact-icon">&#128205;</span>
-              <address id="footerContactAddress">Aurelia Atelier, Heritage Arcade, MG Road, Bengaluru, Karnataka - 560001</address>
+              <address id="footerContactAddress">Nachiyar Botanical Heritage, No. 18 Temple Ring Road, Madurai, Tamil Nadu - 625001</address>
             </li>
           </ul>
 
           <div class="footer-social-block">
             <h4 class="footer-col-title footer-col-title--sm">CONNECT WITH US</h4>
             <div class="footer-social-icons">
-              <a href="https://instagram.com/aureliatime" target="_blank" rel="noopener noreferrer" class="footer-social-link footer-social-link--instagram" aria-label="Follow Digitechzo DigiWatches on Instagram">
+              <a href="https://instagram.com/nachiyarherbals" target="_blank" rel="noopener noreferrer" class="footer-social-link footer-social-link--instagram" aria-label="Follow Nachiyar Herbals & Cosmetics on Instagram">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 <span>Instagram</span>
               </a>
@@ -1763,21 +640,21 @@ img, svg, video {
         <!-- Brand Information Column -->
         <div class="footer-col brand-col">
           <div class="footer-crest-wrap">
-            <img src="/assets/logo.png" alt="Digitechzo DigiWatches Logo" class="footer-crest-img">
+            <img src="/assets/digitechzo-logo.png" alt="Nachiyar Herbals & Cosmetics Logo" class="footer-crest-img">
           </div>
           <p class="footer-brand-bio">
-            Aurelia Chronometry crafts hand-assembled mechanical timepieces and chronometers for discerning collectors worldwide.
+            Nachiyar Herbals & Cosmetics celebrates the timeless grace of royal personal care. Formulated without synthetic shortcuts. Handcrafted in India.
           </p>
         </div>
       </div>
 
       <div class="footer-watermark-row">
-        <span class="footer-watermark-text">DIGITECHZO DIGIWATCHES</span>
+        <span class="footer-watermark-text">NACHIYAR</span>
       </div>
 
       <div class="footer-legal-bar">
-        <p>© 2026 AURELIA CHRONOMETRY. ALL RIGHTS RESERVED.</p>
-        <p class="footer-developer-credit">Powered by Aurelia Atelier Platform</p>
+        <p>© 2026 NACHIYAR HERBALS & COSMETICS. ALL RIGHTS RESERVED.</p>
+        <p class="footer-developer-credit">Powered by Nachiyar Herbals & Cosmetics Platform</p>
         <p class="legal-links">
           <a href="/">Home</a> • <a href="/shop/">Shop</a> • <a href="/about/">About Us</a> • <a href="/contact/">Contact</a> • <a href="/privacy/">Privacy Policy</a> • <a href="/terms/">Terms of Service</a> • <a href="/shipping-policy/">Shipping & Returns</a> • <a href="/sitemap/">Sitemap</a>
         </p>
@@ -1798,7 +675,7 @@ img, svg, video {
           slug = decodeURIComponent(pathParts[1]);
         }
       }
-      slug = slug ? slug.trim() : 'aurelia-sovereign-emerald-41';
+      slug = slug ? slug.trim() : 'herbal-hair-oil';
       const cartBadge = document.getElementById('pdpCartBadge');
 
       let currentProduct = null;
@@ -1812,172 +689,90 @@ img, svg, video {
       } catch (e) {}
 
       const DEFAULT_PRODUCTS_MAP = {
-  "aurelia-sovereign-emerald-41": {
-    "id": "AUR-CHRONO-001",
-    "slug": "aurelia-sovereign-emerald-41",
-    "name": "Aurelia Sovereign Emerald 41",
-    "subtitle": "Caliber 2824 • Sunburst Emerald",
-    "category": "Automatic Chronometers",
-    "price": 48500,
-    "mrp": 56000,
-    "stock": 14,
-    "badge": "SWISS",
-    "themeColor": "#064E3B",
-    "tagline": "Caliber 2824 • Sunburst Emerald",
-    "metricBadge": "COSC",
-    "images": [
-      "/assets/sovereign-watch.png"
-    ],
-    "description": "Flagship 41mm automatic mechanical timepiece featuring sunburst emerald dial, double-domed sapphire crystal, 72-hour power reserve, and solid 316L stainless steel bracelet.",
-    "benefits": [
-      "Official manufacturer warranty included",
-      "Complimentary pan-India express air shipping on ₹999+",
-      "7-day hassle-free doorstep replacement guarantee",
-      "Certified quality tested for optimal daily performance"
-    ],
-    "ingredients": "<strong>CASEDIAMETER:</strong> 41mm Surgical 316L Steel<br><strong>MOVEMENT:</strong> Swiss Caliber 2824 Automatic<br><strong>CRYSTAL:</strong> Double-Domed Anti-Reflective Sapphire<br><strong>WATERRESISTANCE:</strong> 100 Meters (10 ATM)<br><strong>WARRANTY:</strong> 5-Year Global Atelier Guarantee",
-    "howToUse": "Inspect care guide and follow the simple on-screen quick start manual.",
-    "variants": [
-      {
-        "id": "AUR-CHRONO-001_std",
-        "name": "Standard Edition",
-        "price": 48500
-      }
-    ]
-  },
-  "aurelia-deepocean-ceramic-diver": {
-    "id": "AUR-DIVER-002",
-    "slug": "aurelia-deepocean-ceramic-diver",
-    "name": "Aurelia DeepOcean Ceramic Diver",
-    "subtitle": "300M Diver • Helium Escape Valve",
-    "category": "Diving Instruments",
-    "price": 54000,
-    "mrp": 62500,
-    "stock": 10,
-    "badge": "DIVE",
-    "themeColor": "#1E293B",
-    "tagline": "300M Diver • Helium Escape Valve",
-    "metricBadge": "300M",
-    "images": [
-      "/assets/ceramic-diver.png"
-    ],
-    "description": "Professional diving instrument with 120-click ceramic bezel, automatic helium release valve, Super-LumiNova luminescence, and 300 meters water resistance.",
-    "benefits": [
-      "Official manufacturer warranty included",
-      "Complimentary pan-India express air shipping on ₹999+",
-      "7-day hassle-free doorstep replacement guarantee",
-      "Certified quality tested for optimal daily performance"
-    ],
-    "ingredients": "<strong>CASEDIAMETER:</strong> 42.5mm Marine Grade Steel<br><strong>BEZEL:</strong> 120-Click High-Tech Ceramic<br><strong>LUME:</strong> Swiss Super-LumiNova BGW9<br><strong>WATERRESISTANCE:</strong> 300 Meters (30 ATM)<br><strong>WARRANTY:</strong> 5-Year Global Atelier Guarantee",
-    "howToUse": "Inspect care guide and follow the simple on-screen quick start manual.",
-    "variants": [
-      {
-        "id": "AUR-DIVER-002_std",
-        "name": "Standard Edition",
-        "price": 54000
-      }
-    ]
-  },
-  "aurelia-collectors-duo": {
-    "id": "AUR-DUO-003",
-    "slug": "aurelia-collectors-duo",
-    "name": "The Aurelia Collector's Duo (Set of 2)",
-    "subtitle": "Sovereign Emerald 41 + DeepOcean Diver",
-    "category": "Collector Sets",
-    "price": 87125,
-    "mrp": 102500,
-    "stock": 8,
-    "badge": "SET",
-    "themeColor": "#14532D",
-    "tagline": "Sovereign Emerald 41 + DeepOcean Diver",
-    "metricBadge": "DUO",
-    "images": [
-      "/assets/collectors-duo.png"
-    ],
-    "description": "Experience the complete Aurelia horological range. The Sovereign Emerald 41 for refined everyday elegance, paired with the DeepOcean Ceramic Diver for 300 metres of oceanic adventure. Delivered in a bespoke collector's presentation box.",
-    "benefits": [
-      "Official manufacturer warranty included",
-      "Complimentary pan-India express air shipping on ₹999+",
-      "7-day hassle-free doorstep replacement guarantee",
-      "Certified quality tested for optimal daily performance"
-    ],
-    "ingredients": "<strong>CONTENTS:</strong> 1x Sovereign Emerald 41 + 1x DeepOcean Ceramic Diver<br><strong>PRESENTATION:</strong> Bespoke Collector's Presentation Box<br><strong>WARRANTY:</strong> 5-Year Global Atelier Guarantee",
-    "howToUse": "Inspect care guide and follow the simple on-screen quick start manual.",
-    "variants": [
-      {
-        "id": "AUR-DUO-003_std",
-        "name": "Standard Edition",
-        "price": 87125
-      }
-    ]
-  },
-  "aurelia-heritage-moonphase": {
-    "id": "AUR-HERITAGE-004",
-    "slug": "aurelia-heritage-moonphase",
-    "name": "Aurelia Heritage Moonphase",
-    "subtitle": "Astronomical Moonphase • Rose Gold",
-    "category": "Dress Watches",
-    "price": 38900,
-    "mrp": 46000,
-    "stock": 18,
-    "badge": "PHASE",
-    "themeColor": "#14532D",
-    "tagline": "Astronomical Moonphase • Rose Gold",
-    "metricBadge": "MOON",
-    "images": [
-      "data:image/png;base64,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"
-    ],
-    "description": "Exquisite dress timepiece showcasing hand-painted astronomical moonphase disk, Guilloché dial, blued steel hands, and genuine Italian alligator-embossed calfskin leather strap.",
-    "benefits": [
-      "Official manufacturer warranty included",
-      "Complimentary pan-India express air shipping on ₹999+",
-      "7-day hassle-free doorstep replacement guarantee",
-      "Certified quality tested for optimal daily performance"
-    ],
-    "ingredients": "<strong>CASEDIAMETER:</strong> 39.5mm Slim Profile (9.8mm)<br><strong>COMPLICATION:</strong> True Astronomical Moonphase & Date<br><strong>STRAP:</strong> Full-Grain Italian Calfskin<br><strong>WATERRESISTANCE:</strong> 50 Meters (5 ATM)<br><strong>WARRANTY:</strong> 5-Year Global Atelier Guarantee",
-    "howToUse": "Inspect care guide and follow the simple on-screen quick start manual.",
-    "variants": [
-      {
-        "id": "AUR-HERITAGE-004_std",
-        "name": "Standard Edition",
-        "price": 38900
-      }
-    ]
-  },
-  "aurelia-collectors-strap-kit": {
-    "id": "AUR-STRAP-005",
-    "slug": "aurelia-collectors-strap-kit",
-    "name": "Aurelia Collector's Strap Kit (3 Straps)",
-    "subtitle": "3 Italian Calfskin Straps • Quick-Release",
-    "category": "Horological Straps",
-    "price": 6900,
-    "mrp": 8700,
-    "stock": 30,
-    "badge": "x3",
-    "themeColor": "#14532D",
-    "tagline": "3 Italian Calfskin Straps • Quick-Release",
-    "metricBadge": "KIT",
-    "images": [
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
-    ],
-    "description": "Three full-grain Italian calfskin straps in tan, black and emerald with tone-on-tone stitching, plus a spring bar tool for effortless quick-release changes.",
-    "benefits": [
-      "Official manufacturer warranty included",
-      "Complimentary pan-India express air shipping on ₹999+",
-      "7-day hassle-free doorstep replacement guarantee",
-      "Certified quality tested for optimal daily performance"
-    ],
-    "ingredients": "<strong>CONTENTS:</strong> 3 Straps + Spring Bar Tool<br><strong>MATERIAL:</strong> Full-Grain Italian Calfskin<br><strong>LUGWIDTH:</strong> 20mm<br><strong>WARRANTY:</strong> 1-Year Atelier Guarantee",
-    "howToUse": "Inspect care guide and follow the simple on-screen quick start manual.",
-    "variants": [
-      {
-        "id": "AUR-STRAP-005_std",
-        "name": "Standard Edition",
-        "price": 6900
-      }
-    ]
-  }
-};
+        'herbal-hair-oil': {
+          id: 'prod_oil_01',
+          slug: 'herbal-hair-oil',
+          name: 'Herbal Hair Oil',
+          subtitle: 'Lavender Glass Dropper Bottle • 100% Cold-Pressed',
+          category: 'Hair Care',
+          price: 299,
+          mrp: 699,
+          stock: 98,
+          badge: 'Bestseller',
+          themeColor: '#6B4E9B',
+          tagline: 'Cold-Pressed • 18 Rare Herbs • Root Activating',
+          metricBadge: '100% PURE',
+          images: ['assets/new-oil-bottle-card.jpg'],
+          description: 'Crafted in small batches according to classical Ayurvedic texts. Nachiyar Herbal Hair Oil features deep-steeped cold-pressed oils enriched with Bhringraj, Amla, Brahmi, and delicate lavender blossom essence. Calms scalp inflammation, repairs dry split ends, and delivers noticeable root strength within two weeks of regular application.',
+          benefits: [
+            'Clinically proven hair fall reduction in 14 days',
+            'Soothes irritated, dry scalp with calming lavender aromatherapy',
+            'Deeply bioavailable: absorbs without heavy mineral grease',
+            'Encourages dense follicle growth and strand thickness'
+          ],
+          ingredients: 'Cold-Pressed Black Sesame Oil, Virgin Coconut Oil, Pure French Lavender Oil (Lavandula Angustifolia), Bhringraj, Amla, Brahmi, Hibiscus Blossom, Fenugreek, Rosemary, Indian Nardostachys (Jatamansi).',
+          howToUse: 'Dispense 1-2 droppers directly across scalp partings. Gently massage using circular fingertip motions for 5-10 minutes. Leave on for a minimum of 1 hour or overnight before cleansing.',
+          variants: [
+            { id: 'v_oil_100', name: '100ml Travel Edition', price: 349, mrp: 399, sku: 'NH-OIL-100', stock: 45 },
+            { id: 'v_oil_200', name: '200ml Glass Dropper Bottle', price: 299, mrp: 699, sku: 'NH-OIL-200', stock: 85 },
+            { id: 'v_oil_500', name: '500ml Luxury Value Refill', price: 1199, mrp: 1399, sku: 'NH-OIL-500', stock: 25 }
+          ]
+        },
+        'hibiscus-flower-shampoo': {
+          id: 'prod_shampoo_02',
+          slug: 'hibiscus-flower-shampoo',
+          name: 'Hibiscus Flower Shampoo',
+          subtitle: 'Crimson Botanical Pump Bottle • Sulfate-Free pH 5.5',
+          category: 'Scalp & Cleansing',
+          price: 249,
+          mrp: 649,
+          stock: 90,
+          badge: 'Customer Favorite',
+          themeColor: '#822234',
+          tagline: 'Fresh Hibiscus Petals • Coconut Surfactants',
+          metricBadge: 'pH 5.5 BALANCED',
+          images: ['assets/new-shampoo-bottle-card.jpg'],
+          description: 'Formulated with handpicked South Indian hibiscus blossoms and gentle plant-derived saponins. Gently cleanses without stripping natural oils, enhancing softness, promoting follicle vitality, and restoring hair\'s natural radiant shine.',
+          benefits: [
+            '0% Sulfates, Silicones, Parabens, or Synthetic Dyes',
+            'pH 5.5 balanced to protect the delicate scalp acid mantle',
+            'Natural hibiscus mucilage locks in moisture and mirrors conditioning shine',
+            'Safe for color-treated, chemically straightened, or sensitive hair'
+          ],
+          ingredients: 'Aqua, Fresh Hibiscus Rosa-Sinensis Flower Extract, Decyl Glucoside (Coconut derived), Shikakai Extract, Reetha (Soapnut), Aloe Vera Leaf Juice, Vegetable Glycerin, Vitamin E, Sweet Orange Peel Oil.',
+          howToUse: 'Pump 2-3 pumps into wet palms and work into a rich lather. Massage into wet scalp and hair for 2-3 minutes. Rinse thoroughly.',
+          variants: [
+            { id: 'v_shmp_250', name: '250ml Botanical Pump Bottle', price: 249, mrp: 649, sku: 'NH-SHMP-250', stock: 90 },
+            { id: 'v_shmp_500', name: '500ml Family Pump Bottle', price: 449, mrp: 1099, sku: 'NH-SHMP-500', stock: 40 }
+          ]
+        },
+        'royal-hair-ritual-duo': {
+          id: 'prod_duo_03',
+          slug: 'royal-hair-ritual-duo',
+          name: 'The Royal Hair Ritual (Duo Set)',
+          subtitle: 'Complete 2-Step Restorative Ayurvedic System',
+          category: 'Ritual Sets & Combos',
+          price: 499,
+          mrp: 1148,
+          stock: 85,
+          badge: 'Luxury Set',
+          themeColor: '#4A2870',
+          tagline: 'Complete Restorative Duo • Save ₹149',
+          metricBadge: 'BEST VALUE',
+          images: ['assets/duo-ritual-new.jpg'],
+          description: 'The ultimate royal regimen. Includes 200ml Herbal Hair Oil and 250ml Hibiscus Flower Shampoo packed in an exquisite luxury box. Delivers holistic scalp nourishment and gentle purification.',
+          benefits: [
+            'Complete synergistic root-to-tip care routine',
+            'Maximum cost savings: Save ₹149 instantly',
+            'Comes packaged in signature gold-embossed gift packaging'
+          ],
+          ingredients: 'Herbal Hair Oil (200ml) + Hibiscus Flower Shampoo (250ml).',
+          howToUse: 'Apply Herbal Hair Oil 2-3 hours before bath. Cleanse gently using Hibiscus Flower Shampoo. Repeat ritual 2-3 times weekly.',
+          variants: [
+            { id: 'v_duo_standard', name: 'Full Ritual Duo (200ml Oil + 250ml Shampoo)', price: 499, mrp: 1148, sku: 'NH-DUO-STD', stock: 42 }
+          ]
+        }
+      };
 
       // Instant cache-first lookup (0ms)
       try {
@@ -2010,14 +805,26 @@ img, svg, video {
                   price: Number(found.price || 0),
                   mrp: Number(found.mrp || found.compareAtPrice || found.price || 0),
                   category: found.category || 'General',
-                  themeColor: found.themeColor || found.theme_color || '#064E3B',
+                  themeColor: found.themeColor || found.theme_color || '#6B4E9B',
                   images: Array.isArray(found.images) ? found.images : (found.images ? [found.images] : []),
                   metricBadge: found.metricBadge || (typeof found.badge === 'string' ? found.badge : (found.badge?.number ? (found.badge.number + ' ' + (found.badge.unit || '')).trim() : 'PREMIUM'))
                 };
               }
             }
             if (!currentProduct) {
-              currentProduct = DEFAULT_PRODUCTS_MAP[slug] || Object.values(DEFAULT_PRODUCTS_MAP)[0];
+            currentProduct = DEFAULT_PRODUCTS_MAP[cleanSlug] || Object.values(DEFAULT_PRODUCTS_MAP)[0];
+          }
+          if (!currentProduct && dbFallback && Array.isArray(dbFallback.products) && dbFallback.products.length > 0) {
+              const firstP = dbFallback.products[0];
+              currentProduct = {
+                ...firstP,
+                price: Number(firstP.price || 0),
+                mrp: Number(firstP.mrp || firstP.compareAtPrice || firstP.price || 0),
+                category: firstP.category || 'General',
+                themeColor: firstP.themeColor || firstP.theme_color || '#6B4E9B',
+                images: Array.isArray(firstP.images) ? firstP.images : (firstP.images ? [firstP.images] : []),
+                metricBadge: firstP.metricBadge || (typeof firstP.badge === 'string' ? firstP.badge : (firstP.badge?.number ? (firstP.badge.number + ' ' + (firstP.badge.unit || '')).trim() : 'PREMIUM'))
+              };
             }
           }
         } catch (e) {
@@ -2033,15 +840,24 @@ img, svg, video {
                   price: Number(found.price || 0),
                   mrp: Number(found.mrp || found.compareAtPrice || found.price || 0),
                   category: found.category || 'General',
-                  themeColor: found.themeColor || found.theme_color || '#064E3B',
+                  themeColor: found.themeColor || found.theme_color || '#6B4E9B',
                   images: Array.isArray(found.images) ? found.images : (found.images ? [found.images] : []),
                   metricBadge: found.metricBadge || (typeof found.badge === 'string' ? found.badge : (found.badge?.number ? (found.badge.number + ' ' + (found.badge.unit || '')).trim() : 'PREMIUM'))
                 };
               }
             }
           } catch(err) {}
-          if (!currentProduct) {
-            currentProduct = DEFAULT_PRODUCTS_MAP[slug] || Object.values(DEFAULT_PRODUCTS_MAP)[0];
+          if (!currentProduct && dbFallback && Array.isArray(dbFallback.products) && dbFallback.products.length > 0) {
+            const firstP = dbFallback.products[0];
+            currentProduct = {
+              ...firstP,
+              price: Number(firstP.price || 0),
+              mrp: Number(firstP.mrp || firstP.compareAtPrice || firstP.price || 0),
+              category: firstP.category || 'General',
+              themeColor: firstP.themeColor || firstP.theme_color || '#6B4E9B',
+              images: Array.isArray(firstP.images) ? firstP.images : (firstP.images ? [firstP.images] : []),
+              metricBadge: firstP.metricBadge || (typeof firstP.badge === 'string' ? firstP.badge : (firstP.badge?.number ? (firstP.badge.number + ' ' + (firstP.badge.unit || '')).trim() : 'PREMIUM'))
+            };
           }
         }
 
@@ -2335,7 +1151,7 @@ img, svg, video {
           });
         }
 
-        localStorage.setItem('nachiyar_cart', JSON.stringify(cart));
+        try { localStorage.setItem('nachiyar_cart', JSON.stringify(cart)); localStorage.setItem('store_cart', JSON.stringify(cart)); localStorage.setItem('cart', JSON.stringify(cart)); } catch(e) {}
         cartBadge.textContent = cart.reduce((s, i) => s + i.qty, 0);
 
         flyProductToCart(e.currentTarget, currentProduct.images[0]);
